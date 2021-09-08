@@ -1,3 +1,8 @@
 # dot files (hidden files)
 .DS_STORE
 .classpath
+.project
+org.eclipse.*.prefs
+
+# ignore maven build folder
+target/
