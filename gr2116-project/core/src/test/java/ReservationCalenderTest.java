@@ -27,7 +27,7 @@ public class ReservationCalenderTest {
 		assertTrue(checkReservations(calendar, Arrays.asList(reservation)));
 
 		assertThrows(NullPointerException.class, () -> calendar.addReservation(null));
-		assertThrows(IllegalArgumentException.class, () -> calendar.addReservation(reservation));
+		assertThrows(IllegalStateException.class, () -> calendar.addReservation(reservation));
 	}
 	
 	// @Test
