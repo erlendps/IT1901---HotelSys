@@ -19,6 +19,13 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
+        <!-- ui module is dependent on persistence module -->
+        <dependency>
+            <groupId>gr2116</groupId>
+            <artifactId>persistence</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
         <!-- JavaFX dependencies -->
         <dependency>
             <groupId>org.openjfx</groupId>
