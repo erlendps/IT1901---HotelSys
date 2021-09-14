@@ -9,7 +9,7 @@ public class ReservationCalendar implements Iterable<Reservation> {
 
 	public void addReservation(Reservation reservation) {
 		if (reservation == null) {
-			throw new NullPointerException();
+			throw new NullPointerException("Reservation can not be null.");
 		}
 		if (!isAvailable(reservation.getStartDate(), reservation.getEndDate())) {
 			throw new IllegalStateException("The room is not available at this time.");

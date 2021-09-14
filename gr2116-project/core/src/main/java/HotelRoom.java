@@ -60,24 +60,6 @@ public class HotelRoom {
 	public boolean hasAmenity(Amenity amenity) {
 		return amenities.contains(amenity);
 	}
-
-	public void makeReservation(Person person, LocalDate startDate, LocalDate endDate) {
-		if (person == null || startDate == null || endDate == null) {
-			throw new NullPointerException();
-		}
-		verifyChronology(startDate, endDate);
-		double price = getPrice(startDate, endDate);
-		if (price > person.getBalance()) {
-			throw new IllegalStateException("The person cannot afford this reservation.");
-		}
-		if (!isAvailable(startDate, endDate)) {
-			throw new IllegalStateException("The room is not available at this time.");
-		}
-		Reservation reservation = new Reservation(this, startDate, endDate);
-		calendar.addReservation(reservation);
-		person.addReservation(reservation);
-		person.subtractBalance(price);
-	}
 	
 	public boolean isAvailable(LocalDate date) {
 		return calendar.isAvailable(date);
@@ -86,6 +68,21 @@ public class HotelRoom {
 	public boolean isAvailable(LocalDate startDate, LocalDate endDate) {
 		verifyChronology(startDate, endDate);
 		return calendar.isAvailable(startDate, endDate);
+	}
+
+	public void addReservation(Reservation reservation) {
+		if (reservation == null) {
+			throw new NullPointerException("Reservation can not be null");
+		}
+
+		if (reservation.getRoom() != this) {
+			throw new IllegalArgumentException("Reservation on room " + 
+			Integer.toString(reservation.getRoom().getNumber()) + 
+			" can not be registred on room " + 
+			Integer.toString(getNumber()));
+		}
+
+		calendar.addReservation(reservation);
 	}
 
 	private void verifyChronology(LocalDate startDate, LocalDate endDate) {

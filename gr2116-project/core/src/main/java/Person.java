@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -39,6 +40,26 @@ public class Person {
 		this.balance -= balance;
 	}
 	
+	public void makeReservation(HotelRoom hotelRoom, LocalDate startDate, LocalDate endDate) {
+		if (hotelRoom == null || startDate == null || endDate == null) {
+			throw new NullPointerException();
+		}
+		if (startDate.isAfter(endDate)) {
+			throw new IllegalArgumentException("The startDate cannot be after the endDate.");
+		}
+		double price = hotelRoom.getPrice(startDate, endDate);
+		if (price > getBalance()) {
+			throw new IllegalStateException("The person cannot afford this reservation.");
+		}
+		if (!hotelRoom.isAvailable(startDate, endDate)) {
+			throw new IllegalStateException("The room is not available at this time.");
+		}
+		Reservation reservation = new Reservation(hotelRoom, startDate, endDate);
+		hotelRoom.addReservation(reservation);
+		addReservation(reservation);
+		subtractBalance(price);
+	}
+
 	public void addReservation(Reservation reservation) {
 		if (reservation == null) {
 			throw new NullPointerException();

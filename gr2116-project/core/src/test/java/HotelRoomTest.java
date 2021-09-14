@@ -53,11 +53,11 @@ public class HotelRoomTest {
 	public void testMakeReservation() {
 		roomSingle.setPrice(100);
 		Person person = new Person("Peter");
-		assertThrows(IllegalStateException.class, () -> roomSingle.makeReservation(person, today, tomorrow));
+		assertThrows(IllegalStateException.class, () -> person.makeReservation(roomSingle, today, tomorrow));
 		person.addBalance(800);
-		roomSingle.makeReservation(person, today, tomorrow);
+		person.makeReservation(roomSingle, today, tomorrow);
 		assertFalse(roomSingle.isAvailable(today));
-		assertThrows(IllegalStateException.class, () -> roomSingle.makeReservation(person, today, tomorrow));
+		assertThrows(IllegalStateException.class, () -> person.makeReservation(roomSingle, today, tomorrow));
 		assertEquals(600, person.getBalance());
 	}
 }
