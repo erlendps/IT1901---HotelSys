@@ -6,16 +6,14 @@ public class HotelRoom {
 	private final Collection<Amenity> amenities = new HashSet<Amenity>();
 	private final ReservationCalendar calendar = new ReservationCalendar();
 	private final HotelRoomType roomType;
-	private final int floor;
     private final int number;
 	private double price;
 
-	public HotelRoom(HotelRoomType roomType, int floor, int number) {
+	public HotelRoom(HotelRoomType roomType, int number) {
 		if (roomType == null) {
 			throw new NullPointerException();
 		}
 		this.roomType = roomType;
-		this.floor = floor;
 		this.number = number;
 	}
 	
@@ -24,7 +22,8 @@ public class HotelRoom {
 	}
 
 	public int getFloor() {
-		return floor;
+		// Gets which floor the room is on, which is specified by the first digit of the room number.
+		return Integer.parseInt(Integer.toString(number).substring(0,1));
 	}
 
 	public int getNumber() {
@@ -36,7 +35,7 @@ public class HotelRoom {
 	}
 	
 	public double getPrice(LocalDate startDate, LocalDate endDate) {
-		checkChronology(startDate, endDate);
+		verifyChronology(startDate, endDate);
 		return price * (1 + startDate.until(endDate).getDays());
 	}
 
@@ -66,7 +65,7 @@ public class HotelRoom {
 		if (person == null || startDate == null || endDate == null) {
 			throw new NullPointerException();
 		}
-		checkChronology(startDate, endDate);
+		verifyChronology(startDate, endDate);
 		double price = getPrice(startDate, endDate);
 		if (price > person.getBalance()) {
 			throw new IllegalStateException("The person cannot afford this reservation.");
@@ -85,11 +84,11 @@ public class HotelRoom {
 	}
 
 	public boolean isAvailable(LocalDate startDate, LocalDate endDate) {
-		checkChronology(startDate, endDate);
+		verifyChronology(startDate, endDate);
 		return calendar.isAvailable(startDate, endDate);
 	}
 
-	private void checkChronology(LocalDate startDate, LocalDate endDate) {
+	private void verifyChronology(LocalDate startDate, LocalDate endDate) {
 		if (startDate.isAfter(endDate)) {
 			throw new IllegalArgumentException("The startDate cannot be after the endDate.");
 		}

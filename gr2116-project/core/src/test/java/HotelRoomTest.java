@@ -8,7 +8,8 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 
 public class HotelRoomTest {
-	HotelRoom roomSingle = new HotelRoom(HotelRoomType.Single, 1, 111);
+	HotelRoom roomSingle = new HotelRoom(HotelRoomType.Single, 111);
+	HotelRoom roomDouble = new HotelRoom(HotelRoomType.Double, 794);
 	LocalDate today = LocalDate.now();
 	LocalDate tomorrow = today.plusDays(1);
 	
@@ -16,6 +17,9 @@ public class HotelRoomTest {
 	public void testFloorAndNumber() {
 		assertEquals(1, roomSingle.getFloor());
 		assertEquals(111, roomSingle.getNumber());
+
+		assertEquals(7, roomDouble.getFloor());
+		assertEquals(794, roomDouble.getNumber());
 	}
 
 	@Test
