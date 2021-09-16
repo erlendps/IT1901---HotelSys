@@ -3,8 +3,8 @@ public enum HotelRoomType {
 	Double("Dobbeltrom"),
 	Triple("Tremannsrom"),
 	Quad("Firmannsrom"),
-	Suite("Suitte"), //Er det noe bedre?
-	Penthouse("Soppleilighet"); // Er det noe bedre?
+	Suite("Suite"), //Er det noe bedre?
+	Penthouse("Toppleilighet"); // Er det noe bedre?
 	
 	private final String description;
 
