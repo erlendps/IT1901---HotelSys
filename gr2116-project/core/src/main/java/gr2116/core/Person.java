@@ -2,7 +2,6 @@ package gr2116.core;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Person {
