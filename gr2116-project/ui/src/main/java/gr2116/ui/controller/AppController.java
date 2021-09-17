@@ -7,6 +7,6 @@ public class AppController {
     @FXML
     void initialize() {
         Hotel hotel = new Hotel();
-        System.out.print(hotel);
+        System.out.println("HOTEL CLASS: " + hotel);
     }
 }
