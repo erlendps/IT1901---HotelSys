@@ -1,3 +1,4 @@
+package gr2116.core;
 public enum Amenity {
 	KitchenFacilities(""),
 	Television(""),

@@ -95,7 +95,7 @@
               <version>0.0.6</version>
               <configuration>
                   <!-- Syntax: modulename/full-app-class-name-->
-                  <mainClass>App</mainClass>
+                  <mainClass>gr2116.ui/gr2116.ui.app.App</mainClass>
               </configuration>
           </plugin>
           

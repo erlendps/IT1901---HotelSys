@@ -1,3 +1,4 @@
+package gr2116.ui.app;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,7 +9,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent parent = FXMLLoader.load(getClass().getResource("App.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("App.fxml"));
         stage.setScene(new Scene(parent));
         stage.show();
     }
