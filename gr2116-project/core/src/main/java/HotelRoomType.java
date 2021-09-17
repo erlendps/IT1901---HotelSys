@@ -1,10 +1,10 @@
 public enum HotelRoomType {
-	Single(""),
-	Double(""),
-	Triple(""),
-	Quad(""),
-	Suite(""),
-	Penthouse(""); // TODO: Write descriptions
+	Single("Enkeltrom"),
+	Double("Dobbeltrom"),
+	Triple("Tremannsrom"),
+	Quad("Firmannsrom"),
+	Suite("Suite"), //Er det noe bedre?
+	Penthouse("Toppleilighet"); // Er det noe bedre?
 	
 	private final String description;
 

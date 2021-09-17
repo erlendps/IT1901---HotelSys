@@ -1,6 +1,8 @@
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Person {
 	private final Collection<Reservation> reservations = new HashSet<>();
@@ -24,7 +26,13 @@ public class Person {
 	}
 	
 	public void setEmail(String email) {
-		// TODO: Use regex to check if email is valid
+		String regex = "^[a-zA-Z0-9._-]{2,20}@[a-zA-Z0-9.]{2,20}.(no|com|net|org)$";
+		if (email == null) {
+			throw new NullPointerException("Email is null");
+		}
+		if (!Pattern.matches(regex, email)){
+			throw new IllegalArgumentException("The email is not valid");
+		}
 		this.email = email;
 	}
 
