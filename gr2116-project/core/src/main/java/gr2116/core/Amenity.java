@@ -1,3 +1,4 @@
+package gr2116.core;
 public enum Amenity {
 	KitchenFacilities("Kitchen Facilities", "A practical kitchen with a microwave, stovetop, sink and fridge."),
 	Television("Television", "A high-resolution TV with a global selection of channels."),

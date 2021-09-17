@@ -1,3 +1,4 @@
+package gr2116.core;
 public enum HotelRoomType {
 	Single("Enkeltrom"),
 	Double("Dobbeltrom"),

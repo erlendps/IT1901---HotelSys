@@ -1,3 +1,4 @@
+package gr2116.core;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
