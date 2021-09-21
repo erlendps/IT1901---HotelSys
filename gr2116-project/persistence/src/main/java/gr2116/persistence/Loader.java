@@ -1,3 +1,4 @@
+package gr2116.persistence;
 import org.json.JSONObject;
 import java.util.Collection;
 import java.util.ArrayList;
@@ -51,9 +52,7 @@ public class Loader {
         roomData.put("amenities", room.getAmenities());
         roomData.put("reservations", room.getReservationIds());
         return roomData;*/
-    }
-    
-    public Reservation makeReservationJSON(JSONObject reservationData) {
+
         /*JSONObject reservationData = new JSONObject();
         reservationData.put("id", reservation.getId());
         reservationData.put("room", reservation.getRoom().getNumber());
@@ -61,4 +60,6 @@ public class Loader {
         reservationData.put("endDate", reservation.getEndDate());
         return reservationData;*/
     }
+
+        
 }
