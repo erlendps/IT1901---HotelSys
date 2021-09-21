@@ -30,7 +30,7 @@ public class Saver {
         JSONObject roomData = new JSONObject();
         roomData.put("number", room.getNumber());
         roomData.put("price", room.getPrice());
-        roomData.put("type", room.getRoomType());
+        roomData.put("type", room.getRoomType().name());
         roomData.put("amenities", room.getAmenities());
         roomData.put("reservations", room.getReservationIds());
         return roomData;
@@ -40,8 +40,8 @@ public class Saver {
         JSONObject reservationData = new JSONObject();
         reservationData.put("id", reservation.getId());
         reservationData.put("room", reservation.getRoom().getNumber());
-        reservationData.put("startDate", reservation.getStartDate());
-        reservationData.put("endDate", reservation.getEndDate());
+        reservationData.put("startDate", reservation.getStartDate().toString());
+        reservationData.put("endDate", reservation.getEndDate().toString());
         return reservationData;
     }
 
