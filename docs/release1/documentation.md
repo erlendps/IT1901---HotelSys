@@ -25,7 +25,9 @@ Et hotell kan ha mange rom. Rommet kan ha mange fasiliteter, men kun en reservas
 
 Under vises en skisse av hvordan appen skal se ut for brukeren. Brukeren kan velge fasiliteter og romtype, og får dermed opp rom som passer denne beskrivelsen.
 
-
+<img src="skisse_app.png"
+     alt="Skisse av app"
+     style="float: left; margin-right: 10px; width: 100%" />
 
 
 
