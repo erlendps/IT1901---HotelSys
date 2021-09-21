@@ -36,10 +36,11 @@ public class SaverTest {
         rooms.add(room2);
 
         ArrayList<Reservation> reservations = new ArrayList<Reservation>();
-        persons.forEach((person) -> 
-            person.getReservations().forEach((r) -> 
-            reservations.add(r)));
-
+        persons.forEach((person) -> {
+            person.getReservations().forEach((r) -> {
+                reservations.add(r);
+            });
+        });
 
         Saver saver = new Saver();
         JSONObject personsData = saver.updatePersonData(persons);

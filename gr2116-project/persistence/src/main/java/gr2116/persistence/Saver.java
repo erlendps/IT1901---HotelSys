@@ -16,7 +16,6 @@ import java.time.LocalDate;
 public class Saver {
     private static final String METADATA_FOLDER = "gr2116-project/persistence/src/main/resources/";
 
-
     public JSONObject makePersonJSON(Person person) {
         JSONObject personData = new JSONObject();
         personData.put("name", person.getName());
@@ -47,51 +46,31 @@ public class Saver {
 
     public JSONObject updatePersonData(Collection<Person> persons) {
         JSONObject personsData = new JSONObject();
-        persons.forEach((person) -> personsData.
-                                    put(
-                                        person.getEmail(),
-                                        makePersonJSON(person)
-                                        )   
-                                    );
+        persons.forEach((person) -> {
+            personsData.put(person.getEmail(), makePersonJSON(person));
+        });
         return personsData;
     }
 
     public JSONObject updateRoomsData(Collection<HotelRoom> rooms) {
         JSONObject roomsData = new JSONObject();
-        rooms.forEach((room) -> roomsData.
-                                put(
-                                    Integer.toString(room.getNumber()),
-                                    makeRoomJSON(room)
-                                    )
-                                );                  
-        /*
-        for (int i=0; i < rooms.size(); i++) {
-            roomsData.put(Integer.toString(rooms.get(i).getNumber()), makeRoomJSON(rooms.get(i)));
-        }
-        */
+        rooms.forEach((room) -> {
+            roomsData.put(Integer.toString(room.getNumber()), makeRoomJSON(room));
+        });
         return roomsData;
-
     }
 
     public JSONObject updateReservationData(Collection<Reservation> reservations) {
         JSONObject reservationsData = new JSONObject();
-        reservations.forEach((reservation) -> reservationsData.
-                                                put(
-                                                    Long.toString(reservation.getId()),
-                                                    makeReservationJSON(reservation)
-                                                    )
-                                                );
-        /*
-        for (int i=0; i < reservations.size(); i++) {
-            reservationsData.put(Long.toString(reservations.get(i).getId()), makeReservationJSON(reservations.get(i)));
-        }
-        */
+        reservations.forEach((reservation) -> {
+            reservationsData.put(Long.toString(reservation.getId()), makeReservationJSON(reservation));
+        });
         return reservationsData;
     }
 
     public void WriteToFile(Collection<Person> persons,
                             Collection<HotelRoom> rooms,
-                            Collection<Reservation> reservations) throws FileNotFoundException {
+                            Collection<Reservation> reservations)throws FileNotFoundException {
         File personDataJSON = new File(METADATA_FOLDER + "personData.json");
         File roomsDataJSON = new File(METADATA_FOLDER + "roomsData.json");
         File reservationDataJSON = new File(METADATA_FOLDER + "reservationData.json");
@@ -147,7 +126,6 @@ public class Saver {
             person.getReservations().forEach((r) -> 
             reservations.add(r)));
 
-
         Saver saver = new Saver();
         JSONObject personsData = saver.updatePersonData(persons);
         JSONObject roomsData = saver.updateRoomsData(rooms);
@@ -156,12 +134,12 @@ public class Saver {
         System.out.println(personsData);
         System.out.println(roomsData);
         System.out.println(reservationsData);
+        
         try {
-        saver.WriteToFile(persons, rooms, reservations);
+            saver.WriteToFile(persons, rooms, reservations);
         }
         catch (Exception e) {
             System.err.println(e);
         }
     }
-
 }

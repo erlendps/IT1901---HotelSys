@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 
 
 public class LoaderTest {
-
     JSONObject personsData;
     JSONObject roomsData;
     JSONObject reservationsData;
@@ -59,7 +58,6 @@ public class LoaderTest {
             person.getReservations().forEach((r) -> 
             reservations.add(r)));
 
-
         Saver saver = new Saver();
         personsData = saver.updatePersonData(persons);
         roomsData = saver.updateRoomsData(rooms);
@@ -76,18 +74,17 @@ public class LoaderTest {
         persons.forEach((Person p) -> {
             System.out.println(p.getName());
             System.out.println("> Reservations:");
-            p.getReservations().forEach((Reservation r) -> System.out.println("\t" + r.getId() + 
-                                                                            " for room " + r.getRoom().getNumber() +
-                                                                            " (" + r.getStartDate() + " to " + r.getEndDate() + ")"));
+            p.getReservations().forEach((Reservation r) -> {
+                System.out.println("\t" + r.getId() + 
+                " for room " + r.getRoom().getNumber() +
+                " (" + r.getStartDate() + " to " + r.getEndDate() + ")");
+            });
             System.out.println();
-        
         });
         System.out.println();
         System.out.println();
         System.out.println("Rooms:");
         rooms.forEach((HotelRoom r) -> System.out.println(r.getNumber()));
         System.out.println();
-        
-        
     }
 }
