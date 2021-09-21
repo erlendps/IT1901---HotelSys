@@ -7,7 +7,7 @@ Kodingsprosjektet ligger i mapppen gr2116-project/core/src/main
 
 Prosjektet kjøres og bygges av maven.
 
-For å kjøre:
+For å kjøre (fra rotprosjekt **gr2116-project**-mappa):
 > mvn install \
 > mvn -pl ui javafx:run
 
