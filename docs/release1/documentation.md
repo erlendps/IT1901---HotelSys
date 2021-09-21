@@ -2,6 +2,8 @@
 
   For hver sluppet versjon skal en beskrive hvilken funksjonalitet en vil ha med, f.eks. i form av brukerhistorier og designskisser. Så slipper dere en versjon når det er realisert, heller enn å fryse tidsfristen og slippe det dere har da.
 
+Issuses på gitlab for innlevering 1 kan finnes under milestone MVP 1/3.
+
 Designet til først innleverinig legges på bakgrunn av brukerhistorien:
 
 ## Brukerhistorie
@@ -23,7 +25,7 @@ Et hotell kan ha mange rom. Rommet kan ha mange fasiliteter, men kun en reservas
 
 ## Designskisse
 
-Under vises en skisse av hvordan appen skal se ut for brukeren. Brukeren kan velge fasiliteter og romtype, og får dermed opp rom som passer denne beskrivelsen.
+Under vises en skisse av hvordan appen skal se ut for brukeren. Brukeren kan velge fasiliteter og romtype, og får dermed opp rom som passer denne beskrivelsen. For første innleveringen vil appen være enkel.
 
 <img src="skisse_app.png"
      alt="Skisse av app"
