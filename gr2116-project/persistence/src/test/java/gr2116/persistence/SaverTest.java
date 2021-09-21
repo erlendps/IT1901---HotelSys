@@ -7,7 +7,7 @@ import gr2116.core.*;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
-public class SaveTest {
+public class SaverTest {
     @Test
     public void testSave() {
         Person rick = new Person("Richard");
