@@ -1,0 +1,17 @@
+{
+  "kyle@people.com": {
+    "balance": 0,
+    "reservations": [3745046661532283142],
+    "name": "Kyllard",
+    "email": "kyle@people.com"
+  },
+  "richard@people.com": {
+    "balance": 0,
+    "reservations": [
+      2384234801681884246,
+      7369286509666852851
+    ],
+    "name": "Richard",
+    "email": "richard@people.com"
+  }
+}

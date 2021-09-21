@@ -1,0 +1,26 @@
+{
+  "101": {
+    "number": 101,
+    "amenities": [
+      "Bathtub",
+      "Television"
+    ],
+    "reservations": [
+      7369286509666852851,
+      3745046661532283142
+    ],
+    "price": 0,
+    "type": "Single"
+  },
+  "102": {
+    "number": 102,
+    "amenities": [
+      "Fridge",
+      "Shower",
+      "Internet"
+    ],
+    "reservations": [2384234801681884246],
+    "price": 0,
+    "type": "Single"
+  }
+}
