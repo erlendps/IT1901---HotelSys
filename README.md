@@ -10,3 +10,8 @@ Prosjektet kjøres og bygges av maven.
 For å kjøre:
 > mvn install \
 > mvn -pl ui javafx:run
+
+For å teste:
+> mvn test
+
+Test coverage ligger i module-name/target/site/index.html. I GitPod kan denne vises ved hjelp av Live Server extension.
