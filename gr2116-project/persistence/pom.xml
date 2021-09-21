@@ -13,7 +13,7 @@
     </parent>
 
     <dependencies>
-        <!-- ui module is dependent on core module -->
+        <!-- persistence module is dependent on core module -->
         <dependency>
             <groupId>gr2116</groupId>
             <artifactId>core</artifactId>
@@ -34,6 +34,13 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
+        </dependency>
+        
+        <!-- JSON dependency -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20210307</version>
         </dependency>
 
     </dependencies>
