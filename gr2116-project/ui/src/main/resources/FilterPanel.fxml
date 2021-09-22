@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- type must be imported -->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.VBox?>
+
+<!-- fx:controller must be set to ComponentTemplate -->
+<!-- type must be set to the parent of ComponentTemplate -->
+
+
+<fx:root type="VBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gr2116.ui.components.FilterPanel">
+   <children>
+      <Label text="Start date:" />
+      <DatePicker fx:id="startDatePicker" />
+      <Label text="End date:" />
+      <DatePicker fx:id="endDatePicker" />
+      <Separator prefHeight="30.0" prefWidth="200.0" />
+      <Label text="Room type:" />
+      <ChoiceBox fx:id="roomTypeChoiceBox" prefWidth="150.0" />
+      <Label fx:id="roomTypeDescription" />
+   </children>
+   <padding>
+      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+   </padding>
+</fx:root>
