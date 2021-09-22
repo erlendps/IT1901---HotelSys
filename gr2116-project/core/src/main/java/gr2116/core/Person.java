@@ -2,7 +2,6 @@ package gr2116.core;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.regex.Pattern;
 
 public class Person {
 	private final Collection<Reservation> reservations = new HashSet<>();
@@ -14,9 +13,12 @@ public class Person {
 		if (name == null) {
 			throw new NullPointerException();
 		}
+		if (!name.matches("([A-Za-z]+.* *)+")) {
+			throw new IllegalArgumentException("The name is not valid");
+		}
 		this.name = name;
 	}
-
+	
 	public String getName() {
 		return name;
 	}
@@ -30,7 +32,7 @@ public class Person {
 		if (email == null) {
 			throw new NullPointerException("Email is null");
 		}
-		if (!Pattern.matches(regex, email)){
+		if (!email.matches(regex)){
 			throw new IllegalArgumentException("The email is not valid");
 		}
 		this.email = email;

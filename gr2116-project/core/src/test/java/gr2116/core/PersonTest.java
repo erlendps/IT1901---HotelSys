@@ -33,4 +33,9 @@ public class PersonTest {
         person.setEmail("yolo.noob@noob.com");
         assertEquals("yolo.noob@noob.com", person.getEmail());
     }
+
+    @Test
+    public void testName() {
+        assertThrows(IllegalArgumentException.class, () -> new Person(""));
+    }
 }
