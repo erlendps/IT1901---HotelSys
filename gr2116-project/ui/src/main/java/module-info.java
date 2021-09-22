@@ -5,4 +5,5 @@ module gr2116.ui {
     opens gr2116.ui.app to javafx.graphics;
     opens gr2116.ui.controller to javafx.fxml;
     opens gr2116.ui.components to javafx.fxml;
+    opens gr2116.ui.pages to javafx.fxml;
 }
