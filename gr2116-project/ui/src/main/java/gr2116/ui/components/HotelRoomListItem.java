@@ -5,11 +5,11 @@ import gr2116.ui.utils.FXMLUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 
-public class RoomItem extends VBox {
+public class HotelRoomListItem extends HBox {
     private HotelRoom room;
-    
+
     @FXML
     private Label numberLabel;
     @FXML
@@ -17,23 +17,15 @@ public class RoomItem extends VBox {
     @FXML
     private Button button;
 
-    public RoomItem(HotelRoom room) {
+    public HotelRoomListItem(HotelRoom room) {
         this.room = room;
         FXMLUtils.loadFXML(this);
     }
 
     @FXML
     private void initialize() {
-        numberLabel.setText("Room " + room.getNumber());
+        numberLabel.setText("HotelRoom " + room.getNumber());
         typeLabel.setText(room.getRoomType().getDescription());
         button.setText("Make reservation.");
-    }
-
-    public void setRoom(HotelRoom room) {
-        this.room = room;
-    }
-
-    public HotelRoom getRoom() {
-        return room;
     }
 }
