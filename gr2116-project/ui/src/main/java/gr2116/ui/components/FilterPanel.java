@@ -32,7 +32,7 @@ public class FilterPanel extends VBox {
     
     @FXML
     private void initialize() {
-		roomTypeDescription.setText("Velg en romtype.");
+		roomTypeDescription.setText("Select a room type.");
 
 		for (HotelRoomType roomType : HotelRoomType.values()) {
 			roomTypeChoiceBox.getItems().add(roomType);
@@ -47,7 +47,7 @@ public class FilterPanel extends VBox {
         roomTypeChoiceBox.setOnAction((event) -> {
 			HotelRoomType roomType = roomTypeChoiceBox.getValue();
 			if (roomType == null) {
-				roomTypeDescription.setText("Velg en romtype.");
+				roomTypeDescription.setText("Select a room type.");
 			} else {
 				roomTypeDescription.setText(roomType.getDescription());
 			}
