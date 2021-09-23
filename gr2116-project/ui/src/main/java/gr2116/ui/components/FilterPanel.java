@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import gr2116.core.HotelRoom;
 import gr2116.core.HotelRoomType;
 import gr2116.ui.message.Message;
+import gr2116.ui.message.MessageListener;
 import gr2116.ui.utils.FXMLUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;

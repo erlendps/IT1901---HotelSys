@@ -5,6 +5,7 @@ import java.util.HashSet;
 
 import gr2116.core.Person;
 import gr2116.ui.message.Message;
+import gr2116.ui.message.MessageListener;
 import gr2116.ui.utils.FXMLUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -21,6 +22,7 @@ public class UserPanel extends VBox {
 	@FXML
 	private Button signOutButton;
 
+	
     public UserPanel(Person person) {
 		this.person = person;
         FXMLUtils.loadFXML(this);

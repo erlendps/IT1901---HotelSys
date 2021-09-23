@@ -1,6 +1,4 @@
-package gr2116.ui.components;
-
-import gr2116.ui.message.Message;
+package gr2116.ui.message;
 
 public interface MessageListener {
 	

@@ -13,9 +13,9 @@ import gr2116.core.HotelRoomType;
 import gr2116.core.Person;
 import gr2116.ui.components.UserPanel;
 import gr2116.ui.message.Message;
+import gr2116.ui.message.MessageListener;
 import gr2116.ui.components.FilterPanel;
 import gr2116.ui.components.HotelRoomListItem;
-import gr2116.ui.components.MessageListener;
 import javafx.scene.layout.AnchorPane;
 
 public class MainPage extends VBox implements MessageListener {

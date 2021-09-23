@@ -1,8 +1,8 @@
 package gr2116.ui.controller;
 
 import gr2116.core.Person;
-import gr2116.ui.components.MessageListener;
 import gr2116.ui.message.Message;
+import gr2116.ui.message.MessageListener;
 import gr2116.ui.pages.LoginPage;
 import gr2116.ui.pages.MainPage;
 import javafx.fxml.FXML;
