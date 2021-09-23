@@ -1,10 +1,7 @@
 package gr2116.ui.components;
-import java.time.LocalDate;
+
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.function.Predicate;
-
-import gr2116.core.HotelRoom;
 import gr2116.core.HotelRoomType;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
@@ -64,24 +61,8 @@ public class FilterPanel extends VBox {
 	}
 	public void notifyListeners() {
 		for (MessageListener listener : listeners) {
-			Predicate<HotelRoom> roomPredicate = (room) -> {
-				LocalDate startDate = startDatePicker.getValue();
-				LocalDate endDate = endDatePicker.getValue();
-				if (startDate != null && !room.isAvailable(startDate)) {
-					return false;
-				}
-				if (endDate != null && !room.isAvailable(endDate)) {
-					return false;
-				}
-				if (startDate != null && endDate != null && !room.isAvailable(startDate, endDate)) {
-					return false;
-				}
-				if (room.getRoomType() != roomTypeChoiceBox.getValue()) {
-					return false;
-				}
-				return true;
-			};
-			listener.receiveNotification(this, Message.Filter, roomPredicate);
+			HotelRoomFilter filter = new HotelRoomFilter(startDatePicker.getValue(), endDatePicker.getValue(), roomTypeChoiceBox.getValue());
+			listener.receiveNotification(this, Message.Filter, filter);
 		}
 	}
 }

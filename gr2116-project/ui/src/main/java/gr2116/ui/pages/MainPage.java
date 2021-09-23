@@ -5,7 +5,6 @@ import javafx.scene.layout.VBox;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.function.Predicate;
 
 import gr2116.core.Hotel;
 import gr2116.core.HotelRoom;
@@ -15,6 +14,7 @@ import gr2116.ui.components.UserPanel;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
 import gr2116.ui.components.FilterPanel;
+import gr2116.ui.components.HotelRoomFilter;
 import gr2116.ui.components.HotelRoomListItem;
 import javafx.scene.layout.AnchorPane;
 
@@ -22,7 +22,7 @@ public class MainPage extends VBox implements MessageListener {
 	private FilterPanel filterPanel = new FilterPanel();
     private UserPanel userPanel;
 	private Hotel hotel = new Hotel();
-	private Predicate<HotelRoom> roomPredicate = (room) -> true;
+	private HotelRoomFilter hotelRoomFilter;
     private final Person person;
     private final Collection<MessageListener> listeners = new HashSet<>();
 
@@ -53,22 +53,28 @@ public class MainPage extends VBox implements MessageListener {
         
         buildRoomList();
     }
-
+    
     private void buildRoomList() {
-        Collection<HotelRoom> filteredRooms = hotel.getRooms(roomPredicate);
+        if (hotelRoomFilter == null) {
+            return;
+        }
+        Collection<HotelRoom> filteredRooms = hotel.getRooms(hotelRoomFilter.getPredicate());
 
         roomItemContainer.getChildren().clear();
         for (HotelRoom hotelRoom : filteredRooms) {
             HotelRoomListItem roomItem = new HotelRoomListItem(hotelRoom);
+            roomItem.setOnMakeReservationButtonAction((event) -> {
+                person.makeReservation(hotelRoom, hotelRoomFilter.getStartDate(), hotelRoomFilter.getEndDate());
+                buildRoomList();
+            });
             roomItemContainer.getChildren().add(roomItem);
         }
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public void receiveNotification(Object from, Message message, Object data) {
-        if (message == Message.Filter && data instanceof Predicate<?>) {
-            this.roomPredicate = (Predicate<HotelRoom>) data;
+        if (message == Message.Filter && data instanceof HotelRoomFilter) {
+            this.hotelRoomFilter = (HotelRoomFilter) data;
             buildRoomList();
         }
         if (message == Message.SignOut) {
