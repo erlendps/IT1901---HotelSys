@@ -3,7 +3,6 @@ package gr2116.ui.components;
 import java.util.Collection;
 import java.util.HashSet;
 
-import gr2116.core.HotelRoom;
 import gr2116.core.Person;
 import gr2116.core.PersonListener;
 import gr2116.core.Reservation;
