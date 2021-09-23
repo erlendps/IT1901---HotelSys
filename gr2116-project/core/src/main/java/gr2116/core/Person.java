@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 public class Person {
+	private final Collection<PersonListener> listeners = new HashSet<>(); 
 	private final Collection<Reservation> reservations = new HashSet<>();
     private final String name;
 	private String email;
@@ -36,6 +37,7 @@ public class Person {
 			throw new IllegalArgumentException("The email is not valid");
 		}
 		this.email = email;
+		notifyListeners();
 	}
 
 	public double getBalance() {
@@ -44,10 +46,12 @@ public class Person {
 
 	public void addBalance(double balance) {
 		this.balance += balance;
+		notifyListeners();
 	}
 
 	public void subtractBalance(double balance) {
 		this.balance -= balance;
+		notifyListeners();
 	}
 	
 	public void makeReservation(HotelRoom hotelRoom, LocalDate startDate, LocalDate endDate) {
@@ -75,6 +79,7 @@ public class Person {
 			throw new NullPointerException();
 		}
 		reservations.add(reservation);
+		notifyListeners();
 	}
 
 	// public void removeReservation(Reservation reservation) {
@@ -86,5 +91,21 @@ public class Person {
 
 	public boolean hasReservation(Reservation reservation) {
 		return reservations.contains(reservation);
+	}
+
+	public Collection<Reservation> getReservations() {
+		return new HashSet<>(reservations);
+	}
+	
+	public void addListener(PersonListener listener) {
+		listeners.add(listener);
+	}
+	public void removeListener(PersonListener listener) {
+		listeners.remove(listener);
+	}
+	public void notifyListeners() {
+		for (PersonListener listener : listeners) {
+			listener.receiveNotification(this);
+		}
 	}
 }
