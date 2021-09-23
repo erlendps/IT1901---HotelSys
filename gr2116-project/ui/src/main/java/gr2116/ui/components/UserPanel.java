@@ -3,6 +3,7 @@ package gr2116.ui.components;
 import java.util.Collection;
 import java.util.HashSet;
 
+import gr2116.core.HotelRoom;
 import gr2116.core.Person;
 import gr2116.core.PersonListener;
 import gr2116.core.Reservation;
@@ -67,7 +68,9 @@ public class UserPanel extends VBox implements PersonListener {
 		reservationListView.getItems().clear();
 		for (Reservation reservation : person.getReservations()) {
 			String roomNumber = Integer.toString(reservation.getRoom().getNumber()); // TODO: Make prettier reservationListItems
-			reservationListView.getItems().add(new Label("Room: " + roomNumber));
+			String startDate = reservation.getStartDate().toString();
+			String endDate = reservation.getEndDate().toString();
+			reservationListView.getItems().add(new Label("Room: " + roomNumber + ". From " + startDate + " to " + endDate + "."));
 		}
 	}
 }
