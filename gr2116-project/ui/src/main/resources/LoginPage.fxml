@@ -15,10 +15,10 @@
          <children>
             <VBox alignment="CENTER" prefHeight="257.0" prefWidth="510.0">
                <children>
-                  <Label text="Name:" />
-                  <TextField fx:id="nameTextField" />
                   <Label text="Email:" />
                   <TextField fx:id="emailTextField" />
+                  <Label fx:id="nameTitleLabel" text="Email not recognised, choose a name to create account:" />
+                  <TextField fx:id="nameTextField" />
                   <Separator prefHeight="30.0" />
                   <Button fx:id="signInButton" mnemonicParsing="false" text="Sign in" />
                   <Label fx:id="emailErrorLabel" />

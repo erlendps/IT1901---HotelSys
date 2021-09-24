@@ -23,7 +23,7 @@ public class LoginPage extends AnchorPane {
     private Button signInButton;
 
     @FXML
-    private Label emailErrorLabel;
+    private Label emailErrorLabel, nameTitleLabel;
     
     public LoginPage() {
         FXMLUtils.loadFXML(this);
@@ -31,19 +31,36 @@ public class LoginPage extends AnchorPane {
     
     @FXML
     private void initialize() {
+        setNameVisible(false);
+
         signInButton.setOnAction((event) -> {
             try {
-                person = new Person(nameTextField.getText());
+                // Try to sign in with existing email
+                throw new Exception("Sign in with existing email not implemented!");
+            }
+            catch (Exception e) {
                 try {
-                    person.setEmail(emailTextField.getText());
-                    notifyListeners(Message.SignIn, person);
-                } catch (Exception e) {
-                    emailErrorLabel.setText("Invalid email!");
+                    if (!nameTextField.isVisible()) {
+                        setNameVisible(true);
+                        return;
+                    }
+                    person = new Person(nameTextField.getText());
+                    try {
+                        person.setEmail(emailTextField.getText());
+                        notifyListeners(Message.SignIn, person);
+                    } catch (Exception e1) {
+                        emailErrorLabel.setText("Invalid email!");
+                    }
+                } catch (Exception e2) {
+                    emailErrorLabel.setText("Invalid name!");
                 }
-            } catch (Exception e) {
-                emailErrorLabel.setText("Invalid name!");
             }
         });
+    }
+
+    private void setNameVisible(boolean visible) {
+        nameTextField.setVisible(visible);
+        nameTitleLabel.setVisible(visible);
     }
     
     public void addListener(MessageListener listener) {
