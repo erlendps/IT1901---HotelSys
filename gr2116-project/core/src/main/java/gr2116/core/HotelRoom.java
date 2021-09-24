@@ -39,7 +39,7 @@ public class HotelRoom {
 	
 	public double getPrice(LocalDate startDate, LocalDate endDate) {
 		verifyChronology(startDate, endDate);
-		return price * (1 + startDate.until(endDate).getDays());
+		return price * (startDate.until(endDate).getDays());
 	}
 
 	public void setPrice(double price) {
