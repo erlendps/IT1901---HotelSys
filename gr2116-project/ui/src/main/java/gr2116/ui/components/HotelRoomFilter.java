@@ -17,15 +17,25 @@ public class HotelRoomFilter {
 		this.roomType = roomType;
 	}
 	
+	public boolean isValid() {
+		if (roomType == null) {
+			return false;
+		}
+		if (startDate == null || endDate == null) {
+			return false;
+		}
+		if (endDate.isBefore(startDate)) {
+			return false;
+		}
+		return true;
+	}
+	
 	public Predicate<HotelRoom> getPredicate() {
 		return (room) -> {
-			if (startDate != null && !room.isAvailable(startDate)) {
+			if (!isValid()) {
 				return false;
 			}
-			if (endDate != null && !room.isAvailable(endDate)) {
-				return false;
-			}
-			if (startDate != null && endDate != null && !room.isAvailable(startDate, endDate)) {
+			if (!room.isAvailable(startDate, endDate)) {
 				return false;
 			}
 			if (room.getRoomType() != roomType) {
