@@ -3,6 +3,9 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.Random;
+
 
 public class Person {
 	private final Collection<Reservation> reservations = new HashSet<>();
@@ -62,7 +65,8 @@ public class Person {
 		if (!hotelRoom.isAvailable(startDate, endDate)) {
 			throw new IllegalStateException("The room is not available at this time.");
 		}
-		Reservation reservation = new Reservation(hotelRoom, startDate, endDate);
+		Random random = new Random();
+		Reservation reservation = new Reservation(Math.abs(random.nextLong()), hotelRoom, startDate, endDate);
 		hotelRoom.addReservation(reservation);
 		addReservation(reservation);
 		subtractBalance(price);
@@ -73,6 +77,14 @@ public class Person {
 			throw new NullPointerException();
 		}
 		reservations.add(reservation);
+	}
+
+	public Collection<Long> getReservationIds() {
+		return reservations.stream().map((r) -> r.getId()).collect(Collectors.toList());
+	}
+
+	public Collection<Reservation> getReservations() {
+		return reservations;
 	}
 
 	// public void removeReservation(Reservation reservation) {

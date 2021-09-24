@@ -3,7 +3,9 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.stream.Collectors;
 import java.lang.Iterable;
+
 
 public class ReservationCalendar implements Iterable<Reservation> {
     private Collection<Reservation> reservations = new HashSet<>();
@@ -32,6 +34,11 @@ public class ReservationCalendar implements Iterable<Reservation> {
 			return date.isEqual(start) || date.isEqual(end) || date.isAfter(start) && date.isBefore(end);
 		});
 	}
+
+	public Collection<Long> getReservationIds() {
+		return reservations.stream().map((r) -> r.getId()).collect(Collectors.toList());
+	}
+
 
 	public boolean isAvailable(LocalDate startDate, LocalDate endDate) {
 		LocalDate date = startDate;

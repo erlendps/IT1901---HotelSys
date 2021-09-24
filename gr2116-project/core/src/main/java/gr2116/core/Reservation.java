@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Reservation implements Iterable<LocalDate> {
+	private final long id;
     private final HotelRoom room;
 	private final LocalDate startDate;
 	private final LocalDate endDate;
 	
-	public Reservation(HotelRoom room, LocalDate startDate, LocalDate endDate) {
+	public Reservation(long id, HotelRoom room, LocalDate startDate, LocalDate endDate) {
 		if (startDate == null || endDate == null) {
 			throw new NullPointerException();
 		}
@@ -18,6 +19,7 @@ public class Reservation implements Iterable<LocalDate> {
 		this.room = room;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.id = id;
 	}
 	
 	public HotelRoom getRoom() {
@@ -31,6 +33,11 @@ public class Reservation implements Iterable<LocalDate> {
 	public LocalDate getEndDate() {
 		return endDate;
 	}
+
+	public long getId() {
+		return id;
+	}
+
 
 	@Override
 	public Iterator<LocalDate> iterator() {
