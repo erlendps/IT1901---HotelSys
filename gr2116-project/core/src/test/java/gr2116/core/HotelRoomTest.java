@@ -13,6 +13,7 @@ public class HotelRoomTest {
 	HotelRoom roomDouble = new HotelRoom(HotelRoomType.Double, 794);
 	LocalDate today = LocalDate.now();
 	LocalDate tomorrow = today.plusDays(1);
+	LocalDate overmorrow = today.plusDays(2);
 	
 	@Test
 	public void testFloorAndNumber() {
@@ -29,7 +30,7 @@ public class HotelRoomTest {
 		assertEquals(0, roomSingle.getPrice(today, tomorrow));
 		roomSingle.setPrice(100);
 		assertEquals(100, roomSingle.getPrice());
-		assertEquals(200, roomSingle.getPrice(today, tomorrow));
+		assertEquals(200, roomSingle.getPrice(today, overmorrow));
 	}
 
 	@Test
@@ -59,6 +60,6 @@ public class HotelRoomTest {
 		person.makeReservation(roomSingle, today, tomorrow);
 		assertFalse(roomSingle.isAvailable(today));
 		assertThrows(IllegalStateException.class, () -> person.makeReservation(roomSingle, today, tomorrow));
-		assertEquals(600, person.getBalance());
+		assertEquals(700, person.getBalance());
 	}
 }
