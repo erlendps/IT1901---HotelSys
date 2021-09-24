@@ -1,0 +1,28 @@
+{
+  "kyle@people.com": {
+    "balance": 144,
+    "reservations": [8925485604666133023],
+    "name": "Kyllard",
+    "email": "kyle@people.com"
+  },
+  "richard@people.com": {
+    "balance": 1000,
+    "reservations": [
+      1718460883781102335,
+      524592054244710982
+    ],
+    "name": "Richard",
+    "email": "richard@people.com"
+  },
+  "tom@richpeople.org": {
+    "balance": 1.0E9,
+    "reservations": [
+      7039133646951404727,
+      5865019599754115932,
+      7392246899555706190,
+      5682214851579388177
+    ],
+    "name": "Tom",
+    "email": "tom@richpeople.org"
+  }
+}

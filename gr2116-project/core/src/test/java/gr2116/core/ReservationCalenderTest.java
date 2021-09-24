@@ -14,7 +14,7 @@ public class ReservationCalenderTest {
 	ReservationCalendar calendar = new ReservationCalendar();
 	LocalDate today = LocalDate.now();
 	LocalDate tomorrow = today.plusDays(1);
-	Reservation reservation = new Reservation(null, today, tomorrow);
+	Reservation reservation = new Reservation(0, null, today, tomorrow);
 
 	private boolean checkReservations(ReservationCalendar calendar, Collection<Reservation> reservations) {
 		ArrayList<Reservation> calendarReservations = new ArrayList<>();

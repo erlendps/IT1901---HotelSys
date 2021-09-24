@@ -2,6 +2,8 @@ package gr2116.core;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.stream.Collectors;
+
 
 public class HotelRoom {
 	private final Collection<Amenity> amenities = new HashSet<Amenity>();
@@ -51,6 +53,10 @@ public class HotelRoom {
 		amenities.add(amenity);
 	}
 
+	public Collection<String> getAmenities() {
+		return amenities.stream().map((a) -> a.name()).collect(Collectors.toList());
+	}
+
 	public void removeAmenity(Amenity amenity) {
 		if (!amenities.contains(amenity)) {
 			throw new IllegalArgumentException();
@@ -84,6 +90,10 @@ public class HotelRoom {
 		}
 
 		calendar.addReservation(reservation);
+	}
+
+	public Collection<Long> getReservationIds() {
+		return calendar.getReservationIds();
 	}
 
 	private void verifyChronology(LocalDate startDate, LocalDate endDate) {
