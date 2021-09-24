@@ -62,7 +62,7 @@ public class UserPanel extends VBox implements PersonListener {
 	private void updatePanel(Person person) {
 		nameLabel.setText(person.getName());
 		emailLabel.setText(person.getEmail());
-		balanceLabel.setText(Double.toString(person.getBalance())); // TODO: Make sure this stays up to date.
+		balanceLabel.setText(Double.toString(person.getBalance()));
 
 		reservationListView.getItems().clear();
 		for (Reservation reservation : person.getReservations()) {
