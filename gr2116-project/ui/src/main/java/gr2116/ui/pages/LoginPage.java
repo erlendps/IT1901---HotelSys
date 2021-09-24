@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 
 public class LoginPage extends AnchorPane {
     private Collection<MessageListener> listeners = new HashSet<>();
+    private Collection<Person> loadedPersons;
     private Person person;
 
     @FXML
@@ -29,27 +30,34 @@ public class LoginPage extends AnchorPane {
         FXMLUtils.loadFXML(this);
     }
     
+    public void setLoadedPersons(Collection<Person> loadedPersons) {
+        this.loadedPersons = new HashSet<>(loadedPersons);
+    }
+
     @FXML
     private void initialize() {
         setNameVisible(false);
-
+        
         signInButton.setOnAction((event) -> {
+            String email = emailTextField.getText();
+            String name = nameTextField.getText();
             try {
-                // Try to sign in with existing email
-                throw new Exception("Sign in with existing email not implemented!");
-            }
-            catch (Exception e) {
+                if (loadedPersons != null) {
+                    for (Person loadedPerson : loadedPersons) {
+                        if (loadedPerson.getEmail().equals(email)) {
+                            notifyListeners(Message.SignIn, loadedPerson);
+                            return;
+                        }
+                    }
+                }
+                Person person = new Person(name);
+                person.setEmail(email);
+                notifyListeners(Message.SignIn, person);
+            } catch (Exception e1) {
                 try {
                     if (!nameTextField.isVisible()) {
                         setNameVisible(true);
                         return;
-                    }
-                    person = new Person(nameTextField.getText());
-                    try {
-                        person.setEmail(emailTextField.getText());
-                        notifyListeners(Message.SignIn, person);
-                    } catch (Exception e1) {
-                        emailErrorLabel.setText("Invalid email!");
                     }
                 } catch (Exception e2) {
                     emailErrorLabel.setText("Invalid name!");
@@ -57,7 +65,7 @@ public class LoginPage extends AnchorPane {
             }
         });
     }
-
+    
     private void setNameVisible(boolean visible) {
         nameTextField.setVisible(visible);
         nameTitleLabel.setVisible(visible);

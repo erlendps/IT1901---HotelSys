@@ -1,6 +1,10 @@
 package gr2116.ui.controller;
 
+import java.util.Collection;
+
+import gr2116.core.HotelRoom;
 import gr2116.core.Person;
+import gr2116.persistence.Loader;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
 import gr2116.ui.pages.LoginPage;
@@ -9,31 +13,50 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 
 public class AppController implements MessageListener {
-
+    private Collection<Person> loadedPersons;
+    private Collection<HotelRoom> loadedRooms;
+    
     @FXML
     private StackPane root;
 
     @FXML
     private void initialize() {
-        LoginPage loginPage = new LoginPage();
-        loginPage.addListener(this);
-        root.getChildren().add(loginPage);
+        moveToLoginPage();
     }
 
     @Override
     public void receiveNotification(Object from, Message message, Object data) {
         if (message == Message.SignIn && data instanceof Person) {
-            root.getChildren().clear();
             Person person = (Person) data;
-            MainPage mainPage = new MainPage(person);
-            mainPage.addListener(this);
-            root.getChildren().add(mainPage);
+            moveToMainPage(person);
         }
         if (message == Message.SignOut) {
-            root.getChildren().clear();
-            LoginPage loginPage = new LoginPage();
-            loginPage.addListener(this);
-            root.getChildren().add(loginPage);
+            moveToLoginPage();
         }
+    }
+    
+    private void moveToLoginPage() {
+        root.getChildren().clear();
+        LoginPage loginPage = new LoginPage();
+        loginPage.addListener(this);
+        
+        Loader loader = new Loader();
+        try {
+            loader.loadData();
+            loadedPersons = loader.getPersons();
+            loadedRooms = loader.getRooms();
+            loginPage.setLoadedPersons(loadedPersons);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        root.getChildren().add(loginPage);
+    }
+    
+    private void moveToMainPage(Person person) {
+        root.getChildren().clear();
+        MainPage mainPage = new MainPage(person);
+        mainPage.addListener(this);
+        root.getChildren().add(mainPage);
     }
 }
