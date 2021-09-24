@@ -70,7 +70,6 @@ public class Saver {
                             Collection<Person> persons,
                             Collection<Reservation> reservations) throws FileNotFoundException {
         File personDataJSON = new File(METADATA_FOLDER + "personData.json");
-        System.out.println(personDataJSON.getAbsolutePath());
         File roomsDataJSON = new File(METADATA_FOLDER + "roomsData.json");
         File reservationDataJSON = new File(METADATA_FOLDER + "reservationData.json");
         try {

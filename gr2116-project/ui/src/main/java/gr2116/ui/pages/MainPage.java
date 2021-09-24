@@ -48,10 +48,6 @@ public class MainPage extends VBox implements MessageListener {
         filterPane.getChildren().add(filterPanel);
         filterPanel.addListener(this);
 
-        hotel.addRoom(new HotelRoom(HotelRoomType.Single, 101));
-        hotel.addRoom(new HotelRoom(HotelRoomType.Double, 102));
-        hotel.addRoom(new HotelRoom(HotelRoomType.Single, 103));
-        hotel.addRoom(new HotelRoom(HotelRoomType.Suite, 201));
         
         buildRoomList();
     }
@@ -97,6 +93,7 @@ public class MainPage extends VBox implements MessageListener {
 
     public void addRooms(Collection<HotelRoom> rooms) {
         rooms.forEach((HotelRoom room) -> hotel.addRoom(room));
+        buildRoomList();
     }
 
     @Override
