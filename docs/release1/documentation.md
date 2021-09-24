@@ -1,7 +1,3 @@
- release-mappene er ment for å dekke hva slags funksjonalitet som (er ment å være) med, mens generell dokumentasjon av prosjektet ligger i md-filer utenom release-mappene og endres jevnt og trutt gjennom semesteret for å speile realitetene
-
-  For hver sluppet versjon skal en beskrive hvilken funksjonalitet en vil ha med, f.eks. i form av brukerhistorier og designskisser. Så slipper dere en versjon når det er realisert, heller enn å fryse tidsfristen og slippe det dere har da.
-
 Issuses på gitlab for innlevering 1 kan finnes under milestone MVP 1/3.
 
 Designet til først innleverinig legges på bakgrunn av brukerhistorien:
