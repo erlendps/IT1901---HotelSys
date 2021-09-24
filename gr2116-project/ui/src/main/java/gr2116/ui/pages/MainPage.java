@@ -79,7 +79,7 @@ public class MainPage extends VBox implements MessageListener {
                 roomItemContainer.getChildren().add(label);
             }
         
-            return; // TODO: Inform the user about why the filter is invalid.
+            return; 
         }
         
         Collection<HotelRoom> filteredRooms = hotel.getRooms(hotelRoomFilter.getPredicate());
