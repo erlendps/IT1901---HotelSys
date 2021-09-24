@@ -18,7 +18,11 @@ public class Hotel implements Iterable<HotelRoom> {
 		if (room == null) {
 			throw new NullPointerException();
 		}
-		rooms.add(room);
+		if (rooms.contains(room)) {
+			System.out.println("[Warning]: Tried to add a room that was already added.");
+		} else {
+			rooms.add(room);
+		}
 	}
 
 	public void removeRoom(HotelRoom room) {

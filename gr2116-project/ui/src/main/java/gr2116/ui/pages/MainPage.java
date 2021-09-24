@@ -95,6 +95,10 @@ public class MainPage extends VBox implements MessageListener {
         }
     }
 
+    public void addRooms(Collection<HotelRoom> rooms) {
+        rooms.forEach((HotelRoom room) -> hotel.addRoom(room));
+    }
+
     @Override
     public void receiveNotification(Object from, Message message, Object data) {
         if (message == Message.Filter && data instanceof HotelRoomFilter) {

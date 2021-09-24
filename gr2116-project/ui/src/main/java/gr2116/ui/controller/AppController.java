@@ -21,6 +21,14 @@ public class AppController implements MessageListener {
 
     @FXML
     private void initialize() {
+        Loader loader = new Loader();
+        try {
+            loader.loadData();
+            loadedPersons = loader.getPersons();
+            loadedRooms = loader.getRooms();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         moveToLoginPage();
     }
 
@@ -39,16 +47,7 @@ public class AppController implements MessageListener {
         root.getChildren().clear();
         LoginPage loginPage = new LoginPage();
         loginPage.addListener(this);
-        
-        Loader loader = new Loader();
-        try {
-            loader.loadData();
-            loadedPersons = loader.getPersons();
-            loadedRooms = loader.getRooms();
-            loginPage.setLoadedPersons(loadedPersons);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        loginPage.setLoadedPersons(loadedPersons);
 
         root.getChildren().add(loginPage);
     }
@@ -57,6 +56,7 @@ public class AppController implements MessageListener {
         root.getChildren().clear();
         MainPage mainPage = new MainPage(person);
         mainPage.addListener(this);
+        mainPage.addRooms(loadedRooms);
         root.getChildren().add(mainPage);
     }
 }
