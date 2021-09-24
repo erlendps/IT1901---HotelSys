@@ -14,7 +14,7 @@ import gr2116.core.*;
 public class Saver {
     private static final String METADATA_FOLDER = "src/main/resources/";
 
-    public JSONObject makePersonJSON(Person person) {
+    private JSONObject makePersonJSON(Person person) {
         JSONObject personData = new JSONObject();
         personData.put("name", person.getName());
         personData.put("email", person.getEmail());
@@ -23,7 +23,7 @@ public class Saver {
         return personData;
     }
 
-    public JSONObject makeRoomJSON(HotelRoom room) {
+    private JSONObject makeRoomJSON(HotelRoom room) {
         JSONObject roomData = new JSONObject();
         roomData.put("number", room.getNumber());
         roomData.put("price", room.getPrice());
@@ -33,7 +33,7 @@ public class Saver {
         return roomData;
     }
     
-    public JSONObject makeReservationJSON(Reservation reservation) {
+    private JSONObject makeReservationJSON(Reservation reservation) {
         JSONObject reservationData = new JSONObject();
         reservationData.put("id", reservation.getId());
         reservationData.put("room", reservation.getRoom().getNumber());
@@ -42,7 +42,7 @@ public class Saver {
         return reservationData;
     }
 
-    public JSONObject updatePersonData(Collection<Person> persons) {
+    private JSONObject updatePersonData(Collection<Person> persons) {
         JSONObject personsData = new JSONObject();
         persons.forEach((person) -> {
             personsData.put(person.getEmail(), makePersonJSON(person));
@@ -50,7 +50,7 @@ public class Saver {
         return personsData;
     }
 
-    public JSONObject updateRoomsData(Collection<HotelRoom> rooms) {
+    private JSONObject updateRoomsData(Collection<HotelRoom> rooms) {
         JSONObject roomsData = new JSONObject();
         rooms.forEach((room) -> {
             roomsData.put(Integer.toString(room.getNumber()), makeRoomJSON(room));
@@ -58,7 +58,7 @@ public class Saver {
         return roomsData;
     }
 
-    public JSONObject updateReservationData(Collection<Reservation> reservations) {
+    private JSONObject updateReservationData(Collection<Reservation> reservations) {
         JSONObject reservationsData = new JSONObject();
         reservations.forEach((reservation) -> {
             reservationsData.put(Long.toString(reservation.getId()), makeReservationJSON(reservation));
