@@ -6,6 +6,11 @@ import java.util.HashMap;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Map;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
+
+import org.apache.commons.io.IOUtils; 
 
 import gr2116.core.*;
 
@@ -97,4 +102,25 @@ public class Loader {
         }
         return rooms;
     }
+
+    public JSONObject getAsJSON(String filename) throws IOException {
+        InputStream stream = Loader.class.getResourceAsStream(filename);
+        if (stream == null) {
+            throw new NullPointerException("Stream is null - this is not good.");
+        }
+        String text = IOUtils.toString(stream, Charset.defaultCharset());
+        JSONObject json = new JSONObject(text);
+        return json;
+    }
+
+    public void loadData() throws IOException {
+        JSONObject personData = getAsJSON("/personData.json");
+        JSONObject roomData = getAsJSON("/roomsData.json");
+        JSONObject reservationData = getAsJSON("/reservationData.json");
+
+        loadData(roomData, personData, reservationData);
+    }
+
+
+        
 }

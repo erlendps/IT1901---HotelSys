@@ -1,5 +1,7 @@
 package gr2116.persistence;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,13 +19,17 @@ public class LoaderTest {
     JSONObject reservationsData;
 
     @BeforeEach
-    public void makeData() {
+    public void makeData() throws FileNotFoundException {
         Person rick = new Person("Richard");
         Person kyle = new Person("Kyllard");
         Person tom = new Person("Tom");
         rick.setEmail("richard@people.com");
         kyle.setEmail("kyle@people.com");
         tom.setEmail("tom@richpeople.org");
+
+        rick.addBalance(1000);
+        kyle.addBalance(144);
+        tom.addBalance(1000000000); 
 
         HotelRoom room1 = new HotelRoom(HotelRoomType.Single, 101);
         HotelRoom room2 = new HotelRoom(HotelRoomType.Single, 102);
@@ -59,15 +65,16 @@ public class LoaderTest {
             reservations.add(r)));
 
         Saver saver = new Saver();
-        personsData = saver.updatePersonData(persons);
+        /*personsData = saver.updatePersonData(persons);
         roomsData = saver.updateRoomsData(rooms);
-        reservationsData = saver.updateReservationData(reservations);
+        reservationsData = saver.updateReservationData(reservations);*/
+        saver.writeToFile(rooms, persons, reservations);
     }
 
     @Test
-    public void load() {
+    public void load() throws IOException {
         Loader dataLoader = new Loader();
-        dataLoader.loadData(roomsData, personsData, reservationsData);
+        dataLoader.loadData();
         Collection<Person> persons = dataLoader.getPersons();
         Collection<HotelRoom> rooms = dataLoader.getRooms();
         System.out.println("People:");
