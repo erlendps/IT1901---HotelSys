@@ -9,10 +9,10 @@ Designet til først innleverinig legges på bakgrunn av brukerhistorien:
 ## Brukerhistorie
 ### Booking av hotelrom 
 
-> Som privatperson ønsker jeg å finne hotellrom som har de fasilitetene jeg vil ha, slik at jeg får et godt opphold. 
+> Som privatperson ønsker jeg å finne hotellrom av romtypen jeg vil ha, slik at jeg får et godt opphold. 
 > _- Bruker_
 
-Brukeren har behov for å kunne velge hvilke fasiliteter de vil at hotellrommet skal ha, og deretter kunne se de ledige rommene som passer best til de valgte fasilitetene. Det bør kunne velges hvilken periode brukeren vil reservere rom for, og deretter kunne se hvilke rom brukeren har reservert. Dermed er det lett å huske hvilke rom brukeren har reservert. 
+Brukeren har behov for å kunne velge hvilken romtype de vil at hotellrommet skal ha, og deretter kunne se de ledige rommene med denne romtypen. Det bør kunne velges hvilken periode brukeren vil reservere rom for, og se tidligere reservasjoner brukeren har gjort. Dermed er det lett å huske hvilke rom brukeren har reservert. 
 
 ## ER-diagram
 
@@ -31,5 +31,7 @@ Under vises en skisse av hvordan appen skal se ut for brukeren. Brukeren kan vel
      alt="Skisse av app"
      style="float: left; margin-right: 10px; width: 100%" />
 
+## Realisert
 
+Når appen åpnes kommer det opp et innlogingsvindu. Her skriver man inn e-postadresse. E-postadressen må være gyldid for at man skal komme seg videre. Dersom e-postadressen er brukt tidligere kommer man direkte videre, eller så må man skrive inn navn også. Når man trykker "Sign in"  ser man på venstre side navn, E-postadresse, balanse og reservasjoner. Midten er tom, fram til du velger dato for inn og utsjekking, samt hvilken romtype du vil ha. Da vil rom som er ledig i denne perioden og som har denne romtypen dukke opp på skjermen. Om bruker har gjort enn feil, vil det komme en forklarende feilmelding, slik at bruker kan rette opp feilen. I tillegg er det implenter fillagring, slik at reservasjoner brukeren gjør lagres i en fil. Denne filen kan lagres, og leses ved senere bruk av appen. Dersom man logger seg inn med samme mail, vil man kunne se reservasjoner som  er gjort tidligere.
 
