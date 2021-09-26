@@ -16,7 +16,7 @@ public class Person {
 		if (name == null) {
 			throw new NullPointerException();
 		}
-		if (!name.matches("([A-Za-z]+.* *)+")) {
+		if (!isValidName(name)) {
 			throw new IllegalArgumentException("The name is not valid");
 		}
 		this.name = name;
@@ -31,15 +31,23 @@ public class Person {
 	}
 	
 	public void setEmail(String email) {
-		String regex = "^[a-zA-Z0-9._-]{2,20}@[a-zA-Z0-9.]{2,20}.(no|com|net|org)$";
 		if (email == null) {
 			throw new NullPointerException("Email is null");
 		}
-		if (!email.matches(regex)){
+		if (!isValidEmail(email)){
 			throw new IllegalArgumentException("The email is not valid");
 		}
 		this.email = email;
 		notifyListeners();
+	}
+
+	public static boolean isValidEmail(String email) {
+		String regex = "^[a-zA-Z0-9._-]{2,20}@[a-zA-Z0-9.]{2,20}.(no|com|net|org)$";
+		return email.matches(regex);
+	}
+
+	public static boolean isValidName(String name) {
+		return name.matches("([A-Za-z]+.* *)+");
 	}
 
 	public double getBalance() {

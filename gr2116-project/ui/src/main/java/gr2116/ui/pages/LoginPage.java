@@ -15,7 +15,6 @@ import javafx.scene.layout.AnchorPane;
 public class LoginPage extends AnchorPane {
     private Collection<MessageListener> listeners = new HashSet<>();
     private Collection<Person> loadedPersons;
-    private Person person;
 
     @FXML
     private TextField nameTextField, emailTextField;
@@ -41,28 +40,30 @@ public class LoginPage extends AnchorPane {
         signInButton.setOnAction((event) -> {
             String email = emailTextField.getText();
             String name = nameTextField.getText();
-            try {
-                if (loadedPersons != null) {
-                    for (Person loadedPerson : loadedPersons) {
-                        if (loadedPerson.getEmail().equals(email)) {
-                            notifyListeners(Message.SignIn, loadedPerson);
-                            return;
-                        }
-                    }
-                }
-                Person person = new Person(name);
-                person.setEmail(email);
-                notifyListeners(Message.SignIn, person);
-            } catch (Exception e1) {
-                try {
-                    if (!nameTextField.isVisible()) {
-                        setNameVisible(true);
-                        return;
-                    }
-                } catch (Exception e2) {
-                    emailErrorLabel.setText("Invalid name!");
+
+            if (!Person.isValidEmail(email)) {
+                emailErrorLabel.setText("Invalid email!");
+                return;
+            }
+
+            for (Person loadedPerson : loadedPersons) {
+                if (loadedPerson.getEmail().equals(email)) {
+                    notifyListeners(Message.SignIn, loadedPerson);
+                    return;
                 }
             }
+
+            if (!nameTextField.isVisible()) {
+                setNameVisible(true);
+                return;
+            } else if (!Person.isValidName(name)) {
+                emailErrorLabel.setText("Invalid name!");
+                return;
+            }
+            
+            Person person = new Person(name);
+            person.setEmail(email);
+            notifyListeners(Message.SignIn, person);
         });
     }
     
