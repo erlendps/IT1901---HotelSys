@@ -21,9 +21,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
 public class MainPage extends VBox implements MessageListener {
-	private FilterPanel filterPanel = new FilterPanel();
+	private final FilterPanel filterPanel = new FilterPanel();
     private UserPanel userPanel;
-	private Hotel hotel = new Hotel();
+	private final Hotel hotel = new Hotel();
 	private HotelRoomFilter hotelRoomFilter;
     private final Person person;
     private final Collection<MessageListener> listeners = new HashSet<>();
@@ -54,33 +54,32 @@ public class MainPage extends VBox implements MessageListener {
     
     private void buildRoomList() {
         roomItemContainer.getChildren().clear();
+
         if (hotelRoomFilter == null) {
             return;
         }
+        
         if (!hotelRoomFilter.isValid()) {
             HotelRoomType roomType = hotelRoomFilter.getRoomType();
             LocalDate startDate = hotelRoomFilter.getStartDate();
             LocalDate endDate = hotelRoomFilter.getEndDate();
             
-            if( roomType == null){
+            if (roomType == null) {
                 Label label = new Label("No room type is set yet.");
                 roomItemContainer.getChildren().add(label);
             }
-            if( startDate == null || endDate == null ){
+            if (startDate == null || endDate == null) {
                 Label label = new Label("No dates are picked yet.");
                 roomItemContainer.getChildren().add(label);
-            }
-            if( endDate.isBefore(startDate) ){
+            } else if (endDate.isBefore(startDate)) {
                 Label label = new Label("The end date picked is before the start date.");
                 roomItemContainer.getChildren().add(label);
-            }
-        
+            }        
             return; 
         }
         
         Collection<HotelRoom> filteredRooms = hotel.getRooms(hotelRoomFilter.getPredicate());
 
-        
         for (HotelRoom hotelRoom : filteredRooms) {
             HotelRoomListItem roomItem = new HotelRoomListItem(hotelRoom);
             roomItem.setOnMakeReservationButtonAction((event) -> {
@@ -103,7 +102,7 @@ public class MainPage extends VBox implements MessageListener {
             buildRoomList();
         }
         if (message == Message.SignOut) {
-            notifyListeners(Message.SignOut);
+            notifyListeners(Message.SignOut, person);
         }
     }
     
@@ -113,9 +112,9 @@ public class MainPage extends VBox implements MessageListener {
 	public void removeListener(MessageListener listener) {
 		listeners.remove(listener);
 	}
-	public void notifyListeners(Message message) {
+	public void notifyListeners(Message message, Object data) {
         for (MessageListener listener : listeners) {
-            listener.receiveNotification(this, message, null);
+            listener.receiveNotification(this, message, data);
         }
     }
 }

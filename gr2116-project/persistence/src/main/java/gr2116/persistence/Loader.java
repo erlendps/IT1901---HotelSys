@@ -6,16 +6,18 @@ import java.util.HashMap;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Map;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.Charset;
-
-import org.apache.commons.io.IOUtils; 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import gr2116.core.*;
 
 public class Loader {
     // TODO: Invalid data handling
+
+    private static final Path METADATA_FOLDER = Paths.get(".").toAbsolutePath().normalize().getParent().getParent().resolve("data");
     private boolean loaded = false;
     private Collection<Person> persons = new HashSet<Person>();
     private Collection<HotelRoom> rooms = new HashSet<HotelRoom>();
@@ -104,11 +106,7 @@ public class Loader {
     }
 
     public JSONObject getAsJSON(String filename) throws IOException {
-        InputStream stream = Loader.class.getResourceAsStream(filename);
-        if (stream == null) {
-            throw new NullPointerException("Stream is null - this is not good.");
-        }
-        String text = IOUtils.toString(stream, Charset.defaultCharset());
+        String text = Files.readString(Paths.get(new File(METADATA_FOLDER + filename).getAbsolutePath()));
         JSONObject json = new JSONObject(text);
         return json;
     }
@@ -120,7 +118,4 @@ public class Loader {
 
         loadData(roomData, personData, reservationData);
     }
-
-
-        
 }
