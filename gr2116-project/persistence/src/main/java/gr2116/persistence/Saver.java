@@ -5,14 +5,16 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.io.PrintWriter;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import gr2116.core.*;
 
 public class Saver {
-    private static final String METADATA_FOLDER = "src/main/resources/";
+    private static final Path METADATA_FOLDER = Paths.get(".").toAbsolutePath().normalize().getParent().getParent().resolve("data");
 
     private JSONObject makePersonJSON(Person person) {
         JSONObject personData = new JSONObject();
@@ -67,12 +69,18 @@ public class Saver {
     }
 
     public void writeToFile(Collection<HotelRoom> rooms,
+                            Collection<Person> persons) throws FileNotFoundException {
+        ArrayList<Reservation> reservations = new ArrayList<Reservation>();
+        persons.forEach((person) -> reservations.addAll(person.getReservations()));
+        writeToFile(rooms, persons, reservations);
+    }
+    
+    public void writeToFile(Collection<HotelRoom> rooms,
                             Collection<Person> persons,
                             Collection<Reservation> reservations) throws FileNotFoundException {
-        File personDataJSON = new File(METADATA_FOLDER + "personData.json");
-        System.out.println(personDataJSON.getAbsolutePath());
-        File roomsDataJSON = new File(METADATA_FOLDER + "roomsData.json");
-        File reservationDataJSON = new File(METADATA_FOLDER + "reservationData.json");
+        File personDataJSON = new File(METADATA_FOLDER + "/personData.json");
+        File roomsDataJSON = new File(METADATA_FOLDER + "/roomsData.json");
+        File reservationDataJSON = new File(METADATA_FOLDER + "/reservationData.json");
         try {
             Path.of(personDataJSON.getAbsolutePath()).toFile().createNewFile();
             Path.of(roomsDataJSON.getAbsolutePath()).toFile().createNewFile();
@@ -93,5 +101,4 @@ public class Saver {
             pw.flush();
         }
     }
-
 }

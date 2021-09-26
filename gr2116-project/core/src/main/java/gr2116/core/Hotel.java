@@ -7,12 +7,22 @@ import java.util.stream.Collectors;
 
 public class Hotel implements Iterable<HotelRoom> {
     private final Collection<HotelRoom> rooms = new ArrayList<>();
-
+	
+	public Hotel() {}
+	
+	public Hotel(Collection<HotelRoom> rooms) {
+		rooms.forEach((room) -> this.rooms.add(room));
+	}
+	
 	public void addRoom(HotelRoom room) {
 		if (room == null) {
 			throw new NullPointerException();
 		}
-		rooms.add(room);
+		if (rooms.contains(room)) {
+			System.out.println("[Warning]: Tried to add a room that was already added.");
+		} else {
+			rooms.add(room);
+		}
 	}
 
 	public void removeRoom(HotelRoom room) {

@@ -2,12 +2,11 @@ package gr2116.core;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.Random;
 
-
 public class Person {
+	private final Collection<PersonListener> listeners = new HashSet<>(); 
 	private final Collection<Reservation> reservations = new HashSet<>();
     private final String name;
 	private String email;
@@ -17,9 +16,12 @@ public class Person {
 		if (name == null) {
 			throw new NullPointerException();
 		}
+		if (!isValidName(name)) {
+			throw new IllegalArgumentException("The name is not valid");
+		}
 		this.name = name;
 	}
-
+	
 	public String getName() {
 		return name;
 	}
@@ -29,14 +31,23 @@ public class Person {
 	}
 	
 	public void setEmail(String email) {
-		String regex = "^[a-zA-Z0-9._-]{2,20}@[a-zA-Z0-9.]{2,20}.(no|com|net|org)$";
 		if (email == null) {
 			throw new NullPointerException("Email is null");
 		}
-		if (!Pattern.matches(regex, email)){
+		if (!isValidEmail(email)){
 			throw new IllegalArgumentException("The email is not valid");
 		}
 		this.email = email;
+		notifyListeners();
+	}
+
+	public static boolean isValidEmail(String email) {
+		String regex = "^[a-zA-Z0-9._-]{2,20}@[a-zA-Z0-9.]{2,20}.(no|com|net|org)$";
+		return email.matches(regex);
+	}
+
+	public static boolean isValidName(String name) {
+		return name.matches("([A-Za-z]+.* *)+");
 	}
 
 	public double getBalance() {
@@ -45,10 +56,12 @@ public class Person {
 
 	public void addBalance(double balance) {
 		this.balance += balance;
+		notifyListeners();
 	}
 
 	public void subtractBalance(double balance) {
 		this.balance -= balance;
+		notifyListeners();
 	}
 	
 	public void makeReservation(HotelRoom hotelRoom, LocalDate startDate, LocalDate endDate) {
@@ -77,14 +90,11 @@ public class Person {
 			throw new NullPointerException();
 		}
 		reservations.add(reservation);
+		notifyListeners();
 	}
 
 	public Collection<Long> getReservationIds() {
 		return reservations.stream().map((r) -> r.getId()).collect(Collectors.toList());
-	}
-
-	public Collection<Reservation> getReservations() {
-		return reservations;
 	}
 
 	// public void removeReservation(Reservation reservation) {
@@ -96,5 +106,21 @@ public class Person {
 
 	public boolean hasReservation(Reservation reservation) {
 		return reservations.contains(reservation);
+	}
+
+	public Collection<Reservation> getReservations() {
+		return new HashSet<>(reservations);
+	}
+	
+	public void addListener(PersonListener listener) {
+		listeners.add(listener);
+	}
+	public void removeListener(PersonListener listener) {
+		listeners.remove(listener);
+	}
+	public void notifyListeners() {
+		for (PersonListener listener : listeners) {
+			listener.receiveNotification(this);
+		}
 	}
 }
