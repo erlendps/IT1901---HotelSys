@@ -1,4 +1,4 @@
-Issuses på gitlab for innlevering 1 kan finnes under milestone MVP 1/3.
+Issuses på [GitLab](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2116/gr2116) for innlevering 1 kan finnes under milestone MVP 1/3.
 
 Designet til først innleverinig legges på bakgrunn av brukerhistorien:
 
