@@ -1,15 +1,18 @@
 # Brukerhistorie 1: Booking av hotelrom med valgt romtype
-> Som privatperson ønsker jeg å finne hotellrom av romtypen jeg vil ha, slik at jeg får et godt opphold. 
+> Som privatperson ønsker jeg å finne hotellrom av romtypen jeg vil ha med de fasilitetene jeg ønsker, slik at jeg får et godt opphold. 
 > _- Bruker_
 
-Brukeren har behov for å kunne velge hvilken romtype de vil at hotellrommet skal ha, og deretter kunne se de ledige rommene med denne romtypen. Det bør kunne velges hvilken periode brukeren vil reservere rom for, slik at de ledige rommene for denne perioden kommer opp.
+Brukeren har behov for å kunne velge hvilken romtype og fasiliteter de vil at hotellrommet skal ha, og deretter kunne se de ledige rommene med valgt romtype og fasiliteter. Det bør kunne velges hvilken periode brukeren vil reservere rom for, slik at de ledige rommene for denne perioden kommer opp.
 ## Viktig å kunne se
 * Hvilke romtyper som kan velges.
-* Ledige rom med valgt romtype, i valgt periode.
+* Hvilke fasiliteter som kan velges.
+* Ledige rom med valgt romtype og fasiliteter, i valgt periode.
 
 ## Viktig å kunne gjøre
 * Finn hotelrom som er ledig i en gitt periode.
-* Finn hotelrom med riktig type.
+* Finn hotelrom med riktig romtype.
+* Finn hotelrom med riktig fasiliteter.
+
 
 # Brukerhistorie 2: Se tidligere reserverte rom
 > Som privatperson ønsker jeg å holde oversikt over og orden på mine  reservasjoner, så jeg husker dem. 
