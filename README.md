@@ -3,7 +3,7 @@
 This is the group project in IT1901 for gr2116
 Dette prosjektet er et utviklingsprosjekt for grupper 16 i faget IT1901.
 
-Kodingsprosjektet ligger i mapppen gr2116-project/core/src/main
+Kodingsprosjektet ligger i mapppen [gr2116-project](gr2116-project). Her ligger de tre modulene som utgjør prosjektet. [_Core_](gr2116-project/core/src/main/java/gr2116/core) refererer til den tekniske modellen, [_persistence_](gr2116-project/persistence/src/main/java/gr2116/persistence) refererer til fillagringssystemet og [_ui_](gr2116-project/ui/src/main/java/gr2116/ui) refererer til det grafiske grensesnittet i applikasjonen.
 
 Prosjektet kjøres og bygges av maven.
 
