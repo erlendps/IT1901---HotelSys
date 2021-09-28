@@ -1,4 +1,4 @@
-Issuses på [GitLab](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2116/gr2116) for innlevering 1 kan finnes under milestone [Release 1 - MVP](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2116/gr2116/-/milestones/1).
+Issues for innlevering 1 kan finnes under milestone [Release 1 - MVP](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2116/gr2116/-/milestones/1).
 
 Designet til først innlevering legges på bakgrunn av brukerhistorien:
 
