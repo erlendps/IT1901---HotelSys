@@ -1,14 +1,7 @@
 Issuses på [GitLab](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2116/gr2116) for innlevering 1 kan finnes under milestone MVP 1/3.
 
-Designet til først innleverinig legges på bakgrunn av brukerhistorien:
+Designet til først innleverinig legges på bakgrunn av Brukerhistorie 1: Booking av hotelrom med valgt romtype og Brukerhistorie 2: Se tidligere reserverte rom. Brukerhistoriene finnes i [brukerhistorie](../../brukerhistorie.md).
 
-## Brukerhistorie
-### Booking av hotelrom 
-
-> Som privatperson ønsker jeg å finne hotellrom av romtypen jeg vil ha, slik at jeg får et godt opphold. 
-> _- Bruker_
-
-Brukeren har behov for å kunne velge hvilken romtype de vil at hotellrommet skal ha, og deretter kunne se de ledige rommene med denne romtypen. Det bør kunne velges hvilken periode brukeren vil reservere rom for, og se tidligere reservasjoner brukeren har gjort. Dermed er det lett å huske hvilke rom brukeren har reservert. 
 
 ## ER-diagram
 
