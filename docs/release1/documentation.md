@@ -8,7 +8,7 @@ Designet til først innlevering legges på bakgrunn av brukerhistorien:
 Et Entity Relationship Diagram vises under, det angitt konseptuelle sammenhenger mellom klassene. 
 Et hotell kan ha mange rom. Rommet kan ha mange fasiliteter, men kun en reservasjonskalender. Reservasjonskalenderen kan ha mange reservasjoner. En reservasjon er koblet til en person, mens en persjon kan ha mange reservasjoner. Personen søker i hotell for å finne ledige rom med riktige fasiliteter. 
 
-<img src="ER-diagram___Konseptuell_modell_.png"
+<img src="../images/ER-diagram___Konseptuell_modell_.png"
      alt="ER-diagram"
      style="float: left; margin-right: 10px; width: 100%" />
 

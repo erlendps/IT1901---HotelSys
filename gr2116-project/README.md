@@ -4,3 +4,9 @@ HotelSys er et program hvor man kan reservere hotellrom for bestemte tidspunkt, 
 Programmet skal også støtte et administratorpanel. Der kan man legge til nye hotellrom, se reservasjoner og endre brukeres saldo.
 
 Alle disse funksjonene er ikke realisert. I [dokumentasjonen](docs/release1/documentation.md) finnes en oversikt over hva som er implementert.
+
+## Designskisse
+
+<img src="../docs/images/skisse_app.png"
+     alt="Designskisse av hovedsiden."
+     style="float: left; margin-right: 10px; width: 100%" />
