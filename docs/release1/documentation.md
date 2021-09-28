@@ -12,7 +12,7 @@ Et hotell kan ha mange rom. Rommet kan ha mange fasiliteter, men kun en reservas
      alt="ER-diagram"
      style="float: left; margin-right: 10px; width: 100%" />
 
-## Designskisse
+## Skjermbilder
 
 Under vises skjermbilder for hvordan applikasjonen ser ut foreløpig. Innloggingsiden er for å logge inn eller opprette ny bruker. Hovedsiden er der brukeren søker etter hotellrom og oppretter reservasjoner.
 
