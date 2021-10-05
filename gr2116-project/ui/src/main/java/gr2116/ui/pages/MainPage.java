@@ -10,7 +10,6 @@ import java.util.function.Predicate;
 
 import gr2116.core.Hotel;
 import gr2116.core.HotelRoom;
-import gr2116.core.HotelRoomType;
 import gr2116.core.Person;
 import gr2116.ui.components.UserPanel;
 import gr2116.ui.message.Message;
