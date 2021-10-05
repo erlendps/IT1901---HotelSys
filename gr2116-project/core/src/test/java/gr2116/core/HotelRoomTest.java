@@ -3,16 +3,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 
+@ExtendWith(MockitoExtension.class)  
 public class HotelRoomTest {
+	@Mock
 	HotelRoom roomSingle = new HotelRoom(HotelRoomType.Single, 111);
+	@Mock
 	HotelRoom roomDouble = new HotelRoom(HotelRoomType.Double, 794);
+	@Mock
 	LocalDate today = LocalDate.now();
+	@Mock
 	LocalDate tomorrow = today.plusDays(1);
+	@Mock
 	LocalDate overmorrow = today.plusDays(2);
 	
 	@Test
