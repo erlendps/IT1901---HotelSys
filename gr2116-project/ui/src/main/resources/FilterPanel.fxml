@@ -8,7 +8,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 
 <!-- fx:controller must be set to ComponentTemplate -->
 <!-- type must be set to the parent of ComponentTemplate -->
@@ -32,7 +34,7 @@
             <CheckBox fx:id="floorCheckBox" />
             <Label text="Enable"/>
          </children>
-      <HBox />
+      </HBox>
       <Separator prefHeight="30.0" prefWidth="200.0" />
       <Label text="Amenities:" />
       <VBox fx:id="amenitiesContainer"/>
