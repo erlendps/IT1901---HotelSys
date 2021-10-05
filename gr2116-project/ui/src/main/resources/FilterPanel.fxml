@@ -7,6 +7,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.layout.VBox?>
 
 <!-- fx:controller must be set to ComponentTemplate -->
@@ -23,6 +24,9 @@
       <Label text="Room type:" />
       <ChoiceBox fx:id="roomTypeChoiceBox" prefWidth="150.0" />
       <Label fx:id="roomTypeDescription" />
+      <Separator prefHeight="30.0" prefWidth="200.0" />
+      <Label text="Floor:" />
+      <Spinner fx:id="floorSpinner" />
       <Separator prefHeight="30.0" prefWidth="200.0" />
       <Label text="Amenities:" />
       <VBox fx:id="amenitiesContainer"/>

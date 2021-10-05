@@ -13,11 +13,13 @@ public class HotelRoomFilter {
 	private final LocalDate endDate;
 	private final HotelRoomType roomType;
 	private final HashMap<Amenity, Boolean> amenities;
+	private final int floor;
 
-	public HotelRoomFilter(LocalDate startDate, LocalDate endDate, HotelRoomType roomType, HashMap<Amenity, Boolean> amenities) {
+	public HotelRoomFilter(LocalDate startDate, LocalDate endDate, HotelRoomType roomType, int floor, HashMap<Amenity, Boolean> amenities) {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.roomType = roomType;
+		this.floor = floor;
 		this.amenities = amenities;
 	}
 	
@@ -46,6 +48,9 @@ public class HotelRoomFilter {
 				return false;
 			}
 			if (room.getRoomType() != roomType) {
+				return false;
+			}
+			if (room.getFloor() != floor) {
 				return false;
 			}
 			for (Amenity amenity : amenities.keySet()) {

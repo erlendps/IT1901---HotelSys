@@ -14,6 +14,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -33,6 +35,9 @@ public class FilterPanel extends VBox {
 	@FXML
 	private VBox amenitiesContainer;
 
+	@FXML
+	private Spinner<Integer> floorSpinner;
+	
     public FilterPanel() {
         FXMLUtils.loadFXML(this);
     }
@@ -40,7 +45,8 @@ public class FilterPanel extends VBox {
     @FXML
     private void initialize() {
 		roomTypeDescription.setText("Select a room type.");
-
+		floorSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20, 1));
+		
 		for (HotelRoomType roomType : HotelRoomType.values()) {
 			roomTypeChoiceBox.getItems().add(roomType);
 		}
@@ -73,6 +79,9 @@ public class FilterPanel extends VBox {
 			}
 			notifyListeners();
 		});
+		floorSpinner.valueProperty().addListener((obs, oldValue, newValue) -> {
+			notifyListeners();
+		});
     }
 
 	public void addListener(MessageListener listener) {
@@ -83,7 +92,8 @@ public class FilterPanel extends VBox {
 	}
 	public void notifyListeners() {
 		for (MessageListener listener : listeners) {
-			HotelRoomFilter filter = new HotelRoomFilter(startDatePicker.getValue(), endDatePicker.getValue(), roomTypeChoiceBox.getValue(), amenities);
+			HotelRoomFilter filter = new HotelRoomFilter(startDatePicker.getValue(), endDatePicker.getValue(),
+											 roomTypeChoiceBox.getValue(), floorSpinner.getValue(), amenities);
 			listener.receiveNotification(this, Message.Filter, filter);
 		}
 	}
