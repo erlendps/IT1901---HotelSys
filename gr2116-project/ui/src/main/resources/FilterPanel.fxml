@@ -7,7 +7,11 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 
 <!-- fx:controller must be set to ComponentTemplate -->
 <!-- type must be set to the parent of ComponentTemplate -->
@@ -23,6 +27,20 @@
       <Label text="Room type:" />
       <ChoiceBox fx:id="roomTypeChoiceBox" prefWidth="150.0" />
       <Label fx:id="roomTypeDescription" />
+      <Separator prefHeight="30.0" prefWidth="200.0" />
+      <Label text="Floor:" />
+      <HBox>
+         <children>
+            <Spinner fx:id="floorSpinner" />
+            <CheckBox fx:id="floorCheckBox" />
+            <Label text="Enable"/>
+         </children>
+      </HBox>
+      <Separator prefHeight="30.0" prefWidth="200.0" />
+      <Label text="Amenities:" />
+      <VBox fx:id="amenitiesContainer"/>
+      <Separator prefHeight="30.0" prefWidth="200.0" />
+      <Button text="Clear filter" fx:id="clearFilterButton"/>
    </children>
    <padding>
       <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
