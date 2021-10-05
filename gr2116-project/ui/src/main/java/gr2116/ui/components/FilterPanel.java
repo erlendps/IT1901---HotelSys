@@ -37,6 +37,9 @@ public class FilterPanel extends VBox {
 
 	@FXML
 	private Spinner<Integer> floorSpinner;
+
+	@FXML
+	private CheckBox floorCheckBox;
 	
     public FilterPanel() {
         FXMLUtils.loadFXML(this);
@@ -44,6 +47,7 @@ public class FilterPanel extends VBox {
     
     @FXML
     private void initialize() {
+		floorSpinner.setDisable(true);
 		roomTypeDescription.setText("Select a room type.");
 		floorSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20, 1));
 		
@@ -82,8 +86,11 @@ public class FilterPanel extends VBox {
 		floorSpinner.valueProperty().addListener((obs, oldValue, newValue) -> {
 			notifyListeners();
 		});
+		floorCheckBox.selectedProperty().addListener((obs, oldValue, newValue) -> {
+			floorSpinner.setDisable(newValue);
+		});
     }
-
+	
 	public void addListener(MessageListener listener) {
 		listeners.add(listener);
 	}
@@ -92,8 +99,11 @@ public class FilterPanel extends VBox {
 	}
 	public void notifyListeners() {
 		for (MessageListener listener : listeners) {
-			HotelRoomFilter filter = new HotelRoomFilter(startDatePicker.getValue(), endDatePicker.getValue(),
-											 roomTypeChoiceBox.getValue(), floorSpinner.getValue(), amenities);
+			HotelRoomFilter filter = new HotelRoomFilter(startDatePicker.getValue(),
+											endDatePicker.getValue(),
+											roomTypeChoiceBox.getValue(),
+											floorSpinner.isDisable() ? null : floorSpinner.getValue(),
+											amenities);
 			listener.receiveNotification(this, Message.Filter, filter);
 		}
 	}

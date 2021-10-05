@@ -26,7 +26,13 @@
       <Label fx:id="roomTypeDescription" />
       <Separator prefHeight="30.0" prefWidth="200.0" />
       <Label text="Floor:" />
-      <Spinner fx:id="floorSpinner" />
+      <HBox>
+         <children>
+            <Spinner fx:id="floorSpinner" />
+            <CheckBox fx:id="floorCheckBox" />
+            <Label text="Enable"/>
+         </children>
+      <HBox />
       <Separator prefHeight="30.0" prefWidth="200.0" />
       <Label text="Amenities:" />
       <VBox fx:id="amenitiesContainer"/>

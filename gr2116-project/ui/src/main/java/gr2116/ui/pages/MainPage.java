@@ -6,6 +6,7 @@ import javafx.scene.layout.VBox;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.function.Predicate;
 
 import gr2116.core.Hotel;
 import gr2116.core.HotelRoom;
@@ -54,33 +55,30 @@ public class MainPage extends VBox implements MessageListener {
     
     private void buildRoomList() {
         roomItemContainer.getChildren().clear();
-
-        if (hotelRoomFilter == null) {
-            Label label = new Label("No filter is selected.");
-            roomItemContainer.getChildren().add(label);
-            return;
-        }
+        Predicate<HotelRoom> predicate;
         
-        if (!hotelRoomFilter.isValid()) {
-            HotelRoomType roomType = hotelRoomFilter.getRoomType();
-            LocalDate startDate = hotelRoomFilter.getStartDate();
-            LocalDate endDate = hotelRoomFilter.getEndDate();
-            
-            if (roomType == null) {
-                Label label = new Label("No room type is set yet.");
-                roomItemContainer.getChildren().add(label);
+        if (hotelRoomFilter != null) {
+            if (!hotelRoomFilter.isValid()) {
+                LocalDate startDate = hotelRoomFilter.getStartDate();
+                LocalDate endDate = hotelRoomFilter.getEndDate();
+                
+                if (startDate == null && endDate != null || startDate != null && endDate == null) {
+                    Label label = new Label("You must choose both a start date and an end date.");
+                    roomItemContainer.getChildren().add(label);
+                }
+                if (startDate != null && endDate != null && endDate.isBefore(startDate)) {
+                    Label label = new Label("The end date must be after the start date.");
+                    roomItemContainer.getChildren().add(label);
+                }
+                return;
             }
-            if (startDate == null || endDate == null) {
-                Label label = new Label("No dates are picked yet.");
-                roomItemContainer.getChildren().add(label);
-            } else if (endDate.isBefore(startDate)) {
-                Label label = new Label("The end date picked is before the start date.");
-                roomItemContainer.getChildren().add(label);
-            }        
-            return; 
+            predicate = hotelRoomFilter.getPredicate();
+        }
+        else {
+            predicate = (room) -> true;
         }
         
-        Collection<HotelRoom> filteredRooms = hotel.getRooms(hotelRoomFilter.getPredicate());
+        Collection<HotelRoom> filteredRooms = hotel.getRooms(predicate);
 
         for (HotelRoom hotelRoom : filteredRooms) {
             HotelRoomListItem roomItem = new HotelRoomListItem(hotelRoom);

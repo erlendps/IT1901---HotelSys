@@ -13,9 +13,9 @@ public class HotelRoomFilter {
 	private final LocalDate endDate;
 	private final HotelRoomType roomType;
 	private final HashMap<Amenity, Boolean> amenities;
-	private final int floor;
+	private final Integer floor;
 
-	public HotelRoomFilter(LocalDate startDate, LocalDate endDate, HotelRoomType roomType, int floor, HashMap<Amenity, Boolean> amenities) {
+	public HotelRoomFilter(LocalDate startDate, LocalDate endDate, HotelRoomType roomType, Integer floor, HashMap<Amenity, Boolean> amenities) {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.roomType = roomType;
@@ -24,16 +24,10 @@ public class HotelRoomFilter {
 	}
 	
 	public boolean isValid() {
-		if (roomType == null) {
+		if (startDate == null && endDate != null || startDate != null && endDate == null) {
 			return false;
 		}
-		if (startDate == null || endDate == null) {
-			return false;
-		}
-		if (endDate.isBefore(startDate)) {
-			return false;
-		}
-		if (amenities == null) {
+		if (startDate != null && endDate != null && endDate.isBefore(startDate)) {
 			return false;
 		}
 		return true;
@@ -44,13 +38,13 @@ public class HotelRoomFilter {
 			if (!isValid()) {
 				return false;
 			}
-			if (!room.isAvailable(startDate, endDate)) {
+			if (startDate != null && endDate != null && !room.isAvailable(startDate, endDate)) {
 				return false;
 			}
-			if (room.getRoomType() != roomType) {
+			if (roomType != null && room.getRoomType() != roomType) {
 				return false;
 			}
-			if (room.getFloor() != floor) {
+			if (floor != null && room.getFloor() != floor) {
 				return false;
 			}
 			for (Amenity amenity : amenities.keySet()) {
