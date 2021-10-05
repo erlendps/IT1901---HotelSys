@@ -23,6 +23,9 @@
       <Label text="Room type:" />
       <ChoiceBox fx:id="roomTypeChoiceBox" prefWidth="150.0" />
       <Label fx:id="roomTypeDescription" />
+      <Separator prefHeight="30.0" prefWidth="200.0" />
+      <Label text="Amenities:" />
+      <VBox fx:id="amenitiesContainer"/>
    </children>
    <padding>
       <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
