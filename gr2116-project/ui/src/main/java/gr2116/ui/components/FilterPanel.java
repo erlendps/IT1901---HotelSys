@@ -87,7 +87,7 @@ public class FilterPanel extends VBox {
 			notifyListeners();
 		});
 		floorCheckBox.selectedProperty().addListener((obs, oldValue, newValue) -> {
-			floorSpinner.setDisable(newValue);
+			floorSpinner.setDisable(!newValue);
 		});
     }
 	
