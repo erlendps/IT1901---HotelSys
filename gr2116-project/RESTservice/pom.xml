@@ -48,6 +48,12 @@
                 <artifactId>maven-checkstyle-plugin</artifactId>
             </plugin>
 
+            <!-- run spotbugs plugin -->
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+            </plugin>
+
             <!-- JaCoCo for Maven test coverage 
             <plugin>
                 <groupId>org.jacoco</groupId>
