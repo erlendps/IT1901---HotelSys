@@ -56,6 +56,8 @@ public class MainPage extends VBox implements MessageListener {
         roomItemContainer.getChildren().clear();
 
         if (hotelRoomFilter == null) {
+            Label label = new Label("No filter is selected.");
+            roomItemContainer.getChildren().add(label);
             return;
         }
         
