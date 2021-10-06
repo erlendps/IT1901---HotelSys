@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class PersonTest {
 
@@ -48,9 +50,16 @@ public class PersonTest {
 
     @Test
     public void testPay() {
-        HotelRoom room = new HotelRoom(HotelRoomType.Double, 100);
-        room.setPrice(100);
+        HotelRoom room = mock(HotelRoom.class);
+
         double balanceBefore = tom.getBalance();
+        
+        LocalDate start = LocalDate.of(2021,7,6);
+        LocalDate end = LocalDate.of(2021, 7, 7);
+        when(room.isAvailable(start, end)).thenReturn(true);
+        when(room.getPrice(start, end)).thenReturn(100.0);
+        when(room.getPrice()).thenReturn(100.0);
+        
         tom.makeReservation(room, LocalDate.of(2021, 7, 6), LocalDate.of(2021, 7, 7));
         assertEquals(balanceBefore-room.getPrice(), tom.getBalance(), "Booking one night should cost the same as the price of the hotel room.");
 
@@ -59,6 +68,9 @@ public class PersonTest {
             "Booking should only be possible when the hotel room is free."
         );
 
+        when(room.isAvailable(LocalDate.of(2021, 8, 6), LocalDate.of(2021, 8 ,6))).thenReturn(true);
+        when(room.getPrice(LocalDate.of(2021, 8, 6), LocalDate.of(2021, 8 ,6))).thenReturn(0.0);
+
         tom.makeReservation(room, LocalDate.of(2021, 8, 6), LocalDate.of(2021, 8, 6));
         assertEquals(900, tom.getBalance(), "Booking 0 days should not cost money.");
 
@@ -66,8 +78,6 @@ public class PersonTest {
             tom.makeReservation(room, LocalDate.of(2022, 4, 3), LocalDate.of(2022, 4, 1)),
             "Booking must conform to the linear passing of time."
         );
-
-    
     }
     @Test
     public void testReservationConstistency() {
