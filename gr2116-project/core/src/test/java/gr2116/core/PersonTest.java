@@ -81,7 +81,11 @@ public class PersonTest {
     }
     @Test
     public void testReservationConstistency() {
-        HotelRoom deluxeRoom = new HotelRoom(HotelRoomType.Suite, 900); // The room is on the 9th floor.
+        //HotelRoom deluxeRoom = new HotelRoom(HotelRoomType.Suite, 900); // The room is on the 9th floor.
+        HotelRoom deluxeRoom = mock(HotelRoom.class);
+        when(deluxeRoom.isAvailable(today, overmorrow)).thenReturn(true);
+        when(deluxeRoom.getPrice(today, overmorrow)).thenReturn(900.0);
+
         tom.makeReservation(deluxeRoom, today, overmorrow);
         assertEquals(1, tom.getReservationIds().size(), "User should have one reservation after booking one room.");
         ArrayList<Reservation> reservations = new ArrayList<Reservation>();
