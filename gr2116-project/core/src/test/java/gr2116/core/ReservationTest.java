@@ -6,12 +6,15 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.mockito.Mockito.mock;
+
 public class ReservationTest {
     private Reservation res;
     private final LocalDate startDate = LocalDate.now();
     private final LocalDate endDate = LocalDate.now().plusDays(4);
-    private final HotelRoom room = new HotelRoom(HotelRoomType.Single, 21);
-    private final HotelRoom room2 = new HotelRoom(HotelRoomType.Suite, 22);
+    private final HotelRoom room = mock(HotelRoom.class);
+    private final HotelRoom room2 = mock(HotelRoom.class);
+
 
     @BeforeEach
     public void setup() {
