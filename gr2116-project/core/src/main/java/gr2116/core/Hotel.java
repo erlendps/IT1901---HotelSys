@@ -36,6 +36,10 @@ public class Hotel implements Iterable<HotelRoom> {
 		return rooms.stream().filter(predicate).collect(Collectors.toList());
 	}
 
+	public Collection<HotelRoom> getRooms() {
+		return new ArrayList<>(rooms);
+	}
+
 	@Override
 	public Iterator<HotelRoom> iterator() {
 		return rooms.iterator();
