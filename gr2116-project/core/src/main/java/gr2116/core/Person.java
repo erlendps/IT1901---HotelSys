@@ -110,6 +110,9 @@ public class Person {
    * @throws IllegalArgumentException if {@code balance} is below 0.
    */
   public final void addBalance(final double balance) {
+    if (balance < 0) {
+      throw new IllegalArgumentException("Balance must be positive.");
+    }
     this.balance += balance;
     notifyListeners();
   }
@@ -120,6 +123,9 @@ public class Person {
    * @throws IllegalArgumentException if {@code balance} is below 0.
    */
   public final void subtractBalance(final double balance) {
+    if (balance < 0) {
+      throw new IllegalArgumentException("Balance must be positive.");
+    }
     this.balance -= balance;
     notifyListeners();
   }
