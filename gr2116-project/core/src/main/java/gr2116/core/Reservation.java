@@ -52,7 +52,7 @@ public class Reservation implements Iterable<LocalDate> {
   }
 
    /**
-   * Returns the reservation's room
+   * Returnsgit s the reservation's room
    * @return room
    */
   public final HotelRoom getRoom() {
