@@ -5,6 +5,10 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.stream.Collectors;
 
+/**
+ * HotelRoom class. Contains a Collection of amenities, a ReservationCalendar,
+ * a roomType, a number and a price.
+ */
 public class HotelRoom {
   /**
    * A collection of amenities included in the hotel room.
@@ -30,6 +34,7 @@ public class HotelRoom {
 
   /**
    * Constructs a hotel room, of the given type and with the given room number.
+   *
    * @param roomType the given room type.
    * @param number the given room number.
    */
@@ -43,6 +48,7 @@ public class HotelRoom {
 
   /**
    * Returns the room type.
+   *
    * @return room type
    */
   public final HotelRoomType getRoomType() {
@@ -51,6 +57,7 @@ public class HotelRoom {
 
   /**
    * Returns what floor the room is on.
+   *
    * @return floor
    */
   public final int getFloor() {
@@ -59,6 +66,7 @@ public class HotelRoom {
 
   /**
    * Returns the room number.
+   *
    * @return number
    */
   public final int getNumber() {
@@ -67,6 +75,7 @@ public class HotelRoom {
 
   /**
    * Returns the room daily price.
+   *
    * @return price
    */
   public final double getPrice() {
@@ -76,8 +85,10 @@ public class HotelRoom {
   /**
    * Returns the cost of staying from the given
    * start date to the given end date.
+   *
    * @param startDate the given start date.
    * @param endDate the given end date.
+   *
    * @return price
    */
   public final double getPrice(final LocalDate startDate,
@@ -88,6 +99,7 @@ public class HotelRoom {
 
   /**
    * Sets the daily price to the given price.
+   *
    * @param price the given price.
    */
   public final void setPrice(final double price) {
@@ -96,6 +108,7 @@ public class HotelRoom {
 
   /**
    * Adds the given amenity to the room's collection of amenities.
+   *
    * @param amenity the given amenity.
    */
   public final void addAmenity(final Amenity amenity) {
@@ -107,6 +120,7 @@ public class HotelRoom {
 
   /**
    * Returns a collection of the names of the room's amenities.
+   *
    * @return amenities
    */
   public final Collection<String> getAmenities() {
@@ -115,6 +129,7 @@ public class HotelRoom {
 
   /**
    * Removes the given amenity to the room's collection of amenities.
+   *
    * @param amenity the given amenity.
    */
   public final void removeAmenity(final Amenity amenity) {
@@ -126,7 +141,9 @@ public class HotelRoom {
 
   /**
    * Returns whether or not the room includes the given amenity.
+   *
    * @param amenity the given amenity.
+   *
    * @return true if the room includes the amenity, false otherwise.
    */
   public final boolean hasAmenity(final Amenity amenity) {
@@ -135,7 +152,9 @@ public class HotelRoom {
 
   /**
    * Returns whether or not the room is available on the given date.
+   *
    * @param date the given date.
+   *
    * @return true if the room is available, false otherwise.
    */
   public final boolean isAvailable(final LocalDate date) {
@@ -145,8 +164,10 @@ public class HotelRoom {
   /**
    * Returns whether or not the room is available between the given
    * start date and end date.
+   *
    * @param startDate the given start date.
    * @param endDate the given end date.
+   *
    * @return true if the room is available, false otherwise.
    */
   public final boolean isAvailable(final LocalDate startDate,
@@ -157,6 +178,7 @@ public class HotelRoom {
 
   /**
    * Adds the given reservation to the room's reservation calendar.
+   *
    * @param reservation the given reservation.
    */
   public final void addReservation(final Reservation reservation) {
@@ -177,6 +199,7 @@ public class HotelRoom {
   /**
    * Returns a collection of the ids
    * of the reservations in the room's calendar.
+   *
    * @return reservation ids
    */
   public final Collection<Long> getReservationIds() {
@@ -186,9 +209,11 @@ public class HotelRoom {
   /**
    * Verifies that the start date is before the end date.
    * Throws and IllegalArgumentException this is not the case.
+   *
    * @param startDate the given start date.
    * @param endDate the given end date.
-   * @throws IllegalArgumentException
+   *
+   * @throws IllegalArgumentException if startDate is chronologically after endDate.
    */
   private void verifyChronology(final LocalDate startDate,
       final LocalDate endDate) {
