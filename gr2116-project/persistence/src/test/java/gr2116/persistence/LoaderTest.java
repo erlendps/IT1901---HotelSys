@@ -1,25 +1,30 @@
 package gr2116.persistence;
 
-import java.io.FileNotFoundException;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import gr2116.core.*;
 
 import org.json.JSONObject;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 
 public class LoaderTest {
     JSONObject personsData;
     JSONObject roomsData;
     JSONObject reservationsData;
+    static Loader dataLoader = new Loader();
 
-    @BeforeEach
-    public void makeData() throws FileNotFoundException {
+    @BeforeAll
+    public static void makeAndLoadData() throws IOException {
         Person rick = new Person("Richard");
         Person kyle = new Person("Kyllard");
         Person tom = new Person("Tom");
@@ -65,33 +70,72 @@ public class LoaderTest {
             reservations.add(r)));
 
         Saver saver = new Saver();
-        /*personsData = saver.updatePersonData(persons);
-        roomsData = saver.updateRoomsData(rooms);
-        reservationsData = saver.updateReservationData(reservations);*/
-        saver.writeToFile(rooms, persons, reservations);
+        assertDoesNotThrow(() -> saver.writeToFile(rooms, persons), "Something went wrong with saving.");
+
+        dataLoader.loadData();
     }
 
+
     @Test
-    public void load() throws IOException {
-        Loader dataLoader = new Loader();
-        dataLoader.loadData();
+    public void loadPersonsTest() {
         Collection<Person> persons = dataLoader.getPersons();
+
+        // Checks if the persons saved are in the list.
+        // Also checks if there are multiple instances of them in the list.
+        List<Person> rickList = persons.stream().filter((Person p) -> p.getName().equals("Richard")).collect(Collectors.toList());
+        List<Person> kyleList = persons.stream().filter((Person p) -> p.getName().equals("Kyllard")).collect(Collectors.toList());
+        List<Person> tomList = persons.stream().filter((Person p) -> p.getName().equals("Tom")).collect(Collectors.toList());
+        assertEquals(1, rickList.size(), "There was not 1 instance of person Rick in the loaded data, there were " + 
+        Integer.toString(rickList.size()));
+        assertEquals(1, kyleList.size(), "There was not 1 instance of person Kyle in the loaded data, there were " + 
+        Integer.toString(kyleList.size()));
+        assertEquals(1, tomList.size(), "There was not 1 instance of person Tom in the loaded data, there were " +
+        Integer.toString(tomList.size()));
+
+        // Saves the persons.
+        Person rick = rickList.get(0);
+        Person kyle = kyleList.get(0);
+        Person tom = tomList.get(0);
+
+        // Check if a selection of attributes were preserved
+        assertEquals(1000, rick.getBalance(), "Balance was saved incorrectly for Rick.");
+        assertEquals(1000000000, tom.getBalance(), "Balance was saved incorrectly for Tom.");
+
+        assertEquals("kyle@people.com", kyle.getEmail());
+
+        assertEquals(1, kyle.getReservations().size(), "Kyle has the wrong number of reservations, should be 1. Was " + 
+        Integer.toString(kyle.getReservations().size()));
+        assertEquals(4, tom.getReservations().size(), "Tom has the wrong number of reservations, should be 1. Was " + 
+        Integer.toString(tom.getReservations().size()));
+    }
+    @Test
+    public void loadRoomsTest() throws IOException {
+
         Collection<HotelRoom> rooms = dataLoader.getRooms();
-        System.out.println("People:");
-        persons.forEach((Person p) -> {
-            System.out.println(p.getName());
-            System.out.println("> Reservations:");
-            p.getReservations().forEach((Reservation r) -> {
-                System.out.println("\t" + r.getId() + 
-                " for room " + r.getRoom().getNumber() +
-                " (" + r.getStartDate() + " to " + r.getEndDate() + ")");
-            });
-            System.out.println();
-        });
-        System.out.println();
-        System.out.println();
-        System.out.println("Rooms:");
-        rooms.forEach((HotelRoom r) -> System.out.println(r.getNumber()));
-        System.out.println();
+
+        // Checks if the rooms saved are in the list.
+        // Also checks if there are multiple instances of them in the list.
+        List<HotelRoom> room1List = rooms.stream().filter((HotelRoom r) -> r.getNumber() == 101).collect(Collectors.toList());
+        List<HotelRoom> room2List = rooms.stream().filter((HotelRoom r) -> r.getNumber() == 102).collect(Collectors.toList());
+        List<HotelRoom> room3List = rooms.stream().filter((HotelRoom r) -> r.getNumber() == 714).collect(Collectors.toList());
+        assertEquals(1, room1List.size(), "There was not 1 instance of room '101' in the loaded data, there were " + 
+        Integer.toString(room1List.size()));
+        assertEquals(1, room2List.size(), "There was not 1 instance of room '102' in the loaded data, there were " + 
+        Integer.toString(room2List.size()));
+        assertEquals(1, room3List.size(), "There was not 1 instance of room '714' in the loaded data, there were " +
+        Integer.toString(room3List.size()));
+        
+        // Saves the rooms
+        HotelRoom room1 = room1List.get(0);
+        HotelRoom room2 = room2List.get(0);
+        HotelRoom room3 = room3List.get(0);
+
+        // Test if selection of attributes were preserved
+        assertTrue(room1.hasAmenity(Amenity.Bathtub), "Room 101 should contain bathtub, this was not loaded.");
+        assertTrue(room1.hasAmenity(Amenity.Television), "Room 101 should contain television, this was not loaded.");
+        assertEquals(0, room3.getAmenities().size(), "Loaded room 714 contains amenities even though none were set.");
+        assertEquals(1, room2.getReservationIds().size(), "Room 102 was reserved 1 time, but loaded value was " 
+        + Integer.toString(room2.getReservationIds().size()));
+        assertEquals(HotelRoomType.Quad, room3.getRoomType());
     }
 }
