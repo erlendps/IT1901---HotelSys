@@ -14,7 +14,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 
-@ExtendWith(MockitoExtension.class)
 public class HotelRoomTest {
 
 	HotelRoom roomSingle = new HotelRoom(HotelRoomType.Single, 111);
@@ -22,8 +21,6 @@ public class HotelRoomTest {
 	LocalDate today = LocalDate.now();
 	LocalDate tomorrow = today.plusDays(1);
 	LocalDate overmorrow = today.plusDays(2);
-	@Mock
-	Person person;
 
 
 	@Test
@@ -60,17 +57,5 @@ public class HotelRoomTest {
 		roomSingle.removeAmenity(Amenity.Bathtub);
 		assertFalse(roomSingle.hasAmenity(Amenity.Bathtub));
 		assertThrows(IllegalArgumentException.class, () -> roomSingle.removeAmenity(Amenity.Bathtub));
-	}
-
-	@Test
-	public void testMakeReservation() {
-		roomSingle.setPrice(100);
-		person = new Person("Peter");
-		assertThrows(IllegalStateException.class, () -> person.makeReservation(roomSingle, today, tomorrow));
-		person.addBalance(800);
-		person.makeReservation(roomSingle, today, tomorrow);
-		assertFalse(roomSingle.isAvailable(today));
-		assertThrows(IllegalStateException.class, () -> person.makeReservation(roomSingle, today, tomorrow));
-		assertEquals(700, person.getBalance());
 	}
 }
