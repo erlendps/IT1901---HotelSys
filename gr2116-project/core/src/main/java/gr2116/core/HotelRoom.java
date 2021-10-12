@@ -30,8 +30,8 @@ public class HotelRoom {
 
   /**
    * Constructs a hotel room, of the given type and with the given room number.
-   * @param roomType
-   * @param number
+   * @param roomType the given room type.
+   * @param number the given room number.
    */
   public HotelRoom(final HotelRoomType roomType, final int number) {
     if (roomType == null) {
@@ -76,8 +76,8 @@ public class HotelRoom {
   /**
    * Returns the cost of staying from the given
    * start date to the given end date.
-   * @param startDate
-   * @param endDate
+   * @param startDate the given start date.
+   * @param endDate the given end date.
    * @return price
    */
   public final double getPrice(final LocalDate startDate,
@@ -87,8 +87,8 @@ public class HotelRoom {
   }
 
   /**
-   * Sets the daily price.
-   * @param price
+   * Sets the daily price to the given price.
+   * @param price the given price.
    */
   public final void setPrice(final double price) {
     this.price = price;
@@ -96,7 +96,7 @@ public class HotelRoom {
 
   /**
    * Adds the given amenity to the room's collection of amenities.
-   * @param amenity
+   * @param amenity the given amenity.
    */
   public final void addAmenity(final Amenity amenity) {
     if (amenity == null) {
@@ -115,7 +115,7 @@ public class HotelRoom {
 
   /**
    * Removes the given amenity to the room's collection of amenities.
-   * @param amenity
+   * @param amenity the given amenity.
    */
   public final void removeAmenity(final Amenity amenity) {
     if (!amenities.contains(amenity)) {
@@ -126,7 +126,7 @@ public class HotelRoom {
 
   /**
    * Returns whether or not the room includes the given amenity.
-   * @param amenity
+   * @param amenity the given amenity.
    * @return true if the room includes the amenity, false otherwise.
    */
   public final boolean hasAmenity(final Amenity amenity) {
@@ -135,7 +135,7 @@ public class HotelRoom {
 
   /**
    * Returns whether or not the room is available on the given date.
-   * @param date
+   * @param date the given date.
    * @return true if the room is available, false otherwise.
    */
   public final boolean isAvailable(final LocalDate date) {
@@ -145,8 +145,8 @@ public class HotelRoom {
   /**
    * Returns whether or not the room is available between the given
    * start date and end date.
-   * @param startDate
-   * @param endDate
+   * @param startDate the given start date.
+   * @param endDate the given end date.
    * @return true if the room is available, false otherwise.
    */
   public final boolean isAvailable(final LocalDate startDate,
@@ -157,7 +157,7 @@ public class HotelRoom {
 
   /**
    * Adds the given reservation to the room's reservation calendar.
-   * @param reservation
+   * @param reservation the given reservation.
    */
   public final void addReservation(final Reservation reservation) {
     if (reservation == null) {
@@ -186,8 +186,8 @@ public class HotelRoom {
   /**
    * Verifies that the start date is before the end date.
    * Throws and IllegalArgumentException this is not the case.
-   * @param startDate
-   * @param endDate
+   * @param startDate the given start date.
+   * @param endDate the given end date.
    * @throws IllegalArgumentException
    */
   private void verifyChronology(final LocalDate startDate,

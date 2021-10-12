@@ -21,7 +21,7 @@ public class Hotel implements Iterable<HotelRoom> {
 
   /**
    * Constructs a hotel with a collection of rooms.
-   * @param rooms
+   * @param rooms a collection of rooms.
    */
   public Hotel(final Collection<HotelRoom> rooms) {
     rooms.forEach((room) -> this.rooms.add(room));
@@ -29,7 +29,7 @@ public class Hotel implements Iterable<HotelRoom> {
 
   /**
    * Adds the given room to the hotel.
-   * @param room
+   * @param room the given room.
    */
   public final void addRoom(final HotelRoom room) {
     if (room == null) {
@@ -45,7 +45,7 @@ public class Hotel implements Iterable<HotelRoom> {
 
   /**
    * Removes the given room from the hotel.
-   * @param room
+   * @param room the given room.
    */
   public final void removeRoom(final HotelRoom room) {
     if (!rooms.contains(room)) {
@@ -55,9 +55,9 @@ public class Hotel implements Iterable<HotelRoom> {
   }
 
   /**
-   * Returns the rooms of the hotel that matches the predicate.
+   * Returns the rooms of the hotel that matches the given predicate.
    * Used in search.
-   * @param predicate
+   * @param predicate the given predicate.
    * @return a collection of rooms.
    */
   public final Collection<HotelRoom> getRooms(
