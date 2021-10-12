@@ -11,6 +11,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Arrays;
+import java.util.Iterator;
 
 /**
  * Test class for Hotel class
@@ -49,6 +50,7 @@ public class HotelTest {
         hotel.addRoom(room2);
         assertEquals(Arrays.asList(room1, room2), hotel.getRooms());
         assertThrows(NullPointerException.class, () -> hotel.addRoom(null));
+        assertFalse(hotel.addRoom(room1));
     }
 
     @Test
@@ -76,5 +78,15 @@ public class HotelTest {
         when(room1.hasAmenity(Amenity.Internet)).thenReturn(true);
         when(room2.hasAmenity(Amenity.Internet)).thenReturn(false);
         assertEquals(Arrays.asList(room1), hotel.getRooms((room) -> room.hasAmenity(Amenity.Internet)));
+    }
+
+    @Test
+    public void testIterator() {
+        hotel.addRoom(room1);
+        hotel.addRoom(room2);
+        Iterator<HotelRoom> it = hotel.iterator();
+        while (it.hasNext()) {
+            assertTrue(hotel.getRooms().contains(it.next()));
+        }
     }
 }
