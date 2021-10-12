@@ -4,22 +4,24 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * Reservation class. Implements Iterable.
+ * Has an id (pseudorandom when Reservation is generated), a HotelRoom relation,
+ * a startDate and an endDate.
+ */
 public class Reservation implements Iterable<LocalDate> {
   /**
    * The reservation's id.
    */
   private final long id;
-
   /**
    * The reservation's room.
    */
   private final HotelRoom room;
-
   /**
    * The reservation's start date.
    */
   private final LocalDate startDate;
-
   /**
    * The reservation's end date.
    */
@@ -27,6 +29,7 @@ public class Reservation implements Iterable<LocalDate> {
 
   /**
    * Construtcts a reservation with given id, room, startDate and endDate.
+   *
    * @param id the given id.
    * @param room the given room.
    * @param startDate the given start date.
@@ -53,6 +56,7 @@ public class Reservation implements Iterable<LocalDate> {
 
   /**
    * Returns the reservation's room.
+   *
    * @return room.
    */
   public final HotelRoom getRoom() {
@@ -61,6 +65,7 @@ public class Reservation implements Iterable<LocalDate> {
 
   /**
    * Returns reservation's start date.
+   *
    * @return start date.
    */
   public final LocalDate getStartDate() {
@@ -69,6 +74,7 @@ public class Reservation implements Iterable<LocalDate> {
 
   /**
    * Returns reservation's end date.
+   *
    * @return end date.
    */
   public final LocalDate getEndDate() {
@@ -77,6 +83,7 @@ public class Reservation implements Iterable<LocalDate> {
 
   /**
    * Returns reservation's id.
+   *
    * @return id.
    */
   public final long getId() {

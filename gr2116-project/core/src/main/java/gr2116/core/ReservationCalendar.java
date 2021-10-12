@@ -6,6 +6,10 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.stream.Collectors;
 
+/**
+ * ReservationCalendar class. Implements Iterable.
+ * Has a Collection of Reservation objects.
+ */
 public class ReservationCalendar implements Iterable<Reservation> {
   /**
    * The reservation calander's collection of reservations.
@@ -14,6 +18,7 @@ public class ReservationCalendar implements Iterable<Reservation> {
 
   /**
    * Add given reservation to the reservation calandar.
+   *
    * @param reservation the given reservation.
    */
   public final void addReservation(final Reservation reservation) {
@@ -29,6 +34,7 @@ public class ReservationCalendar implements Iterable<Reservation> {
 
   /**
    * Returns collection of ids of reservation caladar's reservations.
+   *
    * @return stream of reservation ids.
    */
   public final Collection<Long> getReservationIds() {
@@ -39,7 +45,9 @@ public class ReservationCalendar implements Iterable<Reservation> {
 
   /**
    * Returns wether or not the room is available on given date.
+   *
    * @param date given date to check if room id available.
+   *
    * @return true if there are no reservations on given date, false otherwise.
    */
   public final boolean isAvailable(final LocalDate date) {
@@ -54,8 +62,10 @@ public class ReservationCalendar implements Iterable<Reservation> {
 
   /**
    * Returns wether or not the room is available in given time period.
+   *
    * @param startDate given start date.
    * @param endDate given end date.
+   *
    * @return true if there are no reservations in given time period, false otherwise.
    */
   public final boolean isAvailable(final LocalDate startDate,
