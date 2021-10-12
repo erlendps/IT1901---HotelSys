@@ -9,11 +9,11 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 
 public class HotelRoomTest {
-  HotelRoom roomSingle = new HotelRoom(HotelRoomType.Single, 111);
-  HotelRoom roomDouble = new HotelRoom(HotelRoomType.Double, 794);
-  LocalDate today = LocalDate.now();
-  LocalDate tomorrow = today.plusDays(1);
-  LocalDate overmorrow = today.plusDays(2);
+  private HotelRoom roomSingle = new HotelRoom(HotelRoomType.Single, 111);
+  private HotelRoom roomDouble = new HotelRoom(HotelRoomType.Double, 794);
+  private LocalDate today = LocalDate.now();
+  private LocalDate tomorrow = today.plusDays(1);
+  private LocalDate overmorrow = today.plusDays(2);
 
   @Test
   public void testFloorAndNumber() {

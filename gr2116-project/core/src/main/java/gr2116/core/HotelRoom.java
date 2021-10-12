@@ -38,7 +38,8 @@ public class HotelRoom {
     return price;
   }
 
-  public final double getPrice(final LocalDate startDate, final LocalDate endDate) {
+  public final double getPrice(final LocalDate startDate,
+      final LocalDate endDate) {
     verifyChronology(startDate, endDate);
     return price * (startDate.until(endDate).getDays());
   }
@@ -98,7 +99,8 @@ public class HotelRoom {
     return calendar.getReservationIds();
   }
 
-  private void verifyChronology(final LocalDate startDate, final LocalDate endDate) {
+  private void verifyChronology(final LocalDate startDate,
+      final LocalDate endDate) {
     if (startDate.isAfter(endDate)) {
       throw new IllegalArgumentException(
         "The startDate cannot be after the endDate.");

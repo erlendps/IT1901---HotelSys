@@ -64,7 +64,8 @@ public class Saver {
     return roomsData;
   }
 
-  private JSONObject updateReservationData(final Collection<Reservation> reservations) {
+  private JSONObject updateReservationData(
+      final Collection<Reservation> reservations) {
     JSONObject reservationsData = new JSONObject();
     reservations.forEach((reservation) -> {
       reservationsData.put(Long.toString(reservation.getId()),
@@ -74,7 +75,7 @@ public class Saver {
   }
 
   public final void writeToFile(final Collection<HotelRoom> rooms,
-                                final Collection<Person> persons)
+      final Collection<Person> persons)
       throws FileNotFoundException {
     ArrayList<Reservation> reservations = new ArrayList<Reservation>();
     persons.forEach((person) -> reservations.addAll(person.getReservations()));
@@ -82,9 +83,9 @@ public class Saver {
   }
 
   public final void writeToFile(final Collection<HotelRoom> rooms,
-                                final Collection<Person> persons,
-                                final Collection<Reservation> reservations)
-                                throws FileNotFoundException {
+      final Collection<Person> persons,
+      final Collection<Reservation> reservations)
+      throws FileNotFoundException {
     File personDataJSON = new File(METADATA_FOLDER + "/personData.json");
     File roomsDataJSON = new File(METADATA_FOLDER + "/roomsData.json");
     File reservationDataJSON = new File(

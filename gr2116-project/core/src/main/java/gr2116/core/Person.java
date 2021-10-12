@@ -7,7 +7,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Person {
-  private final Collection<PersonListener> listeners = new HashSet<>(); 
+  private final Collection<PersonListener> listeners = new HashSet<>();
   private final Collection<Reservation> reservations = new HashSet<>();
   private final String name;
   private String email;

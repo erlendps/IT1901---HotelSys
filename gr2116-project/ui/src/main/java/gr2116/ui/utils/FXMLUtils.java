@@ -14,7 +14,8 @@ public class FXMLUtils {
     String fileName = component.getClass().getSimpleName() + ".fxml";
 
     try {
-      loader.load(component.getClass().getClassLoader().getResourceAsStream(fileName));
+      loader.load(
+          component.getClass().getClassLoader().getResourceAsStream(fileName));
     } catch (IOException e) {
       throw new RuntimeException(e);
     }

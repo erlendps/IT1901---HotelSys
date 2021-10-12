@@ -21,8 +21,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class FilterPanel extends VBox {
-  Collection<MessageListener> listeners = new HashSet<>();
-  HashMap<Amenity, Boolean> amenities = new HashMap<>();
+  private Collection<MessageListener> listeners = new HashSet<>();
+  private HashMap<Amenity, Boolean> amenities = new HashMap<>();
 
   @FXML
   private DatePicker startDatePicker;
@@ -54,7 +54,8 @@ public class FilterPanel extends VBox {
   private void initialize() {
     floorSpinner.setDisable(true);
     roomTypeDescription.setText("Select a room type.");
-    floorSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20, 1));
+    floorSpinner.setValueFactory(
+        new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20, 1));
 
     for (HotelRoomType roomType : HotelRoomType.values()) {
       roomTypeChoiceBox.getItems().add(roomType);
@@ -103,7 +104,7 @@ public class FilterPanel extends VBox {
   private class AmenityCheckBox extends HBox {
     private CheckBox checkBox = new CheckBox();
 
-    public AmenityCheckBox(final Amenity amenity) {
+    AmenityCheckBox(final Amenity amenity) {
       Label label = new Label(amenity.getName());
       checkBox.selectedProperty().addListener((obs, oldValue, newValue) -> {
         amenities.put(amenity, newValue);

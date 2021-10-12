@@ -26,7 +26,7 @@ public class ReservationCalendar implements Iterable<Reservation> {
   // }
   // reservations.remove(reservation);
   // }
-  
+
   public final Collection<Long> getReservationIds() {
     return reservations.stream()
       .map((r) -> r.getId())
@@ -42,7 +42,7 @@ public class ReservationCalendar implements Iterable<Reservation> {
         || date.isAfter(start) && date.isBefore(end);
     });
   }
-  
+
   public final boolean isAvailable(final LocalDate startDate,
                                     final LocalDate endDate) {
     LocalDate date = startDate;

@@ -10,12 +10,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class PersonTest {
-  LocalDate today = LocalDate.now();
-  LocalDate tomorrow = today.plusDays(1);
-  LocalDate overmorrow = today.plusDays(2);
+  private LocalDate today = LocalDate.now();
+  private LocalDate overmorrow = today.plusDays(2);
 
-  Person person;
-  Person tom;
+  private Person person;
+  private Person tom;
 
   @BeforeEach
   public final void setup() {

@@ -16,7 +16,7 @@ public enum Amenity {
   Bathtub("Bathtub",
     "A large bathttub for your spa needs."),
   Fridge("Fridge",
-    "A small fridge loaded with fine wine and our selection of beer."); 
+    "A small fridge loaded with fine wine and our selection of beer.");
 
   private final String name;
   private final String description;
