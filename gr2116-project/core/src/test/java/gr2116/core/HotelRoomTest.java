@@ -43,23 +43,27 @@ public class HotelRoomTest {
 
   @Test
   public void testRemoveAmenity() {
-    assertThrows(IllegalArgumentException.class, () -> roomSingle.removeAmenity(Amenity.Bathtub));
+    assertThrows(IllegalArgumentException.class,
+      () -> roomSingle.removeAmenity(Amenity.Bathtub));
     roomSingle.addAmenity(Amenity.Bathtub);
     assertTrue(roomSingle.hasAmenity(Amenity.Bathtub));
     roomSingle.removeAmenity(Amenity.Bathtub);
     assertFalse(roomSingle.hasAmenity(Amenity.Bathtub));
-    assertThrows(IllegalArgumentException.class, () -> roomSingle.removeAmenity(Amenity.Bathtub));
+    assertThrows(IllegalArgumentException.class,
+      () -> roomSingle.removeAmenity(Amenity.Bathtub));
   }
 
   @Test
   public void testMakeReservation() {
     roomSingle.setPrice(100);
     Person person = new Person("Peter");
-    assertThrows(IllegalStateException.class, () -> person.makeReservation(roomSingle, today, tomorrow));
+    assertThrows(IllegalStateException.class,
+      () -> person.makeReservation(roomSingle, today, tomorrow));
     person.addBalance(800);
     person.makeReservation(roomSingle, today, tomorrow);
     assertFalse(roomSingle.isAvailable(today));
-    assertThrows(IllegalStateException.class, () -> person.makeReservation(roomSingle, today, tomorrow));
+    assertThrows(IllegalStateException.class,
+      () -> person.makeReservation(roomSingle, today, tomorrow));
     assertEquals(700, person.getBalance());
   }
 }

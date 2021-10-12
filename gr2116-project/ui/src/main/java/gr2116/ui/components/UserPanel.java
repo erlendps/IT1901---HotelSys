@@ -1,14 +1,13 @@
 package gr2116.ui.components;
 
-import java.util.Collection;
-import java.util.HashSet;
-
 import gr2116.core.Person;
 import gr2116.core.PersonListener;
 import gr2116.core.Reservation;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
 import gr2116.ui.utils.FXMLUtils;
+import java.util.Collection;
+import java.util.HashSet;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

@@ -1,5 +1,8 @@
 package gr2116.core;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDate;
 
@@ -14,7 +17,7 @@ public class ReservationTest {
   private final HotelRoom room2 = new HotelRoom(HotelRoomType.Suite, 22);
 
   @BeforeEach
-  public void setup() {
+  public final void setup() {
     res = new Reservation(11, room, startDate, endDate);
   }
 

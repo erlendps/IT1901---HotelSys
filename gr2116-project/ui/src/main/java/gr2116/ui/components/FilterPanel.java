@@ -1,14 +1,13 @@
 package gr2116.ui.components;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-
 import gr2116.core.Amenity;
 import gr2116.core.HotelRoomType;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
 import gr2116.ui.utils.FXMLUtils;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -26,8 +25,9 @@ public class FilterPanel extends VBox {
   HashMap<Amenity, Boolean> amenities = new HashMap<>();
 
   @FXML
-  private DatePicker startDatePicker, endDatePicker;
-
+  private DatePicker startDatePicker;
+  @FXML
+  private DatePicker endDatePicker;
   @FXML
   private ChoiceBox<HotelRoomType> roomTypeChoiceBox;
 
@@ -103,7 +103,7 @@ public class FilterPanel extends VBox {
   private class AmenityCheckBox extends HBox {
     private CheckBox checkBox = new CheckBox();
 
-    public AmenityCheckBox(Amenity amenity) {
+    public AmenityCheckBox(final Amenity amenity) {
       Label label = new Label(amenity.getName());
       checkBox.selectedProperty().addListener((obs, oldValue, newValue) -> {
         amenities.put(amenity, newValue);
@@ -112,18 +112,21 @@ public class FilterPanel extends VBox {
       getChildren().add(checkBox);
       getChildren().add(label);
     }
-    public void setSelected(boolean value) {
+
+    public void setSelected(final boolean value) {
       checkBox.setSelected(value);
-    } 
+    }
   }
 
-  public void addListener(MessageListener listener) {
+  public final void addListener(final MessageListener listener) {
     listeners.add(listener);
   }
-  public void removeListener(MessageListener listener) {
+
+  public final void removeListener(final MessageListener listener) {
     listeners.remove(listener);
   }
-  public void notifyListeners() {
+
+  public final void notifyListeners() {
     for (MessageListener listener : listeners) {
       HotelRoomFilter filter = new HotelRoomFilter(startDatePicker.getValue(),
                       endDatePicker.getValue(),

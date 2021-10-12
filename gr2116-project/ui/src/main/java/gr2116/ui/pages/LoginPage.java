@@ -17,19 +17,22 @@ public class LoginPage extends AnchorPane {
   private Collection<Person> loadedPersons;
 
   @FXML
-  private TextField nameTextField, emailTextField;
-
+  private TextField nameTextField;
+  @FXML
+  private TextField emailTextField;
   @FXML
   private Button signInButton;
 
   @FXML
-  private Label emailErrorLabel, nameTitleLabel;
+  private Label emailErrorLabel;
+  @FXML
+  private Label nameTitleLabel;
 
   public LoginPage() {
     FXMLUtils.loadFXML(this);
   }
 
-  public void setLoadedPersons(Collection<Person> loadedPersons) {
+  public final void setLoadedPersons(final Collection<Person> loadedPersons) {
     this.loadedPersons = new HashSet<>(loadedPersons);
   }
 
@@ -67,18 +70,20 @@ public class LoginPage extends AnchorPane {
     });
   }
 
-  private void setNameVisible(boolean visible) {
+  private void setNameVisible(final boolean visible) {
     nameTextField.setVisible(visible);
     nameTitleLabel.setVisible(visible);
   }
 
-  public void addListener(MessageListener listener) {
+  public final void addListener(final MessageListener listener) {
     listeners.add(listener);
   }
-  public void removeListener(MessageListener listener) {
+
+  public final void removeListener(final MessageListener listener) {
     listeners.remove(listener);
   }
-  public void notifyListeners(Message message, Object data) {
+
+  public final void notifyListeners(final Message message, final Object data) {
     for (MessageListener listener : listeners) {
       listener.receiveNotification(this, message, data);
     }

@@ -1,4 +1,5 @@
 package gr2116.core;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -9,7 +10,10 @@ public class Reservation implements Iterable<LocalDate> {
   private final LocalDate startDate;
   private final LocalDate endDate;
 
-  public Reservation(long id, HotelRoom room, LocalDate startDate, LocalDate endDate) {
+  public Reservation(final long id,
+                      final HotelRoom room,
+                      final LocalDate startDate,
+                      final LocalDate endDate) {
     if (startDate == null || endDate == null) {
       throw new NullPointerException();
     }
@@ -25,25 +29,24 @@ public class Reservation implements Iterable<LocalDate> {
     this.id = id;
   }
 
-  public HotelRoom getRoom() {
+  public final HotelRoom getRoom() {
     return room;
   }
 
-  public LocalDate getStartDate() {
+  public final LocalDate getStartDate() {
     return startDate;
   }
 
-  public LocalDate getEndDate() {
+  public final LocalDate getEndDate() {
     return endDate;
   }
 
-  public long getId() {
+  public final long getId() {
     return id;
   }
 
-
   @Override
-  public Iterator<LocalDate> iterator() {
+  public final Iterator<LocalDate> iterator() {
     ArrayList<LocalDate> dates = new ArrayList<>();
     LocalDate date = startDate;
     while (date.isBefore(endDate)) {

@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.function.Predicate;
-
 import gr2116.core.Hotel;
 import gr2116.core.HotelRoom;
 import gr2116.core.Person;

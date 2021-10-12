@@ -6,20 +6,20 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import gr2116.core.*;
-
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import gr2116.core.Amenity;
+import gr2116.core.HotelRoom;
+import gr2116.core.HotelRoomType;
+import gr2116.core.Person;
+import gr2116.core.Reservation;
 
 public class LoaderTest {
-  JSONObject personsData;
-  JSONObject roomsData;
-  JSONObject reservationsData;
 
   @BeforeEach
-  public void makeData() throws FileNotFoundException {
+  public final void makeData() throws FileNotFoundException {
     Person rick = new Person("Richard");
     Person kyle = new Person("Kyllard");
     Person tom = new Person("Tom");
@@ -29,7 +29,7 @@ public class LoaderTest {
 
     rick.addBalance(1000);
     kyle.addBalance(144);
-    tom.addBalance(1000000000); 
+    tom.addBalance(1000000000);
 
     HotelRoom room1 = new HotelRoom(HotelRoomType.Single, 101);
     HotelRoom room2 = new HotelRoom(HotelRoomType.Single, 102);
@@ -60,8 +60,8 @@ public class LoaderTest {
     rooms.add(room3);
 
     ArrayList<Reservation> reservations = new ArrayList<Reservation>();
-    persons.forEach((person) -> 
-      person.getReservations().forEach((r) -> 
+    persons.forEach((person) ->
+      person.getReservations().forEach((r) ->
       reservations.add(r)));
 
     Saver saver = new Saver();
@@ -82,9 +82,9 @@ public class LoaderTest {
       System.out.println(p.getName());
       System.out.println("> Reservations:");
       p.getReservations().forEach((Reservation r) -> {
-        System.out.println("\t" + r.getId() + 
-        " for room " + r.getRoom().getNumber() +
-        " (" + r.getStartDate() + " to " + r.getEndDate() + ")");
+        System.out.println("\t" + r.getId()
+        + " for room " + r.getRoom().getNumber()
+        + " (" + r.getStartDate() + " to " + r.getEndDate() + ")");
       });
       System.out.println();
     });

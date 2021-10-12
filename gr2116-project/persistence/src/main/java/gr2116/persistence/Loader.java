@@ -1,5 +1,10 @@
 package gr2116.persistence;
 
+import gr2116.core.Amenity;
+import gr2116.core.HotelRoom;
+import gr2116.core.HotelRoomType;
+import gr2116.core.Person;
+import gr2116.core.Reservation;
 import org.json.JSONObject;
 import java.util.Collection;
 import java.util.HashMap;
@@ -12,18 +17,19 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import gr2116.core.*;
-
 public class Loader {
   // TODO: Invalid data handling
 
-  private static final Path METADATA_FOLDER = Paths.get(".").toAbsolutePath().normalize().getParent().getParent().resolve("data");
+  private static final Path METADATA_FOLDER
+      = Paths.get(".").toAbsolutePath()
+      .normalize().getParent().getParent().resolve("data");
   private boolean loaded = false;
   private Collection<Person> persons = new HashSet<Person>();
   private Collection<HotelRoom> rooms = new HashSet<HotelRoom>();
-  private Map<String, Reservation> reservationMap = new HashMap<String, Reservation>();
+  private Map<String, Reservation> reservationMap
+      = new HashMap<String, Reservation>();
 
-  private void loadPersons(JSONObject personsData) {
+  private void loadPersons(final JSONObject personsData) {
     if (rooms.size() == 0) {
       throw new IllegalStateException("Reservations not yet loaded.");
     }
@@ -39,14 +45,17 @@ public class Loader {
         if (reservationMap.containsKey(id)) {
           person.addReservation(reservationMap.get(id));
         } else {
-          throw new IllegalStateException("Reservation " + id + " was not created before person.");
+          throw new IllegalStateException(
+            "Reservation " + id + " was not created before person."
+          );
         }
       });
       persons.add(person);
     });
   }
 
-  private Reservation getReservation(JSONObject reservationsData, String id, HotelRoom room) {
+  private Reservation getReservation(final JSONObject reservationsData,
+                                    final String id, final HotelRoom room) {
     JSONObject reservationData;
 
     if (reservationMap.containsKey(id)) {
@@ -57,23 +66,27 @@ public class Loader {
       throw new IllegalStateException("Missing data for reservation " + id);
     }
 
-    Reservation reservation = new Reservation(
-      Long.parseLong(id),
-      room,
-      LocalDate.parse(reservationData.getString("startDate")),
-      LocalDate.parse(reservationData.getString("endDate"))
-    );
+    Reservation reservation = new Reservation(Long.parseLong(id),
+        room,
+        LocalDate.parse(reservationData.getString("startDate")),
+        LocalDate.parse(reservationData.getString("endDate")));
     reservationMap.put(id, reservation);
     return reservation;
   }
 
-  private void loadRoomsAndReservations(JSONObject roomsData, JSONObject reservationsData) {
-    roomsData.keySet().forEach((String k) -> { 
+  private void loadRoomsAndReservations(final JSONObject roomsData,
+                                        final JSONObject reservationsData) {
+    roomsData.keySet().forEach((String k) -> {
       JSONObject roomData = roomsData.getJSONObject(k);
 
-      HotelRoom room = new HotelRoom(HotelRoomType.valueOf(roomData.getString("type")), roomData.getInt("number"));
+      HotelRoom room = new HotelRoom(
+        HotelRoomType.valueOf(roomData.getString("type")),
+        roomData.getInt("number")
+      );
       room.setPrice(roomData.getInt("price"));
-      roomData.getJSONArray("amenities").forEach((amenity) -> room.addAmenity(Amenity.valueOf((String) amenity)));
+      roomData.getJSONArray("amenities").forEach((amenity) -> {
+        room.addAmenity(Amenity.valueOf((String) amenity));
+      });
 
       roomData.getJSONArray("reservations").forEach((reservationId) -> {
         String id = Long.toString((Long) reservationId);
@@ -85,33 +98,38 @@ public class Loader {
     });
   }
 
-  public void loadData(JSONObject roomsData, JSONObject personsData, JSONObject reservationsData) {
+  public final void loadData(final JSONObject roomsData,
+                            final JSONObject personsData,
+                            final JSONObject reservationsData) {
     loaded = true;
     loadRoomsAndReservations(roomsData, reservationsData);
     loadPersons(personsData);
   }
 
-  public Collection<Person> getPersons() {
+  public final Collection<Person> getPersons() {
     if (!loaded) {
-      throw new IllegalStateException("Objects must be loaded using loadData() before getting.");
+      throw new IllegalStateException(
+        "Objects must be loaded using loadData() before getting.");
     }
     return persons;
   }
 
-  public Collection<HotelRoom> getRooms() {
+  public final Collection<HotelRoom> getRooms() {
     if (!loaded) {
-      throw new IllegalStateException("Objects must be loaded using loadData() before getting.");
+      throw new IllegalStateException(
+        "Objects must be loaded using loadData() before getting.");
     }
     return rooms;
   }
 
-  public JSONObject getAsJSON(String filename) throws IOException {
-    String text = Files.readString(Paths.get(new File(METADATA_FOLDER + filename).getAbsolutePath()));
+  public final JSONObject getAsJSON(final String filename) throws IOException {
+    String text = Files.readString(
+        Paths.get(new File(METADATA_FOLDER + filename).getAbsolutePath()));
     JSONObject json = new JSONObject(text);
     return json;
   }
 
-  public void loadData() throws IOException {
+  public final void loadData() throws IOException {
     JSONObject personData = getAsJSON("/personData.json");
     JSONObject roomData = getAsJSON("/roomsData.json");
     JSONObject reservationData = getAsJSON("/reservationData.json");

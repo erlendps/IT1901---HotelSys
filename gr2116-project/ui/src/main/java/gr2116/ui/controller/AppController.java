@@ -26,7 +26,7 @@ public class AppController implements MessageListener {
   }
 
   @Override
-  public void receiveNotification(Object from, Message message, Object data) {
+  public final void receiveNotification(final Object from, final Message message, final Object data) {
     if (message == Message.SignIn && data instanceof Person) {
       Person person = (Person) data;
       if (!loadedPersons.contains(person)) {
@@ -49,7 +49,7 @@ public class AppController implements MessageListener {
     root.getChildren().add(loginPage);
   }
 
-  private void moveToMainPage(Person person) {
+  private void moveToMainPage(final Person person) {
     root.getChildren().clear();
     MainPage mainPage = new MainPage(person);
     mainPage.addListener(this);

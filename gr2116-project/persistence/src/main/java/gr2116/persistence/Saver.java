@@ -2,6 +2,10 @@ package gr2116.persistence;
 
 import org.json.JSONObject;
 
+import gr2116.core.HotelRoom;
+import gr2116.core.Person;
+import gr2116.core.Reservation;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,12 +15,12 @@ import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import gr2116.core.*;
-
 public class Saver {
-  private static final Path METADATA_FOLDER = Paths.get(".").toAbsolutePath().normalize().getParent().getParent().resolve("data");
+  private static final Path METADATA_FOLDER
+      = Paths.get(".").toAbsolutePath()
+      .normalize().getParent().getParent().resolve("data");
 
-  private JSONObject makePersonJSON(Person person) {
+  private JSONObject makePersonJSON(final Person person) {
     JSONObject personData = new JSONObject();
     personData.put("name", person.getName());
     personData.put("email", person.getEmail());
@@ -25,7 +29,7 @@ public class Saver {
     return personData;
   }
 
-  private JSONObject makeRoomJSON(HotelRoom room) {
+  private JSONObject makeRoomJSON(final HotelRoom room) {
     JSONObject roomData = new JSONObject();
     roomData.put("number", room.getNumber());
     roomData.put("price", room.getPrice());
@@ -35,7 +39,7 @@ public class Saver {
     return roomData;
   }
 
-  private JSONObject makeReservationJSON(Reservation reservation) {
+  private JSONObject makeReservationJSON(final Reservation reservation) {
     JSONObject reservationData = new JSONObject();
     reservationData.put("id", reservation.getId());
     reservationData.put("room", reservation.getRoom().getNumber());
@@ -44,7 +48,7 @@ public class Saver {
     return reservationData;
   }
 
-  private JSONObject updatePersonData(Collection<Person> persons) {
+  private JSONObject updatePersonData(final Collection<Person> persons) {
     JSONObject personsData = new JSONObject();
     persons.forEach((person) -> {
       personsData.put(person.getEmail(), makePersonJSON(person));
@@ -52,7 +56,7 @@ public class Saver {
     return personsData;
   }
 
-  private JSONObject updateRoomsData(Collection<HotelRoom> rooms) {
+  private JSONObject updateRoomsData(final Collection<HotelRoom> rooms) {
     JSONObject roomsData = new JSONObject();
     rooms.forEach((room) -> {
       roomsData.put(Integer.toString(room.getNumber()), makeRoomJSON(room));
@@ -60,27 +64,31 @@ public class Saver {
     return roomsData;
   }
 
-  private JSONObject updateReservationData(Collection<Reservation> reservations) {
+  private JSONObject updateReservationData(final Collection<Reservation> reservations) {
     JSONObject reservationsData = new JSONObject();
     reservations.forEach((reservation) -> {
-      reservationsData.put(Long.toString(reservation.getId()), makeReservationJSON(reservation));
+      reservationsData.put(Long.toString(reservation.getId()),
+                          makeReservationJSON(reservation));
     });
     return reservationsData;
   }
 
-  public void writeToFile(Collection<HotelRoom> rooms,
-              Collection<Person> persons) throws FileNotFoundException {
+  public final void writeToFile(final Collection<HotelRoom> rooms,
+                                final Collection<Person> persons)
+      throws FileNotFoundException {
     ArrayList<Reservation> reservations = new ArrayList<Reservation>();
     persons.forEach((person) -> reservations.addAll(person.getReservations()));
     writeToFile(rooms, persons, reservations);
   }
 
-  public void writeToFile(Collection<HotelRoom> rooms,
-              Collection<Person> persons,
-              Collection<Reservation> reservations) throws FileNotFoundException {
+  public final void writeToFile(final Collection<HotelRoom> rooms,
+                                final Collection<Person> persons,
+                                final Collection<Reservation> reservations)
+                                throws FileNotFoundException {
     File personDataJSON = new File(METADATA_FOLDER + "/personData.json");
     File roomsDataJSON = new File(METADATA_FOLDER + "/roomsData.json");
-    File reservationDataJSON = new File(METADATA_FOLDER + "/reservationData.json");
+    File reservationDataJSON = new File(
+      METADATA_FOLDER + "/reservationData.json");
     try {
       Path.of(personDataJSON.getAbsolutePath()).toFile().createNewFile();
       Path.of(roomsDataJSON.getAbsolutePath()).toFile().createNewFile();
@@ -96,7 +104,8 @@ public class Saver {
       pw.print(updateRoomsData(rooms).toString(2));
       pw.flush();
     }
-    try (PrintWriter pw = new PrintWriter(reservationDataJSON.getAbsolutePath())) {
+    try (PrintWriter pw = new PrintWriter(
+                              reservationDataJSON.getAbsolutePath())) {
       pw.print(updateReservationData(reservations).toString(2));
       pw.flush();
     }

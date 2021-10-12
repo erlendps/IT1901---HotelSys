@@ -1,12 +1,11 @@
 package gr2116.ui.components;
 
-import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.function.Predicate;
-
 import gr2116.core.Amenity;
 import gr2116.core.HotelRoom;
 import gr2116.core.HotelRoomType;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.function.Predicate;
 
 public class HotelRoomFilter {
   private final LocalDate startDate;
@@ -33,7 +32,7 @@ public class HotelRoomFilter {
       return false;
     }
     if (startDate != null && endDate != null
-    && endDate.isBefore(startDate)) {
+      && endDate.isBefore(startDate)) {
       return false;
     }
     return true;

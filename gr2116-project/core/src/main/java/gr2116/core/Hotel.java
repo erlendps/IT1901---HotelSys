@@ -1,4 +1,5 @@
 package gr2116.core;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -8,36 +9,40 @@ import java.util.stream.Collectors;
 public class Hotel implements Iterable<HotelRoom> {
   private final Collection<HotelRoom> rooms = new ArrayList<>();
 
-  public Hotel() {}
+  public Hotel() {
 
-  public Hotel(Collection<HotelRoom> rooms) {
+  }
+
+  public Hotel(final Collection<HotelRoom> rooms) {
     rooms.forEach((room) -> this.rooms.add(room));
   }
 
-  public void addRoom(HotelRoom room) {
+  public final void addRoom(final HotelRoom room) {
     if (room == null) {
       throw new NullPointerException();
     }
     if (rooms.contains(room)) {
-      System.out.println("[Warning]: Tried to add a room that was already added.");
+      System.out.println(
+          "[Warning]: Tried to add a room that was already added.");
     } else {
       rooms.add(room);
     }
   }
 
-  public void removeRoom(HotelRoom room) {
+  public final void removeRoom(final HotelRoom room) {
     if (!rooms.contains(room)) {
       throw new IllegalArgumentException();
     }
     rooms.remove(room);
   }
 
-  public Collection<HotelRoom> getRooms(Predicate<HotelRoom> predicate) {
+  public final Collection<HotelRoom> getRooms(
+      final Predicate<HotelRoom> predicate) {
     return rooms.stream().filter(predicate).collect(Collectors.toList());
   }
 
   @Override
-  public Iterator<HotelRoom> iterator() {
+  public final Iterator<HotelRoom> iterator() {
     return rooms.iterator();
   }
 }

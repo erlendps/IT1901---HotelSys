@@ -1,5 +1,7 @@
 package gr2116.core;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -8,7 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class PersonTest {
-
   LocalDate today = LocalDate.now();
   LocalDate tomorrow = today.plusDays(1);
   LocalDate overmorrow = today.plusDays(2);
@@ -17,7 +18,7 @@ public class PersonTest {
   Person tom;
 
   @BeforeEach
-  public void setup() {
+  public final void setup() {
     person = new Person("Mr. Game and Watch");
     tom = new Person("Tom Haddleford");
     tom.addBalance(1000);
@@ -51,29 +52,44 @@ public class PersonTest {
     HotelRoom room = new HotelRoom(HotelRoomType.Double, 100);
     room.setPrice(100);
     double balanceBefore = tom.getBalance();
-    tom.makeReservation(room, LocalDate.of(2021, 7, 6), LocalDate.of(2021, 7, 7));
-    assertEquals(balanceBefore-room.getPrice(), tom.getBalance(), "Booking one night should cost the same as the price of the hotel room.");
+    tom.makeReservation(room,
+      LocalDate.of(2021, 7, 6),
+      LocalDate.of(2021, 7, 7));
+    assertEquals(balanceBefore - room.getPrice(),
+      tom.getBalance(),
+      "Booking one night should cost the same as the price of the hotel room.");
 
-    assertThrows(IllegalStateException.class, () -> 
-      person.makeReservation(room, LocalDate.of(2021, 7, 6), LocalDate.of(2021, 7, 7)),
+    assertThrows(IllegalStateException.class, () -> {
+        person.makeReservation(room,
+          LocalDate.of(2021, 7, 6),
+          LocalDate.of(2021, 7, 7));
+      },
       "Booking should only be possible when the hotel room is free."
     );
 
-    tom.makeReservation(room, LocalDate.of(2021, 8, 6), LocalDate.of(2021, 8, 6));
-    assertEquals(900, tom.getBalance(), "Booking 0 days should not cost money.");
+    tom.makeReservation(room,
+    LocalDate.of(2021, 8, 6),
+    LocalDate.of(2021, 8, 6));
 
-    assertThrows(IllegalArgumentException.class, () -> 
-      tom.makeReservation(room, LocalDate.of(2022, 4, 3), LocalDate.of(2022, 4, 1)),
+    assertEquals(900, tom.getBalance(),
+      "Booking 0 days should not cost money.");
+
+    assertThrows(IllegalArgumentException.class, () -> {
+        tom.makeReservation(room,
+          LocalDate.of(2022, 4, 3),
+          LocalDate.of(2022, 4, 1));
+      },
       "Booking must conform to the linear passing of time."
     );
-
-
   }
+
   @Test
   public void testReservationConstistency() {
-    HotelRoom deluxeRoom = new HotelRoom(HotelRoomType.Suite, 900); // The room is on the 9th floor.
+    HotelRoom deluxeRoom = new HotelRoom(HotelRoomType.Suite, 900);
+    // The room is on the 9th floor.
     tom.makeReservation(deluxeRoom, today, overmorrow);
-    assertEquals(1, tom.getReservationIds().size(), "User should have one reservation after booking one room.");
+    assertEquals(1, tom.getReservationIds().size(),
+      "User should have one reservation after booking one room.");
     ArrayList<Reservation> reservations = new ArrayList<Reservation>();
     tom.getReservations().forEach((r) -> reservations.add(r));
     assertEquals(deluxeRoom, reservations.get(0).getRoom());

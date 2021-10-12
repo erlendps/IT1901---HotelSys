@@ -6,12 +6,12 @@ public enum HotelRoomType {
   Triple("Tripple room", "A  room for three."),
   Quad("Qaud room", "A room for four."),
   Suite("Suite", "Separate living area and bedroom."),
-  Penthouse("Penthouse", "A penthouse with a beautiful view."); 
+  Penthouse("Penthouse", "A penthouse with a beautiful view.");
 
   private final String name;
   private final String description;
 
-  HotelRoomType(String name, String description) {
+  HotelRoomType(final String name, final String description) {
     this.name = name;
     this.description = description;
   }

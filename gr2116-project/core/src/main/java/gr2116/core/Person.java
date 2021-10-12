@@ -1,9 +1,10 @@
 package gr2116.core;
+
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.stream.Collectors;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class Person {
   private final Collection<PersonListener> listeners = new HashSet<>(); 
@@ -12,7 +13,7 @@ public class Person {
   private String email;
   private double balance = 0;
 
-  public Person(String name) {
+  public Person(final String name) {
     if (name == null) {
       throw new NullPointerException();
     }
@@ -22,70 +23,76 @@ public class Person {
     this.name = name;
   }
 
-  public String getName() {
+  public final String getName() {
     return name;
   }
 
-  public String getEmail() {
+  public final String getEmail() {
     return email;
   }
 
-  public void setEmail(String email) {
+  public final void setEmail(final String email) {
     if (email == null) {
       throw new NullPointerException("Email is null");
     }
-    if (!isValidEmail(email)){
+    if (!isValidEmail(email)) {
       throw new IllegalArgumentException("The email is not valid");
     }
     this.email = email;
     notifyListeners();
   }
 
-  public static boolean isValidEmail(String email) {
+  public static boolean isValidEmail(final String email) {
     String regex = "^[a-zA-Z0-9._-]{2,20}@[a-zA-Z0-9.]{2,20}.(no|com|net|org)$";
     return email.matches(regex);
   }
 
-  public static boolean isValidName(String name) {
+  public static boolean isValidName(final String name) {
     return name.matches("([A-Za-z]+.* *)+");
   }
 
-  public double getBalance() {
+  public final double getBalance() {
     return balance;
   }
 
-  public void addBalance(double balance) {
+  public final void addBalance(final double balance) {
     this.balance += balance;
     notifyListeners();
   }
 
-  public void subtractBalance(double balance) {
+  public final void subtractBalance(final double balance) {
     this.balance -= balance;
     notifyListeners();
   }
 
-  public void makeReservation(HotelRoom hotelRoom, LocalDate startDate, LocalDate endDate) {
+  public final void makeReservation(final HotelRoom hotelRoom,
+                                    final LocalDate startDate,
+                                    final LocalDate endDate) {
     if (hotelRoom == null || startDate == null || endDate == null) {
       throw new NullPointerException();
     }
     if (startDate.isAfter(endDate)) {
-      throw new IllegalArgumentException("The startDate cannot be after the endDate.");
+      throw new IllegalArgumentException(
+        "The startDate cannot be after the endDate.");
     }
     double price = hotelRoom.getPrice(startDate, endDate);
     if (price > getBalance()) {
-      throw new IllegalStateException("The person cannot afford this reservation.");
+      throw new IllegalStateException(
+        "The person cannot afford this reservation.");
     }
     if (!hotelRoom.isAvailable(startDate, endDate)) {
-      throw new IllegalStateException("The room is not available at this time.");
+      throw new IllegalStateException(
+        "The room is not available at this time.");
     }
     Random random = new Random();
-    Reservation reservation = new Reservation(Math.abs(random.nextLong()), hotelRoom, startDate, endDate);
+    Reservation reservation = new Reservation(
+        Math.abs(random.nextLong()), hotelRoom, startDate, endDate);
     hotelRoom.addReservation(reservation);
     addReservation(reservation);
     subtractBalance(price);
   }
 
-  public void addReservation(Reservation reservation) {
+  public final void addReservation(final Reservation reservation) {
     if (reservation == null) {
       throw new NullPointerException();
     }
@@ -93,32 +100,36 @@ public class Person {
     notifyListeners();
   }
 
-  public Collection<Long> getReservationIds() {
-    return reservations.stream().map((r) -> r.getId()).collect(Collectors.toList());
+  public final Collection<Long> getReservationIds() {
+    return reservations.stream()
+      .map((r) -> r.getId())
+      .collect(Collectors.toList());
   }
 
   // public void removeReservation(Reservation reservation) {
-  //   if (!reservations.contains(reservation)) {
-  //     throw new IllegalArgumentException();
-  //   }
-  //   reservations.remove(reservation);
+  // if (!reservations.contains(reservation)) {
+  // throw new IllegalArgumentException();
+  // }
+  // reservations.remove(reservation);
   // }
 
-  public boolean hasReservation(Reservation reservation) {
+  public final boolean hasReservation(final Reservation reservation) {
     return reservations.contains(reservation);
   }
 
-  public Collection<Reservation> getReservations() {
+  public final Collection<Reservation> getReservations() {
     return new HashSet<>(reservations);
   }
 
-  public void addListener(PersonListener listener) {
+  public final void addListener(final PersonListener listener) {
     listeners.add(listener);
   }
-  public void removeListener(PersonListener listener) {
+
+  public final void removeListener(final PersonListener listener) {
     listeners.remove(listener);
   }
-  public void notifyListeners() {
+
+  public final void notifyListeners() {
     for (PersonListener listener : listeners) {
       listener.receiveNotification(this);
     }
