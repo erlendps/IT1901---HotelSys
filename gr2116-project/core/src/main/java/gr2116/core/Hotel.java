@@ -14,14 +14,16 @@ public class Hotel implements Iterable<HotelRoom> {
 		rooms.forEach((room) -> this.rooms.add(room));
 	}
 	
-	public void addRoom(HotelRoom room) {
+	public boolean addRoom(HotelRoom room) {
 		if (room == null) {
 			throw new NullPointerException();
 		}
 		if (rooms.contains(room)) {
 			System.out.println("[Warning]: Tried to add a room that was already added.");
+            return false;
 		} else {
 			rooms.add(room);
+            return true;
 		}
 	}
 
