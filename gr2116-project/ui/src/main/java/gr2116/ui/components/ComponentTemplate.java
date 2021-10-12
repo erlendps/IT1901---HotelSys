@@ -5,12 +5,12 @@ import javafx.scene.layout.VBox;
 
 public class ComponentTemplate extends VBox { // Must extend a javafx class
 
-    public ComponentTemplate() {
-        FXMLUtils.loadFXML(this); // Automatically connects to ComponentTemplate.fxml, the END of the constructor
-    }
-    
-    @FXML
-    private void initialize() { // This will run after FXMLUtils.loadFXML(this);
-        
-    } 
+  public ComponentTemplate() {
+    FXMLUtils.loadFXML(this); // Automatically connects to ComponentTemplate.fxml, the END of the constructor
+  }
+
+  @FXML
+  private void initialize() { // This will run after FXMLUtils.loadFXML(this);
+
+  } 
 }
