@@ -159,6 +159,12 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- PlantUML plugin -->
+            <plugin>
+                <groupId>com.github.jeluard</groupId>
+                <artifactId>plantuml-maven-plugin</artifactId>
+            </plugin>
         </plugins>
 
     </build>
