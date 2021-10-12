@@ -6,6 +6,10 @@ import java.util.HashSet;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
+/**
+ * Person class. A person has a collection of listerners, a collection of
+ * reservaitons, a name, an email and a balance.
+ */
 public class Person {
   /**
    * Collection of PersonListener's listening to this Person object.
@@ -30,7 +34,9 @@ public class Person {
 
   /**
    * Constructs a Person object with a given name.
+   *
    * @param name - {@code String} that represents the persons name.
+   *
    * @throws NullPointerException if {@code name} is null.
    * @throws IllegalArgumentException if {@code name} is not valid.
    */
@@ -46,6 +52,7 @@ public class Person {
 
   /**
    * Returns the name.
+   *
    * @return {@code name}
    */
   public final String getName() {
@@ -54,7 +61,8 @@ public class Person {
 
   /**
    * Returns the email.
-   * @return {@code email}
+   *
+   * @return {@code email} that is associated with this person.
    */
   public final String getEmail() {
     return email;
@@ -62,8 +70,10 @@ public class Person {
 
   /**
    * Sets the email if some conditions are met.
+   *
    * @param email - the new email.
-   * @throws NullPointerException if {@code email} is null
+   *
+   * @throws NullPointerException if {@code email} is null.
    * @throws IllegalArgumentException if {@code email} is not a valid email.
    */
   public final void setEmail(final String email) {
@@ -79,7 +89,9 @@ public class Person {
 
   /**
    * Validation method that uses regex to check if the email provided is valid.
-   * @param email - the email that will be validated
+   *
+   * @param email - the email that will be validated.
+   *
    * @return {@code true} if the email is valid, {@code false} otherwise.
    */
   public static boolean isValidEmail(final String email) {
@@ -89,7 +101,9 @@ public class Person {
 
   /**
    * Validation method that uses regex to check if the name provided is valid.
-   * @param name - the name that will be validated
+   *
+   * @param name - the name that will be validated.
+   *
    * @return {@code true} if the name is valid, {@code false} otherwise.
    */
   public static boolean isValidName(final String name) {
@@ -98,7 +112,8 @@ public class Person {
 
   /**
    * Returns the balance of this Person object.
-   * @return {@code balance}
+   *
+   * @return {@code balance} of this person.
    */
   public final double getBalance() {
     return balance;
@@ -106,7 +121,9 @@ public class Person {
 
   /**
    * Adds the specified {@code balance} to this Peron objects balance field.
+   *
    * @param balance - balance (the amount) to be added.
+   *
    * @throws IllegalArgumentException if {@code balance} is below 0.
    */
   public final void addBalance(final double balance) {
@@ -118,8 +135,10 @@ public class Person {
   }
 
   /**
-   * Subtracts the specified {@code balance} from this Peron objects balance field. 
+   * Subtracts the specified {@code balance} from this Peron objects balance field.
+   *
    * @param balance - balance (the amount) to be subtracted.
+   *
    * @throws IllegalArgumentException if {@code balance} is below 0.
    */
   public final void subtractBalance(final double balance) {
@@ -144,16 +163,17 @@ public class Person {
    * and then it adds the reservation in this Person objects reservation collection.
    * Finally it subtracs the price of the booking.
    * </p>
+   *
    * @param hotelRoom - the room the Person object wants to book.
    * @param startDate - {@code LocalDate} of when the reservation should start.
    * @param endDate - {@code LocalDate} of when the reservation should end.
-   * 
+   *
    * @throws NullPointerException if hotelRoom, startDate or endDate is null.
    * @throws IllegalArgumentException if startDate is chronologically after endDate.
-   * @throws IllegalStateException if the {@code Person} does not have enough balance
-   *      to pay for the reservation.
-   * @throws IllegalStateException if hotelRoom is unavailable, e.g already booked, in
-   *      some period between startDate and endDate. 
+   * @throws IllegalStateException  if the {@code Person} does not have enough balance
+   *                                to pay for the reservation.
+   * @throws IllegalStateException  if hotelRoom is unavailable, e.g already booked, in
+   *                                some period between startDate and endDate. 
    */
   public final void makeReservation(final HotelRoom hotelRoom,
                                     final LocalDate startDate,
@@ -185,7 +205,9 @@ public class Person {
   /**
    * Adds the given reservation to the Person objects collection of reservations and 
    * notifies listeners.
+   *
    * @param reservation - the {@code Reservation} to be added.
+   *
    * @throws NullPointerException if reservation is null.
    */
   public final void addReservation(final Reservation reservation) {
@@ -199,7 +221,8 @@ public class Person {
   /**
    * Returns a Collection of the reservation IDs for this Person objects. E.g all
    * reservation IDs that belong to this Person.
-   * @return {@code Collection<Long>} of reservation IDs
+   *
+   * @return {@code Collection<Long>} of reservation IDs.
    */
   public final Collection<Long> getReservationIds() {
     return reservations.stream()
@@ -209,7 +232,9 @@ public class Person {
 
   /**
    * Returns a boolean value depending on if the Person has made the given reservation.
-   * @param reservation - the {@code Reservation} to be checked
+   *
+   * @param reservation - the {@code Reservation} to be checked.
+   *
    * @return {@code true} if this Person has made the reservation, {@code false} otherwise.
    */
   public final boolean hasReservation(final Reservation reservation) {
@@ -218,6 +243,7 @@ public class Person {
 
   /**
    * Returns a Collection of the reservations this Person has made.
+   *
    * @return {@code Collection<Reservation>} of the reservations.
    */
   public final Collection<Reservation> getReservations() {
@@ -226,6 +252,7 @@ public class Person {
 
   /**
    * Adds a {@code PersonListener} to Person listeners collection.
+   *
    * @param listener - the listener that needs to listen to Person.
    */
   public final void addListener(final PersonListener listener) {
@@ -234,6 +261,7 @@ public class Person {
 
   /**
    * Removes the listener stated from the Person objects listeners Collection.
+   *
    * @param listener - the listener to be removed.
    */
   public final void removeListener(final PersonListener listener) {

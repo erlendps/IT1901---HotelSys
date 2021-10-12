@@ -1,5 +1,8 @@
 package gr2116.core;
 
+/**
+ * RoomType enum. Contains the different types of rooms a room can be.
+ */
 public enum HotelRoomType {
   /**
    * Single hotel room type.
@@ -42,6 +45,7 @@ public enum HotelRoomType {
 
   /**
    * Returns the display name.
+   *
    * @return name
    */
   public String getName() {
@@ -50,6 +54,7 @@ public enum HotelRoomType {
 
   /**
    * Returns the description.
+   *
    * @return description
    */
   public String getDescription() {
