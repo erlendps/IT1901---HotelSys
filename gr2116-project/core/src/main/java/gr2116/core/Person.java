@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Person {
+  private static final Random random = new Random();
   private final Collection<PersonListener> listeners = new HashSet<>();
   private final Collection<Reservation> reservations = new HashSet<>();
   private final String name;
@@ -84,7 +85,6 @@ public class Person {
       throw new IllegalStateException(
         "The room is not available at this time.");
     }
-    Random random = new Random();
     Reservation reservation = new Reservation(
         Math.abs(random.nextLong()), hotelRoom, startDate, endDate);
     hotelRoom.addReservation(reservation);
