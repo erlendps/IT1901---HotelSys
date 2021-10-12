@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.stream.Collectors;
 
 public class ReservationCalendar implements Iterable<Reservation> {
-   /**
+  /**
    * The reservation calander's collection of reservations.
    */
   private Collection<Reservation> reservations = new HashSet<>();
@@ -26,13 +26,6 @@ public class ReservationCalendar implements Iterable<Reservation> {
     }
     reservations.add(reservation);
   }
-
-  // public void removeReservation(Reservation reservation) {
-  // if (!reservations.contains(reservation)) {
-  // throw new IllegalArgumentException();
-  // }
-  // reservations.remove(reservation);
-  // }
 
   /**
    * Returns collection of ids of reservation caladar's reservations.

@@ -10,22 +10,22 @@ public class Reservation implements Iterable<LocalDate> {
    */
   private final long id;
 
-   /**
+  /**
    * The reservation's room.
    */
   private final HotelRoom room;
 
-   /**
+  /**
    * The reservation's start date.
    */
   private final LocalDate startDate;
 
-   /**
+  /**
    * The reservation's end date.
    */
   private final LocalDate endDate;
 
-   /**
+  /**
    * Construtcts a reservation with given id, room, startDate and endDate.
    * @param id the given id.
    * @param room the given room.
@@ -51,7 +51,7 @@ public class Reservation implements Iterable<LocalDate> {
     this.id = id;
   }
 
-   /**
+  /**
    * Returns the reservation's room.
    * @return room.
    */
@@ -59,7 +59,7 @@ public class Reservation implements Iterable<LocalDate> {
     return room;
   }
 
-   /**
+  /**
    * Returns reservation's start date.
    * @return start date.
    */
@@ -67,7 +67,7 @@ public class Reservation implements Iterable<LocalDate> {
     return startDate;
   }
 
-   /**
+  /**
    * Returns reservation's end date.
    * @return end date.
    */
