@@ -2,6 +2,7 @@ package gr2116.persistence;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
@@ -17,13 +18,14 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class LoaderTest {
+public class PersistenceTest {
     JSONObject personsData;
     JSONObject roomsData;
     JSONObject reservationsData;
     static Loader dataLoader = new Loader();
 
     @BeforeAll
+    @Test
     public static void makeAndLoadData() throws IOException {
         Person rick = new Person("Richard");
         Person kyle = new Person("Kyllard");
@@ -71,7 +73,8 @@ public class LoaderTest {
 
         Saver saver = new Saver();
         assertDoesNotThrow(() -> saver.writeToFile(rooms, persons), "Something went wrong with saving.");
-
+        assertThrows(IllegalStateException.class, () -> dataLoader.getRooms());
+        assertThrows(IllegalStateException.class, () -> dataLoader.getPersons());
         dataLoader.loadData();
     }
 
