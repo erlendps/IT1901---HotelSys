@@ -6,31 +6,31 @@ import java.util.Iterator;
 
 public class Reservation implements Iterable<LocalDate> {
   /**
-   * The reservation's id
+   * The reservation's id.
    */
   private final long id;
 
    /**
-   * The reservation's room
+   * The reservation's room.
    */
   private final HotelRoom room;
 
    /**
-   * The reservation's start date
+   * The reservation's start date.
    */
   private final LocalDate startDate;
 
    /**
-   * The reservation's end date
+   * The reservation's end date.
    */
   private final LocalDate endDate;
 
    /**
-   * Construtcts a reservation with given id, room, startDate and endDate
-   * @param id the given id
-   * @param room the given room
-   * @param startDate the given start date
-   * @param endDate the given end date
+   * Construtcts a reservation with given id, room, startDate and endDate.
+   * @param id the given id.
+   * @param room the given room.
+   * @param startDate the given start date.
+   * @param endDate the given end date.
    */
   public Reservation(final long id,
                       final HotelRoom room,
@@ -52,32 +52,32 @@ public class Reservation implements Iterable<LocalDate> {
   }
 
    /**
-   * Returnsgit s the reservation's room
-   * @return room
+   * Returns the reservation's room.
+   * @return room.
    */
   public final HotelRoom getRoom() {
     return room;
   }
 
    /**
-   * Returns reservation's start date
-   * @return start date
+   * Returns reservation's start date.
+   * @return start date.
    */
   public final LocalDate getStartDate() {
     return startDate;
   }
 
    /**
-   * Returns reservation's end date
-   * @return end date
+   * Returns reservation's end date.
+   * @return end date.
    */
   public final LocalDate getEndDate() {
     return endDate;
   }
 
   /**
-   * Returns reservation's id
-   * @return id
+   * Returns reservation's id.
+   * @return id.
    */
   public final long getId() {
     return id;
