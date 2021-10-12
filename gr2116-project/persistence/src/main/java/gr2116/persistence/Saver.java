@@ -1,19 +1,17 @@
 package gr2116.persistence;
 
-import org.json.JSONObject;
-
 import gr2116.core.HotelRoom;
 import gr2116.core.Person;
 import gr2116.core.Reservation;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collection;
+import org.json.JSONObject;
 
 public class Saver {
   private static final Path METADATA_FOLDER
@@ -89,7 +87,7 @@ public class Saver {
     File personDataJSON = new File(METADATA_FOLDER + "/personData.json");
     File roomsDataJSON = new File(METADATA_FOLDER + "/roomsData.json");
     File reservationDataJSON = new File(
-      METADATA_FOLDER + "/reservationData.json");
+        METADATA_FOLDER + "/reservationData.json");
     try {
       Path.of(personDataJSON.getAbsolutePath()).toFile().createNewFile();
       Path.of(roomsDataJSON.getAbsolutePath()).toFile().createNewFile();
