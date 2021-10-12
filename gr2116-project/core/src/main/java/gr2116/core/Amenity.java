@@ -1,5 +1,9 @@
 package gr2116.core;
 
+/**
+ * Amenity enum.
+ * Contains all amenities that a room could have.
+ */
 public enum Amenity {
   /**
    * Kitchen facilities amenity.
@@ -51,6 +55,12 @@ public enum Amenity {
    */
   private final String description;
 
+  /**
+   * Constructor for Amenity.
+   *
+   * @param name  the name of the amenity.
+   * @param description   the description of the amenity.
+   */
   Amenity(final String name, final String description) {
     this.name = name;
     this.description = description;
@@ -58,6 +68,7 @@ public enum Amenity {
 
   /**
    * Returns the display name.
+   *
    * @return name
    */
   public String getName() {
@@ -66,6 +77,7 @@ public enum Amenity {
 
   /**
    * Returns the description.
+   *
    * @return description
    */
   public String getDescription() {
