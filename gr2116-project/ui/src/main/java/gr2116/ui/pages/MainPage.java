@@ -1,30 +1,30 @@
 package gr2116.ui.pages;
-import gr2116.ui.utils.FXMLUtils;
-import javafx.fxml.FXML;
-import javafx.scene.layout.VBox;
 
+import gr2116.core.Hotel;
+import gr2116.core.HotelRoom;
+import gr2116.core.Person;
+import gr2116.ui.components.FilterPanel;
+import gr2116.ui.components.HotelRoomFilter;
+import gr2116.ui.components.HotelRoomListItem;
+import gr2116.ui.components.UserPanel;
+import gr2116.ui.message.Message;
+import gr2116.ui.message.MessageListener;
+import gr2116.ui.utils.FXMLUtils;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.function.Predicate;
-import gr2116.core.Hotel;
-import gr2116.core.HotelRoom;
-import gr2116.core.Person;
-import gr2116.ui.components.UserPanel;
-import gr2116.ui.message.Message;
-import gr2116.ui.message.MessageListener;
-import gr2116.ui.components.FilterPanel;
-import gr2116.ui.components.HotelRoomFilter;
-import gr2116.ui.components.HotelRoomListItem;
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 public class MainPage extends VBox implements MessageListener {
   private final FilterPanel filterPanel = new FilterPanel();
   private UserPanel userPanel;
   private final Hotel hotel = new Hotel();
   private HotelRoomFilter hotelRoomFilter
-    = new HotelRoomFilter(null, null, null, null, null);
+      = new HotelRoomFilter(null, null, null, null, null);
   private final Person person;
   private final Collection<MessageListener> listeners = new HashSet<>();
 
@@ -67,13 +67,13 @@ public class MainPage extends VBox implements MessageListener {
 
       if (startDate == null || endDate == null) {
         Label label = new Label(
-          "You must choose both a start date "
-          + "and an end date to make a reservation."
+            "You must choose both a start date "
+            + "and an end date to make a reservation."
         );
         roomItemContainer.getChildren().add(label);
       } else if (endDate.isBefore(startDate)) {
         Label label = new Label(
-          "The end date must be after the start date."
+            "The end date must be after the start date."
         );
         roomItemContainer.getChildren().add(label);
       }
@@ -87,9 +87,9 @@ public class MainPage extends VBox implements MessageListener {
       if (hotelRoomFilter.hasValidDates()) {
         roomItem.setOnMakeReservationButtonAction((event) -> {
           person.makeReservation(
-            hotelRoom,
-            hotelRoomFilter.getStartDate(),
-            hotelRoomFilter.getEndDate()
+              hotelRoom,
+              hotelRoomFilter.getStartDate(),
+              hotelRoomFilter.getEndDate()
           );
           buildRoomList();
         });

@@ -1,6 +1,5 @@
 package gr2116.ui.controller;
 
-import java.util.Collection;
 import gr2116.core.HotelRoom;
 import gr2116.core.Person;
 import gr2116.persistence.Loader;
@@ -9,6 +8,7 @@ import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
 import gr2116.ui.pages.LoginPage;
 import gr2116.ui.pages.MainPage;
+import java.util.Collection;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 
