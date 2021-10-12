@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -63,8 +64,12 @@ public class HotelRoomTest {
 		assertThrows(IllegalArgumentException.class, () -> roomSingle.removeAmenity(Amenity.Bathtub));
 	}
 
-    // isAvailable is tested in ReservationCalendar class
-    
+    @Test
+    public void testIsAvailable() {
+        assertTrue(roomSingle.isAvailable(today));
+        assertTrue(roomSingle.isAvailable(today, tomorrow));
+        assertThrows(IllegalArgumentException.class, () -> roomSingle.isAvailable(tomorrow, today));
+    }    
     @Test
     public void testAddReservation() {
         assertThrows(NullPointerException.class, () -> roomDouble.addReservation(null));
