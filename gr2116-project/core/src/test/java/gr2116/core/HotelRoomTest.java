@@ -1,22 +1,30 @@
 package gr2116.core;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 public class HotelRoomTest {
 
-	HotelRoom roomSingle = new HotelRoom(HotelRoomType.Single, 111);
-	HotelRoom roomDouble = new HotelRoom(HotelRoomType.Double, 794);
+	HotelRoom roomSingle;
+	HotelRoom roomDouble;
 	LocalDate today = LocalDate.now();
 	LocalDate tomorrow = today.plusDays(1);
 	LocalDate overmorrow = today.plusDays(2);
+
+    // mock
+    Reservation res = mock(Reservation.class);
+
+    @BeforeEach
+    public void setup() {
+        roomSingle = new HotelRoom(HotelRoomType.Single, 111);
+        roomDouble = new HotelRoom(HotelRoomType.Double, 794);
+    }
 
 
 	@Test
@@ -54,4 +62,14 @@ public class HotelRoomTest {
 		assertFalse(roomSingle.hasAmenity(Amenity.Bathtub));
 		assertThrows(IllegalArgumentException.class, () -> roomSingle.removeAmenity(Amenity.Bathtub));
 	}
+
+    // isAvailable is tested in ReservationCalendar class
+    
+    @Test
+    public void testAddReservation() {
+        assertThrows(NullPointerException.class, () -> roomDouble.addReservation(null));
+        when(res.getRoom()).thenReturn(roomSingle);
+        assertThrows(IllegalArgumentException.class, () -> roomDouble.addReservation(res));
+    }
+
 }
