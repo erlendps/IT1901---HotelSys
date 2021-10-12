@@ -32,7 +32,7 @@ public class HotelRoomFilter {
       return false;
     }
     if (startDate != null && endDate != null
-      && endDate.isBefore(startDate)) {
+        && endDate.isBefore(startDate)) {
       return false;
     }
     return true;

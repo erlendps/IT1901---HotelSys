@@ -59,6 +59,7 @@ public class Loader {
       persons.add(person);
     });
   }
+  
   /**
    * Extracts reservation from JSON and connect to hotelroom.
    * @param reservationsData

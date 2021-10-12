@@ -51,34 +51,30 @@ public class PersonTest {
     room.setPrice(100);
     double balanceBefore = tom.getBalance();
     tom.makeReservation(room,
-      LocalDate.of(2021, 7, 6),
-      LocalDate.of(2021, 7, 7));
+        LocalDate.of(2021, 7, 6),
+        LocalDate.of(2021, 7, 7));
     assertEquals(balanceBefore - room.getPrice(),
-      tom.getBalance(),
-      "Booking one night should cost the same as the price of the hotel room.");
+        tom.getBalance(),
+        "Booking one night should cost the same as the price of the hotel room.");
 
     assertThrows(IllegalStateException.class, () -> {
-        person.makeReservation(room,
+      person.makeReservation(room,
           LocalDate.of(2021, 7, 6),
           LocalDate.of(2021, 7, 7));
-      },
-      "Booking should only be possible when the hotel room is free."
-    );
+    }, "Booking should only be possible when the hotel room is free.");
 
     tom.makeReservation(room,
-    LocalDate.of(2021, 8, 6),
-    LocalDate.of(2021, 8, 6));
+        LocalDate.of(2021, 8, 6),
+        LocalDate.of(2021, 8, 6));
 
     assertEquals(900, tom.getBalance(),
-      "Booking 0 days should not cost money.");
+        "Booking 0 days should not cost money.");
 
     assertThrows(IllegalArgumentException.class, () -> {
-        tom.makeReservation(room,
+      tom.makeReservation(room,
           LocalDate.of(2022, 4, 3),
           LocalDate.of(2022, 4, 1));
-      },
-      "Booking must conform to the linear passing of time."
-    );
+    }, "Booking must conform to the linear passing of time.");
   }
 
   @Test
@@ -87,7 +83,7 @@ public class PersonTest {
     // The room is on the 9th floor.
     tom.makeReservation(deluxeRoom, today, overmorrow);
     assertEquals(1, tom.getReservationIds().size(),
-      "User should have one reservation after booking one room.");
+        "User should have one reservation after booking one room.");
     ArrayList<Reservation> reservations = new ArrayList<Reservation>();
     tom.getReservations().forEach((r) -> reservations.add(r));
     assertEquals(deluxeRoom, reservations.get(0).getRoom());
