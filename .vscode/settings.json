@@ -1,3 +1,5 @@
 {
-    "java.configuration.updateBuildConfiguration": "automatic"
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.checkstyle.version": "9.0.1",
+    "java.checkstyle.configuration": "/sun_checks.xml"
 }
