@@ -21,26 +21,34 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
 public class MainPage extends VBox implements MessageListener {
-	private final FilterPanel filterPanel = new FilterPanel();
+    private final FilterPanel filterPanel = new FilterPanel();
     private UserPanel userPanel;
-	private final Hotel hotel = new Hotel();
-	private HotelRoomFilter hotelRoomFilter;
+    private final Hotel hotel = new Hotel();
+    private HotelRoomFilter hotelRoomFilter
+        = new HotelRoomFilter(null, null, null, null, null);
     private final Person person;
     private final Collection<MessageListener> listeners = new HashSet<>();
 
-    public MainPage(Person person) {
+    /**
+     * Constructs a main page for a given person.
+     * @param person
+     */
+    public MainPage(final Person person) {
         this.person = person;
         FXMLUtils.loadFXML(this);
     }
-    
+
     @FXML
     private VBox roomItemContainer;
 
     @FXML
-    private AnchorPane filterPane, userPane;
+    private AnchorPane filterPane;
 
     @FXML
-    void initialize() {
+    private AnchorPane userPane;
+
+    @FXML
+    final void initialize() {
         userPanel = new UserPanel(person);
         userPane.getChildren().add(userPanel);
         userPanel.addListener(this);
@@ -48,54 +56,61 @@ public class MainPage extends VBox implements MessageListener {
         filterPane.getChildren().add(filterPanel);
         filterPanel.addListener(this);
 
-        
         buildRoomList();
     }
-    
+
     private void buildRoomList() {
         roomItemContainer.getChildren().clear();
-        Predicate<HotelRoom> predicate;
-        
-        if (hotelRoomFilter != null) {
-            if (!hotelRoomFilter.isValid()) {
-                LocalDate startDate = hotelRoomFilter.getStartDate();
-                LocalDate endDate = hotelRoomFilter.getEndDate();
-                
-                if (startDate == null && endDate != null || startDate != null && endDate == null) {
-                    Label label = new Label("You must choose both a start date and an end date.");
-                    roomItemContainer.getChildren().add(label);
-                }
-                if (startDate != null && endDate != null && endDate.isBefore(startDate)) {
-                    Label label = new Label("The end date must be after the start date.");
-                    roomItemContainer.getChildren().add(label);
-                }
-                return;
+
+        if (!hotelRoomFilter.hasValidDates()) {
+            LocalDate startDate = hotelRoomFilter.getStartDate();
+            LocalDate endDate = hotelRoomFilter.getEndDate();
+
+            if (startDate == null || endDate == null) {
+                Label label = new Label(
+                    "You must choose both a start date "
+                    + "and an end date to make a reservation."
+                );
+                roomItemContainer.getChildren().add(label);
+            } else if (endDate.isBefore(startDate)) {
+                Label label = new Label(
+                    "The end date must be after the start date."
+                );
+                roomItemContainer.getChildren().add(label);
             }
-            predicate = hotelRoomFilter.getPredicate();
         }
-        else {
-            predicate = (room) -> true;
-        }
-        
+
+        Predicate<HotelRoom> predicate = hotelRoomFilter.getPredicate();
         Collection<HotelRoom> filteredRooms = hotel.getRooms(predicate);
 
         for (HotelRoom hotelRoom : filteredRooms) {
             HotelRoomListItem roomItem = new HotelRoomListItem(hotelRoom);
-            roomItem.setOnMakeReservationButtonAction((event) -> {
-                person.makeReservation(hotelRoom, hotelRoomFilter.getStartDate(), hotelRoomFilter.getEndDate());
-                buildRoomList();
-            });
+            if (hotelRoomFilter.hasValidDates()) {
+                roomItem.setOnMakeReservationButtonAction((event) -> {
+                    person.makeReservation(
+                        hotelRoom,
+                        hotelRoomFilter.getStartDate(),
+                        hotelRoomFilter.getEndDate()
+                    );
+                    buildRoomList();
+                });
+            } else {
+                roomItem.setOnMakeReservationButtonAction(null);
+            }
             roomItemContainer.getChildren().add(roomItem);
         }
     }
 
-    public void addRooms(Collection<HotelRoom> rooms) {
+    public final void addRooms(final Collection<HotelRoom> rooms) {
         rooms.forEach((HotelRoom room) -> hotel.addRoom(room));
         buildRoomList();
     }
 
     @Override
-    public void receiveNotification(Object from, Message message, Object data) {
+    public final void receiveNotification(
+            final Object from,
+            final Message message,
+            final Object data) {
         if (message == Message.Filter && data instanceof HotelRoomFilter) {
             this.hotelRoomFilter = (HotelRoomFilter) data;
             buildRoomList();
@@ -104,14 +119,18 @@ public class MainPage extends VBox implements MessageListener {
             notifyListeners(Message.SignOut, person);
         }
     }
-    
-    public void addListener(MessageListener listener) {
-		listeners.add(listener);
-	}
-	public void removeListener(MessageListener listener) {
-		listeners.remove(listener);
-	}
-	public void notifyListeners(Message message, Object data) {
+
+    public final void addListener(final MessageListener listener) {
+        listeners.add(listener);
+    }
+
+    public final void removeListener(final MessageListener listener) {
+        listeners.remove(listener);
+    }
+
+    public final void notifyListeners(
+            final Message message,
+            final Object data) {
         for (MessageListener listener : listeners) {
             listener.receiveNotification(this, message, data);
         }
