@@ -4,7 +4,7 @@ import gr2116.core.Amenity;
 import gr2116.core.HotelRoomType;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
-import gr2116.ui.utils.FXMLUtils;
+import gr2116.ui.utils.FxmlUtils;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -47,7 +47,7 @@ public class FilterPanel extends VBox {
   private Button clearFilterButton;
 
   public FilterPanel() {
-    FXMLUtils.loadFXML(this);
+    FxmlUtils.loadFXML(this);
   }
 
   @FXML

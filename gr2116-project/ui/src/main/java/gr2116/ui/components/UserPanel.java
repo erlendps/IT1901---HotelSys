@@ -5,7 +5,7 @@ import gr2116.core.PersonListener;
 import gr2116.core.Reservation;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
-import gr2116.ui.utils.FXMLUtils;
+import gr2116.ui.utils.FxmlUtils;
 import java.util.Collection;
 import java.util.HashSet;
 import javafx.fxml.FXML;
@@ -33,7 +33,7 @@ public class UserPanel extends VBox implements PersonListener {
   public UserPanel(final Person person) {
     this.person = person;
     person.addListener(this);
-    FXMLUtils.loadFXML(this);
+    FxmlUtils.loadFXML(this);
   }
 
   @FXML

@@ -9,7 +9,7 @@ import gr2116.ui.components.HotelRoomListItem;
 import gr2116.ui.components.UserPanel;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
-import gr2116.ui.utils.FXMLUtils;
+import gr2116.ui.utils.FxmlUtils;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
@@ -34,7 +34,7 @@ public class MainPage extends VBox implements MessageListener {
    */
   public MainPage(final Person person) {
     this.person = person;
-    FXMLUtils.loadFXML(this);
+    FxmlUtils.loadFXML(this);
   }
 
   @FXML

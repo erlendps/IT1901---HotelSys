@@ -1,7 +1,7 @@
 package gr2116.ui.components;
 
 import gr2116.core.HotelRoom;
-import gr2116.ui.utils.FXMLUtils;
+import gr2116.ui.utils.FxmlUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -33,7 +33,7 @@ public class HotelRoomListItem extends HBox {
    */
   public HotelRoomListItem(final HotelRoom room) {
     this.room = room;
-    FXMLUtils.loadFXML(this);
+    FxmlUtils.loadFXML(this);
   }
 
   @FXML

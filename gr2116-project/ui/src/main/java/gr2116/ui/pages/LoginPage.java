@@ -3,7 +3,7 @@ package gr2116.ui.pages;
 import gr2116.core.Person;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
-import gr2116.ui.utils.FXMLUtils;
+import gr2116.ui.utils.FxmlUtils;
 import java.util.Collection;
 import java.util.HashSet;
 import javafx.fxml.FXML;
@@ -29,7 +29,7 @@ public class LoginPage extends AnchorPane {
   private Label nameTitleLabel;
 
   public LoginPage() {
-    FXMLUtils.loadFXML(this);
+    FxmlUtils.loadFXML(this);
   }
 
   public final void setLoadedPersons(final Collection<Person> loadedPersons) {
