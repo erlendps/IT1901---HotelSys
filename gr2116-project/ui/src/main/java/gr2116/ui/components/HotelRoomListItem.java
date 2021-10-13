@@ -29,7 +29,8 @@ public class HotelRoomListItem extends HBox {
 
   /**
    * Constructs a HotelRoomListItem for the given HotelRoom.
-   * @param room
+   *
+   * @param room hotelRoom to be constructed from.
    */
   public HotelRoomListItem(final HotelRoom room) {
     this.room = room;
@@ -51,7 +52,8 @@ public class HotelRoomListItem extends HBox {
 
   /**
    * Sets the action of the makeReservationButton.
-   * @param eventHandler
+   *
+   * @param eventHandler the eventHandler that supplies the action.
    */
   public final void setOnMakeReservationButtonAction(
       final EventHandler<ActionEvent> eventHandler) {

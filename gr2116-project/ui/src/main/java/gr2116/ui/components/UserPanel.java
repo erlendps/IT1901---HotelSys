@@ -35,6 +35,8 @@ public class UserPanel extends VBox implements PersonListener {
 
   /**
    * Initialize the user panel with a person. This persons' attributes will be displayed.
+   *
+   * @param person the person we want to initialize for.
    */
   public UserPanel(final Person person) {
     this.person = person;
@@ -55,15 +57,18 @@ public class UserPanel extends VBox implements PersonListener {
   }
 
   /**
-   * Add a listener
-   * @param listener The listener
+   * Add a listener.
+   *
+   * @param listener The listener to be added.
    */
   public final void addListener(final MessageListener listener) {
     listeners.add(listener);
   }
+
   /**
-   * Remove a listener
-   * @param listener The listener
+   * Remove a listener.
+   *
+   * @param listener The listener to be removed.
    */
   public final void removeListener(final MessageListener listener) {
     listeners.remove(listener);
@@ -71,7 +76,8 @@ public class UserPanel extends VBox implements PersonListener {
 
   /**
    * Notify the listeners with a message.
-   * @param message
+   *
+   * @param message the message to notify.
    */
   public final void notifyListeners(final Message message) {
     for (MessageListener listener : listeners) {
@@ -90,6 +96,7 @@ public class UserPanel extends VBox implements PersonListener {
   /**
    * Update the person panel with attributes that might have changed.
    * This includes name, email, balance and reservations.
+   *
    * @param person The person to show attributes for.
    */
   private void updatePanel(final Person person) {

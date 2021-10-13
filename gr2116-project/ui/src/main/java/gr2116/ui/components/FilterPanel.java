@@ -21,7 +21,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
- * The panel where users select filters for hotel rooms
+ * The panel where users select filters for hotel rooms.
  */
 public class FilterPanel extends VBox {
   private Collection<MessageListener> listeners = new HashSet<>();
@@ -108,7 +108,7 @@ public class FilterPanel extends VBox {
   }
 
   /**
-   * Amenity check box, to select an amenity
+   * Amenity check box, to select an amenity.
    */
   private class AmenityCheckBox extends HBox {
     private CheckBox checkBox = new CheckBox();
@@ -127,8 +127,9 @@ public class FilterPanel extends VBox {
     }
 
     /**
-     * Set whether to search for rooms with this amenity
-     * @param value true if amenity is selected
+     * Set whether to search for rooms with this amenity.
+     *
+     * @param value true if amenity is selected.
      */
     public void setSelected(final boolean value) {
       checkBox.setSelected(value);
@@ -136,20 +137,23 @@ public class FilterPanel extends VBox {
   }
 
   /**
-   * Add a listener
-   * @param listener The listener
+   * Add a listener.
+   *
+   * @param listener The listener.
    */
   public final void addListener(final MessageListener listener) {
     listeners.add(listener);
   }
 
   /**
-   * Remove a listener
-   * @param listener The listener
+   * Remove a listener.
+   *
+   * @param listener The listener.
    */
   public final void removeListener(final MessageListener listener) {
     listeners.remove(listener);
   }
+  
   /**
    * Notify listenrs that the filter has been updated.
    * Includes dates, room type, floor and amenities.

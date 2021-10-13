@@ -7,7 +7,9 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.function.Predicate;
 
-
+/**
+ * Component that lets you filter on hotelRoom objects.
+ */
 public class HotelRoomFilter {
   private final LocalDate startDate;
   private final LocalDate endDate;
@@ -15,6 +17,15 @@ public class HotelRoomFilter {
   private final HashMap<Amenity, Boolean> amenities;
   private final Integer floor;
 
+  /**
+   * Constructor for this component.
+   *
+   * @param startDate the startDate you are filtering on.
+   * @param endDate the endDate you are filtering on.
+   * @param roomType  the roomType you are filtering on.
+   * @param floor the floor number to filter on.
+   * @param amenities the amenities you are filerting on.
+   */
   public HotelRoomFilter(
       final LocalDate startDate,
       final LocalDate endDate,
@@ -28,6 +39,11 @@ public class HotelRoomFilter {
     this.amenities = amenities;
   }
 
+  /**
+   * Method that checks if the user has chosen a valid time period.
+   *
+   * @return {@code true} if the period is valid, {@code false} otherwise.
+   */
   public final boolean hasValidDates() {
     if (startDate == null || endDate == null) {
       return false;
@@ -39,6 +55,12 @@ public class HotelRoomFilter {
     return true;
   }
 
+  /**
+   * Creates a predicate that is used for filtering the rooms based on all the chocies
+   * the user has made.
+   *
+   * @return {@code Predicate<HotelRoom>} that filters based on user choices.
+   */
   public final Predicate<HotelRoom> getPredicate() {
     return (room) -> {
       if (hasValidDates() && !room.isAvailable(startDate, endDate)) {
