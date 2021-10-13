@@ -1,43 +1,81 @@
 package gr2116.core;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+/**
+ * Hotel Class.
+ */
 public class Hotel implements Iterable<HotelRoom> {
-    private final Collection<HotelRoom> rooms = new ArrayList<>();
-	
-	public Hotel() {}
-	
-	public Hotel(Collection<HotelRoom> rooms) {
-		rooms.forEach((room) -> this.rooms.add(room));
-	}
-	
-	public void addRoom(HotelRoom room) {
-		if (room == null) {
-			throw new NullPointerException();
-		}
-		if (rooms.contains(room)) {
-			System.out.println("[Warning]: Tried to add a room that was already added.");
-		} else {
-			rooms.add(room);
-		}
-	}
+  /**
+   * The hotel's collection of rooms.
+   */
+  private final Collection<HotelRoom> rooms = new ArrayList<>();
 
-	public void removeRoom(HotelRoom room) {
-		if (!rooms.contains(room)) {
-			throw new IllegalArgumentException();
-		}
-		rooms.remove(room);
-	}
+  /**
+   * Constructs an empty hotel.
+   */
 
-	public Collection<HotelRoom> getRooms(Predicate<HotelRoom> predicate) {
-		return rooms.stream().filter(predicate).collect(Collectors.toList());
-	}
+  public Hotel() {
 
-	@Override
-	public Iterator<HotelRoom> iterator() {
-		return rooms.iterator();
-	}
+  }
+
+  /**
+   * Constructs a hotel with a collection of rooms.
+   *
+   * @param rooms a collection of rooms.
+   */
+  public Hotel(final Collection<HotelRoom> rooms) {
+    rooms.forEach((room) -> this.rooms.add(room));
+  }
+
+  /**
+   * Adds the given room to the hotel.
+   *
+   * @param room the given room.
+   */
+  public final void addRoom(final HotelRoom room) {
+    if (room == null) {
+      throw new NullPointerException();
+    }
+    if (rooms.contains(room)) {
+      System.out.println(
+          "[Warning]: Tried to add a room that was already added.");
+    } else {
+      rooms.add(room);
+    }
+  }
+
+  /**
+   * Removes the given room from the hotel.
+   *
+   * @param room the given room.
+   */
+  public final void removeRoom(final HotelRoom room) {
+    if (!rooms.contains(room)) {
+      throw new IllegalArgumentException();
+    }
+    rooms.remove(room);
+  }
+
+  /**
+   * Returns the rooms of the hotel that matches the given predicate.
+   * Used in search.
+   *
+   * @param predicate the given predicate.
+   *
+   * @return a collection of rooms.
+   */
+  public final Collection<HotelRoom> getRooms(
+      final Predicate<HotelRoom> predicate) {
+    return rooms.stream().filter(predicate).collect(Collectors.toList());
+  }
+
+  @Override
+  public final Iterator<HotelRoom> iterator() {
+    return rooms.iterator();
+  }
 }

@@ -1,30 +1,68 @@
 package gr2116.core;
 
+/**
+ * RoomType enum. Contains the different types of rooms a room can be.
+ */
 public enum HotelRoomType {
-	Single("Single room", "A room for one."),
-	Double("Double room", "A room for two"),
-	Triple("Tripple room", "A  room for three."),
-	Quad("Qaud room", "A room for four."),
-	Suite("Suite", "Separate living area and bedroom."),
-	Penthouse("Penthouse", "A penthouse with a beautiful view."); 
-	
-	private final String name;
-	private final String description;
+  /**
+   * Single hotel room type.
+   */
+  Single("Single room", "A room for one."),
+  /**
+   * Double hotel room type.
+   */
+  Double("Double room", "A room for two"),
+  /**
+   * Triple hotel room type.
+   */
+  Triple("Triple room", "A  room for three."),
+  /**
+   * Quad hotel room type.
+   */
+  Quad("Qaud room", "A room for four."),
+  /**
+   * Suite hotel room type.
+   */
+  Suite("Suite", "Separate living area and bedroom."),
+  /**
+   * Penthouse hotel room type.
+   */
+  Penthouse("Penthouse", "A penthouse with a beautiful view.");
 
-	HotelRoomType(String name, String description) {
-		this.name = name;
-		this.description = description;
-	}
-	
-	public String getName() {
-		return name;
-	}
+  /**
+   * The display name.
+   */
+  private final String name;
+  /**
+   * The description, explaining the hotel room type in detail.
+   */
+  private final String description;
 
-	public String getDescription() {
-		return description;
-	}
+  HotelRoomType(final String name, final String description) {
+    this.name = name;
+    this.description = description;
+  }
 
-	public String toString() {
-		return getName();
-	}
+  /**
+   * Returns the display name.
+   *
+   * @return name
+   */
+  public String getName() {
+    return name;
+  }
+
+  /**
+   * Returns the description.
+   *
+   * @return description
+   */
+  public String getDescription() {
+    return description;
+  }
+
+  @Override
+  public String toString() {
+    return getName();
+  }
 }

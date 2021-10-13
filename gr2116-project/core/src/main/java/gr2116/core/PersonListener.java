@@ -1,7 +1,10 @@
 package gr2116.core;
 
+/**
+ * Interface for PersonListener.
+ */
 public interface PersonListener {
-	
-	public void receiveNotification(Person person);
+
+  void receiveNotification(Person person);
 
 }
