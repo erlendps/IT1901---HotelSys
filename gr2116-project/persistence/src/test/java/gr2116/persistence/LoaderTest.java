@@ -5,11 +5,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
-
-import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import gr2116.core.Amenity;
 import gr2116.core.HotelRoom;
 import gr2116.core.HotelRoomType;
@@ -41,13 +38,20 @@ public class LoaderTest {
     room2.addAmenity(Amenity.Internet);
     room2.addAmenity(Amenity.Shower);
 
-    rick.makeReservation(room1, LocalDate.of(2021, 6, 4), LocalDate.of(2021, 6, 7));
-    kyle.makeReservation(room1, LocalDate.of(2021, 6, 11), LocalDate.of(2021, 6, 13));
-    rick.makeReservation(room2, LocalDate.of(2021, 7, 13), LocalDate.of(2021, 7, 22));
-    tom.makeReservation(room3, LocalDate.of(2021, 10, 12), LocalDate.of(2021, 10, 13));
-    tom.makeReservation(room3, LocalDate.of(2021, 11, 12), LocalDate.of(2021, 11, 13));
-    tom.makeReservation(room3, LocalDate.of(2022, 1, 12), LocalDate.of(2022, 1, 13));
-    tom.makeReservation(room3, LocalDate.of(2022, 2, 12), LocalDate.of(2022, 2, 13));
+    rick.makeReservation(room1,
+        LocalDate.of(2021, 6, 4), LocalDate.of(2021, 6, 7));
+    kyle.makeReservation(room1,
+        LocalDate.of(2021, 6, 11), LocalDate.of(2021, 6, 13));
+    rick.makeReservation(room2,
+        LocalDate.of(2021, 7, 13), LocalDate.of(2021, 7, 22));
+    tom.makeReservation(room3,
+        LocalDate.of(2021, 10, 12), LocalDate.of(2021, 10, 13));
+    tom.makeReservation(room3,
+        LocalDate.of(2021, 11, 12), LocalDate.of(2021, 11, 13));
+    tom.makeReservation(room3,
+        LocalDate.of(2022, 1, 12), LocalDate.of(2022, 1, 13));
+    tom.makeReservation(room3,
+        LocalDate.of(2022, 2, 12), LocalDate.of(2022, 2, 13));
 
     ArrayList<Person> persons = new ArrayList<Person>();
     persons.add(rick);

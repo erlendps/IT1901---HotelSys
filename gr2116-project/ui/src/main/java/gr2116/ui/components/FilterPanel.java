@@ -4,7 +4,7 @@ import gr2116.core.Amenity;
 import gr2116.core.HotelRoomType;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
-import gr2116.ui.utils.FXMLUtils;
+import gr2116.ui.utils.FxmlUtils;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,9 +20,12 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * The panel where users select filters for hotel rooms.
+ */
 public class FilterPanel extends VBox {
-  Collection<MessageListener> listeners = new HashSet<>();
-  HashMap<Amenity, Boolean> amenities = new HashMap<>();
+  private Collection<MessageListener> listeners = new HashSet<>();
+  private HashMap<Amenity, Boolean> amenities = new HashMap<>();
 
   @FXML
   private DatePicker startDatePicker;
@@ -47,14 +50,18 @@ public class FilterPanel extends VBox {
   private Button clearFilterButton;
 
   public FilterPanel() {
-    FXMLUtils.loadFXML(this);
+    FxmlUtils.loadFxml(this);
   }
 
+  /**
+   * Initializes the component. Sets action for buttons and adds data for filtering.
+   */
   @FXML
   private void initialize() {
     floorSpinner.setDisable(true);
     roomTypeDescription.setText("Select a room type.");
-    floorSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20, 1));
+    floorSpinner.setValueFactory(
+        new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20, 1));
 
     for (HotelRoomType roomType : HotelRoomType.values()) {
       roomTypeChoiceBox.getItems().add(roomType);
@@ -100,10 +107,16 @@ public class FilterPanel extends VBox {
     });
   }
 
+  /**
+   * Amenity check box, to select an amenity.
+   */
   private class AmenityCheckBox extends HBox {
     private CheckBox checkBox = new CheckBox();
 
-    public AmenityCheckBox(final Amenity amenity) {
+    /**
+     * Constructor, specify which amenity this is a checkbox for.
+     */
+    AmenityCheckBox(final Amenity amenity) {
       Label label = new Label(amenity.getName());
       checkBox.selectedProperty().addListener((obs, oldValue, newValue) -> {
         amenities.put(amenity, newValue);
@@ -113,19 +126,38 @@ public class FilterPanel extends VBox {
       getChildren().add(label);
     }
 
+    /**
+     * Set whether to search for rooms with this amenity.
+     *
+     * @param value true if amenity is selected.
+     */
     public void setSelected(final boolean value) {
       checkBox.setSelected(value);
     }
   }
 
+  /**
+   * Add a listener.
+   *
+   * @param listener The listener.
+   */
   public final void addListener(final MessageListener listener) {
     listeners.add(listener);
   }
 
+  /**
+   * Remove a listener.
+   *
+   * @param listener The listener.
+   */
   public final void removeListener(final MessageListener listener) {
     listeners.remove(listener);
   }
-
+  
+  /**
+   * Notify listenrs that the filter has been updated.
+   * Includes dates, room type, floor and amenities.
+   */
   public final void notifyListeners() {
     for (MessageListener listener : listeners) {
       HotelRoomFilter filter = new HotelRoomFilter(startDatePicker.getValue(),
