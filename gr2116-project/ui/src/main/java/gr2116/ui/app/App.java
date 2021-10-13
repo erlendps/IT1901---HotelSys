@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 public class App extends Application {
 
   /**
-   * Start the app, load FXML and show scene
+   * Start the app, load FXML and show scene.
    */
   @Override
   public final void start(final Stage stage) throws Exception {

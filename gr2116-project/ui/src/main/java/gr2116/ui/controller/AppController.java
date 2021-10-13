@@ -48,6 +48,7 @@ public class AppController implements MessageListener {
       moveToLoginPage();
     }
   }
+
   /**
    * Move to the login page.
    * This involves clearing AppControllers children,
@@ -64,6 +65,7 @@ public class AppController implements MessageListener {
     }
     root.getChildren().add(loginPage);
   }
+
   /**
    * Moves to main page.
    * This involves clearing AppControllers children,
@@ -71,6 +73,7 @@ public class AppController implements MessageListener {
    * adding AppController as a listener and setting the rooms from memory.
    * The MainPage is created with the selected person (which is usually selected from LoginPage).
    * Finally adds MainPage as a child of itself.
+   *
    * @param person The person to be logged in as
    */
   private void moveToMainPage(final Person person) {
@@ -97,6 +100,7 @@ public class AppController implements MessageListener {
       e.printStackTrace();
     }
   }
+  
   /**
    * Save data to JSON files, from memory.
    * Files might have been modified, as users might have been created 
