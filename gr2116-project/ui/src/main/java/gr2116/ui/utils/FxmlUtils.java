@@ -14,7 +14,7 @@ public class FxmlUtils {
    *
    * @param component the component to be loaded.
    */
-  public static <T extends Parent> void loadFXML(final T component) {
+  public static <T extends Parent> void loadFxml(final T component) {
     FXMLLoader loader = new FXMLLoader();
     loader.setRoot(component);
     loader.setControllerFactory(theClass -> component);

@@ -50,7 +50,7 @@ public class FilterPanel extends VBox {
   private Button clearFilterButton;
 
   public FilterPanel() {
-    FxmlUtils.loadFXML(this);
+    FxmlUtils.loadFxml(this);
   }
 
   /**

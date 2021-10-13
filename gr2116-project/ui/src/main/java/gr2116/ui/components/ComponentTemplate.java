@@ -12,7 +12,7 @@ public class ComponentTemplate extends VBox { // Must extend a javafx class
    * Loads fxml.
    */
   public ComponentTemplate() {
-    FxmlUtils.loadFXML(this);
+    FxmlUtils.loadFxml(this);
     // Automatically connects to ComponentTemplate.fxml,
     // at the END of the constructor
   }

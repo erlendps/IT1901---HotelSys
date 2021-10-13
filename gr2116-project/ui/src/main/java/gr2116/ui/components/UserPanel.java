@@ -41,7 +41,7 @@ public class UserPanel extends VBox implements PersonListener {
   public UserPanel(final Person person) {
     this.person = person;
     person.addListener(this);
-    FxmlUtils.loadFXML(this);
+    FxmlUtils.loadFxml(this);
   }
 
   /**

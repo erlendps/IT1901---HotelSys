@@ -38,7 +38,7 @@ public class MainPage extends VBox implements MessageListener {
    */
   public MainPage(final Person person) {
     this.person = person;
-    FxmlUtils.loadFXML(this);
+    FxmlUtils.loadFxml(this);
   }
 
   @FXML

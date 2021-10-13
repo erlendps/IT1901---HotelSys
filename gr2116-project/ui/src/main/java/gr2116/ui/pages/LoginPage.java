@@ -35,7 +35,7 @@ public class LoginPage extends AnchorPane {
    * Load FXML for login page.
    */
   public LoginPage() {
-    FxmlUtils.loadFXML(this);
+    FxmlUtils.loadFxml(this);
   }
 
   /**

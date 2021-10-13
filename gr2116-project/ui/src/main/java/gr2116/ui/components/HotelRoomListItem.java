@@ -34,7 +34,7 @@ public class HotelRoomListItem extends HBox {
    */
   public HotelRoomListItem(final HotelRoom room) {
     this.room = room;
-    FxmlUtils.loadFXML(this);
+    FxmlUtils.loadFxml(this);
   }
 
   @FXML
