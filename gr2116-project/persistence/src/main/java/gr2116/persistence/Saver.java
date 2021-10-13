@@ -27,7 +27,7 @@ public class Saver {
    * @param person The person object
    * @return JSONObject containing person attributes
    */
-  private JSONObject makePersonJSON(final Person person) {
+  private JSONObject makePersonJson(final Person person) {
     JSONObject personData = new JSONObject();
     personData.put("name", person.getName());
     personData.put("email", person.getEmail());
@@ -40,7 +40,7 @@ public class Saver {
    * @param room The hotel room object
    * @return JSONObject containing room attributes
    */
-  private JSONObject makeRoomJSON(final HotelRoom room) {
+  private JSONObject makeRoomJson(final HotelRoom room) {
     JSONObject roomData = new JSONObject();
     roomData.put("number", room.getNumber());
     roomData.put("price", room.getPrice());
@@ -55,7 +55,7 @@ public class Saver {
    * @param reservation The reservation object
    * @return The JSONObject containing reservation attributes
    */
-  private JSONObject makeReservationJSON(final Reservation reservation) {
+  private JSONObject makeReservationJson(final Reservation reservation) {
     JSONObject reservationData = new JSONObject();
     reservationData.put("id", reservation.getId());
     reservationData.put("room", reservation.getRoom().getNumber());
@@ -72,7 +72,7 @@ public class Saver {
   private JSONObject updatePersonData(final Collection<Person> persons) {
     JSONObject personsData = new JSONObject();
     persons.forEach((person) -> {
-      personsData.put(person.getEmail(), makePersonJSON(person));
+      personsData.put(person.getEmail(), makePersonJson(person));
     });
     return personsData;
   }
@@ -85,7 +85,7 @@ public class Saver {
   private JSONObject updateRoomsData(final Collection<HotelRoom> rooms) {
     JSONObject roomsData = new JSONObject();
     rooms.forEach((room) -> {
-      roomsData.put(Integer.toString(room.getNumber()), makeRoomJSON(room));
+      roomsData.put(Integer.toString(room.getNumber()), makeRoomJson(room));
     });
     return roomsData;
   }
@@ -99,7 +99,7 @@ public class Saver {
     JSONObject reservationsData = new JSONObject();
     reservations.forEach((reservation) -> {
       reservationsData.put(Long.toString(reservation.getId()),
-                          makeReservationJSON(reservation));
+                          makeReservationJson(reservation));
     });
     return reservationsData;
   }

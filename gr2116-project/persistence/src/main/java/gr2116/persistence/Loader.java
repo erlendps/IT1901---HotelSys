@@ -152,9 +152,9 @@ public class Loader {
    * @throws IOException if something with Input/Output went wrong.
    */
   public void loadData() throws IOException {
-    JSONObject personData = getAsJSON("/personData.json");
-    JSONObject roomData = getAsJSON("/roomsData.json");
-    JSONObject reservationData = getAsJSON("/reservationData.json");
+    JSONObject personData = getAsJson("/personData.json");
+    JSONObject roomData = getAsJson("/roomsData.json");
+    JSONObject reservationData = getAsJson("/reservationData.json");
 
     loadData(roomData, personData, reservationData);
   }
@@ -190,7 +190,7 @@ public class Loader {
    * @return {@code JSONObject} of the text in the file.
    * @throws IOException if something with Input/Output went wrong.
    */
-  public JSONObject getAsJSON(String filename) throws IOException {
+  public JSONObject getAsJson(String filename) throws IOException {
     String text = Files.readString(
         Paths.get(new File(METADATA_FOLDER + filename).getAbsolutePath()));
     JSONObject json = new JSONObject(text);
