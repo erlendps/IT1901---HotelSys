@@ -31,7 +31,7 @@ public class Loader {
 
   /**
    * Loads persons from JSON data. Rooms must be loaded first.
-   * @param personsData
+   * @param personsData JSONObject with persons data, must be formatted as from Saver class
    */
   private void loadPersons(JSONObject personsData) {
     if (rooms.size() == 0) {
@@ -62,10 +62,10 @@ public class Loader {
   
   /**
    * Extracts reservation from JSON and connect to hotelroom.
-   * @param reservationsData
-   * @param id
-   * @param room
-   * @return
+   * @param reservationsData JSONObject with reservation data
+   * @param id ID of reservation to be connected to room and saved
+   * @param room room to be connected to reservation
+   * @return The created reservation object
    */
   private Reservation getReservation(JSONObject reservationsData, String id, HotelRoom room) {
     JSONObject reservationData;
@@ -97,8 +97,8 @@ public class Loader {
   /**
    * Loads rooms and the reservations connected to them,
    * must be called before loadPersons(). 
-   * @param roomsData
-   * @param reservationsData
+   * @param roomsData Room data, JSONObject, must be formatted as in Saver class
+   * @param reservationsData Reservation data, JSONObject, must be formatted as in Saver class
    */
   private void loadRoomsAndReservations(JSONObject roomsData, JSONObject reservationsData) {
 
@@ -127,9 +127,9 @@ public class Loader {
   /**
    * Call this method to enable getPersons() and getRooms().
    * Loads the data from JSON objects into lists containing appropriate objects.
-   * @param roomsData
-   * @param personsData
-   * @param reservationsData
+   * @param roomsData Room data, JSONObject, must be formatted as in Saver class
+   * @param personsData Person data, JSONObject, must be formatted as in Saver class
+   * @param reservationsData Reservation data, JSONObject, must be formatted as in Saver class
    */
   public void loadData(JSONObject roomsData, JSONObject personsData, JSONObject reservationsData) {
     // Set the variable to enable use of getPersons(), getRooms()
@@ -140,7 +140,7 @@ public class Loader {
 
   /**
    * Get the collection of persons that were loaded using loadData().
-   * @return
+   * @return Person objects made by loadData()
    */
   public Collection<Person> getPersons() {
     if (!loaded) {
@@ -151,7 +151,7 @@ public class Loader {
 
   /**
    * Get the collection of rooms that were loaded using loadData().
-   * @return
+   * @return Room objects made by loadData()
    */
   public Collection<HotelRoom> getRooms() {
     if (!loaded) {
