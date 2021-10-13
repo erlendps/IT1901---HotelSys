@@ -20,7 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 /**
- * Main page, which contains the main panel for booking hotel nights
+ * Main page, which contains the main panel for booking hotel nights.
  */
 public class MainPage extends VBox implements MessageListener {
   private final FilterPanel filterPanel = new FilterPanel();
@@ -33,7 +33,8 @@ public class MainPage extends VBox implements MessageListener {
 
   /**
    * Constructs a main page for a given person.
-   * @param person
+   *
+   * @param person the person the main page should be constructed for.
    */
   public MainPage(final Person person) {
     this.person = person;
@@ -64,6 +65,7 @@ public class MainPage extends VBox implements MessageListener {
 
     buildRoomList();
   }
+
   /**
    * Build list of rooms according to selected filters.
    * Puts the filtered rooms into the roomItemContainer, 
@@ -110,9 +112,11 @@ public class MainPage extends VBox implements MessageListener {
       roomItemContainer.getChildren().add(roomItem);
     }
   }
+
   /**
    * Add rooms to the hotel. These rooms will show up when filters are selected.
    * Usually, the rooms will be provided by the Loader class.
+   *
    * @param rooms Collection of rooms to add to the hotel.
    */
   public final void addRooms(final Collection<HotelRoom> rooms) {
@@ -137,22 +141,28 @@ public class MainPage extends VBox implements MessageListener {
       notifyListeners(Message.SignOut, person);
     }
   }
+
   /**
-   * Add a listener to the main page
-   * @param listener The listener to add
+   * Add a listener to the main page.
+   *
+   * @param listener The listener to be added
    */
   public final void addListener(final MessageListener listener) {
     listeners.add(listener);
   }
+
   /**
-   * Remove a listener to the login page
-   * @param listener The listener to remove
+   * Remove a listener to the login page.
+   *
+   * @param listener The listener to be removed
    */
   public final void removeListener(final MessageListener listener) {
     listeners.remove(listener);
   }
+
   /**
-   * Notify listeners of some message (from the Message Enum) and send an object as data
+   * Notify listeners of some message (from the Message Enum) and send an object as data.
+   *
    * @param message The message (from Message Enum)
    * @param data The object to send with the notification
    */
