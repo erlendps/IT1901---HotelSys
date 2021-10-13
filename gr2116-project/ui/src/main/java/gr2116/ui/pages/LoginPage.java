@@ -32,7 +32,7 @@ public class LoginPage extends AnchorPane {
   private Label nameTitleLabel;
 
   /**
-   * Set the login page to show up in the program window
+   * Load FXML for login page
    */
   public LoginPage() {
     FxmlUtils.loadFXML(this);

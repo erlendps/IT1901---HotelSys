@@ -19,6 +19,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * Main page, which contains the main panel for booking hotel nights
+ */
 public class MainPage extends VBox implements MessageListener {
   private final FilterPanel filterPanel = new FilterPanel();
   private UserPanel userPanel;
@@ -46,6 +49,10 @@ public class MainPage extends VBox implements MessageListener {
   @FXML
   private AnchorPane userPane;
 
+  /**
+   * Initializes the main page, which includes adding 
+   * the user panel and the filter panel to the respective panes.
+   */
   @FXML
   final void initialize() {
     userPanel = new UserPanel(person);
@@ -57,7 +64,11 @@ public class MainPage extends VBox implements MessageListener {
 
     buildRoomList();
   }
-
+  /**
+   * Build list of rooms according to selected filters.
+   * Puts the filtered rooms into the roomItemContainer, 
+   * which is where the user can select to book them.
+   */
   private void buildRoomList() {
     roomItemContainer.getChildren().clear();
 
@@ -99,12 +110,20 @@ public class MainPage extends VBox implements MessageListener {
       roomItemContainer.getChildren().add(roomItem);
     }
   }
-
+  /**
+   * Add rooms to the hotel. These rooms will show up when filters are selected.
+   * Usually, the rooms will be provided by the Loader class.
+   * @param rooms Collection of rooms to add to the hotel.
+   */
   public final void addRooms(final Collection<HotelRoom> rooms) {
     rooms.forEach((HotelRoom room) -> hotel.addRoom(room));
     buildRoomList();
   }
 
+  /**
+   * Receive notification (as a listener) and act accordingly.
+   * Includes notification to log out, and filtering.
+   */
   @Override
   public final void receiveNotification(
       final Object from,
@@ -118,15 +137,25 @@ public class MainPage extends VBox implements MessageListener {
       notifyListeners(Message.SignOut, person);
     }
   }
-
+  /**
+   * Add a listener to the main page
+   * @param listener The listener to add
+   */
   public final void addListener(final MessageListener listener) {
     listeners.add(listener);
   }
-
+  /**
+   * Remove a listener to the login page
+   * @param listener The listener to remove
+   */
   public final void removeListener(final MessageListener listener) {
     listeners.remove(listener);
   }
-
+  /**
+   * Notify listeners of some message (from the Message Enum) and send an object as data
+   * @param message The message (from Message Enum)
+   * @param data The object to send with the notification
+   */
   public final void notifyListeners(
       final Message message,
       final Object data) {
