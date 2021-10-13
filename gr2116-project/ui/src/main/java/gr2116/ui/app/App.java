@@ -21,8 +21,10 @@ public class App extends Application {
     stage.setScene(new Scene(parent));
     stage.show();
   }
+
   /**
-   * Main method to launch app
+   * Main method to launch app.
+   *
    * @param args Main method needs to have these
    */
   public static void main(final String[] args) {
