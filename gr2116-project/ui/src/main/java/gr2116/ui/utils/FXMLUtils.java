@@ -4,7 +4,7 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
-public class FxmlUtils {
+public class FXMLUtils {
   public static <T extends Parent> void loadFXML(final T component) {
     FXMLLoader loader = new FXMLLoader();
     loader.setRoot(component);
