@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.function.Predicate;
 
+
 public class HotelRoomFilter {
   private final LocalDate startDate;
   private final LocalDate endDate;
