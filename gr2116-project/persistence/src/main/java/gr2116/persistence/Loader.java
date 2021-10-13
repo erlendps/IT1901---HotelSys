@@ -34,6 +34,7 @@ public class Loader {
 
   /**
    * Loads persons from JSON data. Rooms must be loaded first.
+   *
    * @param personsData JSONObject with persons data, must be formatted as from Saver class
    */
   private void loadPersons(JSONObject personsData) {
@@ -65,9 +66,11 @@ public class Loader {
   
   /**
    * Extracts reservation from JSON and connect to hotelroom.
+   *
    * @param reservationsData JSONObject with reservation data
    * @param id ID of reservation to be connected to room and saved
    * @param room room to be connected to reservation
+   *
    * @return The created reservation object
    */
   private Reservation getReservation(JSONObject reservationsData, String id, HotelRoom room) {
@@ -99,7 +102,8 @@ public class Loader {
 
   /**
    * Loads rooms and the reservations connected to them,
-   * must be called before loadPersons(). 
+   * must be called before loadPersons().
+   *
    * @param roomsData Room data, JSONObject, must be formatted as in Saver class
    * @param reservationsData Reservation data, JSONObject, must be formatted as in Saver class
    */
@@ -130,6 +134,7 @@ public class Loader {
   /**
    * Call this method to enable getPersons() and getRooms().
    * Loads the data from JSON objects into lists containing appropriate objects.
+   *
    * @param roomsData Room data, JSONObject, must be formatted as in Saver class
    * @param personsData Person data, JSONObject, must be formatted as in Saver class
    * @param reservationsData Reservation data, JSONObject, must be formatted as in Saver class
@@ -142,7 +147,21 @@ public class Loader {
   }
 
   /**
+   * Load data from the default file locations.
+   *
+   * @throws IOException if something with Input/Output went wrong.
+   */
+  public void loadData() throws IOException {
+    JSONObject personData = getAsJSON("/personData.json");
+    JSONObject roomData = getAsJSON("/roomsData.json");
+    JSONObject reservationData = getAsJSON("/reservationData.json");
+
+    loadData(roomData, personData, reservationData);
+  }
+
+  /**
    * Get the collection of persons that were loaded using loadData().
+   *
    * @return Person objects made by loadData()
    */
   public Collection<Person> getPersons() {
@@ -154,6 +173,7 @@ public class Loader {
 
   /**
    * Get the collection of rooms that were loaded using loadData().
+   *
    * @return Room objects made by loadData()
    */
   public Collection<HotelRoom> getRooms() {
@@ -163,22 +183,17 @@ public class Loader {
     return rooms;
   }
   
+  /**
+   * Takes a String and returns a JSONObject. Filename will be the name of the file to read from.
+   *
+   * @param filename the name of the file to read and convert to JSON
+   * @return {@code JSONObject} of the text in the file.
+   * @throws IOException if something with Input/Output went wrong.
+   */
   public JSONObject getAsJSON(String filename) throws IOException {
     String text = Files.readString(
         Paths.get(new File(METADATA_FOLDER + filename).getAbsolutePath()));
     JSONObject json = new JSONObject(text);
     return json;
-  }
-
-  /**
-   * Load data from the default file locations.
-   * @throws IOException
-   */
-  public void loadData() throws IOException {
-    JSONObject personData = getAsJSON("/personData.json");
-    JSONObject roomData = getAsJSON("/roomsData.json");
-    JSONObject reservationData = getAsJSON("/reservationData.json");
-
-    loadData(roomData, personData, reservationData);
   }
 }
