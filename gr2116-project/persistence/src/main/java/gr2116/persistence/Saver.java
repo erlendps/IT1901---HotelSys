@@ -13,11 +13,20 @@ import java.util.ArrayList;
 import java.util.Collection;
 import org.json.JSONObject;
 
+
+/**
+ * Saver class to save person, room and reservation objects to JSON file.
+ */
 public class Saver {
   private static final Path METADATA_FOLDER
       = Paths.get(".").toAbsolutePath()
       .normalize().getParent().getParent().resolve("data");
 
+  /**
+   * Method to make JSON from a single person object
+   * @param person The person object
+   * @return JSONObject containing person attributes
+   */
   private JSONObject makePersonJSON(final Person person) {
     JSONObject personData = new JSONObject();
     personData.put("name", person.getName());
@@ -26,7 +35,11 @@ public class Saver {
     personData.put("reservations", person.getReservationIds());
     return personData;
   }
-
+  /**
+   * Method to make JSON from a single HotelRoom object
+   * @param room The hotel room object
+   * @return JSONObject containing room attributes
+   */
   private JSONObject makeRoomJSON(final HotelRoom room) {
     JSONObject roomData = new JSONObject();
     roomData.put("number", room.getNumber());
@@ -37,6 +50,11 @@ public class Saver {
     return roomData;
   }
 
+  /**
+   * Method to make JSON from a single reservation object
+   * @param reservation The reservation object
+   * @return The JSONObject containing reservation attributes
+   */
   private JSONObject makeReservationJSON(final Reservation reservation) {
     JSONObject reservationData = new JSONObject();
     reservationData.put("id", reservation.getId());
@@ -46,6 +64,11 @@ public class Saver {
     return reservationData;
   }
 
+  /**
+   * Take in a collection of persons and save each as a JSONObject, then arrange them in a JSON Map
+   * @param persons Collection of persons
+   * @return JSON Map of persons, with email as key.
+   */
   private JSONObject updatePersonData(final Collection<Person> persons) {
     JSONObject personsData = new JSONObject();
     persons.forEach((person) -> {
@@ -54,6 +77,11 @@ public class Saver {
     return personsData;
   }
 
+  /**
+   * Take in a collection of rooms and save each as a JSONObject, then arrange them in a JSON Map
+   * @param rooms Collection of rooms
+   * @return JSON Map of rooms, with number as key.
+   */
   private JSONObject updateRoomsData(final Collection<HotelRoom> rooms) {
     JSONObject roomsData = new JSONObject();
     rooms.forEach((room) -> {
@@ -61,7 +89,11 @@ public class Saver {
     });
     return roomsData;
   }
-
+  /**
+   * Take in a collection of reservations and save each as a JSONObject, then arrange them in a JSON Map
+   * @param reservations Collection of reservations
+   * @return JSON Map of reservations, with ID as string
+   */
   private JSONObject updateReservationData(
       final Collection<Reservation> reservations) {
     JSONObject reservationsData = new JSONObject();
@@ -72,6 +104,13 @@ public class Saver {
     return reservationsData;
   }
 
+  /**
+   * Write JSON data to file from collections of rooms and persons.
+   * This method automatically extracts reservations from persons.
+   * @param rooms Collection of room objects
+   * @param persons Collection of person objects 
+   * @throws FileNotFoundException
+   */
   public final void writeToFile(final Collection<HotelRoom> rooms,
       final Collection<Person> persons)
       throws FileNotFoundException {
@@ -79,7 +118,13 @@ public class Saver {
     persons.forEach((person) -> reservations.addAll(person.getReservations()));
     writeToFile(rooms, persons, reservations);
   }
-
+  /**
+   * Write JSON data to file from collections of rooms, persons and reservations.
+   * @param rooms Collection of room objects
+   * @param persons Collection of person objects
+   * @param reservations Collection of reservation objects
+   * @throws FileNotFoundException
+   */
   public final void writeToFile(final Collection<HotelRoom> rooms,
       final Collection<Person> persons,
       final Collection<Reservation> reservations)

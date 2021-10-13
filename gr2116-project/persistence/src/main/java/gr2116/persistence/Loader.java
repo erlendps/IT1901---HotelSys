@@ -17,6 +17,9 @@ import java.util.HashSet;
 import java.util.Map;
 import org.json.JSONObject;
 
+/**
+ * Loader class used to load persons, rooms and reservations from JSON files.
+ */
 public class Loader {
   // TODO: Invalid data handling?
 
