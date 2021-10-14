@@ -62,10 +62,6 @@ public class PersonTest {
         tom.makeReservation(room, LocalDate.of(2021, 7, 6), LocalDate.of(2021, 7, 7));
         assertEquals(balanceBefore-room.getPrice(), tom.getBalance(), "Booking one night should cost the same as the price of the hotel room.");
 
-    tom.makeReservation(room,
-        LocalDate.of(2021, 8, 6),
-        LocalDate.of(2021, 8, 6));
-
         when(room.isAvailable(LocalDate.of(2021, 8, 6), LocalDate.of(2021, 8 ,6))).thenReturn(true);
         when(room.getPrice(LocalDate.of(2021, 8, 6), LocalDate.of(2021, 8 ,6))).thenReturn(0.0);
 
