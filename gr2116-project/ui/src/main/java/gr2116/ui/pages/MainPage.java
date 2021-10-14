@@ -1,120 +1,176 @@
 package gr2116.ui.pages;
-import gr2116.ui.utils.FXMLUtils;
-import javafx.fxml.FXML;
-import javafx.scene.layout.VBox;
-
-import java.time.LocalDate;
-import java.util.Collection;
-import java.util.HashSet;
 
 import gr2116.core.Hotel;
 import gr2116.core.HotelRoom;
-import gr2116.core.HotelRoomType;
 import gr2116.core.Person;
-import gr2116.ui.components.UserPanel;
-import gr2116.ui.message.Message;
-import gr2116.ui.message.MessageListener;
 import gr2116.ui.components.FilterPanel;
 import gr2116.ui.components.HotelRoomFilter;
 import gr2116.ui.components.HotelRoomListItem;
+import gr2116.ui.components.UserPanel;
+import gr2116.ui.message.Message;
+import gr2116.ui.message.MessageListener;
+import gr2116.ui.utils.FxmlUtils;
+import java.time.LocalDate;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.function.Predicate;
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
+/**
+ * Main page, which contains the main panel for booking hotel nights.
+ */
 public class MainPage extends VBox implements MessageListener {
-	private final FilterPanel filterPanel = new FilterPanel();
-    private UserPanel userPanel;
-	private final Hotel hotel = new Hotel();
-	private HotelRoomFilter hotelRoomFilter;
-    private final Person person;
-    private final Collection<MessageListener> listeners = new HashSet<>();
+  private final FilterPanel filterPanel = new FilterPanel();
+  private UserPanel userPanel;
+  private final Hotel hotel = new Hotel();
+  private HotelRoomFilter hotelRoomFilter
+      = new HotelRoomFilter(null, null, null, null, null);
+  private final Person person;
+  private final Collection<MessageListener> listeners = new HashSet<>();
 
-    public MainPage(Person person) {
-        this.person = person;
-        FXMLUtils.loadFXML(this);
-    }
-    
-    @FXML
-    private VBox roomItemContainer;
+  /**
+   * Constructs a main page for a given person.
+   *
+   * @param person the person the main page should be constructed for.
+   */
+  public MainPage(final Person person) {
+    this.person = person;
+    FxmlUtils.loadFxml(this);
+  }
 
-    @FXML
-    private AnchorPane filterPane, userPane;
+  @FXML
+  private VBox roomItemContainer;
 
-    @FXML
-    void initialize() {
-        userPanel = new UserPanel(person);
-        userPane.getChildren().add(userPanel);
-        userPanel.addListener(this);
+  @FXML
+  private AnchorPane filterPane;
 
-        filterPane.getChildren().add(filterPanel);
-        filterPanel.addListener(this);
+  @FXML
+  private AnchorPane userPane;
 
-        
-        buildRoomList();
-    }
-    
-    private void buildRoomList() {
-        roomItemContainer.getChildren().clear();
+  /**
+   * Initializes the main page, which includes adding 
+   * the user panel and the filter panel to the respective panes.
+   */
+  @FXML
+  final void initialize() {
+    userPanel = new UserPanel(person);
+    userPane.getChildren().add(userPanel);
+    userPanel.addListener(this);
 
-        if (hotelRoomFilter == null) {
-            return;
-        }
-        
-        if (!hotelRoomFilter.isValid()) {
-            HotelRoomType roomType = hotelRoomFilter.getRoomType();
-            LocalDate startDate = hotelRoomFilter.getStartDate();
-            LocalDate endDate = hotelRoomFilter.getEndDate();
-            
-            if (roomType == null) {
-                Label label = new Label("No room type is set yet.");
-                roomItemContainer.getChildren().add(label);
-            }
-            if (startDate == null || endDate == null) {
-                Label label = new Label("No dates are picked yet.");
-                roomItemContainer.getChildren().add(label);
-            } else if (endDate.isBefore(startDate)) {
-                Label label = new Label("The end date picked is before the start date.");
-                roomItemContainer.getChildren().add(label);
-            }        
-            return; 
-        }
-        
-        Collection<HotelRoom> filteredRooms = hotel.getRooms(hotelRoomFilter.getPredicate());
+    filterPane.getChildren().add(filterPanel);
+    filterPanel.addListener(this);
 
-        for (HotelRoom hotelRoom : filteredRooms) {
-            HotelRoomListItem roomItem = new HotelRoomListItem(hotelRoom);
-            roomItem.setOnMakeReservationButtonAction((event) -> {
-                person.makeReservation(hotelRoom, hotelRoomFilter.getStartDate(), hotelRoomFilter.getEndDate());
-                buildRoomList();
-            });
-            roomItemContainer.getChildren().add(roomItem);
-        }
-    }
+    buildRoomList();
+  }
 
-    public void addRooms(Collection<HotelRoom> rooms) {
-        rooms.forEach((HotelRoom room) -> hotel.addRoom(room));
-        buildRoomList();
+  /**
+   * Build list of rooms according to selected filters.
+   * Puts the filtered rooms into the roomItemContainer, 
+   * which is where the user can select to book them.
+   */
+  private void buildRoomList() {
+    roomItemContainer.getChildren().clear();
+
+    if (!hotelRoomFilter.hasValidDates()) {
+      LocalDate startDate = hotelRoomFilter.getStartDate();
+      LocalDate endDate = hotelRoomFilter.getEndDate();
+
+      if (startDate == null || endDate == null) {
+        Label label = new Label(
+            "You must choose both a start date "
+            + "and an end date to make a reservation."
+        );
+        roomItemContainer.getChildren().add(label);
+      } else if (endDate.isBefore(startDate)) {
+        Label label = new Label(
+            "The end date must be after the start date."
+        );
+        roomItemContainer.getChildren().add(label);
+      }
     }
 
-    @Override
-    public void receiveNotification(Object from, Message message, Object data) {
-        if (message == Message.Filter && data instanceof HotelRoomFilter) {
-            this.hotelRoomFilter = (HotelRoomFilter) data;
-            buildRoomList();
-        }
-        if (message == Message.SignOut) {
-            notifyListeners(Message.SignOut, person);
-        }
+    Predicate<HotelRoom> predicate = hotelRoomFilter.getPredicate();
+    Collection<HotelRoom> filteredRooms = hotel.getRooms(predicate);
+
+    for (HotelRoom hotelRoom : filteredRooms) {
+      HotelRoomListItem roomItem = new HotelRoomListItem(hotelRoom);
+      if (hotelRoomFilter.hasValidDates()) {
+        roomItem.setOnMakeReservationButtonAction((event) -> {
+          person.makeReservation(
+              hotelRoom,
+              hotelRoomFilter.getStartDate(),
+              hotelRoomFilter.getEndDate()
+          );
+          buildRoomList();
+        });
+      } else {
+        roomItem.setOnMakeReservationButtonAction(null);
+      }
+      roomItemContainer.getChildren().add(roomItem);
     }
-    
-    public void addListener(MessageListener listener) {
-		listeners.add(listener);
-	}
-	public void removeListener(MessageListener listener) {
-		listeners.remove(listener);
-	}
-	public void notifyListeners(Message message, Object data) {
-        for (MessageListener listener : listeners) {
-            listener.receiveNotification(this, message, data);
-        }
+  }
+
+  /**
+   * Add rooms to the hotel. These rooms will show up when filters are selected.
+   * Usually, the rooms will be provided by the Loader class.
+   *
+   * @param rooms Collection of rooms to add to the hotel.
+   */
+  public final void addRooms(final Collection<HotelRoom> rooms) {
+    rooms.forEach((HotelRoom room) -> hotel.addRoom(room));
+    buildRoomList();
+  }
+
+  /**
+   * Receive notification (as a listener) and act accordingly.
+   * Includes notification to log out, and filtering.
+   */
+  @Override
+  public final void receiveNotification(
+      final Object from,
+      final Message message,
+      final Object data) {
+    if (message == Message.Filter && data instanceof HotelRoomFilter) {
+      this.hotelRoomFilter = (HotelRoomFilter) data;
+      buildRoomList();
     }
+    if (message == Message.SignOut) {
+      notifyListeners(Message.SignOut, person);
+    }
+  }
+
+  /**
+   * Add a listener to the main page.
+   *
+   * @param listener The listener to be added
+   */
+  public final void addListener(final MessageListener listener) {
+    listeners.add(listener);
+  }
+
+  /**
+   * Remove a listener to the login page.
+   *
+   * @param listener The listener to be removed
+   */
+  public final void removeListener(final MessageListener listener) {
+    listeners.remove(listener);
+  }
+
+  /**
+   * Notify listeners of some message (from the Message Enum) and send an object as data.
+   *
+   * @param message The message (from Message Enum)
+   * @param data The object to send with the notification
+   */
+  public final void notifyListeners(
+      final Message message,
+      final Object data) {
+    for (MessageListener listener : listeners) {
+      listener.receiveNotification(this, message, data);
+    }
+  }
 }

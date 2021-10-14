@@ -33,36 +33,38 @@ public class HotelRoomTest {
 		assertEquals(1, roomSingle.getFloor());
 		assertEquals(111, roomSingle.getNumber());
 
-		assertEquals(7, roomDouble.getFloor());
-		assertEquals(794, roomDouble.getNumber());
-	}
+    assertEquals(7, roomDouble.getFloor());
+    assertEquals(794, roomDouble.getNumber());
+  }
 
-	@Test
-	public void testPrice() {
-		assertEquals(0, roomSingle.getPrice());
-		assertEquals(0, roomSingle.getPrice(today, tomorrow));
-		roomSingle.setPrice(100);
-		assertEquals(100, roomSingle.getPrice());
-		assertEquals(200, roomSingle.getPrice(today, overmorrow));
-	}
+  @Test
+  public void testPrice() {
+    assertEquals(0, roomSingle.getPrice());
+    assertEquals(0, roomSingle.getPrice(today, tomorrow));
+    roomSingle.setPrice(100);
+    assertEquals(100, roomSingle.getPrice());
+    assertEquals(200, roomSingle.getPrice(today, overmorrow));
+  }
 
-	@Test
-	public void testAddAmenity() {
-		assertFalse(roomSingle.hasAmenity(Amenity.Bathtub));
-		roomSingle.addAmenity(Amenity.Bathtub);
-		assertTrue(roomSingle.hasAmenity(Amenity.Bathtub));
-		assertThrows(NullPointerException.class, () -> roomSingle.addAmenity(null));
-	}
+  @Test
+  public void testAddAmenity() {
+    assertFalse(roomSingle.hasAmenity(Amenity.Bathtub));
+    roomSingle.addAmenity(Amenity.Bathtub);
+    assertTrue(roomSingle.hasAmenity(Amenity.Bathtub));
+    assertThrows(NullPointerException.class, () -> roomSingle.addAmenity(null));
+  }
 
-	@Test
-	public void testRemoveAmenity() {
-		assertThrows(IllegalArgumentException.class, () -> roomSingle.removeAmenity(Amenity.Bathtub));
-		roomSingle.addAmenity(Amenity.Bathtub);
-		assertTrue(roomSingle.hasAmenity(Amenity.Bathtub));
-		roomSingle.removeAmenity(Amenity.Bathtub);
-		assertFalse(roomSingle.hasAmenity(Amenity.Bathtub));
-		assertThrows(IllegalArgumentException.class, () -> roomSingle.removeAmenity(Amenity.Bathtub));
-	}
+  @Test
+  public void testRemoveAmenity() {
+    assertThrows(IllegalArgumentException.class,
+        () -> roomSingle.removeAmenity(Amenity.Bathtub));
+    roomSingle.addAmenity(Amenity.Bathtub);
+    assertTrue(roomSingle.hasAmenity(Amenity.Bathtub));
+    roomSingle.removeAmenity(Amenity.Bathtub);
+    assertFalse(roomSingle.hasAmenity(Amenity.Bathtub));
+    assertThrows(IllegalArgumentException.class,
+        () -> roomSingle.removeAmenity(Amenity.Bathtub));
+  }
 
     @Test
     public void testIsAvailable() {

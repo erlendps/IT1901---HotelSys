@@ -1,52 +1,51 @@
 package gr2116.core;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class PersonTest {
+  private LocalDate today = LocalDate.now();
+  private LocalDate overmorrow = today.plusDays(2);
 
-    LocalDate today = LocalDate.now();
-	LocalDate tomorrow = today.plusDays(1);
-	LocalDate overmorrow = today.plusDays(2);
+  private Person person;
+  private Person tom;
 
-    Person person;
-    Person tom;
+  @BeforeEach
+  public final void setup() {
+    person = new Person("Mr. Game and Watch");
+    tom = new Person("Tom Haddleford");
+    tom.addBalance(1000);
+  }
 
-    @BeforeEach
-    public void setup() {
-        person = new Person("Mr. Game and Watch");
-        tom = new Person("Tom Haddleford");
-        tom.addBalance(1000);
-    }
-
-    @Test
-    public void testSetEmail() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            person.setEmail("yolo@noob.home");
-        });
-        assertThrows(IllegalArgumentException.class, () -> {
-            person.setEmail("y@noob.no");
-        });
-        assertThrows(IllegalArgumentException.class, () -> {
-            person.setEmail("yolo@n.com");
-        });
-        assertThrows(IllegalArgumentException.class, () -> {
-            person.setEmail("yolo(at)noob.net");
-        });
-        assertThrows(NullPointerException.class, () -> {
-            person.setEmail(null);
-        });
-        person.setEmail("yolo.noob@noob.com");
-        assertEquals("yolo.noob@noob.com", person.getEmail());
-        tom.setEmail("tom@richpeople.com");
-        assertEquals("tom@richpeople.com", tom.getEmail());
-    }
+  @Test
+  public void testSetEmail() {
+    assertThrows(IllegalArgumentException.class, () -> {
+      person.setEmail("yolo@noob.home");
+    });
+    assertThrows(IllegalArgumentException.class, () -> {
+      person.setEmail("y@noob.no");
+    });
+    assertThrows(IllegalArgumentException.class, () -> {
+      person.setEmail("yolo@n.com");
+    });
+    assertThrows(IllegalArgumentException.class, () -> {
+      person.setEmail("yolo(at)noob.net");
+    });
+    assertThrows(NullPointerException.class, () -> {
+      person.setEmail(null);
+    });
+    person.setEmail("yolo.noob@noob.com");
+    assertEquals("yolo.noob@noob.com", person.getEmail());
+    tom.setEmail("tom@richpeople.com");
+    assertEquals("tom@richpeople.com", tom.getEmail());
+  }
 
     @Test
     public void testPay() {
@@ -63,10 +62,9 @@ public class PersonTest {
         tom.makeReservation(room, LocalDate.of(2021, 7, 6), LocalDate.of(2021, 7, 7));
         assertEquals(balanceBefore-room.getPrice(), tom.getBalance(), "Booking one night should cost the same as the price of the hotel room.");
 
-        assertThrows(IllegalStateException.class, () -> 
-            person.makeReservation(room, LocalDate.of(2021, 7, 6), LocalDate.of(2021, 7, 7)),
-            "Booking should only be possible when the hotel room is free."
-        );
+    tom.makeReservation(room,
+        LocalDate.of(2021, 8, 6),
+        LocalDate.of(2021, 8, 6));
 
         when(room.isAvailable(LocalDate.of(2021, 8, 6), LocalDate.of(2021, 8 ,6))).thenReturn(true);
         when(room.getPrice(LocalDate.of(2021, 8, 6), LocalDate.of(2021, 8 ,6))).thenReturn(0.0);
@@ -93,8 +91,8 @@ public class PersonTest {
         assertEquals(deluxeRoom, reservations.get(0).getRoom());
     }
 
-    @Test
-    public void testName() {
-        assertThrows(IllegalArgumentException.class, () -> new Person(""));
-    }
+  @Test
+  public void testName() {
+    assertThrows(IllegalArgumentException.class, () -> new Person(""));
+  }
 }
