@@ -37,15 +37,17 @@ public class Hotel implements Iterable<HotelRoom> {
    *
    * @param room the given room.
    */
-  public final void addRoom(final HotelRoom room) {
+  public final boolean addRoom(final HotelRoom room) {
     if (room == null) {
       throw new NullPointerException();
     }
     if (rooms.contains(room)) {
       System.out.println(
           "[Warning]: Tried to add a room that was already added.");
+      return false;
     } else {
       rooms.add(room);
+      return true;
     }
   }
 

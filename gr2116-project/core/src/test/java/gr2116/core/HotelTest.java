@@ -30,9 +30,9 @@ public class HotelTest {
     @Test
     public void testConstructor() {
         Hotel emptyHotel = new Hotel();
-        assertEquals(Arrays.asList(), emptyHotel.getRooms());
+        assertEquals(Arrays.asList(), emptyHotel.getRooms((r) -> true));
         Hotel fullHotel = new Hotel(rooms);
-        assertEquals(rooms, fullHotel.getRooms());
+        assertEquals(rooms, fullHotel.getRooms((r) -> true));
     }
 
     @Test
@@ -40,15 +40,15 @@ public class HotelTest {
         Hotel fullHotel = new Hotel(rooms);
         HotelRoom room3 = mock(HotelRoom.class);
         rooms.add(room3);
-        assertNotEquals(rooms, fullHotel.getRooms());
+        assertNotEquals(rooms, fullHotel.getRooms((r) -> true));
     }
 
     @Test
     public void testAddRoom() {
-        assertEquals(Arrays.asList(), hotel.getRooms());
+        assertEquals(Arrays.asList(), hotel.getRooms((r) -> true));
         hotel.addRoom(room1);
         hotel.addRoom(room2);
-        assertEquals(Arrays.asList(room1, room2), hotel.getRooms());
+        assertEquals(Arrays.asList(room1, room2), hotel.getRooms((r) -> true));
         assertThrows(NullPointerException.class, () -> hotel.addRoom(null));
         assertFalse(hotel.addRoom(room1));
     }
@@ -58,7 +58,7 @@ public class HotelTest {
         assertThrows(IllegalArgumentException.class, () -> hotel.removeRoom(room1));
         hotel.addRoom(room1);
         hotel.removeRoom(room1);
-        assertEquals(Arrays.asList(), hotel.getRooms());
+        assertEquals(Arrays.asList(), hotel.getRooms((r) -> true));
     }
 
     @Test
@@ -86,7 +86,7 @@ public class HotelTest {
         hotel.addRoom(room2);
         Iterator<HotelRoom> it = hotel.iterator();
         while (it.hasNext()) {
-            assertTrue(hotel.getRooms().contains(it.next()));
+            assertTrue(hotel.getRooms((r) -> true).contains(it.next()));
         }
     }
 }
