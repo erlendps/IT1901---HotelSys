@@ -56,7 +56,7 @@ public class AppController implements MessageListener {
    * adding AppController as a listener and setting the loadedPersons from own memory.
    * AppController finally adds the login page as a child instance of itself.
    */
-  private void moveToLoginPage() {
+  public void moveToLoginPage() {
     root.getChildren().clear();
     LoginPage loginPage = new LoginPage();
     loginPage.addListener(this);
@@ -76,7 +76,7 @@ public class AppController implements MessageListener {
    *
    * @param person The person to be logged in as
    */
-  private void moveToMainPage(final Person person) {
+  public void moveToMainPage(final Person person) {
     root.getChildren().clear();
     MainPage mainPage = new MainPage(person);
     mainPage.addListener(this);
