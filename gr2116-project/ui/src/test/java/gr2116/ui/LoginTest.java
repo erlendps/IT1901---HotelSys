@@ -11,12 +11,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import gr2116.ui.controller.AppController;
+
 
 /**
  * FXML Application, the booking system application.
  */
 
 public class LoginTest extends ApplicationTest{
+  AppController appController;
   /**
    * Start the app, load FXML and show scene.
    * @throws IOException
@@ -24,10 +27,14 @@ public class LoginTest extends ApplicationTest{
 
   @Start
   public void start(Stage stage) throws IOException {
-    Parent parent = FXMLLoader.load(
-      getClass().getClassLoader().getResource("App.fxml"));
-      stage.setScene(new Scene(parent));
-      stage.show();
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("App.fxml"));
+        //Pane p = fxmlLoader.load(getClass().getResource("App.fxml").openStream());
+    Parent parent = fxmlLoader.load();
+    appController = (AppController) fxmlLoader.getController();
+    appController.setPrefix("test");
+    appController.load();
+    stage.setScene(new Scene(parent));
+    stage.show();
   }
   
   @Test

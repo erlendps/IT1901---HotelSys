@@ -98,7 +98,7 @@ public class AppController implements MessageListener {
    * Load data from JSON files. Puts this data into loadedPersons and loadedRooms,
    * which is used to create pages with correct data in them.
    */
-  private void load() {
+  public void load() {
     Loader loader = new Loader();
     try {
       loader.loadData(prefix);
