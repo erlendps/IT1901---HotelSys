@@ -63,9 +63,11 @@ public class PersonTest {
           LocalDate.of(2021, 7, 7));
     }, "Booking should only be possible when the hotel room is free.");
 
-    tom.makeReservation(room,
-        LocalDate.of(2021, 8, 6),
-        LocalDate.of(2021, 8, 6));
+    assertThrows(IllegalArgumentException.class, () -> {
+      tom.makeReservation(room,
+          LocalDate.of(2021, 8, 6),
+          LocalDate.of(2021, 8, 6));
+    }, "Booking 0 days should not be possible.");
 
     assertEquals(900, tom.getBalance(),
         "Booking 0 days should not cost money.");

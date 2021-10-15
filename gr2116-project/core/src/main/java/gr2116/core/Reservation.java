@@ -28,7 +28,7 @@ public class Reservation implements Iterable<LocalDate> {
   private final LocalDate endDate;
 
   /**
-   * Construtcts a reservation with given id, room, startDate and endDate.
+   * Constructs a reservation with given id, room, startDate and endDate.
    *
    * @param id the given id.
    * @param room the given room.
@@ -42,8 +42,8 @@ public class Reservation implements Iterable<LocalDate> {
     if (startDate == null || endDate == null) {
       throw new NullPointerException();
     }
-    if (startDate.isAfter(endDate)) {
-      throw new IllegalArgumentException("startDate cannot be after endDate.");
+    if (!startDate.isBefore(endDate)) {
+      throw new IllegalArgumentException("startDate must be before endDate.");
     }
     if (room == null) {
       throw new NullPointerException("Rooms is null.");
