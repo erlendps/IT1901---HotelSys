@@ -18,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 /**
  * Main page, which contains the main panel for booking hotel nights.
@@ -83,11 +84,14 @@ public class MainPage extends VBox implements MessageListener {
             "You must choose both a start date "
             + "and an end date to make a reservation."
         );
+        label.setTextFill(Color.RED);
         roomItemContainer.getChildren().add(label);
       } else if (!startDate.isBefore(endDate)) {
         Label label = new Label(
-            "The start date must be before the end date."
+            "You must choose an end date which is "
+            + "after the start date to make a reservation."
         );
+        label.setTextFill(Color.RED);
         roomItemContainer.getChildren().add(label);
       }
     }
