@@ -155,7 +155,6 @@ public class Loader {
     JSONObject personData = getAsJson("/" + prefix + "Person.json");
     JSONObject roomData = getAsJson("/" + prefix + "Rooms.json");
     JSONObject reservationData = getAsJson("/" + prefix + "Reservation.json");
-    System.out.println("/" + prefix + "Person.json");
     loadData(roomData, personData, reservationData);
   }
 
