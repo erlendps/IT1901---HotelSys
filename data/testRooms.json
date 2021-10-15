@@ -1,0 +1,38 @@
+{
+  "101": {
+    "number": 101,
+    "amenities": [
+      "Bathtub",
+      "Television"
+    ],
+    "reservations": [
+      7662873080530374933,
+      378368675823445148
+    ],
+    "price": 0,
+    "type": "Single"
+  },
+  "102": {
+    "number": 102,
+    "amenities": [
+      "Fridge",
+      "Internet",
+      "Shower"
+    ],
+    "reservations": [1270232750141960585],
+    "price": 0,
+    "type": "Single"
+  },
+  "714": {
+    "number": 714,
+    "amenities": [],
+    "reservations": [
+      8965246808019324515,
+      238835554015392754,
+      1313739294269960158,
+      6928759775513832988
+    ],
+    "price": 0,
+    "type": "Quad"
+  }
+}
