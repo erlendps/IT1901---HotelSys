@@ -86,7 +86,7 @@ public class MainPage extends VBox implements MessageListener {
         );
         label.setTextFill(Color.RED);
         roomItemContainer.getChildren().add(label);
-      } else if (endDate.isBefore(startDate)) {
+      } else if (!startDate.isBefore(endDate)) {
         Label label = new Label(
             "You must choose an end date which is "
             + "after the start date to make a reservation."

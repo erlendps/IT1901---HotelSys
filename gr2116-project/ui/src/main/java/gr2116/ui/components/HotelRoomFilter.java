@@ -49,7 +49,7 @@ public class HotelRoomFilter {
       return false;
     }
     if (startDate != null && endDate != null
-        && endDate.isBefore(startDate)) {
+        && !startDate.isBefore(endDate)) {
       return false;
     }
     return true;

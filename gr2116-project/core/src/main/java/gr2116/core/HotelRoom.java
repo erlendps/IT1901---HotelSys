@@ -217,9 +217,9 @@ public class HotelRoom {
    */
   private void verifyChronology(final LocalDate startDate,
       final LocalDate endDate) {
-    if (startDate.isAfter(endDate)) {
+    if (!startDate.isBefore(endDate)) {
       throw new IllegalArgumentException(
-        "The startDate cannot be after the endDate.");
+        "The startDate must be before the endDate.");
     }
   }
 }
