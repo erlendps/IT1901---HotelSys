@@ -42,7 +42,7 @@ public class HotelRoomListItem extends HBox {
     numberLabel.setText("HotelRoom " + room.getNumber());
     typeLabel.setText(room.getRoomType().getDescription());
     makeReservationButton.setText("Make reservation.");
-    makeReservationButton.setDisable(true);
+    makeReservationButton.setDisable(true); 
     String amenitiesText = "";
     for (String amenity : room.getAmenities()) {
       amenitiesText += amenity + ", ";
@@ -59,5 +59,9 @@ public class HotelRoomListItem extends HBox {
       final EventHandler<ActionEvent> eventHandler) {
     makeReservationButton.setOnAction(eventHandler);
     makeReservationButton.setDisable(eventHandler == null);
+  }
+
+  public final String getRoomText() {
+    return numberLabel.getText();
   }
 }
