@@ -18,7 +18,7 @@ import org.json.JSONObject;
  * Saver class to save person, room and reservation objects to JSON file.
  */
 public class Saver {
-  private static final Path METADATA_FOLDER
+  private static final Path DATA_FOLDER
       = Paths.get(".").toAbsolutePath()
       .normalize().getParent().getParent().resolve("data");
 
@@ -129,11 +129,12 @@ public class Saver {
    * @throws FileNotFoundException if it does not find the file.
    */
   public final void writeToFile(final Collection<HotelRoom> rooms,
-      final Collection<Person> persons)
+      final Collection<Person> persons,
+      final String prefix)
       throws FileNotFoundException {
-    ArrayList<Reservation> reservations = new ArrayList<Reservation>();
+    Collection<Reservation> reservations = new ArrayList<Reservation>();
     persons.forEach((person) -> reservations.addAll(person.getReservations()));
-    writeToFile(rooms, persons, reservations);
+    writeToFile(rooms, persons, reservations, prefix);
   }
 
   /**
@@ -147,12 +148,13 @@ public class Saver {
    */
   public final void writeToFile(final Collection<HotelRoom> rooms,
       final Collection<Person> persons,
-      final Collection<Reservation> reservations)
+      final Collection<Reservation> reservations,
+      final String prefix)
       throws FileNotFoundException {
-    File personDataJson = new File(METADATA_FOLDER + "/personData.json");
-    File roomsDataJson = new File(METADATA_FOLDER + "/roomsData.json");
+    File personDataJson = new File(DATA_FOLDER + "/" + prefix + "Person.json");
+    File roomsDataJson = new File(DATA_FOLDER + "/" + prefix + "Rooms.json");
     File reservationDataJson = new File(
-        METADATA_FOLDER + "/reservationData.json");
+        DATA_FOLDER + "/" + prefix + "Reservation.json");
     try {
       Path.of(personDataJson.getAbsolutePath()).toFile().createNewFile();
       Path.of(roomsDataJson.getAbsolutePath()).toFile().createNewFile();

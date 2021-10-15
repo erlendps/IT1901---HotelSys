@@ -24,7 +24,7 @@ public class Loader {
   // TODO: Invalid data handling?
 
   // Get path for data
-  private static final Path METADATA_FOLDER
+  private static final Path DATA_FOLDER
       = Paths.get(".").toAbsolutePath().normalize().getParent().getParent().resolve("data");
 
   private boolean loaded = false;
@@ -139,7 +139,7 @@ public class Loader {
    * @param personsData Person data, JSONObject, must be formatted as in Saver class
    * @param reservationsData Reservation data, JSONObject, must be formatted as in Saver class
    */
-  public void loadData(JSONObject roomsData, JSONObject personsData, JSONObject reservationsData) {
+  private void loadData(JSONObject roomsData, JSONObject personsData, JSONObject reservationsData) {
     // Set the variable to enable use of getPersons(), getRooms()
     loaded = true;
     loadRoomsAndReservations(roomsData, reservationsData);
@@ -151,10 +151,10 @@ public class Loader {
    *
    * @throws IOException if something with Input/Output went wrong.
    */
-  public void loadData() throws IOException {
-    JSONObject personData = getAsJson("/personData.json");
-    JSONObject roomData = getAsJson("/roomsData.json");
-    JSONObject reservationData = getAsJson("/reservationData.json");
+  public void loadData(String prefix) throws IOException {
+    JSONObject personData = getAsJson("/" + prefix + "Person.json");
+    JSONObject roomData = getAsJson("/" + prefix + "Rooms.json");
+    JSONObject reservationData = getAsJson("/" + prefix + "Reservation.json");
 
     loadData(roomData, personData, reservationData);
   }
@@ -190,9 +190,9 @@ public class Loader {
    * @return {@code JSONObject} of the text in the file.
    * @throws IOException if something with Input/Output went wrong.
    */
-  public JSONObject getAsJson(String filename) throws IOException {
+  private JSONObject getAsJson(String filename) throws IOException {
     String text = Files.readString(
-        Paths.get(new File(METADATA_FOLDER + filename).getAbsolutePath()));
+        Paths.get(new File(DATA_FOLDER + filename).getAbsolutePath()));
     JSONObject json = new JSONObject(text);
     return json;
   }

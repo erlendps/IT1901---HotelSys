@@ -72,13 +72,13 @@ public class LoaderTest {
     /*personsData = saver.updatePersonData(persons);
     roomsData = saver.updateRoomsData(rooms);
     reservationsData = saver.updateReservationData(reservations);*/
-    saver.writeToFile(rooms, persons, reservations);
+    saver.writeToFile(rooms, persons, reservations, "test");
   }
 
   @Test
   public void load() throws IOException {
     Loader dataLoader = new Loader();
-    dataLoader.loadData();
+    dataLoader.loadData("test");
     Collection<Person> persons = dataLoader.getPersons();
     Collection<HotelRoom> rooms = dataLoader.getRooms();
     System.out.println("People:");
