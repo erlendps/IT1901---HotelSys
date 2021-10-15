@@ -1,24 +1,21 @@
 package gr2116.ui;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.framework.junit5.Start;
+import org.testfx.matcher.base.NodeMatchers;
 import org.testfx.matcher.control.LabeledMatchers;
 import org.testfx.api.FxAssert;
 import javafx.fxml.FXMLLoader;
-//import javafx.fxml.FXMLController;
-import javafx.scene.layout.VBox;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.DatePicker;
 import gr2116.core.Person;
 import gr2116.ui.controller.AppController;
-import gr2116.ui.components.HotelRoomListItem;
 
 
 public class MainPageTest extends ApplicationTest{
@@ -65,10 +62,10 @@ public class MainPageTest extends ApplicationTest{
         clickOn((lookup("#startDatePicker").queryAs(DatePicker.class)).getEditor()).write("12/01/2021\n");
         clickOn((lookup("#endDatePicker").queryAs(DatePicker.class)).getEditor()).write("12/02/2021\n");
         clickOn("#amenityTelevision");
-        VBox roomsContainer = lookup("#roomItemContainer").queryAs(VBox.class);
-        assertEquals(1, roomsContainer.getChildren().size());
-        HotelRoomListItem availableRoom = (HotelRoomListItem) roomsContainer.getChildren().get(0);
-        assertEquals("HotelRoom 101", availableRoom.getRoomText());
+
+        FxAssert.verifyThat("#roomItemContainer", NodeMatchers.hasChild("#hotelRoom101listItem"));
+        clickOn("#hotelRoom101Button");
+        FxAssert.verifyThat("#reservationListView", NodeMatchers.hasChild("#hotelRoom101reservation2021-12-01to2021-12-02"));
     }
 
 }

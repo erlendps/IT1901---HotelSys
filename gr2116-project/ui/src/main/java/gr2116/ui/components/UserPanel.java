@@ -110,12 +110,12 @@ public class UserPanel extends VBox implements PersonListener {
       int roomNumber = reservation.getRoom().getNumber();
       String startDate = reservation.getStartDate().toString();
       String endDate = reservation.getEndDate().toString();
-      reservationListView.getItems().add(
-        new Label("Room: " + roomNumber
-          + ". From " + startDate
-          + " to " + endDate + "."
-        )
+      Label label = new Label("Room: " + roomNumber
+      + ". From " + startDate
+      + " to " + endDate + "."
       );
+      label.setId("hotelRoom" + Integer.toString(roomNumber) + "reservation" + startDate + "to" + endDate);
+      reservationListView.getItems().add(label);
     }
   }
 }
