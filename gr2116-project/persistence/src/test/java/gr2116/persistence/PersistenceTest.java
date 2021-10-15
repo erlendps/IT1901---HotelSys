@@ -72,10 +72,10 @@ public class PersistenceTest {
             reservations.add(r)));
 
         Saver saver = new Saver();
-        assertDoesNotThrow(() -> saver.writeToFile(rooms, persons), "Something went wrong with saving.");
+        assertDoesNotThrow(() -> saver.writeToFile(rooms, persons, "test"), "Something went wrong with saving.");
         assertThrows(IllegalStateException.class, () -> dataLoader.getRooms());
         assertThrows(IllegalStateException.class, () -> dataLoader.getPersons());
-        dataLoader.loadData();
+        dataLoader.loadData("test");
     }
 
 
