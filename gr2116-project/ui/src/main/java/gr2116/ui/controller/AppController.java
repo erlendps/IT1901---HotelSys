@@ -70,6 +70,9 @@ public class AppController implements MessageListener {
     loginPage.addListener(this);
     if (loadedPersons != null) {
       loginPage.setLoadedPersons(loadedPersons);
+    } else {
+      throw new IllegalStateException("No loaded persons were set.");
+
     }
     root.getChildren().add(loginPage);
   }
@@ -105,7 +108,8 @@ public class AppController implements MessageListener {
       loadedPersons = loader.getPersons();
       loadedRooms = loader.getRooms();
     } catch (Exception e) {
-      e.printStackTrace();
+      // TODO: e.printStackTrace();
+      throw new IllegalStateException("Something went wrong loading with prefix " + prefix);
     }
   }
   
