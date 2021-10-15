@@ -20,6 +20,7 @@ import javafx.scene.layout.StackPane;
 public class AppController implements MessageListener {
   private Collection<Person> loadedPersons;
   private Collection<HotelRoom> loadedRooms;
+  private String prefix = "data";
 
   @FXML
   private StackPane root;
@@ -47,6 +48,13 @@ public class AppController implements MessageListener {
       save();
       moveToLoginPage();
     }
+  }
+
+  public void setPrefix(String prefix) {
+    if (!prefix.matches("^([a-z]){3,10}$")) {
+      throw new IllegalArgumentException("prefix is not valid");
+    }
+    this.prefix = prefix;
   }
 
   /**
@@ -93,7 +101,7 @@ public class AppController implements MessageListener {
   private void load() {
     Loader loader = new Loader();
     try {
-      loader.loadData();
+      loader.loadData(prefix);
       loadedPersons = loader.getPersons();
       loadedRooms = loader.getRooms();
     } catch (Exception e) {
@@ -109,7 +117,7 @@ public class AppController implements MessageListener {
   private void save() {
     Saver saver = new Saver();
     try {
-      saver.writeToFile(loadedRooms, loadedPersons);
+      saver.writeToFile(loadedRooms, loadedPersons, prefix);
     } catch (Exception e) {
       e.printStackTrace();
     }
