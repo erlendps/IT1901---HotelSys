@@ -122,6 +122,7 @@ public class FilterPanel extends VBox {
         amenities.put(amenity, newValue);
         notifyListeners();
       });
+      checkBox.setId("amenity" + amenity.toString());
       getChildren().add(checkBox);
       getChildren().add(label);
     }

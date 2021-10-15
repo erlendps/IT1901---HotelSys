@@ -2,7 +2,6 @@ package gr2116.ui;
 
 import java.io.IOException;
 
-import org.assertj.core.internal.bytebuddy.dynamic.scaffold.TypeInitializer.None;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.framework.junit5.Start;
@@ -13,9 +12,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.control.DatePicker;
 import gr2116.core.Person;
 import gr2116.ui.controller.AppController;
-import javafx.scene.layout.Pane;
 
 
 public class MainPageTest extends ApplicationTest{
@@ -55,6 +54,13 @@ public class MainPageTest extends ApplicationTest{
         FxAssert.verifyThat("#nameLabel", LabeledMatchers.hasText("Richard Wilkens"));
         FxAssert.verifyThat("#emailLabel", LabeledMatchers.hasText("RichardWilkins@gmail.com"));
         FxAssert.verifyThat("#balanceLabel", LabeledMatchers.hasText("100.0"));
+    }
+
+    @Test
+    void checkBookHotel() {
+        clickOn((lookup("#startDatePicker").queryAs(DatePicker.class)).getEditor()).write("12/01/2021\n");
+        clickOn((lookup("#endDatePicker").queryAs(DatePicker.class)).getEditor()).write("12/02/2021\n");
+        clickOn("#amenityTelevision");
     }
 
 }
