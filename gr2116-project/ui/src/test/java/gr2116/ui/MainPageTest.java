@@ -58,7 +58,7 @@ public class MainPageTest extends ApplicationTest{
         FxAssert.verifyThat("#emailLabel", LabeledMatchers.hasText("RichardWilkins@gmail.com"));
         FxAssert.verifyThat("#balanceLabel", LabeledMatchers.hasText("100.0"));
     }
-    /*
+    
     @Test
     void checkBookHotel() {
         clickOn((lookup("#startDatePicker").queryAs(DatePicker.class)).getEditor()).write("12/01/2021\n");
@@ -69,6 +69,6 @@ public class MainPageTest extends ApplicationTest{
         clickOn("#hotelRoom101Button");
         FxAssert.verifyThat("#reservationListView", NodeMatchers.hasChild("#hotelRoom101reservation2021-12-01to2021-12-02"));
     }
-    */
+    
 }
     
