@@ -2,6 +2,8 @@ package gr2116.core;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.stream.Collectors;
@@ -38,9 +40,11 @@ public class ReservationCalendar implements Iterable<Reservation> {
    * @return stream of reservation ids.
    */
   public final Collection<Long> getReservationIds() {
-    return reservations.stream()
+    List<Long> ids = reservations.stream()
       .map((r) -> r.getId())
       .collect(Collectors.toList());
+    Collections.sort(ids);
+    return ids;
   }
 
   /**

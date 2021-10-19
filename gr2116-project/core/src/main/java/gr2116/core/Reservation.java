@@ -110,10 +110,8 @@ public class Reservation implements Iterable<LocalDate> {
     return dates.iterator();
   }
 
-
-public static void main(String[] args) {
-  HotelRoom room = new HotelRoom(HotelRoomType.Single, 101);
-  Reservation res = new Reservation(room, LocalDate.now(), LocalDate.now().plusDays(2));
-  System.out.println(res.getId());
+  @Override
+  public String toString() {
+    return Long.toString(getId());
   }
 }

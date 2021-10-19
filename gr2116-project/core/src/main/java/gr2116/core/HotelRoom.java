@@ -2,6 +2,8 @@ package gr2116.core;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.HashSet;
 import java.util.stream.Collectors;
 
@@ -130,7 +132,11 @@ public class HotelRoom {
    * @return amenities
    */
   public final Collection<String> getAmenities() {
-    return amenities.stream().map((a) -> a.name()).collect(Collectors.toList());
+    List<String> amen = amenities.stream()
+      .map((a) -> a.name())
+      .collect(Collectors.toList());
+    Collections.sort(amen);
+    return amen;
   }
 
   /**
