@@ -1,24 +1,35 @@
 package gr2116.core;
+import static org.junit.jupiter.api.Assertions.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.time.LocalDate;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class HotelRoomTest {
-  private HotelRoom roomSingle = new HotelRoom(HotelRoomType.Single, 111);
-  private HotelRoom roomDouble = new HotelRoom(HotelRoomType.Double, 794);
-  private LocalDate today = LocalDate.now();
-  private LocalDate tomorrow = today.plusDays(1);
-  private LocalDate overmorrow = today.plusDays(2);
+import java.time.LocalDate;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-  @Test
-  public void testFloorAndNumber() {
-    assertEquals(1, roomSingle.getFloor());
-    assertEquals(111, roomSingle.getNumber());
+public class HotelRoomTest {
+
+	HotelRoom roomSingle;
+	HotelRoom roomDouble;
+	LocalDate today = LocalDate.now();
+	LocalDate tomorrow = today.plusDays(1);
+	LocalDate overmorrow = today.plusDays(2);
+
+    // mock
+    Reservation res = mock(Reservation.class);
+
+    @BeforeEach
+    public void setup() {
+        roomSingle = new HotelRoom(HotelRoomType.Single, 111);
+        roomDouble = new HotelRoom(HotelRoomType.Double, 794);
+    }
+
+
+	@Test
+	public void testFloorAndNumber() {
+		assertEquals(1, roomSingle.getFloor());
+		assertEquals(111, roomSingle.getNumber());
 
     assertEquals(7, roomDouble.getFloor());
     assertEquals(794, roomDouble.getNumber());
@@ -49,17 +60,17 @@ public class HotelRoomTest {
     assertFalse(roomSingle.hasAmenity(Amenity.Bathtub));
   }
 
-  @Test
-  public void testMakeReservation() {
-    roomSingle.setPrice(100);
-    Person person = new Person("Peter");
-    assertThrows(IllegalStateException.class,
-        () -> person.makeReservation(roomSingle, today, tomorrow));
-    person.addBalance(800);
-    person.makeReservation(roomSingle, today, tomorrow);
-    assertFalse(roomSingle.isAvailable(today));
-    assertThrows(IllegalStateException.class,
-        () -> person.makeReservation(roomSingle, today, tomorrow));
-    assertEquals(700, person.getBalance());
-  }
+    @Test
+    public void testIsAvailable() {
+        assertTrue(roomSingle.isAvailable(today));
+        assertTrue(roomSingle.isAvailable(today, tomorrow));
+        assertThrows(IllegalArgumentException.class, () -> roomSingle.isAvailable(tomorrow, today));
+    }    
+    @Test
+    public void testAddReservation() {
+        assertThrows(NullPointerException.class, () -> roomDouble.addReservation(null));
+        when(res.getRoom()).thenReturn(roomSingle);
+        assertThrows(IllegalArgumentException.class, () -> roomDouble.addReservation(res));
+    }
+
 }

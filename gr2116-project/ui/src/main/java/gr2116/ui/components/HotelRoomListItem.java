@@ -45,7 +45,13 @@ public class HotelRoomListItem extends HBox {
     numberLabel.setText("HotelRoom " + room.getNumber());
     typeLabel.setText(room.getRoomType().getDescription());
     makeReservationButton.setText("Make reservation.");
-    makeReservationButton.setDisable(true);
+    makeReservationButton.setDisable(true); 
+
+    this.setId("hotelRoom" + Integer.toString(room.getNumber()) + "listItem");
+    numberLabel.setId("hotelRoom" + Integer.toString(room.getNumber()) + "NumberLabel");
+    typeLabel.setId("hotelRoom" + Integer.toString(room.getNumber()) + "TypeLabel");
+    makeReservationButton.setId("hotelRoom" + Integer.toString(room.getNumber()) + "Button");
+
     String amenitiesText = "";
     for (String amenity : room.getAmenities()) {
       amenitiesText += amenity + ", ";

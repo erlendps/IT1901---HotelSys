@@ -106,7 +106,7 @@ public class HotelRoom {
    * @param price the given price.
    */
   public final void setPrice(final double price) {
-    if (price <= 0) {
+    if (price < 0) {
       throw new IllegalArgumentException("Price must be greater than zero.");
     }
     this.price = price;

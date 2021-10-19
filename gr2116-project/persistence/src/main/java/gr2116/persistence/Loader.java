@@ -156,7 +156,6 @@ public class Loader {
     JSONObject personData = getAsJson("/" + prefix + "Person.json");
     JSONObject roomData = getAsJson("/" + prefix + "Rooms.json");
     JSONObject reservationData = getAsJson("/" + prefix + "Reservation.json");
-
     loadData(roomData, personData, reservationData);
   }
 

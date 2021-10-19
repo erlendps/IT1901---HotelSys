@@ -64,12 +64,15 @@ public class AppController implements MessageListener {
    * adding AppController as a listener and setting the loadedPersons from own memory.
    * AppController finally adds the login page as a child instance of itself.
    */
-  private void moveToLoginPage() {
+  public void moveToLoginPage() {
     root.getChildren().clear();
     LoginPage loginPage = new LoginPage();
     loginPage.addListener(this);
     if (loadedPersons != null) {
       loginPage.setLoadedPersons(loadedPersons);
+    } else {
+      throw new IllegalStateException("No loaded persons were set.");
+
     }
     root.getChildren().add(loginPage);
   }
@@ -84,7 +87,7 @@ public class AppController implements MessageListener {
    *
    * @param person The person to be logged in as
    */
-  private void moveToMainPage(final Person person) {
+  public void moveToMainPage(final Person person) {
     root.getChildren().clear();
     MainPage mainPage = new MainPage(person);
     mainPage.addListener(this);
@@ -98,14 +101,15 @@ public class AppController implements MessageListener {
    * Load data from JSON files. Puts this data into loadedPersons and loadedRooms,
    * which is used to create pages with correct data in them.
    */
-  private void load() {
+  public void load() {
     Loader loader = new Loader();
     try {
       loader.loadData(prefix);
       loadedPersons = loader.getPersons();
       loadedRooms = loader.getRooms();
     } catch (Exception e) {
-      e.printStackTrace();
+      // TODO: e.printStackTrace();
+      throw new IllegalStateException("Something went wrong loading with prefix " + prefix);
     }
   }
   
