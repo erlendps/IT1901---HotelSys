@@ -43,14 +43,10 @@ public class HotelRoomTest {
 
   @Test
   public void testRemoveAmenity() {
-    assertThrows(IllegalArgumentException.class,
-        () -> roomSingle.removeAmenity(Amenity.Bathtub));
     roomSingle.addAmenity(Amenity.Bathtub);
     assertTrue(roomSingle.hasAmenity(Amenity.Bathtub));
     roomSingle.removeAmenity(Amenity.Bathtub);
     assertFalse(roomSingle.hasAmenity(Amenity.Bathtub));
-    assertThrows(IllegalArgumentException.class,
-        () -> roomSingle.removeAmenity(Amenity.Bathtub));
   }
 
   @Test
