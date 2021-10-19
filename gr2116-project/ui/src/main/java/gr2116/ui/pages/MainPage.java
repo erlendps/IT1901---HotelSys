@@ -13,7 +13,6 @@ import gr2116.ui.utils.FxmlUtils;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.function.Predicate;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -26,21 +25,26 @@ import javafx.scene.paint.Color;
 public class MainPage extends VBox implements MessageListener {
   private final FilterPanel filterPanel = new FilterPanel();
   private UserPanel userPanel;
-  private final Hotel hotel = new Hotel();
+  private final Hotel hotel;
   private HotelRoomFilter hotelRoomFilter
       = new HotelRoomFilter(null, null, null, null, null);
   private final Person person;
   private final Collection<MessageListener> listeners = new HashSet<>();
 
   /**
-   * Constructs a main page for a given person.
+   * Constructs a main page for a given person and hotel.
    *
    * @param person the person the main page should be constructed for.
+   * @param hotel the hotel the main page should be constructed for.
    */
-  public MainPage(final Person person) {
+  public MainPage(Person person, Hotel hotel) {
     if (person == null) {
       throw new NullPointerException("Person is null.");
     }
+    if (hotel == null) {
+      throw new NullPointerException("Hotel is null.");
+    }
+    this.hotel = hotel;
     this.person = person;
     FxmlUtils.loadFxml(this);
   }
@@ -118,20 +122,6 @@ public class MainPage extends VBox implements MessageListener {
       }
       roomItemContainer.getChildren().add(roomItem);
     }
-  }
-
-  /**
-   * Add rooms to the hotel. These rooms will show up when filters are selected.
-   * Usually, the rooms will be provided by the Loader class.
-   *
-   * @param rooms Collection of rooms to add to the hotel.
-   */
-  public final void addRooms(final Collection<HotelRoom> rooms) {
-    if (rooms == null) {
-      throw new NullPointerException("Rooms collection is null.");
-    }
-    rooms.forEach((HotelRoom room) -> hotel.addRoom(room));
-    buildRoomList();
   }
 
   /**
