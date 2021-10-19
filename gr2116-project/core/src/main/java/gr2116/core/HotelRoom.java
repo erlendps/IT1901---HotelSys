@@ -133,9 +133,6 @@ public class HotelRoom {
    * @param amenity the given amenity.
    */
   public final void removeAmenity(final Amenity amenity) {
-    if (!amenities.contains(amenity)) {
-      throw new IllegalArgumentException();
-    }
     amenities.remove(amenity);
   }
 

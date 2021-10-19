@@ -55,9 +55,6 @@ public class Hotel implements Iterable<HotelRoom> {
    * @param room the given room.
    */
   public final void removeRoom(final HotelRoom room) {
-    if (!rooms.contains(room)) {
-      throw new IllegalArgumentException();
-    }
     rooms.remove(room);
   }
 
