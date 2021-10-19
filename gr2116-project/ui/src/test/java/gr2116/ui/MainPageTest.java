@@ -1,7 +1,9 @@
 package gr2116.ui;
 
-
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
@@ -14,9 +16,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import gr2116.core.Person;
 import gr2116.ui.controller.AppController;
-
 
 public class MainPageTest extends ApplicationTest{
     AppController appController;
@@ -61,13 +64,18 @@ public class MainPageTest extends ApplicationTest{
     
     @Test
     void checkBookHotel() {
-        clickOn((lookup("#startDatePicker").queryAs(DatePicker.class)).getEditor()).write("12/01/2021\n");
-        clickOn((lookup("#endDatePicker").queryAs(DatePicker.class)).getEditor()).write("12/02/2021\n");
+        DateTimeFormatter systemFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
+        String dateFrom = systemFormat.format(LocalDate.of(2021, 01, 12));
+        String dateTo = systemFormat.format(LocalDate.of(2021, 01, 14));
+        
+        clickOn((lookup("#startDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateFrom + '\n');
+        clickOn((lookup("#endDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateTo + '\n');
         clickOn("#amenityTelevision");
 
         FxAssert.verifyThat("#roomItemContainer", NodeMatchers.hasChild("#hotelRoom101listItem"));
         clickOn("#hotelRoom101Button");
-        FxAssert.verifyThat("#reservationListView", NodeMatchers.hasChild("#hotelRoom101reservation2021-12-01to2021-12-02"));
+        FxAssert.verifyThat("#reservationListView", NodeMatchers.hasChild("#hotelRoom101reservation2021-01-12to2021-01-14"));
+
     }
     
 }
