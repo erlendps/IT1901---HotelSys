@@ -39,6 +39,9 @@ public enum HotelRoomType {
   private final String description;
 
   HotelRoomType(final String name, final String description) {
+    if (name == null || description == null) {
+      throw new NullPointerException("Name or description cannot be null.");
+    }
     this.name = name;
     this.description = description;
   }
