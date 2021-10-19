@@ -38,6 +38,9 @@ public class MainPage extends VBox implements MessageListener {
    * @param person the person the main page should be constructed for.
    */
   public MainPage(final Person person) {
+    if (person == null) {
+      throw new NullPointerException("Person is null.");
+    }
     this.person = person;
     FxmlUtils.loadFxml(this);
   }
@@ -124,6 +127,9 @@ public class MainPage extends VBox implements MessageListener {
    * @param rooms Collection of rooms to add to the hotel.
    */
   public final void addRooms(final Collection<HotelRoom> rooms) {
+    if (rooms == null) {
+      throw new NullPointerException("Rooms collection is null.");
+    }
     rooms.forEach((HotelRoom room) -> hotel.addRoom(room));
     buildRoomList();
   }
@@ -152,6 +158,9 @@ public class MainPage extends VBox implements MessageListener {
    * @param listener The listener to be added
    */
   public final void addListener(final MessageListener listener) {
+    if (listener == null) {
+      throw new NullPointerException("Listener is null.");
+    }
     listeners.add(listener);
   }
 

@@ -42,6 +42,9 @@ public class HotelRoom {
     if (roomType == null) {
       throw new NullPointerException();
     }
+    if (number <= 0) {
+      throw new IllegalArgumentException("Room number must be greater than zero.");
+    }
     this.roomType = roomType;
     this.number = number;
   }
@@ -103,6 +106,9 @@ public class HotelRoom {
    * @param price the given price.
    */
   public final void setPrice(final double price) {
+    if (price <= 0) {
+      throw new IllegalArgumentException("Price must be greater than zero.");
+    }
     this.price = price;
   }
 
@@ -113,7 +119,7 @@ public class HotelRoom {
    */
   public final void addAmenity(final Amenity amenity) {
     if (amenity == null) {
-      throw new NullPointerException();
+      throw new NullPointerException("Amenity cannot be null.");
     }
     amenities.add(amenity);
   }
@@ -214,6 +220,9 @@ public class HotelRoom {
    */
   private void verifyChronology(final LocalDate startDate,
       final LocalDate endDate) {
+    if (startDate == null || endDate == null) {
+      throw new NullPointerException("Startdate or endDate cannot be null.");
+    }
     if (!startDate.isBefore(endDate)) {
       throw new IllegalArgumentException(
         "The startDate must be before the endDate.");
