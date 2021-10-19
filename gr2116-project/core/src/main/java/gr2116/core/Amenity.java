@@ -62,6 +62,9 @@ public enum Amenity {
    * @param description   the description of the amenity.
    */
   Amenity(final String name, final String description) {
+    if (name == null || description == null) {
+      throw new NullPointerException("Name or description cannot be null.");
+    }
     this.name = name;
     this.description = description;
   }
