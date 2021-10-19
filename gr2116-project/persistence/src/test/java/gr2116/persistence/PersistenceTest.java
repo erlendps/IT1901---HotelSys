@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,16 +18,23 @@ import java.util.stream.Collectors;
 import gr2116.core.*;
 
 import org.json.JSONObject;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class PersistenceTest {
     JSONObject personsData;
     JSONObject roomsData;
     JSONObject reservationsData;
-    static Loader dataLoader = new Loader();
+    static Loader dataLoader;
 
-    @BeforeAll
+    @BeforeEach
+    public void setup() throws IOException {
+        dataLoader = new Loader();
+        dataLoader.loadData("test");
+    }
+
     @Test
     public static void makeAndLoadData() throws IOException {
         Person rick = new Person("Richard");
@@ -72,10 +82,9 @@ public class PersistenceTest {
             reservations.add(r)));
 
         Saver saver = new Saver();
-        assertDoesNotThrow(() -> saver.writeToFile(rooms, persons, "test"), "Something went wrong with saving.");
+        assertDoesNotThrow(() -> saver.writeToFile(rooms, persons, "testWrite"), "Something went wrong with saving.");
         assertThrows(IllegalStateException.class, () -> dataLoader.getRooms());
         assertThrows(IllegalStateException.class, () -> dataLoader.getPersons());
-        dataLoader.loadData("test");
     }
 
 
@@ -141,4 +150,17 @@ public class PersistenceTest {
         + Integer.toString(room2.getReservationIds().size()));
         assertEquals(HotelRoomType.Quad, room3.getRoomType());
     }
+
+    @AfterAll
+    public static void cleanUp() {
+        Path DATA_FOLDER
+            = Paths.get(".").toAbsolutePath()
+            .normalize().getParent().getParent().resolve("data");
+        File personFile = new File(DATA_FOLDER + "/testWritePerson.json");
+        File roomsFile = new File(DATA_FOLDER + "/testWriteRooms.json");
+        File reservationFile = new File(DATA_FOLDER + "/testWriteReservation.json");
+        personFile.delete();
+        roomsFile.delete();
+        reservationFile.delete();
+    }   
 }
