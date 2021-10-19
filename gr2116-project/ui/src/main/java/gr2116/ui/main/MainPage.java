@@ -1,12 +1,9 @@
-package gr2116.ui.pages;
+package gr2116.ui.main;
 
 import gr2116.core.Hotel;
 import gr2116.core.HotelRoom;
 import gr2116.core.HotelRoomFilter;
 import gr2116.core.Person;
-import gr2116.ui.components.FilterPanel;
-import gr2116.ui.components.HotelRoomListItem;
-import gr2116.ui.components.UserPanel;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
 import gr2116.ui.utils.FxmlUtils;

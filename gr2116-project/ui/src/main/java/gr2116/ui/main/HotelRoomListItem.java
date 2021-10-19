@@ -1,4 +1,4 @@
-package gr2116.ui.components;
+package gr2116.ui.main;
 
 import gr2116.core.HotelRoom;
 import gr2116.ui.utils.FxmlUtils;

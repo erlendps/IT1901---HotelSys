@@ -4,10 +4,11 @@ import gr2116.core.Hotel;
 import gr2116.core.Person;
 import gr2116.persistence.Loader;
 import gr2116.persistence.Saver;
+import gr2116.ui.login.LoginPage;
+import gr2116.ui.main.MainPage;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
-import gr2116.ui.pages.LoginPage;
-import gr2116.ui.pages.MainPage;
+
 import java.util.Collection;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
