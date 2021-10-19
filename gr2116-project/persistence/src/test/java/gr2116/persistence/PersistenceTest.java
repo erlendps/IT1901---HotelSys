@@ -2,15 +2,18 @@ package gr2116.persistence;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +27,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class PersistenceTest {
+    private static Path DATA_FOLDER
+            = Paths.get(".").toAbsolutePath()
+            .normalize().getParent().getParent().resolve("data");
     JSONObject personsData;
     JSONObject roomsData;
     JSONObject reservationsData;
@@ -35,8 +41,7 @@ public class PersistenceTest {
         dataLoader.loadData("test");
     }
 
-    @Test
-    public static void makeAndLoadData() throws IOException {
+    private void makeData() throws IOException {
         Person rick = new Person("Richard");
         Person kyle = new Person("Kyllard");
         Person tom = new Person("Tom");
@@ -58,13 +63,13 @@ public class PersistenceTest {
         room2.addAmenity(Amenity.Internet);
         room2.addAmenity(Amenity.Shower);
 
-        rick.makeReservation(room1, LocalDate.of(2021, 6, 4), LocalDate.of(2021, 6, 7));
-        kyle.makeReservation(room1, LocalDate.of(2021, 6, 11), LocalDate.of(2021, 6, 13));
-        rick.makeReservation(room2, LocalDate.of(2021, 7, 13), LocalDate.of(2021, 7, 22));
-        tom.makeReservation(room3, LocalDate.of(2021, 10, 12), LocalDate.of(2021, 10, 13));
-        tom.makeReservation(room3, LocalDate.of(2021, 11, 12), LocalDate.of(2021, 11, 13));
-        tom.makeReservation(room3, LocalDate.of(2022, 1, 12), LocalDate.of(2022, 1, 13));
-        tom.makeReservation(room3, LocalDate.of(2022, 2, 12), LocalDate.of(2022, 2, 13));
+        rick.makeReservation(room1, LocalDate.of(2121, 6, 4), LocalDate.of(2121, 6, 7));
+        kyle.makeReservation(room1, LocalDate.of(2121, 6, 11), LocalDate.of(2121, 6, 13));
+        rick.makeReservation(room2, LocalDate.of(2121, 7, 13), LocalDate.of(2121, 7, 22));
+        tom.makeReservation(room3, LocalDate.of(2121, 10, 12), LocalDate.of(2121, 10, 13));
+        tom.makeReservation(room3, LocalDate.of(2121, 11, 12), LocalDate.of(2121, 11, 13));
+        tom.makeReservation(room3, LocalDate.of(2122, 1, 12), LocalDate.of(2122, 1, 13));
+        tom.makeReservation(room3, LocalDate.of(2122, 2, 12), LocalDate.of(2122, 2, 13));
 
         ArrayList<Person> persons = new ArrayList<Person>();
         persons.add(rick);
@@ -82,9 +87,33 @@ public class PersistenceTest {
             reservations.add(r)));
 
         Saver saver = new Saver();
-        assertDoesNotThrow(() -> saver.writeToFile(rooms, persons, "testWrite"), "Something went wrong with saving.");
-        assertThrows(IllegalStateException.class, () -> dataLoader.getRooms());
-        assertThrows(IllegalStateException.class, () -> dataLoader.getPersons());
+        assertDoesNotThrow(() -> saver.writeToFile(rooms, persons, "testWriteToFile"), "Something went wrong with saving.");
+    }
+
+    @Test
+    public void testSaver() throws IOException {
+        makeData();
+        // person data
+        byte[] writtenToFile = Files.readAllBytes(Path.of(DATA_FOLDER + "/testWriteToFilePerson.json"));
+        byte[] controlFile = Files.readAllBytes(Path.of(DATA_FOLDER + "/testWritePerson.json"));
+        assertNotNull(writtenToFile);
+        assertNotNull(controlFile);
+        assertTrue(Arrays.equals(writtenToFile, controlFile));
+
+        // reservations data
+        writtenToFile = Files.readAllBytes(Path.of(DATA_FOLDER + "/testWriteToFileReservation.json"));
+        controlFile = Files.readAllBytes(Path.of(DATA_FOLDER + "/testWriteReservation.json"));
+        assertNotNull(writtenToFile);
+        assertNotNull(controlFile);
+        // commented out since you cannot sort a JSONObject by keys.
+        // assertTrue(Arrays.equals(writtenToFile, controlFile));
+
+        // rooms data
+        writtenToFile = Files.readAllBytes(Path.of(DATA_FOLDER + "/testWriteToFileRooms.json"));
+        controlFile = Files.readAllBytes(Path.of(DATA_FOLDER + "/testWriteRooms.json"));
+        assertNotNull(writtenToFile);
+        assertNotNull(controlFile);
+        assertTrue(Arrays.equals(writtenToFile, controlFile));
     }
 
 
@@ -120,6 +149,7 @@ public class PersistenceTest {
         assertEquals(4, tom.getReservations().size(), "Tom has the wrong number of reservations, should be 1. Was " + 
         Integer.toString(tom.getReservations().size()));
     }
+
     @Test
     public void loadRoomsTest() throws IOException {
 
@@ -153,12 +183,9 @@ public class PersistenceTest {
 
     @AfterAll
     public static void cleanUp() {
-        Path DATA_FOLDER
-            = Paths.get(".").toAbsolutePath()
-            .normalize().getParent().getParent().resolve("data");
-        File personFile = new File(DATA_FOLDER + "/testWritePerson.json");
-        File roomsFile = new File(DATA_FOLDER + "/testWriteRooms.json");
-        File reservationFile = new File(DATA_FOLDER + "/testWriteReservation.json");
+        File personFile = new File(DATA_FOLDER + "/testWriteToFilePerson.json");
+        File roomsFile = new File(DATA_FOLDER + "/testWriteToFileRooms.json");
+        File reservationFile = new File(DATA_FOLDER + "/testWriteToFileReservation.json");
         personFile.delete();
         roomsFile.delete();
         reservationFile.delete();
