@@ -30,6 +30,9 @@ public class Saver {
    * @return JSONObject containing person attributes.
    */
   private JSONObject makePersonJson(final Person person) {
+    if (person == null) {
+      throw new NullPointerException("Person is null.");
+    }
     JSONObject personData = new JSONObject();
     personData.put("name", person.getName());
     personData.put("email", person.getEmail());
@@ -46,6 +49,9 @@ public class Saver {
    * @return JSONObject containing room attributes.
    */
   private JSONObject makeRoomJson(final HotelRoom room) {
+    if (room == null) {
+      throw new NullPointerException("HotelRoom is null.");
+    }
     JSONObject roomData = new JSONObject();
     roomData.put("number", room.getNumber());
     roomData.put("price", room.getPrice());
@@ -63,6 +69,9 @@ public class Saver {
    * @return The JSONObject containing reservation attributes.
    */
   private JSONObject makeReservationJson(final Reservation reservation) {
+    if (reservation == null) {
+      throw new NullPointerException("Reservation is null.");
+    }
     JSONObject reservationData = new JSONObject();
     reservationData.put("id", reservation.getId());
     reservationData.put("room", reservation.getRoom().getNumber());
