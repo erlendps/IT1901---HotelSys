@@ -100,8 +100,7 @@ public class MainPage extends VBox implements MessageListener {
       }
     }
 
-    Predicate<HotelRoom> predicate = hotelRoomFilter.getPredicate();
-    Collection<HotelRoom> filteredRooms = hotel.getRooms(predicate);
+    Collection<HotelRoom> filteredRooms = hotel.getRooms(hotelRoomFilter);
 
     for (HotelRoom hotelRoom : filteredRooms) {
       HotelRoomListItem roomItem = new HotelRoomListItem(hotelRoom);
