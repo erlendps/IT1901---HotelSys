@@ -6,7 +6,7 @@ Klassediagram for alle modulene er generert med PlantUML, og kan sees i [modules
 
 ## Arbeidsvaner
 
-Vi jobber fire timer sammen på skolen, og fordeler oppgaver innad. Dersom det er noen problemer tar vi kontakt digitalt. Når vi sitter fysisk på skolen bruker vi parprogrammering ved behov. Koden skrevet av enkeltperson blir gått gjennom av andre gruppemedlemmer, for best mulig Kodekvalitet.
+Vi jobber fire timer i uken sammen på skolen, og fordeler oppgaver innad. Dersom det er noen problemer tar vi kontakt digitalt. Når vi sitter fysisk på skolen bruker vi parprogrammering ved behov. Koden skrevet av enkeltperson blir gått gjennom av andre gruppemedlemmer, for best mulig Kodekvalitet.
 
 ## Kodekvalitet
 
