@@ -1,7 +1,7 @@
 Issues for innlevering 2 kan finnes under milestone [Release 2](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2116/gr2116/-/milestones/2).
 
 ## Arkitektur 
-sett inn PlantUML
+Klassediagram for alle modulene er generert med PlantUML, og kan sees i [modules](../modules/README.md). I tilegg ligger alle diagrammene i [images](../images). 
 
 ## Arbeidsvaner
 Vi jobber fire timer sammen på skolen, og fordeler oppgaver innad. Dersom det er noen problemer tar vi kontakt digitalt. Når vi sitter fysisk på skolen bruker vi parprogrammering ved behov. Koden skrevet av enkeltperson blir gått gjennom av andre gruppemedlemmer, for best mulig Kodekvalitet.
