@@ -180,6 +180,9 @@ public class Person {
     if (hotelRoom == null || startDate == null || endDate == null) {
       throw new NullPointerException();
     }
+    if (startDate.isBefore(LocalDate.now())) {
+      throw new IllegalStateException("Cant make a reservation backwards in time.");
+    }
     if (startDate.isAfter(endDate)) {
       throw new IllegalArgumentException(
         "The startDate cannot be after the endDate.");
@@ -194,7 +197,7 @@ public class Person {
         "The room is not available at this time.");
     }
 
-    Reservation reservation = new Reservation( hotelRoom, startDate, endDate);
+    Reservation reservation = new Reservation(hotelRoom, startDate, endDate);
     hotelRoom.addReservation(reservation);
     addReservation(reservation);
     subtractBalance(price);
