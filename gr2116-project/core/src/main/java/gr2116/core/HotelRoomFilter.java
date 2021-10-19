@@ -1,8 +1,5 @@
-package gr2116.ui.components;
+package gr2116.core;
 
-import gr2116.core.Amenity;
-import gr2116.core.HotelRoom;
-import gr2116.core.HotelRoomType;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.function.Predicate;

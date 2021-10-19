@@ -1,13 +1,14 @@
 package gr2116.ui.controller;
 
-import gr2116.core.HotelRoom;
+import gr2116.core.Hotel;
 import gr2116.core.Person;
 import gr2116.persistence.Loader;
 import gr2116.persistence.Saver;
+import gr2116.ui.login.LoginPage;
+import gr2116.ui.main.MainPage;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
-import gr2116.ui.pages.LoginPage;
-import gr2116.ui.pages.MainPage;
+
 import java.util.Collection;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
@@ -18,9 +19,9 @@ import javafx.scene.layout.StackPane;
  * as it receives notifications from various parts of the program.
  */
 public class AppController implements MessageListener {
-  private Collection<Person> loadedPersons;
-  private Collection<HotelRoom> loadedRooms;
+  private Collection<Person> persons;
   private String prefix = "data";
+  private Hotel hotel = new Hotel();
 
   @FXML
   private StackPane root;
@@ -40,8 +41,8 @@ public class AppController implements MessageListener {
       final Message message, final Object data) {
     if (message == Message.SignIn && data instanceof Person) {
       Person person = (Person) data;
-      if (!loadedPersons.contains(person)) {
-        loadedPersons.add(person);
+      if (!persons.contains(person)) {
+        persons.add(person);
       }
       moveToMainPage(person);
     } else if (message == Message.SignOut) {
@@ -61,18 +62,17 @@ public class AppController implements MessageListener {
    * Move to the login page.
    * This involves clearing AppControllers children,
    * creating a new LoginPage instance,
-   * adding AppController as a listener and setting the loadedPersons from own memory.
+   * adding AppController as a listener and setting the persons from own memory.
    * AppController finally adds the login page as a child instance of itself.
    */
   public void moveToLoginPage() {
     root.getChildren().clear();
     LoginPage loginPage = new LoginPage();
     loginPage.addListener(this);
-    if (loadedPersons != null) {
-      loginPage.setLoadedPersons(loadedPersons);
+    if (persons != null) {
+      loginPage.setLoadedPersons(persons);
     } else {
       throw new IllegalStateException("No loaded persons were set.");
-
     }
     root.getChildren().add(loginPage);
   }
@@ -89,26 +89,22 @@ public class AppController implements MessageListener {
    */
   public void moveToMainPage(final Person person) {
     root.getChildren().clear();
-    MainPage mainPage = new MainPage(person);
+    MainPage mainPage = new MainPage(person, hotel);
     mainPage.addListener(this);
-    if (loadedRooms != null) {
-      mainPage.addRooms(loadedRooms);
-    }
     root.getChildren().add(mainPage);
   }
 
   /**
-   * Load data from JSON files. Puts this data into loadedPersons and loadedRooms,
+   * Load data from JSON files. Puts this data into persons and loadedRooms,
    * which is used to create pages with correct data in them.
    */
   public void load() {
     Loader loader = new Loader();
     try {
       loader.loadData(prefix);
-      loadedPersons = loader.getPersons();
-      loadedRooms = loader.getRooms();
+      hotel = new Hotel(loader.getRooms());
+      persons = loader.getPersons();
     } catch (Exception e) {
-      // TODO: e.printStackTrace();
       throw new IllegalStateException("Something went wrong loading with prefix " + prefix);
     }
   }
@@ -121,7 +117,7 @@ public class AppController implements MessageListener {
   private void save() {
     Saver saver = new Saver();
     try {
-      saver.writeToFile(loadedRooms, loadedPersons, prefix);
+      saver.writeToFile(hotel.getRooms((room) -> true), persons, prefix);
     } catch (Exception e) {
       e.printStackTrace();
     }
