@@ -1,3 +1,5 @@
+Issues for innlevering 2 kan finnes under milestone [Release 2](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2116/gr2116/-/milestones/2).
+
 ## Arkitektur 
 sett inn PlantUML
 
@@ -6,3 +8,6 @@ Vi jobber fire timer sammen på skolen, og fordeler oppgaver innad. Dersom det e
 
 ## Kodekvalitet
 Det er flere tester for alle de tre lagene. Jacoco brukes til å se testdekningsgrad, Maven-tillegget CheckStyle benyttes for å forsikre seg om at koden opprettholder kodingsstandard og SpotBugs benytter til å finne bugs i koden. I tillegg benyttes Mockito i de ulike testene i core, slik at klassene kan testes uavhengig av hverandre
+
+## Realisert
+Appen er i stor grad lik som ved innlevering 1 [(se release1)](../release1/README.md). Noen endringer er gjort i hovedsiden. Nå kan man velge etasje og fasilteter. Dermed er det letter for bruker å finne ønskelig rom, samt at det oppfyller [brukerhistriere 2](../../brukerhistorie.md).
