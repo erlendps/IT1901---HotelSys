@@ -1,4 +1,4 @@
-# Brukerhistorie 1: Booking av hotelrom med valgt romtype
+# Brukerhistorie 1: Booking av hotelrom med valgt romtype og fasiliteter
 > Som privatperson ønsker jeg å finne hotellrom av romtypen jeg vil ha med de fasilitetene jeg ønsker, slik at jeg får et godt opphold. 
 > _- Bruker_
 

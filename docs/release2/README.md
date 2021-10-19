@@ -2,7 +2,7 @@ Issues for innlevering 2 kan finnes under milestone [Release 2](https://gitlab.s
 
 ## Arkitektur 
 
-Klassediagram for alle modulene er generert med PlantUML, og kan sees i [modules](../modules/README.md). I tilegg ligger alle diagrammene i [images](../images). 
+Klassediagram for alle modulene er generert med PlantUML, og kan sees i [modules](../modules/README.md). I tillegg ligger alle diagrammene i [images](../images). 
 
 ## Arbeidsvaner
 
@@ -22,4 +22,4 @@ Under vises et skjermbilde for hvordan hovedsiden ser ut foreløpig. Innloggings
 
 ## Realisert
 
-Appen er i stor grad lik som ved innlevering 1 [(se release1)](../release1/README.md). Noen endringer er gjort i hovedsiden. Nå kan man velge etasje og fasilteter. Dermed er det letter for bruker å finne ønskelig rom, samt at det oppfyller [brukerhistriere 2](../../brukerhistorie.md). Det er også mulig å fjerne valgte filter, slik at brukeren lett kan nullstille alle valg.
+Appen er i stor grad lik som ved innlevering 1 [(se release1)](../release1/README.md). Noen endringer er gjort i hovedsiden. Nå kan man velge etasje og fasilteter. Dermed er det letter for bruker å finne ønskelig rom, samt at det oppfyller [brukerhistriere 1](../../brukerhistorie.md). Det er også mulig å fjerne valgte filter, slik at brukeren lett kan nullstille alle valg.
