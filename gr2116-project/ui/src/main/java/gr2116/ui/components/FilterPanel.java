@@ -1,6 +1,7 @@
 package gr2116.ui.components;
 
 import gr2116.core.Amenity;
+import gr2116.core.HotelRoomFilter;
 import gr2116.core.HotelRoomType;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
