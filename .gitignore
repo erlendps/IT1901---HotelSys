@@ -3,7 +3,13 @@
 .classpath
 .project
 org.eclipse.*.prefs
-**/.vscode/
+
+# VSCode. certain json files should not be untracked
+.vscode/*      # Maybe .vscode/**/* instead - see comments
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 
 # ignore maven build folder
 target/
