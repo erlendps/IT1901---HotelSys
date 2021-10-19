@@ -5,21 +5,22 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-import org.junit.jupiter.api.Test;
-import org.testfx.framework.junit5.ApplicationTest;
-import org.testfx.framework.junit5.Start;
-import org.testfx.matcher.base.NodeMatchers;
-import org.testfx.matcher.control.LabeledMatchers;
-import org.testfx.api.FxAssert;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+
 import gr2116.core.Person;
 import gr2116.ui.controller.AppController;
+
+import org.junit.jupiter.api.Test;
+import org.testfx.api.FxAssert;
+import org.testfx.framework.junit5.ApplicationTest;
+import org.testfx.framework.junit5.Start;
+import org.testfx.matcher.base.NodeMatchers;
+import org.testfx.matcher.control.LabeledMatchers;
+
 
 public class MainPageTest extends ApplicationTest{
     AppController appController;
@@ -78,5 +79,16 @@ public class MainPageTest extends ApplicationTest{
 
     }
     
+    @Test
+    void checkBookWrongDates() {
+        DateTimeFormatter systemFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
+        String dateFrom = systemFormat.format(LocalDate.of(2021, 01, 11));
+        String dateTo = systemFormat.format(LocalDate.of(2021, 01, 10));
+        
+        clickOn((lookup("#startDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateFrom + '\n');
+        clickOn((lookup("#endDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateTo + '\n');
+        FxAssert.verifyThat("#filterError", LabeledMatchers.hasText("You must choose an end date which is after the start date to make a reservation."));
+
+    }
 }
     

@@ -91,6 +91,7 @@ public class MainPage extends VBox implements MessageListener {
             "You must choose an end date which is "
             + "after the start date to make a reservation."
         );
+        label.setId("filterError");
         label.setTextFill(Color.RED);
         roomItemContainer.getChildren().add(label);
       }
