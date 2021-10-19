@@ -39,6 +39,9 @@ public class UserPanel extends VBox implements PersonListener {
    * @param person the person we want to initialize for.
    */
   public UserPanel(final Person person) {
+    if (person == null) {
+      throw new NullPointerException("Error initializing UserPanel: person is null.");
+    }
     this.person = person;
     person.addListener(this);
     FxmlUtils.loadFxml(this);

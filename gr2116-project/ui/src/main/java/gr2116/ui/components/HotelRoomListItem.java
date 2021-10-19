@@ -33,6 +33,9 @@ public class HotelRoomListItem extends HBox {
    * @param room hotelRoom to be constructed from.
    */
   public HotelRoomListItem(final HotelRoom room) {
+    if (room == null) {
+      throw new NullPointerException("Error initializing HotelRoomListItem: room is null.");
+    }
     this.room = room;
     FxmlUtils.loadFxml(this);
   }
