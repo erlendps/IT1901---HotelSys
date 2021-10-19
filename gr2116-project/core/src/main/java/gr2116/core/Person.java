@@ -3,7 +3,6 @@ package gr2116.core;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 /**
@@ -195,8 +194,7 @@ public class Person {
         "The room is not available at this time.");
     }
 
-    Reservation reservation = new Reservation(
-        Math.abs(ThreadLocalRandom.current().nextLong()), hotelRoom, startDate, endDate);
+    Reservation reservation = new Reservation( hotelRoom, startDate, endDate);
     hotelRoom.addReservation(reservation);
     addReservation(reservation);
     subtractBalance(price);
