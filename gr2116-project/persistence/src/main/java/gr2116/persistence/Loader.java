@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -168,7 +169,7 @@ public class Loader {
     if (!loaded) {
       throw new IllegalStateException("Objects must be loaded using loadData() before getting.");
     }
-    return persons;
+    return new ArrayList<>(persons);
   }
 
   /**
@@ -180,7 +181,7 @@ public class Loader {
     if (!loaded) {
       throw new IllegalStateException("Objects must be loaded using loadData() before getting.");
     }
-    return rooms;
+    return new ArrayList<>(rooms);
   }
   
   /**
