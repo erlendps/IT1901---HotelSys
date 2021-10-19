@@ -15,7 +15,6 @@ public class ReservationCalenderTest {
   private LocalDate today = LocalDate.now();
   private LocalDate tomorrow = today.plusDays(1);
   private Reservation reservation = new Reservation(
-                                  0,
                                   new HotelRoom(HotelRoomType.Single, 1),
                                   today,
                                   tomorrow);
