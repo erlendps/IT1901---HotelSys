@@ -5,11 +5,8 @@
 org.eclipse.*.prefs
 
 # VSCode. certain json files should not be untracked
-.vscode/*      # Maybe .vscode/**/* instead - see comments
+**/.vscode/*
 !.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
 
 # ignore maven build folder
 target/
