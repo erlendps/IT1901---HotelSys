@@ -3,7 +3,7 @@
 .classpath
 .project
 org.eclipse.*.prefs
-.vscode
+.vscode/
 
 # ignore maven build folder
 target/
