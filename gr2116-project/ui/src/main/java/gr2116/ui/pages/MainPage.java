@@ -61,8 +61,11 @@ public class MainPage extends VBox implements MessageListener {
     userPane.getChildren().add(userPanel);
     userPanel.addListener(this);
 
+
     filterPane.getChildren().add(filterPanel);
     filterPanel.addListener(this);
+
+    
 
     buildRoomList();
   }
@@ -144,6 +147,10 @@ public class MainPage extends VBox implements MessageListener {
     }
     if (message == Message.SignOut) {
       notifyListeners(Message.SignOut, person);
+    }
+
+    if (message == Message.MoneyPage) {
+      notifyListeners(Message.MoneyPage, person);
     }
   }
 

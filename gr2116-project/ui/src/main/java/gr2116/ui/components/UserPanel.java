@@ -31,6 +31,9 @@ public class UserPanel extends VBox implements PersonListener {
   private Button signOutButton;
 
   @FXML
+  private Button makeDepositButton;
+
+  @FXML
   private ListView<Label> reservationListView;
 
   /**
@@ -52,6 +55,10 @@ public class UserPanel extends VBox implements PersonListener {
   private void initialize() {
     signOutButton.setOnAction((event) -> {
       notifyListeners(Message.SignOut);
+    });
+
+    makeDepositButton.setOnAction((event) -> {
+      notifyListeners(Message.MoneyPage);
     });
     updatePanel(person);
   }
@@ -84,6 +91,7 @@ public class UserPanel extends VBox implements PersonListener {
       listener.receiveNotification(this, message, null);
     }
   }
+
 
   /**
    * Receive a notification to update attributes for the person.

@@ -8,6 +8,8 @@ import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
 import gr2116.ui.pages.LoginPage;
 import gr2116.ui.pages.MainPage;
+import gr2116.ui.pages.MoneyPage;
+
 import java.util.Collection;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
@@ -47,6 +49,9 @@ public class AppController implements MessageListener {
     } else if (message == Message.SignOut) {
       save();
       moveToLoginPage();
+    } else if (message == Message.MoneyPage && data instanceof Person) {
+      Person person = (Person) data;
+      moveToMoneyPage(person);
     }
   }
 
@@ -95,6 +100,14 @@ public class AppController implements MessageListener {
       mainPage.addRooms(loadedRooms);
     }
     root.getChildren().add(mainPage);
+  }
+
+  public void moveToMoneyPage(final Person person) {
+    System.out.println("Sending to money page.");
+    root.getChildren().clear();
+    MoneyPage moneyPage = new MoneyPage(person);
+    moneyPage.addListener(this);
+    root.getChildren().add(moneyPage);
   }
 
   /**

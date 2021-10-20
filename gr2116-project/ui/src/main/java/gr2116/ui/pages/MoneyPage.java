@@ -1,7 +1,11 @@
 package gr2116.ui.pages;
-import gr2116.core.Person;
-import gr2116.ui.utils.FxmlUtils;
 
+import gr2116.core.Person;
+import gr2116.ui.message.Message;
+import gr2116.ui.message.MessageListener;
+import gr2116.ui.utils.FxmlUtils;
+import java.util.Collection;
+import java.util.HashSet;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
  * Money page class, which is where users can add money to their accounts.
  */
 public class MoneyPage extends AnchorPane {
+  private Collection<MessageListener> listeners = new HashSet<>();
   private Person person;
 
   @FXML
@@ -20,7 +25,7 @@ public class MoneyPage extends AnchorPane {
   private TextField moneyAmountTextField;
   @FXML
   private Button addFundsButton;
-
+  @FXML
   private Label moneyErrorLabel;
 
   /**
@@ -93,6 +98,40 @@ public class MoneyPage extends AnchorPane {
         moneyErrorLabel.setText(e.getMessage());
       }
       person.addBalance(Integer.parseInt(moneyAmount));
+      
+      notifyListeners(Message.SignIn, person);
     });
+  }
+
+  /**
+   * Add a listener to the money page.
+   *
+   * @param listener The listener to be added.
+   */
+  public final void addListener(final MessageListener listener) {
+    listeners.add(listener);
+  }
+
+  /**
+   * Remove a listener to the money page.
+   *
+   * @param listener The listener to be removed.
+   */
+  public final void removeListener(final MessageListener listener) {
+    listeners.remove(listener);
+  }
+
+  /**
+   * Notify listeners that something has happened.
+   * Carries a message, which can be chosen from an enum of values.
+   * Carries data, which is any object.
+   *
+   * @param message Pick a message from the Enum Message to be sent
+   * @param data Any object
+   */
+  public final void notifyListeners(final Message message, final Object data) {
+    for (MessageListener listener : listeners) {
+      listener.receiveNotification(this, message, data);
+    }
   }
 }
