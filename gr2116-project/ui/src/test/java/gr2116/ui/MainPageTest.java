@@ -90,5 +90,14 @@ public class MainPageTest extends ApplicationTest{
         FxAssert.verifyThat("#filterError", LabeledMatchers.hasText("You must choose an end date which is after the start date to make a reservation."));
 
     }
+
+    @Test
+    void checkAddMoney() {
+        clickOn("#makeDepositButton");
+        clickOn("#cardTextField").write("0100341963170009");
+        clickOn("#moneyAmountTextField").write("100");
+        clickOn("#addFundsButton");
+        FxAssert.verifyThat("#balanceLabel", LabeledMatchers.hasText("200.0"));
+    }
 }
     
