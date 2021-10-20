@@ -1,0 +1,5 @@
+#!/bin/bash
+if ! grep -E '#[0-9]+' "$1" ; then
+	echo "Begin your commit message with an issue id! (or override with --no-verify)" 
+	exit 1
+fi
