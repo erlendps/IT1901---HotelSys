@@ -43,7 +43,7 @@ public class ReservationCalendar implements Iterable<Reservation> {
     List<Long> ids = reservations.stream()
       .map((r) -> r.getId())
       .collect(Collectors.toList());
-    Collections.sort(ids);
+    Collections.sort(ids);    // sorts in ascending order.
     return ids;
   }
 
