@@ -92,8 +92,44 @@ public class MainPageTest extends ApplicationTest{
     }
 
     @Test
+    void checkInvalidCardNumber() {
+        clickOn("#makeDepositButton");
+
+        clickOn("#cardTextField").write("0100341963170010");
+        clickOn("#moneyAmountTextField").write("100");
+        clickOn("#addFundsButton");
+        FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText("Card number has invalid format."));
+        
+        clickOn("#cardTextField").write("1");
+        clickOn("#addFundsButton");
+        FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText("Card numbers must be exactly 16 characters long."));
+    }
+
+    @Test
+    void checkInvalidMoney() {
+        clickOn("#makeDepositButton");
+
+        clickOn("#cardTextField").write("0100341963170009");
+        clickOn("#moneyAmountTextField").write("-100");
+        clickOn("#addFundsButton");
+        FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText("Balance must be a positive integer."));
+        
+        clickOn("#moneyAmountTextField").eraseText(4);
+        clickOn("#moneyAmountTextField").write("100000000");
+        clickOn("#addFundsButton");
+        FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText("Balance must be less than 1 000 000."));
+
+        clickOn("#moneyAmountTextField").eraseText(9);
+        clickOn("#moneyAmountTextField").write("0");
+        clickOn("#addFundsButton");
+        FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText("Balance must be strictly greater than zero."));
+
+    }
+
+    @Test
     void checkAddMoney() {
         clickOn("#makeDepositButton");
+
         clickOn("#cardTextField").write("0100341963170009");
         clickOn("#moneyAmountTextField").write("100");
         clickOn("#addFundsButton");

@@ -65,15 +65,15 @@ public class MoneyPage extends AnchorPane {
   }
 
   private void validateMoneyAmount(String moneyAmount) {
-    if (!moneyAmount.matches("[0-9]+")) {
-      throw new IllegalArgumentException("Balance must be a positive integer");
+    if (!moneyAmount.matches("^[0-9]+$")) {
+      throw new IllegalArgumentException("Balance must be a positive integer.");
     }
     if (moneyAmount.length() > 6) {
       throw new IllegalArgumentException("Balance must be less than 1 000 000.");
     }
     int money = Integer.parseInt(moneyAmount);
     if (money == 0) {
-      throw new IllegalArgumentException("Balance must be strictly larger than zero.");
+      throw new IllegalArgumentException("Balance must be strictly greater than zero.");
     }
     
   }
@@ -96,6 +96,7 @@ public class MoneyPage extends AnchorPane {
         validateMoneyAmount(moneyAmount);
       } catch (Exception e) {
         moneyErrorLabel.setText(e.getMessage());
+        return;
       }
       person.addBalance(Integer.parseInt(moneyAmount));
       
