@@ -81,26 +81,30 @@ public class MainPage extends VBox implements MessageListener {
    */
   private void buildRoomList() {
     roomItemContainer.getChildren().clear();
+    Label label = new Label();
+    label.setId("filterError");
+    label.setTextFill(Color.RED);
 
     if (!hotelRoomFilter.hasValidDates()) {
       LocalDate startDate = hotelRoomFilter.getStartDate();
       LocalDate endDate = hotelRoomFilter.getEndDate();
+      roomItemContainer.getChildren().add(label);
 
       if (startDate == null || endDate == null) {
-        Label label = new Label(
+        label.setText(
             "You must choose both a start date "
             + "and an end date to make a reservation."
         );
-        label.setTextFill(Color.RED);
-        roomItemContainer.getChildren().add(label);
       } else if (!startDate.isBefore(endDate)) {
-        Label label = new Label(
+        label.setText(
             "You must choose an end date which is "
             + "after the start date to make a reservation."
         );
-        label.setId("filterError");
-        label.setTextFill(Color.RED);
-        roomItemContainer.getChildren().add(label);
+      } else if (startDate.isBefore(LocalDate.now())) {
+        label.setText(
+            "You must choose a start date that is "
+            + "today or later to make a reservation." 
+        );
       }
     }
 
@@ -109,6 +113,9 @@ public class MainPage extends VBox implements MessageListener {
     for (HotelRoom hotelRoom : filteredRooms) {
       HotelRoomListItem roomItem = new HotelRoomListItem(hotelRoom);
       if (hotelRoomFilter.hasValidDates()) {
+        double totalPrice = hotelRoom.getPrice(
+                              hotelRoomFilter.getStartDate(),
+                              hotelRoomFilter.getEndDate());
         roomItem.setOnMakeReservationButtonAction((event) -> {
           person.makeReservation(
               hotelRoom,
@@ -117,6 +124,12 @@ public class MainPage extends VBox implements MessageListener {
           );
           buildRoomList();
         });
+        roomItem.setTotalPriceLabel(Double.toString(totalPrice));
+        if (person.getBalance() < totalPrice) {
+          roomItem.setOnMakeReservationButtonAction(null);
+          roomItem.setErrorLabel("You don't have enough money to "
+                                  + "make this reservation.");
+        }
       } else {
         roomItem.setOnMakeReservationButtonAction(null);
       }

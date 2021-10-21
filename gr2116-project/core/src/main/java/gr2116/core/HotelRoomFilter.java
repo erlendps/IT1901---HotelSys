@@ -45,8 +45,10 @@ public class HotelRoomFilter {
     if (startDate == null || endDate == null) {
       return false;
     }
-    if (startDate != null && endDate != null
-        && !startDate.isBefore(endDate)) {
+    if (!startDate.isBefore(endDate)) {
+      return false;
+    }
+    if (startDate.isBefore(LocalDate.now())) {
       return false;
     }
     return true;
