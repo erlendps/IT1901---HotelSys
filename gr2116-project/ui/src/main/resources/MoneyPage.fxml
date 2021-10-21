@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -21,7 +22,12 @@
                   <Label fx:id="nameTitleLabel" text="Amount" />
                   <TextField fx:id="moneyAmountTextField" maxWidth="300.0" prefHeight="26.0" prefWidth="300.0" />
                   <Separator prefHeight="30.0" />
-                  <Button fx:id="addFundsButton" mnemonicParsing="false" text="Add funds" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                     <children>
+                        <Button fx:id="moneyCancelButton" mnemonicParsing="false" text="Cancel" />
+                        <Button fx:id="addFundsButton" mnemonicParsing="false" text="Add funds" />
+                     </children>
+                  </HBox>
                   <Label fx:id="emailErrorLabel" />
                </children>
                <StackPane.margin>

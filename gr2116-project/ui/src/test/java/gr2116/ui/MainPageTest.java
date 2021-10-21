@@ -135,5 +135,12 @@ public class MainPageTest extends ApplicationTest{
         clickOn("#addFundsButton");
         FxAssert.verifyThat("#balanceLabel", LabeledMatchers.hasText("200.0"));
     }
+
+    @Test
+    void cancelMoney() {
+        clickOn("#makeDepositButton");
+        clickOn("#moneyCancelButton");
+        FxAssert.verifyThat("#makeDepositButton", LabeledMatchers.hasText("Make deposit")); // Test fails if page was not switched
+    }
 }
     

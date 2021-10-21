@@ -25,6 +25,10 @@ public class MoneyPage extends AnchorPane {
   private TextField moneyAmountTextField;
   @FXML
   private Button addFundsButton;
+
+  @FXML
+  private Button moneyCancelButton;
+  
   @FXML
   private Label moneyErrorLabel;
 
@@ -102,6 +106,11 @@ public class MoneyPage extends AnchorPane {
       
       notifyListeners(Message.SignIn, person);
     });
+
+    moneyCancelButton.setOnAction((event) -> {
+      notifyListeners(Message.SignIn, person);
+    });
+
   }
 
   /**
