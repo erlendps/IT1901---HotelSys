@@ -160,6 +160,12 @@ public class Saver {
       final Collection<Reservation> reservations,
       final String prefix)
       throws FileNotFoundException {
+    if (rooms == null || persons == null || reservations == null) {
+      throw new NullPointerException("Rooms, persons or reservations cannot be null.");
+    } 
+    if (prefix == null) {
+      throw new NullPointerException("Prefix cannot be null");
+    }
     File personDataJson = new File(DATA_FOLDER + "/" + prefix + "Person.json");
     File roomsDataJson = new File(DATA_FOLDER + "/" + prefix + "Rooms.json");
     File reservationDataJson = new File(
