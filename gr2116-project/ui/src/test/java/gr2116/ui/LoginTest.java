@@ -31,7 +31,7 @@ public class LoginTest extends ApplicationTest{
         //Pane p = fxmlLoader.load(getClass().getResource("App.fxml").openStream());
     Parent parent = fxmlLoader.load();
     appController = (AppController) fxmlLoader.getController();
-    appController.setPrefix("test");
+    appController.setPrefix("testUi");
     appController.load();
     stage.setScene(new Scene(parent));
     stage.show();

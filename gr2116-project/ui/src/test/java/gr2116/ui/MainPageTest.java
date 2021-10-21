@@ -41,7 +41,7 @@ public class MainPageTest extends ApplicationTest{
         //Pane p = fxmlLoader.load(getClass().getResource("App.fxml").openStream());
         Parent parent = fxmlLoader.load();
         appController = (AppController) fxmlLoader.getController();
-        appController.setPrefix("test");
+        appController.setPrefix("testUi");
         appController.load();
 
         
