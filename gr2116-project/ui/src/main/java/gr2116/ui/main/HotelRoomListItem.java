@@ -33,6 +33,9 @@ public class HotelRoomListItem extends HBox {
   private Label totalPriceLabel;
 
   @FXML
+  private Label totalPriceTextLabel;
+
+  @FXML
   private Label errorLabel;
 
   @FXML
@@ -57,14 +60,14 @@ public class HotelRoomListItem extends HBox {
     typeLabel.setText(room.getRoomType().getDescription());
     makeReservationButton.setText("Make reservation.");
     makeReservationButton.setDisable(true); 
-    pricePerNightLabel.setText("Price per night: " + Double.toString(room.getPrice()));
+    pricePerNightLabel.setText(Double.toString(room.getPrice()));
     totalPriceLabel.setText("");
     errorLabel.setText("");
     errorLabel.setTextFill(Color.RED);
     errorLabel.setMinHeight(Region.USE_PREF_SIZE);
 
     int roomNumber = room.getNumber();
-    this.setId("hotelRoom" + Integer.toString(roomNumber) + "listItem");
+    this.setId("hotelRoom" + Integer.toString(roomNumber) + "ListItem");
     numberLabel.setId("hotelRoom" + Integer.toString(roomNumber) + "NumberLabel");
     typeLabel.setId("hotelRoom" + Integer.toString(roomNumber) + "TypeLabel");
     pricePerNightLabel.setId("hotelRoom" + Integer.toString(roomNumber) + "PricePerNightLabel");
@@ -81,6 +84,7 @@ public class HotelRoomListItem extends HBox {
   }
 
   public void setTotalPriceLabel(String price) {
+    totalPriceTextLabel.setText("Total Price: ");
     totalPriceLabel.setText(price);
   }
 

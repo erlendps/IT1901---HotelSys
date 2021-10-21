@@ -124,8 +124,7 @@ public class MainPage extends VBox implements MessageListener {
           );
           buildRoomList();
         });
-        roomItem.setTotalPriceLabel("Total price: "
-                                    + Double.toString(totalPrice));
+        roomItem.setTotalPriceLabel(Double.toString(totalPrice));
         if (person.getBalance() < totalPrice) {
           roomItem.setOnMakeReservationButtonAction(null);
           roomItem.setErrorLabel("You don't have enough money to "

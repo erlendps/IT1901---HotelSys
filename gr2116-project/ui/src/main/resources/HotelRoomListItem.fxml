@@ -14,8 +14,18 @@
             <Label fx:id="numberLabel" text="Label" />
             <Label fx:id="typeLabel" text="Label" />
             <Label fx:id="amenitiesLabel" alignment="TOP_LEFT" maxWidth="327.0" prefWidth="327.0" text="Label" textOverrun="CLIP" wrapText="true" />
-            <Label fx:id="pricePerNightLabel" text="Label" />
-            <Label fx:id="totalPriceLabel" text="Label" /> 
+            <HBox prefHeight="17.0" prefWidth="310.0">
+               <children>
+                  <Label text="Price per night: " />
+                  <Label fx:id="pricePerNightLabel" text="Label" />
+               </children>
+            </HBox>
+            <HBox prefHeight="16.0" prefWidth="310.0">
+               <children>
+                  <Label fx:id="totalPriceTextLabel" />
+                  <Label fx:id="totalPriceLabel" text="Label" />
+               </children>
+            </HBox> 
          </children>
       </VBox>
       <Separator orientation="VERTICAL" prefHeight="100.0" prefWidth="118.0" />
