@@ -67,7 +67,12 @@ public class MoneyPage extends AnchorPane {
       throw new IllegalArgumentException("Card number has invalid format.");
     }
   }
-
+  /**
+   * Method to validate a money string.
+   * Money can only be a posiitve integer, strictly less than one million.
+   * (1 000 000)
+   * @param moneyAmount
+   */
   private void validateMoneyAmount(String moneyAmount) {
     if (!moneyAmount.matches("^[0-9]+$")) {
       throw new IllegalArgumentException("Balance must be a positive integer.");
