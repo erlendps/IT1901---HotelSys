@@ -3,9 +3,7 @@ package gr2116.core;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -233,7 +231,7 @@ public class Person {
     List<Long> ids = reservations.stream()
       .map((r) -> r.getId())
       .collect(Collectors.toList());
-    Collections.sort(ids);
+    Collections.sort(ids);    // sorts in ascending order
     return ids;
   }
 
