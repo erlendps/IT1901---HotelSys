@@ -11,4 +11,5 @@ module gr2116.ui {
     opens gr2116.ui.controller to javafx.fxml;
     opens gr2116.ui.main to javafx.fxml;
     opens gr2116.ui.login to javafx.fxml;
+    opens gr2116.ui.money to javafx.fxml;
 }

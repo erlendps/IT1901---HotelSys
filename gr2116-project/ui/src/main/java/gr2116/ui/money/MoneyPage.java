@@ -1,4 +1,4 @@
-package gr2116.ui.pages;
+package gr2116.ui.money;
 
 import gr2116.core.Person;
 import gr2116.ui.message.Message;

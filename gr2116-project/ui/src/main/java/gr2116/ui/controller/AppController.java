@@ -6,6 +6,7 @@ import gr2116.persistence.Loader;
 import gr2116.persistence.Saver;
 import gr2116.ui.login.LoginPage;
 import gr2116.ui.main.MainPage;
+import gr2116.ui.money.MoneyPage;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
 
