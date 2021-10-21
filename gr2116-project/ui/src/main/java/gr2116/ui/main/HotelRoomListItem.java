@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 
 /**
  * A gui element for displaying hotel rooms in a list.
@@ -23,6 +25,15 @@ public class HotelRoomListItem extends HBox {
 
   @FXML
   private Label amenitiesLabel;
+
+  @FXML
+  private Label pricePerNightLabel;
+
+  @FXML
+  private Label totalPriceLabel;
+
+  @FXML
+  private Label errorLabel;
 
   @FXML
   private Button makeReservationButton;
@@ -46,17 +57,35 @@ public class HotelRoomListItem extends HBox {
     typeLabel.setText(room.getRoomType().getDescription());
     makeReservationButton.setText("Make reservation.");
     makeReservationButton.setDisable(true); 
+    pricePerNightLabel.setText("Price per night: " + Double.toString(room.getPrice()));
+    totalPriceLabel.setText("");
+    errorLabel.setText("");
+    errorLabel.setTextFill(Color.RED);
+    errorLabel.setMinHeight(Region.USE_PREF_SIZE);
 
-    this.setId("hotelRoom" + Integer.toString(room.getNumber()) + "listItem");
-    numberLabel.setId("hotelRoom" + Integer.toString(room.getNumber()) + "NumberLabel");
-    typeLabel.setId("hotelRoom" + Integer.toString(room.getNumber()) + "TypeLabel");
-    makeReservationButton.setId("hotelRoom" + Integer.toString(room.getNumber()) + "Button");
+    int roomNumber = room.getNumber();
+    this.setId("hotelRoom" + Integer.toString(roomNumber) + "listItem");
+    numberLabel.setId("hotelRoom" + Integer.toString(roomNumber) + "NumberLabel");
+    typeLabel.setId("hotelRoom" + Integer.toString(roomNumber) + "TypeLabel");
+    pricePerNightLabel.setId("hotelRoom" + Integer.toString(roomNumber) + "PricePerNightLabel");
+    totalPriceLabel.setId("hotelRoom" + Integer.toString(roomNumber) + "TotalPriceLabel");
+    errorLabel.setId("hotelRoom" + Integer.toString(roomNumber) + "ErrorLabel");
+    makeReservationButton.setId("hotelRoom" + Integer.toString(roomNumber) + "Button");
 
     String amenitiesText = "";
     for (String amenity : room.getAmenities()) {
       amenitiesText += amenity + ", ";
     }
     amenitiesLabel.setText(amenitiesText);
+    amenitiesLabel.setMinHeight(Region.USE_PREF_SIZE);
+  }
+
+  public void setTotalPriceLabel(String price) {
+    totalPriceLabel.setText(price);
+  }
+
+  public void setErrorLabel(String error) {
+    errorLabel.setText(error);
   }
 
   /**
