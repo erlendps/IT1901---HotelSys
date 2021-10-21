@@ -16,7 +16,7 @@
          <children>
             <VBox alignment="CENTER" prefHeight="257.0" prefWidth="510.0">
                <children>
-                  <Label fx:id="moneyErrorLabel" alignment="TOP_CENTER" />
+                  <Label fx:id="moneyErrorLabel" alignment="TOP_CENTER" textFill="RED" />
                   <Label text="Card number" />
                   <TextField fx:id="cardTextField" maxWidth="500.0" />
                   <Label fx:id="nameTitleLabel" text="Amount" />
