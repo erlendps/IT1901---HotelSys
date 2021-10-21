@@ -16,13 +16,13 @@ Det er flere tester for alle de tre lagene. Jacoco brukes til å se testdeknings
 
 Under vises et skjermbilde for hvordan hovedsiden ser ut foreløpig. 
 
-<img src="../images/main_page_release_2.PNG"
+<img src="../images/main_page_release_2.png"
      alt="Skjermbilde av hovedsiden."
      style="float: left; margin-right: 10px; width: 100%" />
 
 Under vises et skjermbilden av siden for å legge inn penger. Kortnummer må være gyldig for at penger skal kunne settes inn, se eget avsnitt.
 
-<img src="../images/deposit_page_release_2.PNG"
+<img src="../images/deposit_page_release_2.png"
      alt="Skjermbilde av hovedsiden."
      style="float: left; margin-right: 10px; width: 100%" />
 
