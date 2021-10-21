@@ -57,14 +57,14 @@ public class MainPageTest extends ApplicationTest{
     }
 
     @Test
-    void checkUserPane() {
+    public void checkUserPane() {
         FxAssert.verifyThat("#nameLabel", LabeledMatchers.hasText("Richard Wilkens"));
         FxAssert.verifyThat("#emailLabel", LabeledMatchers.hasText("RichardWilkins@gmail.com"));
         FxAssert.verifyThat("#balanceLabel", LabeledMatchers.hasText("100.0"));
     }
     
     @Test
-    void checkBookHotel() {
+    public void checkBookHotel() {
         DateTimeFormatter systemFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
         String dateFrom = systemFormat.format(LocalDate.now());
         String dateTo = systemFormat.format(LocalDate.now().plusDays(3));
@@ -85,7 +85,7 @@ public class MainPageTest extends ApplicationTest{
     }
     
     @Test
-    void checkBookWrongDates() {
+    public void checkBookWrongDates() {
         DateTimeFormatter systemFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
         String dateFrom = systemFormat.format(LocalDate.now().plusDays(20));
         String dateTo = systemFormat.format(LocalDate.now().plusDays(18));
@@ -93,11 +93,10 @@ public class MainPageTest extends ApplicationTest{
         clickOn((lookup("#startDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateFrom + '\n');
         clickOn((lookup("#endDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateTo + '\n');
         FxAssert.verifyThat("#filterError", LabeledMatchers.hasText("You must choose an end date which is after the start date to make a reservation."));
-
     }
 
     @Test
-    void checkInvalidCardNumber() {
+    public void checkInvalidCardNumber() {
         clickOn("#makeDepositButton");
 
         clickOn("#cardTextField").write("0100341963170010");
@@ -111,7 +110,7 @@ public class MainPageTest extends ApplicationTest{
     }
 
     @Test
-    void checkInvalidMoney() {
+    public void checkInvalidMoney() {
         clickOn("#makeDepositButton");
 
         clickOn("#cardTextField").write("0100341963170009");
@@ -132,7 +131,7 @@ public class MainPageTest extends ApplicationTest{
     }
 
     @Test
-    void checkAddMoney() {
+    public void checkAddMoney() {
         clickOn("#makeDepositButton");
 
         clickOn("#cardTextField").write("0100341963170009");
@@ -142,7 +141,7 @@ public class MainPageTest extends ApplicationTest{
     }
 
     @Test
-    void cancelMoney() {
+    public void cancelMoney() {
         clickOn("#makeDepositButton");
         clickOn("#moneyCancelButton");
         FxAssert.verifyThat("#makeDepositButton", LabeledMatchers.hasText("Make deposit")); // Test fails if page was not switched
