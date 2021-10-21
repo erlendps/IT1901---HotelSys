@@ -41,7 +41,7 @@ public class MainPageTest extends ApplicationTest{
         //Pane p = fxmlLoader.load(getClass().getResource("App.fxml").openStream());
         Parent parent = fxmlLoader.load();
         appController = (AppController) fxmlLoader.getController();
-        appController.setPrefix("test");
+        appController.setPrefix("testUi");
         appController.load();
 
         
@@ -66,8 +66,8 @@ public class MainPageTest extends ApplicationTest{
     @Test
     void checkBookHotel() {
         DateTimeFormatter systemFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
-        String dateFrom = systemFormat.format(LocalDate.of(2021, 01, 12));
-        String dateTo = systemFormat.format(LocalDate.of(2021, 01, 14));
+        String dateFrom = systemFormat.format(LocalDate.now());
+        String dateTo = systemFormat.format(LocalDate.now().plusDays(3));
         
         clickOn((lookup("#startDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateFrom + '\n');
         clickOn((lookup("#endDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateTo + '\n');
@@ -75,15 +75,20 @@ public class MainPageTest extends ApplicationTest{
 
         FxAssert.verifyThat("#roomItemContainer", NodeMatchers.hasChild("#hotelRoom101listItem"));
         clickOn("#hotelRoom101Button");
-        FxAssert.verifyThat("#reservationListView", NodeMatchers.hasChild("#hotelRoom101reservation2021-01-12to2021-01-14"));
+        StringBuilder sb = new StringBuilder();
+        sb.append("#hotelRoom101reservation");
+        sb.append(LocalDate.now());
+        sb.append("to");
+        sb.append(LocalDate.now().plusDays(3));
+        FxAssert.verifyThat("#reservationListView", NodeMatchers.hasChild(sb.toString()));
 
     }
     
     @Test
     void checkBookWrongDates() {
         DateTimeFormatter systemFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
-        String dateFrom = systemFormat.format(LocalDate.of(2021, 01, 11));
-        String dateTo = systemFormat.format(LocalDate.of(2021, 01, 10));
+        String dateFrom = systemFormat.format(LocalDate.now().plusDays(20));
+        String dateTo = systemFormat.format(LocalDate.now().plusDays(18));
         
         clickOn((lookup("#startDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateFrom + '\n');
         clickOn((lookup("#endDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateTo + '\n');

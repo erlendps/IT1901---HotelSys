@@ -2,8 +2,9 @@ package gr2116.core;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -181,6 +182,9 @@ public class Person {
     if (hotelRoom == null || startDate == null || endDate == null) {
       throw new NullPointerException();
     }
+    if (startDate.isBefore(LocalDate.now())) {
+      throw new IllegalStateException("Cant make a reservation backwards in time.");
+    }
     if (startDate.isAfter(endDate)) {
       throw new IllegalArgumentException(
         "The startDate cannot be after the endDate.");
@@ -195,8 +199,7 @@ public class Person {
         "The room is not available at this time.");
     }
 
-    Reservation reservation = new Reservation(
-        Math.abs(ThreadLocalRandom.current().nextLong()), hotelRoom, startDate, endDate);
+    Reservation reservation = new Reservation(hotelRoom, startDate, endDate);
     hotelRoom.addReservation(reservation);
     addReservation(reservation);
     subtractBalance(price);
@@ -220,14 +223,16 @@ public class Person {
 
   /**
    * Returns a Collection of the reservation IDs for this Person objects. E.g all
-   * reservation IDs that belong to this Person.
+   * reservation IDs that belong to this Person. Needs to be sorted in increasing order.
    *
    * @return {@code Collection<Long>} of reservation IDs.
    */
   public final Collection<Long> getReservationIds() {
-    return reservations.stream()
+    List<Long> ids = reservations.stream()
       .map((r) -> r.getId())
       .collect(Collectors.toList());
+    Collections.sort(ids);    // sorts in ascending order
+    return ids;
   }
 
   /**

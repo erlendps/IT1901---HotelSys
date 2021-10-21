@@ -35,8 +35,7 @@ public class Reservation implements Iterable<LocalDate> {
    * @param startDate the given start date.
    * @param endDate the given end date.
    */
-  public Reservation(final long id,
-                      final HotelRoom room,
+  public Reservation(final HotelRoom room,
                       final LocalDate startDate,
                       final LocalDate endDate) {
     if (startDate == null || endDate == null) {
@@ -51,7 +50,7 @@ public class Reservation implements Iterable<LocalDate> {
     this.room = room;
     this.startDate = startDate;
     this.endDate = endDate;
-    this.id = id;
+    this.id = generateId();
   }
 
   /**
@@ -90,6 +89,15 @@ public class Reservation implements Iterable<LocalDate> {
     return id;
   }
 
+  private final long generateId() {
+    StringBuilder sb = new StringBuilder();
+    sb.append(room.getNumber());
+    sb.append(startDate.toString().replace("-", ""));
+    sb.append(endDate.toString().replace("-", ""));
+
+    return Long.parseLong(sb.toString());
+  }
+
   @Override
   public final Iterator<LocalDate> iterator() {
     ArrayList<LocalDate> dates = new ArrayList<>();
@@ -100,5 +108,10 @@ public class Reservation implements Iterable<LocalDate> {
     }
     dates.add(endDate);
     return dates.iterator();
+  }
+
+  @Override
+  public String toString() {
+    return Long.toString(getId());
   }
 }

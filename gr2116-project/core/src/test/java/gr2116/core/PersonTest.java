@@ -53,17 +53,17 @@ public class PersonTest {
 
         double balanceBefore = tom.getBalance();
         
-        LocalDate start = LocalDate.of(2021,7,6);
-        LocalDate end = LocalDate.of(2021, 7, 7);
+        LocalDate start = LocalDate.now();
+        LocalDate end = LocalDate.now().plusDays(1);
         when(room.isAvailable(start, end)).thenReturn(true);
         when(room.getPrice(start, end)).thenReturn(100.0);
         when(room.getPrice()).thenReturn(100.0);
         
-        tom.makeReservation(room, LocalDate.of(2021, 7, 6), LocalDate.of(2021, 7, 7));
+        tom.makeReservation(room, start, end);
         assertEquals(balanceBefore-room.getPrice(), tom.getBalance(), "Booking one night should cost the same as the price of the hotel room.");
 
-        when(room.isAvailable(LocalDate.of(2021, 8, 6), LocalDate.of(2021, 8 ,6))).thenReturn(true);
-        when(room.getPrice(LocalDate.of(2021, 8, 6), LocalDate.of(2021, 8 ,6))).thenReturn(0.0);
+        when(room.isAvailable(start.plusDays(2), start.plusDays(2))).thenReturn(true);
+        when(room.getPrice(start.plusDays(2), start.plusDays(2))).thenReturn(0.0);
         /*
         tom.makeReservation(room, LocalDate.of(2021, 8, 6), LocalDate.of(2021, 8, 6));
         assertEquals(900, tom.getBalance(), "Booking 0 days should not cost money.");

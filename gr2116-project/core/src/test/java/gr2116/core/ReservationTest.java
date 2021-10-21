@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class ReservationTest {
     private Reservation res;
@@ -20,7 +21,8 @@ public class ReservationTest {
 
     @BeforeEach
     public void setup() {
-        res = new Reservation(11, room, startDate, endDate);
+        when(room.getNumber()).thenReturn(101);
+        res = new Reservation(room, startDate, endDate);
     }
 
     @Test
@@ -41,22 +43,25 @@ public class ReservationTest {
 
     @Test
     public void testGetId() {
-        assertEquals(11, res.getId());
-        assertNotEquals(22, res.getId());
+        StringBuilder sb = new StringBuilder();
+        sb.append(101);
+        sb.append(startDate.toString().replace("-", ""));
+        sb.append(endDate.toString().replace("-", ""));
+        assertEquals(Long.parseLong(sb.toString()), res.getId());
     }
 
     @Test
     public void testConstructor() {
         assertThrows(NullPointerException.class, () ->
-            new Reservation(1, null, startDate, endDate));
+            new Reservation(null, startDate, endDate));
         
         assertThrows(NullPointerException.class, () ->
-            new Reservation(1, room, null, endDate));
+            new Reservation(room, null, endDate));
         
         assertThrows(NullPointerException.class, () ->
-            new Reservation(1, room, startDate, null));
+            new Reservation(room, startDate, null));
 
         assertThrows(IllegalArgumentException.class, () ->
-            new Reservation(1, room, endDate, startDate));
+            new Reservation(room, endDate, startDate));
     }
 }

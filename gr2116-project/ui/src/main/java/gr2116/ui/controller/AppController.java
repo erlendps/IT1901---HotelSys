@@ -52,7 +52,7 @@ public class AppController implements MessageListener {
   }
 
   public void setPrefix(String prefix) {
-    if (!prefix.matches("^([a-z]){3,10}$")) {
+    if (!prefix.matches("^([a-z]){3,10}([A-Z]{1}[a-z]{1,8})*$")) {
       throw new IllegalArgumentException("prefix is not valid");
     }
     this.prefix = prefix;

@@ -90,7 +90,6 @@ public class Loader {
 
     // Make the reservation using provided room data and data from reservations JSON
     Reservation reservation = new Reservation(
-        Long.parseLong(id),
         room,
         LocalDate.parse(reservationData.getString("startDate")),
         LocalDate.parse(reservationData.getString("endDate"))
