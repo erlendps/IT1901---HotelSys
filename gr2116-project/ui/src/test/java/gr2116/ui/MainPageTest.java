@@ -73,7 +73,7 @@ public class MainPageTest extends ApplicationTest{
         clickOn((lookup("#endDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateTo + '\n');
         clickOn("#amenityTelevision");
 
-        FxAssert.verifyThat("#roomItemContainer", NodeMatchers.hasChild("#hotelRoom101listItem"));
+        FxAssert.verifyThat("#roomItemContainer", NodeMatchers.hasChild("#hotelRoom101ListItem"));
         clickOn("#hotelRoom101Button");
         StringBuilder sb = new StringBuilder();
         sb.append("#hotelRoom101reservation");
@@ -82,6 +82,17 @@ public class MainPageTest extends ApplicationTest{
         sb.append(LocalDate.now().plusDays(3));
         FxAssert.verifyThat("#reservationListView", NodeMatchers.hasChild(sb.toString()));
 
+        clickOn("#amenityTelevision");
+        clickOn("#amenityInternet");
+        FxAssert.verifyThat("#roomItemContainer", NodeMatchers.hasChild("#hotelRoom102ListItem"));
+        clickOn("#hotelRoom102Button");
+        sb = new StringBuilder();
+        sb.append("#hotelRoom102reservation");
+        sb.append(LocalDate.now());
+        sb.append("to");
+        sb.append(LocalDate.now().plusDays(3));
+        FxAssert.verifyThat("#reservationListView", NodeMatchers.hasChild(sb.toString()));
+        FxAssert.verifyThat("#balanceLabel", LabeledMatchers.hasText("40.0"));
     }
     
     @Test
@@ -92,7 +103,36 @@ public class MainPageTest extends ApplicationTest{
         
         clickOn((lookup("#startDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateFrom + '\n');
         clickOn((lookup("#endDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateTo + '\n');
-        FxAssert.verifyThat("#filterError", LabeledMatchers.hasText("You must choose an end date which is after the start date to make a reservation."));
+        FxAssert.verifyThat("#filterError", LabeledMatchers.hasText("You must choose an end date which is " 
+                                                                + "after the start date to make a reservation."));
+
+        dateFrom = systemFormat.format(LocalDate.now().minusDays(2));
+        dateTo = systemFormat.format(LocalDate.now().plusDays(1));
+        
+        clickOn((lookup("#startDatePicker").queryAs(DatePicker.class)).getEditor()).eraseText(10);
+        clickOn((lookup("#endDatePicker").queryAs(DatePicker.class)).getEditor()).eraseText(10);
+        clickOn((lookup("#startDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateFrom + '\n');
+        clickOn((lookup("#endDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateTo + '\n');
+        FxAssert.verifyThat("#filterError", LabeledMatchers.hasText("You must choose a start date that is "
+                                                                + "today or later to make a reservation." ));
+    }
+
+    @Test
+    public void testPriceLabelIsCorrect() {
+        FxAssert.verifyThat("#hotelRoom101PricePerNightLabel", LabeledMatchers.hasText("0.0"));
+        FxAssert.verifyThat("#hotelRoom714PricePerNightLabel", LabeledMatchers.hasText("300.0"));
+        FxAssert.verifyThat("#hotelRoom102TotalPriceLabel", LabeledMatchers.hasText(""));
+
+        DateTimeFormatter systemFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
+        String dateFrom = systemFormat.format(LocalDate.now());
+        String dateTo = systemFormat.format(LocalDate.now().plusDays(3));
+
+        clickOn((lookup("#startDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateFrom + '\n');
+        clickOn((lookup("#endDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateTo + '\n');
+
+        FxAssert.verifyThat("#hotelRoom102TotalPriceLabel", LabeledMatchers.hasText("60.0"));
+        FxAssert.verifyThat("#hotelRoom714ErrorLabel", LabeledMatchers.hasText("You don't have enough money to "
+                                                                + "make this reservation."));
     }
 
     @Test
