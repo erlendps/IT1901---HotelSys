@@ -48,6 +48,9 @@ public class AppController implements MessageListener {
     } else if (message == Message.SignOut) {
       save();
       moveToLoginPage();
+    } else if (message == Message.MoneyPage && data instanceof Person) {
+      Person person = (Person) data;
+      moveToMoneyPage(person);
     }
   }
 
@@ -92,6 +95,14 @@ public class AppController implements MessageListener {
     MainPage mainPage = new MainPage(person, hotel);
     mainPage.addListener(this);
     root.getChildren().add(mainPage);
+  }
+
+  public void moveToMoneyPage(final Person person) {
+    System.out.println("Sending to money page.");
+    root.getChildren().clear();
+    MoneyPage moneyPage = new MoneyPage(person);
+    moneyPage.addListener(this);
+    root.getChildren().add(moneyPage);
   }
 
   /**
