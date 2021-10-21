@@ -12,14 +12,32 @@ Vi jobber fire timer i uken sammen på skolen, og fordeler oppgaver innad. Derso
 
 Det er flere tester for alle de tre lagene. Jacoco brukes til å se testdekningsgrad, Maven-tillegget CheckStyle benyttes for å forsikre seg om at koden opprettholder kodingsstandard og SpotBugs benytter til å finne bugs i koden. I tillegg benyttes Mockito i de ulike testene i core, slik at klassene kan testes uavhengig av hverandre.
 
-## Skjermbilde
+## Skjermbilder
 
-Under vises et skjermbilde for hvordan hovedsiden ser ut foreløpig. Innloggingsiden er lik som den var i [innlevering 1](../release1/README.md). 
+Under vises et skjermbilde for hvordan hovedsiden ser ut foreløpig. 
 
 <img src="../images/main_page_release2.PNG"
      alt="Skjermbilde av hovedsiden."
      style="float: left; margin-right: 10px; width: 100%" />
 
+Under vises et skjermbilden av siden for å legge inn penger. Kortnummer må være gyldig for at penger skal kunne settes inn, se eget avsnitt.
+
+<img src=".." />
+
+Innloggingsiden er lik som den var i [innlevering 1](../release1/README.md).
+
 ## Realisert
 
-Appen er i stor grad lik som ved innlevering 1 [(se release1)](../release1/README.md). Noen endringer er gjort i hovedsiden. Nå kan man velge etasje og fasilteter. Dermed er det letter for bruker å finne ønskelig rom, samt at det oppfyller [brukerhistriere 1](../../brukerhistorie.md). Det er også mulig å fjerne valgte filter, slik at brukeren lett kan nullstille alle valg.
+Appen bygger på konseptene fra den første innleveringen. [(Se release1)](../release1/README.md). Noen endringer er gjort i hovedsiden. Nå kan man velge etasje og fasilteter. Det er lettere for brukeren å finne ønskelig rom, samt at funksjonaliteten i [brukerhistorie 1](../../brukerhistorie.md) innfris. Det har blitt mulig å fjerne valgte filter, slik at brukeren lett kan nullstille valgene. Rom har fått pris, som beregnes ut i fra antall valgte netter. For å legge til penger på sin konto kan man trykke på 'Velg Deposit'.
+
+## Kortnummer
+
+På siden for å legge inn penger på kontoen sin, må man skrive inn et gyldig kortnummer. Et gyldig kortnummer oppfyller følgende krav:
+* De første 4 sifrene betegner et land, og er mellom 0001 og 0195.
+* De neste 8 sifrene kan være hva som helst.
+* De siste 4 sifrene skal være et firesifret tall x, som tilfredstiller x mod 13 ≡ 9.
+
+Under følger noen fungerende kortnummer for testing:
+* 0035 1396 2714 1322
+* 0079 2412 4162 2713
+* 0001 0000 0000 0009
