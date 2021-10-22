@@ -31,27 +31,19 @@ public class MainPageTest extends ApplicationTest{
   
     @Start
     public void start(Stage stage) throws IOException {
-        //Parent parent = FXMLLoader.load(
-        //getClass().getClassLoader().getResource("App.fxml")); //MainPage.fxml
-        //AppController appController = parent.getController();
-        //System.out.println(appController);
-        
-        //FXMLLoader loader = new FXMLLoader(getClass().getResource("App.fxml"));
+       
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("App.fxml"));
-        //Pane p = fxmlLoader.load(getClass().getResource("App.fxml").openStream());
+      
         Parent parent = fxmlLoader.load();
         appController = (AppController) fxmlLoader.getController();
         appController.setPrefix("testUi");
         appController.load();
 
-        
-        //AppController appController = loader.getController();
         Person person = new Person("Richard Wilkens");
         person.setEmail("RichardWilkins@gmail.com");
         person.addBalance(100.0);
         appController.moveToMainPage(person);
         
-
         stage.setScene(new Scene(parent));
         stage.show();
     }
