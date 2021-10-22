@@ -41,32 +41,55 @@ public class MoneyPage extends AnchorPane {
   }
 
   /**
-   * Card number validator.
-   * A valid card number is divided into four parts.
-   * The first part signifies the country. 195 countries are allowed,
-   * meaning the first 4 digits should be between 0001 and 0195. 
-   * 0000 is not allowed.
-   * The next 8 digits are assigned randomly.
-   * The final 4 digits are check digits, and must conform to xxxx % 13 = 9
-   * @param cardNumber
+   * Validates the given card number.
+   * Checks the following:
+   * 1) That all characters are digits (0-9) and the length is 16.
+   * 2) That the first four digits matches a Visa or a Mastercard
+   * 3) That the control digit (last digit) is correct.
+   * @param cardNumber the given card number.
    */
   private void validateCardNumber(String cardNumber) {
+    cardNumber = cardNumber.replaceAll(" ", "");
     if (!cardNumber.matches("[0-9]+")) {
       throw new IllegalArgumentException("Card number must contain numbers only.");
     }
     if (cardNumber.length() != 16) {
       throw new IllegalArgumentException("Card numbers must be exactly 16 characters long.");
-    } 
-    int firstDigits = Integer.parseInt(cardNumber.substring(0, 4));
-    if (!(firstDigits > 0) || !(firstDigits <= 195)) {
-      throw new IllegalArgumentException("Card number has invalid format.");
+    }
+    int first = Integer.parseInt(cardNumber.substring(0, 1));
+    int firstTwo = Integer.parseInt(cardNumber.substring(0, 2));
+    int firstFour = Integer.parseInt(cardNumber.substring(0, 4));
+
+    if (!(first == 4 || (51 <= firstTwo && firstTwo <= 55) || (2221 <= firstFour && firstFour <= 2720))) {
+      throw new IllegalArgumentException("The first four digits of the card number has invalid format.");
     } 
 
-    int lastDigits = Integer.parseInt(cardNumber.substring(12, 16));
-    if (lastDigits % 13 != 9) {
-      throw new IllegalArgumentException("Card number has invalid format.");
+    if (!checkLuhnsAlgorithm(cardNumber)) {
+      throw new IllegalArgumentException("The control digit (last digit) of the card number has invalid format.");
     }
   }
+
+  /**
+   * Checks the given card number, using Luhns algorithm,
+   * Luhns algorithm uses a checksum and compares with the control digit (the last digit).
+   * @param cardNumber the given card number.
+   * @return whether or not the last digit of the card number is correct. 
+   */
+  private boolean checkLuhnsAlgorithm(String cardNumber) {
+      int nDigits = cardNumber.length();
+      int nSum = 0;
+      boolean isSecond = false;
+      for (int i = nDigits - 1; i >= 0; i--) {
+        int d = cardNumber.charAt(i) - '0';
+        if (isSecond == true)
+            d = d * 2;
+        nSum += d / 10;
+        nSum += d % 10;
+        isSecond = !isSecond;
+      }
+      return (nSum % 10 == 0);
+  }
+ 
   /**
    * Method to validate a money string.
    * Money can only be a posiitve integer, strictly less than one million.
