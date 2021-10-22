@@ -70,7 +70,7 @@ public class Person {
   }
 
   /**
-   * Sets the email if some conditions are met.
+   * Sets the email if some conditions are met and notifies listeners.
    *
    * @param email - the new email.
    *
@@ -136,7 +136,8 @@ public class Person {
   }
 
   /**
-   * Subtracts the specified {@code balance} from this Peron objects balance field.
+   * Subtracts the specified {@code balance} from this Peron objects balance field
+   * and notifies listeners.
    *
    * @param balance - balance (the amount) to be subtracted.
    *
@@ -170,6 +171,7 @@ public class Person {
    * @param endDate - {@code LocalDate} of when the reservation should end.
    *
    * @throws NullPointerException if hotelRoom, startDate or endDate is null.
+   * @throws IllegalStateException if the start date is before today.
    * @throws IllegalArgumentException if startDate is chronologically after endDate.
    * @throws IllegalStateException  if the {@code Person} does not have enough balance
    *                                to pay for the reservation.
