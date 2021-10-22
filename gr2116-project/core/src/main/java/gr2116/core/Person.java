@@ -231,8 +231,8 @@ public class Person {
    */
   public final Collection<Long> getReservationIds() {
     List<Long> ids = reservations.stream()
-      .map((r) -> r.getId())
-      .collect(Collectors.toList());
+        .map((r) -> r.getId())
+        .collect(Collectors.toList());
     Collections.sort(ids);    // sorts in ascending order
     return ids;
   }

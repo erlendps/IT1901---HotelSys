@@ -31,7 +31,6 @@ public class Reservation implements Iterable<LocalDate> {
    * Constructs a reservation with given room, startDate and endDate.
    * The reservation ID is generated.
    *
-   * @param id the given id.
    * @param room the given room.
    * @param startDate the given start date.
    * @param endDate the given end date.

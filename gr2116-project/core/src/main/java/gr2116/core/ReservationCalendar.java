@@ -2,10 +2,10 @@ package gr2116.core;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.List;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -24,7 +24,7 @@ public class ReservationCalendar implements Iterable<Reservation> {
    * @param reservation the given reservation.
    *
    * @throws NullPointerException if the reservation is null
-   * @throws IllegalStateException 
+   * @throws IllegalStateException if the room is not available
    */
   public final void addReservation(final Reservation reservation) {
     if (reservation == null) {
@@ -45,8 +45,8 @@ public class ReservationCalendar implements Iterable<Reservation> {
    */
   public final Collection<Long> getReservationIds() {
     List<Long> ids = reservations.stream()
-      .map((r) -> r.getId())
-      .collect(Collectors.toList());
+        .map((r) -> r.getId())
+        .collect(Collectors.toList());
     Collections.sort(ids);    // sorts in ascending order.
     return ids;
   }

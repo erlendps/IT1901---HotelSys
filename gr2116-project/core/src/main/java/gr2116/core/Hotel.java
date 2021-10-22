@@ -14,6 +14,7 @@ public class Hotel implements Iterable<HotelRoom> {
    * The hotel's collection of rooms.
    */
   private final Collection<HotelRoom> rooms = new ArrayList<>();
+  
   /**
    * Constructs an empty hotel.
    */
