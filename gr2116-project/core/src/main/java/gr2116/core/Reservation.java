@@ -28,12 +28,16 @@ public class Reservation implements Iterable<LocalDate> {
   private final LocalDate endDate;
 
   /**
-   * Constructs a reservation with given id, room, startDate and endDate.
+   * Constructs a reservation with given room, startDate and endDate.
+   * The reservation ID is generated.
    *
-   * @param id the given id.
    * @param room the given room.
    * @param startDate the given start date.
    * @param endDate the given end date.
+   *
+   * @throws NullPointerException if startDate or endDate is null
+   * @throws IllegalArgumentException if startDate is after endDate
+   * @throws NullPointerExceptino if room is null
    */
   public Reservation(final HotelRoom room,
                       final LocalDate startDate,
@@ -89,6 +93,12 @@ public class Reservation implements Iterable<LocalDate> {
     return id;
   }
 
+  /**
+   * Generates a reservation ID based on the reservations room,
+   * startDate and endDate.
+   *
+   * @return {@code long} the id
+   */
   private final long generateId() {
     StringBuilder sb = new StringBuilder();
     sb.append(room.getNumber());

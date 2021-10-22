@@ -99,7 +99,6 @@ public class AppController implements MessageListener {
   }
 
   public void moveToMoneyPage(final Person person) {
-    System.out.println("Sending to money page.");
     root.getChildren().clear();
     MoneyPage moneyPage = new MoneyPage(person);
     moneyPage.addListener(this);

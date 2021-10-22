@@ -2,6 +2,7 @@ package gr2116.core;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.function.Predicate;
 
 /**
@@ -72,8 +73,8 @@ public class HotelRoomFilter {
         return false;
       }
       if (amenities != null) {
-        for (Amenity amenity : amenities.keySet()) {
-          if (amenities.get(amenity) && !room.hasAmenity(amenity)) {
+        for (Entry<Amenity, Boolean> entry : amenities.entrySet()) {
+          if (amenities.get(entry.getKey()) && !room.hasAmenity(entry.getKey())) {
             return false;
           }
         }
@@ -82,14 +83,29 @@ public class HotelRoomFilter {
     };
   }
 
+  /**
+   * Returns the start date of this filter.
+   *
+   * @return startDate
+   */
   public final LocalDate getStartDate() {
     return startDate;
   }
 
+  /**
+   * Returns the end date of this filter.
+   *
+   * @return endDate
+   */
   public final LocalDate getEndDate() {
     return endDate;
   }
 
+  /**
+   * Returns the roomType for this filter.
+   *
+   * @return roomType
+   */
   public final HotelRoomType getRoomType() {
     return roomType;
   }

@@ -19,7 +19,7 @@ public enum HotelRoomType {
   /**
    * Quad hotel room type.
    */
-  Quad("Qaud room", "A room for four."),
+  Quad("Quad room", "A room for four."),
   /**
    * Suite hotel room type.
    */

@@ -2,18 +2,15 @@ package gr2116.persistence;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -91,32 +88,6 @@ public class PersistenceTest {
         Saver saver = new Saver();
         assertDoesNotThrow(() -> saver.writeToFile(rooms, persons, "testWrite"), "Something went wrong with saving.");
     }
-
-    /* Since JSONObject stores in a sort of random order, its hard to test if the Saver class writes correctly
-        since it can change from time to time. This test then only 
-    @Test
-    public void testSaver() throws IOException {
-        // person data
-        byte[] writtenToFile = Files.readAllBytes(Path.of(DATA_FOLDER + "/testWriteToFilePerson.json"));
-        byte[] controlFile = Files.readAllBytes(Path.of(DATA_FOLDER + "/testWritePerson.json"));
-        assertNotNull(writtenToFile);
-        assertNotNull(controlFile);
-        assertTrue(Arrays.equals(writtenToFile, controlFile));
-
-        // reservations data
-        writtenToFile = Files.readAllBytes(Path.of(DATA_FOLDER + "/testWriteToFileReservation.json"));
-        assertNotNull(writtenToFile);
-        // commented out since you cannot sort a JSONObject by keys.
-        // assertTrue(Arrays.equals(writtenToFile, controlFile));
-
-        // rooms data
-        writtenToFile = Files.readAllBytes(Path.of(DATA_FOLDER + "/testWriteToFileRooms.json"));
-        controlFile = Files.readAllBytes(Path.of(DATA_FOLDER + "/testWriteRooms.json"));
-        assertNotNull(writtenToFile);
-        assertNotNull(controlFile);
-        assertTrue(Arrays.equals(writtenToFile, controlFile));
-    }
-    */
 
     @Test
     public void testLoadPersonsAndReservations() {

@@ -25,13 +25,16 @@ import javafx.scene.layout.VBox;
  * The panel where users select filters for hotel rooms.
  */
 public class FilterPanel extends VBox {
+
   private Collection<MessageListener> listeners = new HashSet<>();
   private HashMap<Amenity, Boolean> amenities = new HashMap<>();
 
   @FXML
   private DatePicker startDatePicker;
+
   @FXML
   private DatePicker endDatePicker;
+
   @FXML
   private ChoiceBox<HotelRoomType> roomTypeChoiceBox;
 
@@ -50,6 +53,9 @@ public class FilterPanel extends VBox {
   @FXML
   private Button clearFilterButton;
 
+  /**
+   * Constructor for FilterPanel.
+   */
   public FilterPanel() {
     FxmlUtils.loadFxml(this);
   }
@@ -59,11 +65,14 @@ public class FilterPanel extends VBox {
    */
   @FXML
   private void initialize() {
+
+    // Does not sort by floor.
     floorSpinner.setDisable(true);
     roomTypeDescription.setText("Select a room type.");
     floorSpinner.setValueFactory(
         new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20, 1));
-
+    
+    // Adds roomtypes and amenities to list of choices.
     for (HotelRoomType roomType : HotelRoomType.values()) {
       roomTypeChoiceBox.getItems().add(roomType);
     }
@@ -73,12 +82,16 @@ public class FilterPanel extends VBox {
       amenitiesContainer.getChildren().add(amenityCheckBox);
     }
 
+    // When user presses chose date, update filter.  
     startDatePicker.setOnAction((event) -> {
       notifyListeners();
     });
     endDatePicker.setOnAction((event) -> {
       notifyListeners();
     });
+
+    // When user presses a roomtype box the site updates.
+    // If there is not selected a roomType, give message "select a room type".
     roomTypeChoiceBox.setOnAction((event) -> {
       HotelRoomType roomType = roomTypeChoiceBox.getValue();
       if (roomType == null) {
@@ -95,6 +108,8 @@ public class FilterPanel extends VBox {
       floorSpinner.setDisable(!newValue);
       notifyListeners();
     });
+
+    //When user presses clear filter button, the filters clears.
     clearFilterButton.setOnAction((event) -> {
       startDatePicker.setValue(null);
       endDatePicker.setValue(null);
@@ -131,7 +146,7 @@ public class FilterPanel extends VBox {
     /**
      * Set whether to search for rooms with this amenity.
      *
-     * @param value true if amenity is selected.
+     * @param value true if amenity is selected
      */
     public void setSelected(final boolean value) {
       checkBox.setSelected(value);
@@ -141,7 +156,7 @@ public class FilterPanel extends VBox {
   /**
    * Add a listener.
    *
-   * @param listener The listener.
+   * @param listener The listener
    */
   public final void addListener(final MessageListener listener) {
     listeners.add(listener);
@@ -150,7 +165,7 @@ public class FilterPanel extends VBox {
   /**
    * Remove a listener.
    *
-   * @param listener The listener.
+   * @param listener The listener
    */
   public final void removeListener(final MessageListener listener) {
     listeners.remove(listener);

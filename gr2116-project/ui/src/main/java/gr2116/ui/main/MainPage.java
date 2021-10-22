@@ -34,6 +34,9 @@ public class MainPage extends VBox implements MessageListener {
    *
    * @param person the person the main page should be constructed for.
    * @param hotel the hotel the main page should be constructed for.
+   *
+   * @throws NullPointerException throws if person is null.
+   * @throws NullPointerException throws if hotel is null.
    */
   public MainPage(Person person, Hotel hotel) {
     if (person == null) {
@@ -83,6 +86,7 @@ public class MainPage extends VBox implements MessageListener {
    * which is where the user can select to book them.
    */
   private void buildRoomList() {
+    // Sets first empty list of rooms.
     roomItemContainer.getChildren().clear();
     errorLabel.setText("");
     if (!hotelRoomFilter.hasValidDates()) {
@@ -109,6 +113,7 @@ public class MainPage extends VBox implements MessageListener {
     
     Collection<HotelRoom> filteredRooms = hotel.getRooms(hotelRoomFilter);
 
+    // If dates are valid, add all filterd room.
     for (HotelRoom hotelRoom : filteredRooms) {
       HotelRoomListItem roomItem = new HotelRoomListItem(hotelRoom);
       if (hotelRoomFilter.hasValidDates()) {

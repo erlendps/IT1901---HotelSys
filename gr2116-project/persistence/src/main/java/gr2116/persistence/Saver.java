@@ -175,7 +175,8 @@ public class Saver {
       Path.of(roomsDataJson.getAbsolutePath()).toFile().createNewFile();
       Path.of(reservationDataJson.getAbsolutePath()).toFile().createNewFile();
     } catch (IOException e) {
-      System.err.println("Something went wrong with file creation");
+      e.printStackTrace();
+      throw new RuntimeException("Something went wrong in file creation.");
     }
     try (PrintWriter pw = new PrintWriter(personDataJson.getAbsolutePath())) {
       pw.print(updatePersonData(persons).toString(2));
