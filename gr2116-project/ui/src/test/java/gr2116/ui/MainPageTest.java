@@ -139,21 +139,29 @@ public class MainPageTest extends ApplicationTest{
     public void checkInvalidCardNumber() {
         clickOn("#makeDepositButton");
 
-        clickOn("#cardTextField").write("0100341963170010");
+        clickOn("#cardTextField").write("1234 5678 1234 5678");
         clickOn("#moneyAmountTextField").write("100");
         clickOn("#addFundsButton");
-        FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText("Card number has invalid format."));
+        FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText("The first four digits of the card number has invalid format."));
+        clickOn("#cardTextField").eraseText(19);
+
+        clickOn("#cardTextField").write("4106 5778 3149 6289");
+        clickOn("#moneyAmountTextField").write("100");
+        clickOn("#addFundsButton");
+        FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText("The control digit (last digit) of the card number has invalid format."));
+        clickOn("#cardTextField").eraseText(19);
         
         clickOn("#cardTextField").write("1");
         clickOn("#addFundsButton");
         FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText("Card numbers must be exactly 16 characters long."));
+        clickOn("#cardTextField").eraseText(1);
     }
 
     @Test
     public void checkInvalidMoney() {
         clickOn("#makeDepositButton");
 
-        clickOn("#cardTextField").write("0100341963170009");
+        clickOn("#cardTextField").write("4106 5778 3149 6288");
         clickOn("#moneyAmountTextField").write("-100");
         clickOn("#addFundsButton");
         FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText("Balance must be a positive integer."));
@@ -167,14 +175,13 @@ public class MainPageTest extends ApplicationTest{
         clickOn("#moneyAmountTextField").write("0");
         clickOn("#addFundsButton");
         FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText("Balance must be strictly greater than zero."));
-
     }
 
     @Test
     public void checkAddMoney() {
         clickOn("#makeDepositButton");
 
-        clickOn("#cardTextField").write("0100341963170009");
+        clickOn("#cardTextField").write("4106 5778 3149 6288");
         clickOn("#moneyAmountTextField").write("100");
         clickOn("#addFundsButton");
         FxAssert.verifyThat("#balanceLabel", LabeledMatchers.hasText("200.0"));
