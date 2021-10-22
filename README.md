@@ -33,4 +33,4 @@ Test coverage ligger i module-name/target/site/index.html. I GitPod kan denne vi
 
 ## Brukerhistorier
 
-Funksjonaliteten og brukergrensesnittet til applikasjonen er bygget utifra et sett med [brukerhistorier](docs/brukerhistorier.md).
+Funksjonaliteten og brukergrensesnittet til applikasjonen er bygget utifra et sett med [brukerhistorier](docs/brukerhistorier/brukerhistorier.md).
