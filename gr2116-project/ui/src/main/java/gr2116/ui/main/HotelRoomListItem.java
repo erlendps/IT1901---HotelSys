@@ -56,7 +56,7 @@ public class HotelRoomListItem extends HBox {
 
   @FXML
   private void initialize() {
-    numberLabel.setText("HotelRoom " + room.getNumber());
+    numberLabel.setText("Hotel room " + room.getNumber());
     typeLabel.setText(room.getRoomType().getDescription());
     makeReservationButton.setText("Make reservation.");
     makeReservationButton.setDisable(true); 
