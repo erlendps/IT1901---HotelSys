@@ -25,13 +25,16 @@ import javafx.scene.layout.VBox;
  * The panel where users select filters for hotel rooms.
  */
 public class FilterPanel extends VBox {
+  
   private Collection<MessageListener> listeners = new HashSet<>();
   private HashMap<Amenity, Boolean> amenities = new HashMap<>();
 
   @FXML
   private DatePicker startDatePicker;
+
   @FXML
   private DatePicker endDatePicker;
+
   @FXML
   private ChoiceBox<HotelRoomType> roomTypeChoiceBox;
 
@@ -50,6 +53,9 @@ public class FilterPanel extends VBox {
   @FXML
   private Button clearFilterButton;
 
+  /**
+   * Constructor for FilterPanel.
+   */
   public FilterPanel() {
     FxmlUtils.loadFxml(this);
   }
