@@ -13,6 +13,8 @@ public class FxmlUtils {
    * Method that loads the given component, which is a .fxml file.
    *
    * @param component the component to be loaded.
+   *
+   * @throws RunTimeException when file is not found.
    */
   public static <T extends Parent> void loadFxml(final T component) {
     FXMLLoader loader = new FXMLLoader();
