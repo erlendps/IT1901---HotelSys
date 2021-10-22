@@ -127,7 +127,8 @@ public class HotelRoom {
   }
 
   /**
-   * Returns a collection of the names of the room's amenities.
+   * Returns a collection of the names of the room's amenities
+   * that is sorted.
    *
    * @return amenities
    */
