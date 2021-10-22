@@ -6,13 +6,20 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <fx:root prefHeight="160.0" prefWidth="520.0" type="HBox" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gr2116.ui.main.HotelRoomListItem">
    <children>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="310.0">
          <children>
-            <Label fx:id="numberLabel" text="Label" />
-            <Label fx:id="typeLabel" text="Label" />
+            <Label fx:id="numberLabel" text="Label">
+               <font>
+                  <Font name="Verdana Bold" size="13.0" />
+               </font></Label>
+            <Label fx:id="typeLabel" text="Label">
+               <font>
+                  <Font name="System Font" size="13.0" />
+               </font></Label>
             <Label fx:id="amenitiesLabel" alignment="TOP_LEFT" maxWidth="327.0" prefWidth="327.0" text="Label" textOverrun="CLIP" wrapText="true" />
             <HBox prefHeight="17.0" prefWidth="310.0">
                <children>
