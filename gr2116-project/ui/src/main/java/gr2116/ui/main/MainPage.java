@@ -13,6 +13,7 @@ import java.util.HashSet;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
@@ -55,6 +56,9 @@ public class MainPage extends VBox implements MessageListener {
   @FXML
   private AnchorPane userPane;
 
+  @FXML
+  private Label errorLabel;
+
   /**
    * Initializes the main page, which includes adding 
    * the user panel and the filter panel to the respective panes.
@@ -65,12 +69,11 @@ public class MainPage extends VBox implements MessageListener {
     userPane.getChildren().add(userPanel);
     userPanel.addListener(this);
 
-
     filterPane.getChildren().add(filterPanel);
     filterPanel.addListener(this);
 
-    
-
+    errorLabel.setTextFill(Color.RED);
+    errorLabel.setMinHeight(Region.USE_PREF_SIZE);
     buildRoomList();
   }
 
@@ -81,33 +84,29 @@ public class MainPage extends VBox implements MessageListener {
    */
   private void buildRoomList() {
     roomItemContainer.getChildren().clear();
-    Label label = new Label();
-    label.setId("filterError");
-    label.setTextFill(Color.RED);
-
+    errorLabel.setText("");
     if (!hotelRoomFilter.hasValidDates()) {
       LocalDate startDate = hotelRoomFilter.getStartDate();
       LocalDate endDate = hotelRoomFilter.getEndDate();
-      roomItemContainer.getChildren().add(label);
 
       if (startDate == null || endDate == null) {
-        label.setText(
+        errorLabel.setText(
             "You must choose both a start date "
             + "and an end date to make a reservation."
         );
       } else if (!startDate.isBefore(endDate)) {
-        label.setText(
+        errorLabel.setText(
             "You must choose an end date which is "
             + "after the start date to make a reservation."
         );
       } else if (startDate.isBefore(LocalDate.now())) {
-        label.setText(
+        errorLabel.setText(
             "You must choose a start date that is "
             + "today or later to make a reservation." 
         );
       }
     }
-
+    
     Collection<HotelRoom> filteredRooms = hotel.getRooms(hotelRoomFilter);
 
     for (HotelRoom hotelRoom : filteredRooms) {

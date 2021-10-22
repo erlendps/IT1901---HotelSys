@@ -95,7 +95,7 @@ public class MainPageTest extends ApplicationTest{
         
         clickOn((lookup("#startDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateFrom + '\n');
         clickOn((lookup("#endDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateTo + '\n');
-        FxAssert.verifyThat("#filterError", LabeledMatchers.hasText("You must choose an end date which is " 
+        FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText("You must choose an end date which is " 
                                                                 + "after the start date to make a reservation."));
 
         dateFrom = systemFormat.format(LocalDate.now().minusDays(2));
@@ -105,7 +105,7 @@ public class MainPageTest extends ApplicationTest{
         clickOn((lookup("#endDatePicker").queryAs(DatePicker.class)).getEditor()).eraseText(10);
         clickOn((lookup("#startDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateFrom + '\n');
         clickOn((lookup("#endDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateTo + '\n');
-        FxAssert.verifyThat("#filterError", LabeledMatchers.hasText("You must choose a start date that is "
+        FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText("You must choose a start date that is "
                                                                 + "today or later to make a reservation." ));
     }
 
