@@ -71,7 +71,9 @@ public class MoneyPage extends AnchorPane {
    * Method to validate a money string.
    * Money can only be a posiitve integer, strictly less than one million.
    * (1 000 000)
+   *
    * @param moneyAmount
+   * @throws IllegalArgumentException if balance is not a positive integer between 1 and 999 999.
    */
   private void validateMoneyAmount(String moneyAmount) {
     if (!moneyAmount.matches("^[0-9]+$")) {
