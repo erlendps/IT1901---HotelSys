@@ -54,18 +54,24 @@ public class HotelRoomListItem extends HBox {
     FxmlUtils.loadFxml(this);
   }
 
+  /**
+   * Initializes the component. Add the room to HotelRoomList.
+   */
   @FXML
   private void initialize() {
     numberLabel.setText("Hotel room " + room.getNumber());
     typeLabel.setText(room.getRoomType().getDescription());
+    // MakeReservationButton can be pressed.
     makeReservationButton.setText("Make reservation.");
     makeReservationButton.setDisable(true); 
     pricePerNightLabel.setText(Double.toString(room.getPrice()));
     totalPriceLabel.setText("");
+    // No error messeage.
     errorLabel.setText("");
     errorLabel.setTextFill(Color.RED);
     errorLabel.setMinHeight(Region.USE_PREF_SIZE);
 
+    // Sets id used in the tests.
     int roomNumber = room.getNumber();
     this.setId("hotelRoom" + Integer.toString(roomNumber) + "ListItem");
     numberLabel.setId("hotelRoom" + Integer.toString(roomNumber) + "NumberLabel");
@@ -75,6 +81,7 @@ public class HotelRoomListItem extends HBox {
     errorLabel.setId("hotelRoom" + Integer.toString(roomNumber) + "ErrorLabel");
     makeReservationButton.setId("hotelRoom" + Integer.toString(roomNumber) + "Button");
 
+    // Adds the rooms amenities.
     String amenitiesText = "";
     for (String amenity : room.getAmenities()) {
       amenitiesText += amenity + ", ";
@@ -83,11 +90,21 @@ public class HotelRoomListItem extends HBox {
     amenitiesLabel.setMinHeight(Region.USE_PREF_SIZE);
   }
 
+/**
+   * Sets the totalPriceLabel to given price.
+   *
+   * @param price given total price.
+   */
   public void setTotalPriceLabel(String price) {
     totalPriceTextLabel.setText("Total Price: ");
     totalPriceLabel.setText(price);
   }
 
+/**
+   * Sets errorLabel to given error.
+   *
+   * @param error given error.
+   */
   public void setErrorLabel(String error) {
     errorLabel.setText(error);
   }
