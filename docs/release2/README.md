@@ -40,7 +40,7 @@ På siden for å legge inn penger på kontoen sin, må man skrive inn et gyldig 
 * Kortnummeret er 16 siffer langt.
 * De første sifferne betegner utsteder, og må være enten 4 (Visa) eller 51-55 / 2221-2720 (Mastercard).
 * Det siste sifferet må tilfredstille [Luhns' algoritme](https://en.wikipedia.org/wiki/Luhn_algorithm).
-)
+
 
 Under følger noen fungerende (men falske) kortnummer for testing:
 * 4106 5778 3149 6288
