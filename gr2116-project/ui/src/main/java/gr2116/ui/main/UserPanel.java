@@ -23,10 +23,13 @@ public class UserPanel extends VBox implements PersonListener {
 
   @FXML
   private Label nameLabel;
+
   @FXML
   private Label emailLabel;
+
   @FXML
   private Label balanceLabel;
+
   @FXML
   private Button signOutButton;
 
@@ -39,7 +42,9 @@ public class UserPanel extends VBox implements PersonListener {
   /**
    * Initialize the user panel with a person. This persons' attributes will be displayed.
    *
-   * @param person the person we want to initialize for.
+   * @param person the person we want to initialize for
+   *
+   * @throws NullPointerException if person is null
    */
   public UserPanel(final Person person) {
     if (person == null) {
@@ -69,7 +74,7 @@ public class UserPanel extends VBox implements PersonListener {
   /**
    * Add a listener.
    *
-   * @param listener The listener to be added.
+   * @param listener The listener to be added
    */
   public final void addListener(final MessageListener listener) {
     listeners.add(listener);
@@ -78,7 +83,7 @@ public class UserPanel extends VBox implements PersonListener {
   /**
    * Remove a listener.
    *
-   * @param listener The listener to be removed.
+   * @param listener The listener to be removed
    */
   public final void removeListener(final MessageListener listener) {
     listeners.remove(listener);
@@ -87,7 +92,7 @@ public class UserPanel extends VBox implements PersonListener {
   /**
    * Notify the listeners with a message.
    *
-   * @param message the message to notify.
+   * @param message the message to notify
    */
   public final void notifyListeners(final Message message) {
     for (MessageListener listener : listeners) {
@@ -98,6 +103,8 @@ public class UserPanel extends VBox implements PersonListener {
 
   /**
    * Receive a notification to update attributes for the person.
+   *
+   * @param person person to update attributes for
    */
   @Override
   public final void receiveNotification(final Person person) {
@@ -108,7 +115,7 @@ public class UserPanel extends VBox implements PersonListener {
    * Update the person panel with attributes that might have changed.
    * This includes name, email, balance and reservations.
    *
-   * @param person The person to show attributes for.
+   * @param person The person to show attributes for
    */
   private void updatePanel(final Person person) {
     nameLabel.setText(person.getName());
@@ -116,8 +123,8 @@ public class UserPanel extends VBox implements PersonListener {
     balanceLabel.setText(Double.toString(person.getBalance()));
 
     reservationListView.getItems().clear();
+    // Add the person's reservations.
     for (Reservation reservation : person.getReservations()) {
-      // TODO: Make prettier reservationListItems
       int roomNumber = reservation.getRoom().getNumber();
       String startDate = reservation.getStartDate().toString();
       String endDate = reservation.getEndDate().toString();
