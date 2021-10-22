@@ -32,7 +32,7 @@ Innloggingsiden er lik som den var i [innlevering 1](../release1/README.md).
 
 ## Realisert
 
-Appen bygger på konseptene fra den første innleveringen. [(Se release1)](../release1/README.md). Noen endringer er gjort i hovedsiden. Nå kan man velge etasje og fasilteter. Det er lettere for brukeren å finne ønskelig rom, samt at funksjonaliteten i [brukerhistorie 1](../../brukerhistorie.md) innfris. Det har blitt mulig å fjerne valgte filter, slik at brukeren lett kan nullstille valgene. Rom har fått pris, som beregnes ut i fra antall valgte netter. For å legge til penger på sin konto kan man trykke på 'Velg Deposit'.
+Appen bygger på konseptene fra den første innleveringen. [(Se release1)](../release1/README.md). Noen endringer er gjort i hovedsiden. Nå kan man velge etasje og fasilteter. Det er lettere for brukeren å finne ønskelig rom, samt at funksjonaliteten i [brukerhistorie 1](../brukerhistorier/brukerhistorier.md) innfris. Det har blitt mulig å fjerne valgte filter, slik at brukeren lett kan nullstille valgene. Rom har fått pris, som beregnes ut i fra antall valgte netter. For å legge til penger på sin konto kan man trykke på 'Velg Deposit'.
 
 ## Kortnummer
 
