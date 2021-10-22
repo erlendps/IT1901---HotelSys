@@ -25,7 +25,7 @@ import javafx.scene.layout.VBox;
  * The panel where users select filters for hotel rooms.
  */
 public class FilterPanel extends VBox {
-  
+
   private Collection<MessageListener> listeners = new HashSet<>();
   private HashMap<Amenity, Boolean> amenities = new HashMap<>();
 
@@ -65,11 +65,14 @@ public class FilterPanel extends VBox {
    */
   @FXML
   private void initialize() {
+
+    // Does not sort by floor.
     floorSpinner.setDisable(true);
     roomTypeDescription.setText("Select a room type.");
     floorSpinner.setValueFactory(
         new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20, 1));
-
+    
+    // Adds roomtypes and amenities to list of choices.
     for (HotelRoomType roomType : HotelRoomType.values()) {
       roomTypeChoiceBox.getItems().add(roomType);
     }
@@ -79,12 +82,16 @@ public class FilterPanel extends VBox {
       amenitiesContainer.getChildren().add(amenityCheckBox);
     }
 
+    // When user presses chose date, update filter.  
     startDatePicker.setOnAction((event) -> {
       notifyListeners();
     });
     endDatePicker.setOnAction((event) -> {
       notifyListeners();
     });
+
+    // When user presses a roomtype box the site updates.
+    // If there is not selected a roomType, give message "select a room type".
     roomTypeChoiceBox.setOnAction((event) -> {
       HotelRoomType roomType = roomTypeChoiceBox.getValue();
       if (roomType == null) {
@@ -101,6 +108,8 @@ public class FilterPanel extends VBox {
       floorSpinner.setDisable(!newValue);
       notifyListeners();
     });
+
+    //When user presses clear filter button, the filters clears.
     clearFilterButton.setOnAction((event) -> {
       startDatePicker.setValue(null);
       endDatePicker.setValue(null);
