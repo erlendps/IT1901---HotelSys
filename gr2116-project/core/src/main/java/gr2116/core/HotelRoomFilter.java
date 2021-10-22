@@ -34,7 +34,7 @@ public class HotelRoomFilter {
     this.endDate = endDate;
     this.roomType = roomType;
     this.floor = floor;
-    this.amenities = new HashMap<>(amenities);
+    this.amenities = amenities;
   }
 
   /**
