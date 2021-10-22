@@ -22,6 +22,9 @@ public class ReservationCalendar implements Iterable<Reservation> {
    * Add given reservation to the reservation calandar.
    *
    * @param reservation the given reservation.
+   *
+   * @throws NullPointerException if the reservation is null
+   * @throws IllegalStateException 
    */
   public final void addReservation(final Reservation reservation) {
     if (reservation == null) {
@@ -36,6 +39,7 @@ public class ReservationCalendar implements Iterable<Reservation> {
 
   /**
    * Returns collection of ids of reservation caladar's reservations.
+   * Is sorted.
    *
    * @return stream of reservation ids.
    */
