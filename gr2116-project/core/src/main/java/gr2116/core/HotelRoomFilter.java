@@ -2,6 +2,7 @@ package gr2116.core;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.function.Predicate;
 
 /**
@@ -33,7 +34,7 @@ public class HotelRoomFilter {
     this.endDate = endDate;
     this.roomType = roomType;
     this.floor = floor;
-    this.amenities = amenities;
+    this.amenities = new HashMap<>(amenities);
   }
 
   /**
@@ -72,8 +73,8 @@ public class HotelRoomFilter {
         return false;
       }
       if (amenities != null) {
-        for (Amenity amenity : amenities.keySet()) {
-          if (amenities.get(amenity) && !room.hasAmenity(amenity)) {
+        for (Entry<Amenity, Boolean> entry : amenities.entrySet()) {
+          if (amenities.get(entry.getKey()) && !room.hasAmenity(entry.getKey())) {
             return false;
           }
         }
