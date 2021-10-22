@@ -82,14 +82,29 @@ public class HotelRoomFilter {
     };
   }
 
+  /**
+   * Returns the start date of this filter.
+   *
+   * @return startDate
+   */
   public final LocalDate getStartDate() {
     return startDate;
   }
 
+  /**
+   * Returns the end date of this filter.
+   *
+   * @return endDate
+   */
   public final LocalDate getEndDate() {
     return endDate;
   }
 
+  /**
+   * Returns the roomType for this filter.
+   *
+   * @return roomType
+   */
   public final HotelRoomType getRoomType() {
     return roomType;
   }
