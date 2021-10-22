@@ -50,11 +50,14 @@ public class LoginPage extends AnchorPane {
 
   /**
    * Initialize LoginPage. Sets action for the login button.
+   * Set sign-in button to validate input.
+   * Add register field if necessary.
+   * If login is completed, redirect to
+   * main page.
    */
   @FXML
   private void initialize() {
     setNameVisible(false);
-
     signInButton.setOnAction((event) -> {
       String email = emailTextField.getText();
       String name = nameTextField.getText();
@@ -63,7 +66,8 @@ public class LoginPage extends AnchorPane {
         emailErrorLabel.setText("Invalid email!");
         return;
       }
-
+      // Find person and if already registred, notify to
+      // sign in.
       for (Person loadedPerson : loadedPersons) {
         if (loadedPerson.getEmail().equals(email)) {
           notifyListeners(Message.SignIn, loadedPerson);
@@ -71,6 +75,7 @@ public class LoginPage extends AnchorPane {
         }
       }
 
+      // If user was not registred, make name field appear.
       if (!nameTextField.isVisible()) {
         setNameVisible(true);
         return;
@@ -78,7 +83,7 @@ public class LoginPage extends AnchorPane {
         emailErrorLabel.setText("Invalid name!");
         return;
       }
-
+      // If both fields were set, create new person and log in.
       Person person = new Person(name);
       person.setEmail(email);
       notifyListeners(Message.SignIn, person);
