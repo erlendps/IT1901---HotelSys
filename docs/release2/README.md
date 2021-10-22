@@ -37,11 +37,11 @@ Appen bygger på konseptene fra den første innleveringen. [(Se release1)](../re
 ## Kortnummer
 
 På siden for å legge inn penger på kontoen sin, må man skrive inn et gyldig kortnummer. Et gyldig kortnummer oppfyller følgende krav:
-* De første 4 sifrene betegner et land, og er mellom 0001 og 0195.
-* De neste 8 sifrene kan være hva som helst.
-* De siste 4 sifrene skal være et firesifret tall x, som tilfredstiller x mod 13 ≡ 9.
+* Kortnummeret er 16 siffer langt.
+* De første sifferne betegner utsteder, og må være enten 4 (Visa) eller 51-55 / 2221-2720 (Mastercard).
+* Det siste sifferet må tilfredstille [Luhns' algoritme](https://en.wikipedia.org/wiki/Luhn_algorithm).
+)
 
-Under følger noen fungerende kortnummer for testing:
-* 0035 1396 2714 1322
-* 0079 2412 4162 2713
-* 0001 0000 0000 0009
+Under følger noen fungerende (men falske) kortnummer for testing:
+* 4106 5778 3149 6288
+* 5172 3119 4781 6718
