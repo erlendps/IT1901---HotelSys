@@ -93,7 +93,7 @@ public class HotelRoomListItem extends HBox {
 /**
    * Sets the totalPriceLabel to given price.
    *
-   * @param price given total price.
+   * @param price given total price
    */
   public void setTotalPriceLabel(String price) {
     totalPriceTextLabel.setText("Total Price: ");
@@ -103,7 +103,7 @@ public class HotelRoomListItem extends HBox {
 /**
    * Sets errorLabel to given error.
    *
-   * @param error given error.
+   * @param error given error
    */
   public void setErrorLabel(String error) {
     errorLabel.setText(error);
@@ -112,7 +112,7 @@ public class HotelRoomListItem extends HBox {
   /**
    * Sets the action of the makeReservationButton.
    *
-   * @param eventHandler the eventHandler that supplies the action.
+   * @param eventHandler the eventHandler that supplies the action
    */
   public final void setOnMakeReservationButtonAction(
       final EventHandler<ActionEvent> eventHandler) {
