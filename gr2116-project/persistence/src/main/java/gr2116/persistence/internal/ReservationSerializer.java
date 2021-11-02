@@ -1,5 +1,36 @@
 package gr2116.persistence.internal;
 
-public class ReservationSerializer {
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
+
+import gr2116.core.Reservation;
+
+import java.io.IOException;
+
+/**
+ * Serializer for Reservation class.
+ */
+public class ReservationSerializer extends JsonSerializer<Reservation> {
+
+  /*
+  format:
+  {
+    "room": ... ,
+    "startDate": "...",
+    "endDate": "...",
+    "id": ...
+  }
+  */
+  @Override
+  public void serialize(Reservation reservation, JsonGenerator gen,
+      SerializerProvider serializers) throws IOException {
+    gen.writeStartObject();
+    gen.writeNumberField("room", reservation.getRoomNumber());
+    gen.writeStringField("startDate", reservation.getStartDate().toString());
+    gen.writeStringField("endDate", reservation.getEndDate().toString());
+    gen.writeNumberField("id", reservation.getId());
+    gen.writeEndObject();
+  }
     
 }
