@@ -9,11 +9,15 @@ import gr2116.ui.utils.FxmlUtils;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+
+import java.time.LocalDate;
+
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
@@ -88,6 +92,20 @@ public class FilterPanel extends VBox {
     });
     endDatePicker.setOnAction((event) -> {
       notifyListeners();
+    });
+
+    startDatePicker.setDayCellFactory(param -> new DateCell() {
+      public void updateItem(LocalDate date, boolean empty) {
+        super.updateItem(date, empty);
+        setDisable(empty || date.compareTo(LocalDate.now()) < 0 );
+      }
+    });
+
+    endDatePicker.setDayCellFactory(param -> new DateCell() {
+      public void updateItem(LocalDate date, boolean empty) {
+        super.updateItem(date, empty);
+        setDisable(empty || date.compareTo(LocalDate.now()) < 0 );
+      }
     });
 
     // When user presses a roomtype box the site updates.
