@@ -52,6 +52,15 @@ public class HotelRoom {
   }
 
   /**
+   * Constructs a hotel room of type Single room and the given room number.
+   *
+   * @param number the room number
+   */
+  public HotelRoom(int number) {
+    this(HotelRoomType.Single, number);
+  }
+
+  /**
    * Returns the room type.
    *
    * @return room type
