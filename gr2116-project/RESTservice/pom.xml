@@ -17,10 +17,17 @@
 
 
   <dependencies>
-    <!-- RESTservice dependent on -->
+    <!-- RESTservice dependent on core -->
     <dependency>
       <groupId>gr2116</groupId>
       <artifactId>core</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+
+    <!-- RESTservice dependent on persistence -->
+    <dependency>
+      <groupId>gr2116</groupId>
+      <artifactId>persistence</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
 
@@ -160,11 +167,11 @@
         <artifactId>maven-checkstyle-plugin</artifactId>
       </plugin>
 
-      <!-- run spotbugs plugin -->
+      <!-- run spotbugs plugin 
       <plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
-      </plugin>
+      </plugin> -->
 
       <!-- JaCoCo for Maven test coverage --> 
       <plugin>
