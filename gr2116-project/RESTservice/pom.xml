@@ -31,6 +31,18 @@
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
 
+    <!-- jackson -->
+    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+    </dependency>
+
     <!-- jakarta rest service-->
     <dependency>
       <groupId>jakarta.ws.rs</groupId>

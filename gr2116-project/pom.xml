@@ -12,6 +12,7 @@
     <maven.compiler.source>16</maven.compiler.source>
     <maven.compiler.target>16</maven.compiler.target>
     <skipTests>false</skipTests>
+    <jackson.version>2.12.5</jackson.version>
   </properties>
 
   <dependencyManagement>
@@ -45,6 +46,21 @@
         <version>5.7.2</version>
         <scope>test</scope>
       </dependency>
+
+      <!-- jackson JSON library -->
+      <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-core</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+      <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-databind</artifactId>
+          <version>${jackson.version}</version>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
 
