@@ -8,6 +8,15 @@ import java.io.IOException;
 import gr2116.core.Person;
 
 
-public class PersonSerializer {
+public class PersonSerializer extends JsonSerializer<Person> {
+
+ /*
+  * format: { "examlpe@email.com": {}}
+  */
+  @Override
+  public void serialize(Person value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+    // TODO Auto-generated method stub
     
+  }
+
 }
