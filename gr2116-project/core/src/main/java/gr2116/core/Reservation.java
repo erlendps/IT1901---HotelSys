@@ -124,4 +124,24 @@ public class Reservation implements Iterable<LocalDate> {
   public String toString() {
     return Long.toString(getId());
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o == this) {
+      return true;
+    }
+    if (o == null || o.getClass() != this.getClass()) {
+      return false;
+    }
+    Reservation res = (Reservation) o;
+    return getId() == res.getId();
+  }
+
+  @Override
+  public int hashCode() {
+    int hash = 7;
+    hash = 31 * hash + getRoomNumber();
+    hash = 31 * hash + (null == getStartDate() ? 0 : getStartDate().hashCode());
+    return hash;
+  }
 }
