@@ -97,6 +97,15 @@ public class HotelRoom {
   }
 
   /**
+   * Returns the reservation calendar.
+   *
+   * @return ReservationCalendar
+   */
+  public final ReservationCalendar getCalendar() {
+    return calendar;
+  }
+
+  /**
    * Returns the cost of staying from the given
    * start date to the given end date.
    *
