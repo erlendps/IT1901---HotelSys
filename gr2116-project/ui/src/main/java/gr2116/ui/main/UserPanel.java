@@ -125,7 +125,7 @@ public class UserPanel extends VBox implements PersonListener {
     reservationListView.getItems().clear();
     // Add the person's reservations.
     for (Reservation reservation : person.getReservations()) {
-      int roomNumber = reservation.getRoom().getNumber();
+      int roomNumber = reservation.getRoomNumber();
       String startDate = reservation.getStartDate().toString();
       String endDate = reservation.getEndDate().toString();
       Label label = new Label("Room: " + roomNumber

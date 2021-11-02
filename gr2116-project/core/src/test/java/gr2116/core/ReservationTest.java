@@ -26,9 +26,10 @@ public class ReservationTest {
     }
 
     @Test
-    public void testGetRoom() {
-        assertEquals(room, res.getRoom());
-        assertNotEquals(room2, res.getRoom());
+    public void testGetRoomNumber() {
+        when(room2.getNumber()).thenReturn(205);
+        assertEquals(room.getNumber(), res.getRoomNumber());
+        assertNotEquals(room2.getNumber(), res.getRoomNumber());
     }
 
     @Test

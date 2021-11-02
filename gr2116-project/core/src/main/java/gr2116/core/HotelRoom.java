@@ -196,10 +196,10 @@ public class HotelRoom {
       throw new NullPointerException("Reservation can not be null");
     }
 
-    if (reservation.getRoom() != this) {
+    if (reservation.getRoomNumber() != getNumber()) {
       throw new IllegalArgumentException(
         "Reservation on room "
-        + Integer.toString(reservation.getRoom().getNumber())
+        + Integer.toString(reservation.getRoomNumber())
         + " can not be registred on room " + Integer.toString(getNumber()));
     }
 

@@ -17,7 +17,7 @@ public class Reservation implements Iterable<LocalDate> {
   /**
    * The reservation's room.
    */
-  private final HotelRoom room;
+  private final int roomNumber;
   /**
    * The reservation's start date.
    */
@@ -51,7 +51,7 @@ public class Reservation implements Iterable<LocalDate> {
     if (room == null) {
       throw new NullPointerException("Rooms is null.");
     }
-    this.room = room;
+    this.roomNumber = room.getNumber();
     this.startDate = startDate;
     this.endDate = endDate;
     this.id = generateId();
@@ -62,8 +62,8 @@ public class Reservation implements Iterable<LocalDate> {
    *
    * @return room.
    */
-  public final HotelRoom getRoom() {
-    return room;
+  public final int getRoomNumber() {
+    return roomNumber;
   }
 
   /**
@@ -101,7 +101,7 @@ public class Reservation implements Iterable<LocalDate> {
    */
   private final long generateId() {
     StringBuilder sb = new StringBuilder();
-    sb.append(room.getNumber());
+    sb.append(getRoomNumber());
     sb.append(startDate.toString().replace("-", ""));
     sb.append(endDate.toString().replace("-", ""));
 
