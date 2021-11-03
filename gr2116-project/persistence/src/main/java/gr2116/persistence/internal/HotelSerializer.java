@@ -23,18 +23,20 @@ public class HotelSerializer extends JsonSerializer<Hotel> {
   @Override
   public void serialize(Hotel hotel, JsonGenerator gen,
       SerializerProvider serializers) throws IOException {
-    gen.writeStartObject();
-    gen.writeArrayFieldStart("rooms");
-    for (HotelRoom room: hotel.getRooms()) {
-      gen.writeObject(room);
+    if (hotel != null) {
+      gen.writeStartObject();
+      gen.writeArrayFieldStart("rooms");
+      for (HotelRoom room: hotel.getRooms()) {
+        gen.writeObject(room);
+      }
+      gen.writeEndArray();
+      gen.writeArrayFieldStart("persons");
+      for (Person person: hotel.getPersons()) {
+        gen.writeObject(person);
+      }
+      gen.writeEndArray();
+      gen.writeEndObject();
     }
-    gen.writeEndArray();
-    gen.writeArrayFieldStart("persons");
-    for (Person person: hotel.getPersons()) {
-      gen.writeObject(person);
-    }
-    gen.writeEndArray();
-    gen.writeEndObject();
   }
 
 }

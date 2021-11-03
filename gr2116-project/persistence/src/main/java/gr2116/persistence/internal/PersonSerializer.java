@@ -25,19 +25,19 @@ public class PersonSerializer extends JsonSerializer<Person> {
   @Override
   public void serialize(Person person, JsonGenerator gen,
       SerializerProvider serializer) throws IOException {
-    gen.writeStartObject();
-    if (person.getName() != null) {
+    if (person != null) {
+      gen.writeStartObject();
       gen.writeStringField("name", person.getName());
+      if (person.getEmail() != null) {
+        gen.writeStringField("email", person.getEmail());
+      }
+      gen.writeNumberField("balance", person.getBalance());
+      gen.writeArrayFieldStart("reservations");
+      for (Reservation res : person.getReservations()) {
+        gen.writeObject(res);
+      }
+      gen.writeEndArray();
+      gen.writeEndObject();
     }
-    if (person.getEmail() != null) {
-      gen.writeStringField("email", person.getEmail());
-    }
-    gen.writeNumberField("balance", person.getBalance());
-    gen.writeArrayFieldStart("reservations");
-    for (Reservation res : person.getReservations()) {
-      gen.writeObject(res);
-    }
-    gen.writeEndArray();
-    gen.writeEndObject();
   }
 }
