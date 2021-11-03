@@ -34,6 +34,7 @@ public class HotelSerializer extends JsonSerializer<Hotel> {
       gen.writeObject(person);
     }
     gen.writeEndArray();
+    gen.writeEndObject();
   }
 
 }
