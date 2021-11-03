@@ -132,6 +132,10 @@ public class Hotel implements Iterable<HotelRoom> {
     return getRooms(hotelRoomFilter.getPredicate());
   }
 
+  public final Collection<HotelRoom> getRooms() {
+    return new ArrayList<>(rooms);
+  }
+
   /**
    * Returns the collection of persons connected to the hotel.
    *
