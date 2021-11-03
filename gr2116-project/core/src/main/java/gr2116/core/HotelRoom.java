@@ -253,4 +253,29 @@ public class HotelRoom {
         "The startDate must be before the endDate.");
     }
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || this.getClass() != o.getClass()) {
+      return false;
+    }
+    HotelRoom room = (HotelRoom) o;
+    return this.getNumber() == room.getNumber() &&
+        this.getRoomType() == room.getRoomType() &&
+        this.getPrice() == room.getPrice() &&
+        this.getAmenities().equals(room.getAmenities());
+  }
+
+  @Override
+  public int hashCode() {
+    int hash = 13;
+    hash = hash * 31 + getNumber();
+    hash = hash * 13 + getRoomType().hashCode();
+    hash = hash * 5 + getAmenities().hashCode();
+    hash = hash * 7 + (int) getPrice();
+    return hash;
+  }
 }

@@ -283,4 +283,27 @@ public class Person {
       listener.receiveNotification(this);
     }
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o.getClass() != this.getClass() || o == null) {
+      return false;
+    }
+    Person p = (Person) o;
+    return this.getName() == p.getName() &&
+        this.getEmail() == p.getEmail() &&
+        this.getReservations().equals(p.getReservations());
+  }
+
+  @Override
+  public int hashCode() {
+    int hash = 5;
+    hash = hash * 17 + getName().hashCode();
+    hash = hash * 31 + (getEmail() == null ? 0 : getEmail().hashCode());
+    hash = hash * 5 + getReservations().hashCode();
+    return hash;
+  }
 }
