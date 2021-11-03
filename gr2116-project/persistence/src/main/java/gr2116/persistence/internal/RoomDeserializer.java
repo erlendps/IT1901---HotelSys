@@ -49,7 +49,7 @@ public class RoomDeserializer extends JsonDeserializer<HotelRoom> {
    *
    * @return HotelRoom if everything checks out, null otherwise
    */
-  private HotelRoom deserialize(JsonNode jsonNode) {
+  protected HotelRoom deserialize(JsonNode jsonNode) {
     if (jsonNode instanceof ObjectNode objectNode) {
       HotelRoom room;
       JsonNode numberNode = objectNode.get("number");

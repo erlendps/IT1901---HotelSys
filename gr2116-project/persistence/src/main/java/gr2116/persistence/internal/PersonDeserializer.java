@@ -37,7 +37,7 @@ public class PersonDeserializer extends JsonDeserializer<Person> {
    *
    * @return Person if everything checks out, null otherwise.
    */
-  private Person deserialize(JsonNode jsonNode) {
+  protected Person deserialize(JsonNode jsonNode) {
     if (jsonNode instanceof ObjectNode objectNode) {
       Person person;
       JsonNode nameNode = objectNode.get("name");
