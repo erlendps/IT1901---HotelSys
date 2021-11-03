@@ -22,14 +22,8 @@ import gr2116.core.Reservation;
 public class ReservationDeserializer extends JsonDeserializer<Reservation> {
 
   /*
-  format:
-  {
-    "room": ... ,
-    "startDate": "...",
-    "endDate": "...",
-    "id": ...
-  }
-  */
+   * format: { "room": ... , "startDate": "...", "endDate": "...", "id": ... }
+   */
 
   @Override
   public Reservation deserialize(JsonParser p, DeserializationContext ctxt)
@@ -39,7 +33,8 @@ public class ReservationDeserializer extends JsonDeserializer<Reservation> {
   }
 
   /**
-   * Custom implentation of jackson deserialize that take a JsonNode obejct as argument.
+   * Custom implentation of jackson deserialize that take a JsonNode obejct as
+   * argument.
    *
    * @param jsonNode the JsonNode to be processed.
    *
@@ -65,9 +60,7 @@ public class ReservationDeserializer extends JsonDeserializer<Reservation> {
       } catch (Exception e) {
         return null;
       }
-      Reservation reservation = new Reservation(
-          new HotelRoom(roomNode.asInt()),
-          LocalDate.parse(startNode.asText()),
+      Reservation reservation = new Reservation(new HotelRoom(roomNode.asInt()), LocalDate.parse(startNode.asText()),
           LocalDate.parse(endNode.asText()));
       JsonNode idNode = objectNode.get("id");
       if (reservation.getId() == idNode.asLong()) {
@@ -76,5 +69,5 @@ public class ReservationDeserializer extends JsonDeserializer<Reservation> {
     }
     return null;
   }
-    
+
 }

@@ -26,15 +26,9 @@ public class RoomDeserializer extends JsonDeserializer<HotelRoom> {
   private final ReservationDeserializer reservationDeserializer = new ReservationDeserializer();
 
   /*
-  format:
-  {
-    "number": ... ,
-    "type": "...",
-    "amenities": [ ... ],
-    "price": ... ,
-    "reservations": [ ... ]
-  }
-  */
+   * format: { "number": ... , "type": "...", "amenities": [ ... ], "price": ... ,
+   * "reservations": [ ... ] }
+   */
 
   @Override
   public HotelRoom deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
@@ -43,7 +37,8 @@ public class RoomDeserializer extends JsonDeserializer<HotelRoom> {
   }
 
   /**
-   * Custom implementation of jackson deserialize that takes a JsonNode object as argument.
+   * Custom implementation of jackson deserialize that takes a JsonNode object as
+   * argument.
    *
    * @param jsonNode the JsonNode to be processed
    *

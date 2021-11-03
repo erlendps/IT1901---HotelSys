@@ -24,12 +24,11 @@ public class PersonDeserializer extends JsonDeserializer<Person> {
   private ReservationDeserializer reservationDeserializer = new ReservationDeserializer();
 
   @Override
-  public Person deserialize(JsonParser p, DeserializationContext ctxt)
-      throws IOException, JsonProcessingException {
+  public Person deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
     TreeNode treeNode = p.getCodec().readTree(p);
     return deserialize((JsonNode) treeNode);
   }
-  
+
   /**
    * Custom implementation that takes a jsonNode as arugment.
    *

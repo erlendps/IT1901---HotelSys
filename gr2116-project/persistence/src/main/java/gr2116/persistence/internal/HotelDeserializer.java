@@ -20,19 +20,16 @@ import gr2116.core.Person;
 public class HotelDeserializer extends JsonDeserializer<Hotel> {
   private final PersonDeserializer personDeserializer = new PersonDeserializer();
   private final RoomDeserializer roomDeserializer = new RoomDeserializer();
+
   /*
-  format:
-  {
-    "rooms": [ ... ],
-    "persons": [ ... ]
-  }
-  */
+   * format: { "rooms": [ ... ], "persons": [ ... ] }
+   */
   @Override
   public Hotel deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
     TreeNode treeNode = p.getCodec().readTree(p);
     return deserialize((JsonNode) treeNode);
   }
-  
+
   private Hotel deserialize(JsonNode jsonNode) {
     if (jsonNode instanceof ObjectNode objectNode) {
       Collection<HotelRoom> rooms = new ArrayList<>();
