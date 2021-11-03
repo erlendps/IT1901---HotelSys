@@ -293,8 +293,8 @@ public class Person {
       return false;
     }
     Person p = (Person) o;
-    return this.getName() == p.getName() &&
-        this.getEmail() == p.getEmail() &&
+    return this.getName().equals(p.getName()) &&
+        this.getEmail().equals(p.getEmail()) &&
         this.getReservations().equals(p.getReservations());
   }
 
