@@ -18,7 +18,7 @@ import java.nio.file.Paths;
  */
 public class HotelPersistence {
   private ObjectMapper mapper;
-  private static final String DATA_FOLDER
+  protected static final String DATA_FOLDER
       = Paths.get(".").toAbsolutePath()
       .normalize().getParent().getParent().resolve("data").toString();
 
