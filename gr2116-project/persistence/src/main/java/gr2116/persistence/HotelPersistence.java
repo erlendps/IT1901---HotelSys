@@ -105,6 +105,9 @@ public class HotelPersistence {
     if (prefix == null) {
       throw new NullPointerException("Prefix is null.");
     }
+    if (hotel == null) {
+      throw new NullPointerException("Hotel is null.");
+    }
     try (Writer writer = new FileWriter(
         Paths.get(DATA_FOLDER, prefix + "Hotel.json").toFile(),
         StandardCharsets.UTF_8)) {
