@@ -16,36 +16,30 @@ import java.util.Iterator;
 public class RoomSerializer extends JsonSerializer<HotelRoom> {
 
   /*
-  format:
-  {
-    "number": ... ,
-    "type": "...",
-    "amenities": [ ... ],
-    "price": ... ,
-    "reservations": [ ... ]
-  }
-  */
+   * format: { "number": ... , "type": "...", "amenities": [ ... ], "price": ... ,
+   * "reservations": [ ... ] }
+   */
 
   @Override
-  public void serialize(HotelRoom room, JsonGenerator gen,
-      SerializerProvider serializers) throws IOException {
-    if (room != null) {
-      gen.writeStartObject();
-      gen.writeNumberField("number", room.getNumber());
-      gen.writeStringField("type", room.getRoomType().name());
-      gen.writeArrayFieldStart("amenities");
-      for (String amenity : room.getAmenities()) {
-        gen.writeString(amenity);
-      }
-      gen.writeEndArray();
-      gen.writeNumberField("price", room.getPrice());
-      gen.writeArrayFieldStart("reservations");
-      Iterator<Reservation> it = room.getCalendar().iterator();
-      while (it.hasNext()) {
-        gen.writeObject(it.next());
-      }
-      gen.writeEndArray();
-      gen.writeEndObject();
+  public void serialize(HotelRoom room, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+    if (room == null) {
+      throw new NullPointerException("Room is null.");
     }
+    gen.writeStartObject();
+    gen.writeNumberField("number", room.getNumber());
+    gen.writeStringField("type", room.getRoomType().name());
+    gen.writeArrayFieldStart("amenities");
+    for (String amenity : room.getAmenities()) {
+      gen.writeString(amenity);
+    }
+    gen.writeEndArray();
+    gen.writeNumberField("price", room.getPrice());
+    gen.writeArrayFieldStart("reservations");
+    Iterator<Reservation> it = room.getCalendar().iterator();
+    while (it.hasNext()) {
+      gen.writeObject(it.next());
+    }
+    gen.writeEndArray();
+    gen.writeEndObject();
   }
 }

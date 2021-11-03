@@ -14,24 +14,18 @@ import java.io.IOException;
 public class ReservationSerializer extends JsonSerializer<Reservation> {
 
   /*
-  format:
-  {
-    "room": ... ,
-    "startDate": "...",
-    "endDate": "...",
-    "id": ...
-  }
-  */
+   * format: { "room": ... , "startDate": "...", "endDate": "...", "id": ... }
+   */
   @Override
-  public void serialize(Reservation reservation, JsonGenerator gen,
-      SerializerProvider serializers) throws IOException {
-    if (reservation != null) {
-      gen.writeStartObject();
-      gen.writeNumberField("room", reservation.getRoomNumber());
-      gen.writeStringField("startDate", reservation.getStartDate().toString());
-      gen.writeStringField("endDate", reservation.getEndDate().toString());
-      gen.writeNumberField("id", reservation.getId());
-      gen.writeEndObject();
+  public void serialize(Reservation reservation, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+    if (reservation == null) {
+      throw new NullPointerException("Reservation is null.");
     }
-  } 
+    gen.writeStartObject();
+    gen.writeNumberField("room", reservation.getRoomNumber());
+    gen.writeStringField("startDate", reservation.getStartDate().toString());
+    gen.writeStringField("endDate", reservation.getEndDate().toString());
+    gen.writeNumberField("id", reservation.getId());
+    gen.writeEndObject();
+  }
 }

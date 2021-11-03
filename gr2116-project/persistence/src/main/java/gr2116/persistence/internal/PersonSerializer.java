@@ -13,31 +13,28 @@ import gr2116.core.Reservation;
  */
 public class PersonSerializer extends JsonSerializer<Person> {
 
- /*
-  format:
-  { 
-    "name": "...",
-    "email": "...",
-    "balance": ... ,
-    "reservations": [ ... ]
-  }
-  */
+  /*
+   * format: { "name": "...", "email": "...", "balance": ... , "reservations": [
+   * ... ] }
+   */
+  
   @Override
-  public void serialize(Person person, JsonGenerator gen,
-      SerializerProvider serializer) throws IOException {
-    if (person != null) {
-      gen.writeStartObject();
-      gen.writeStringField("name", person.getName());
-      if (person.getEmail() != null) {
-        gen.writeStringField("email", person.getEmail());
-      }
-      gen.writeNumberField("balance", person.getBalance());
-      gen.writeArrayFieldStart("reservations");
-      for (Reservation res : person.getReservations()) {
-        gen.writeObject(res);
-      }
-      gen.writeEndArray();
-      gen.writeEndObject();
+  public void serialize(Person person, JsonGenerator gen, SerializerProvider serializer) throws IOException {
+    if (person == null) {
+      throw new NullPointerException("Person is null.");
     }
+    gen.writeStartObject();
+    gen.writeStringField("name", person.getName());
+    if (person.getEmail() != null) {
+      gen.writeStringField("email", person.getEmail());
+    }
+    gen.writeNumberField("balance", person.getBalance());
+    gen.writeArrayFieldStart("reservations");
+    for (Reservation res : person.getReservations()) {
+      gen.writeObject(res);
+    }
+    gen.writeEndArray();
+    gen.writeEndObject();
+
   }
 }
