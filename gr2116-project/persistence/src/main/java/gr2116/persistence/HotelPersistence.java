@@ -114,5 +114,4 @@ public class HotelPersistence {
       writeHotel(hotel, writer);
     }
   }
-
 }
