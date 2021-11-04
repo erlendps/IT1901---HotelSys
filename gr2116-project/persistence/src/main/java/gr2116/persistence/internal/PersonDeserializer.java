@@ -51,7 +51,7 @@ public class PersonDeserializer extends JsonDeserializer<Person> {
       JsonNode balanceNode = objectNode.get("balance");
       if (balanceNode instanceof NumericNode) {
         person.addBalance(balanceNode.asDouble());
-      }
+      } else return null;
       JsonNode reservationNode = objectNode.get("reservations");
       if (reservationNode instanceof ArrayNode) {
         for (JsonNode reservation : (ArrayNode) reservationNode) {
@@ -60,7 +60,7 @@ public class PersonDeserializer extends JsonDeserializer<Person> {
             person.addReservation(res);
           }
         }
-      }
+      } else return null;
       return person;
     }
     return null;

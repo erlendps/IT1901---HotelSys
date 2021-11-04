@@ -61,18 +61,18 @@ public class RoomDeserializer extends JsonDeserializer<HotelRoom> {
         for (JsonNode amenity : (ArrayNode) amenityNode) {
           room.addAmenity(Amenity.valueOf(amenity.asText()));
         }
-      }
+      } else return null;
       JsonNode priceNode = objectNode.get("price");
       if (priceNode instanceof NumericNode && priceNode.asDouble() >= 0) {
         room.setPrice(priceNode.asDouble());
-      }
+      } else return null;
       JsonNode reservationNode = objectNode.get("reservations");
       if (reservationNode instanceof ArrayNode) {
         for (JsonNode res : (ArrayNode) reservationNode) {
           Reservation reservation = reservationDeserializer.deserialize(res);
           room.addReservation(reservation);
         }
-      }
+      } else return null;
       return room;
     }
     return null;
