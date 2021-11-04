@@ -16,14 +16,14 @@ public class HotelRoomTest {
 	LocalDate tomorrow = today.plusDays(1);
 	LocalDate overmorrow = today.plusDays(2);
 
-    // mock
-    Reservation res = mock(Reservation.class);
+  // mock
+  Reservation res = mock(Reservation.class);
 
-    @BeforeEach
-    public void setup() {
-        roomSingle = new HotelRoom(HotelRoomType.Single, 111);
-        roomDouble = new HotelRoom(HotelRoomType.Double, 794);
-    }
+  @BeforeEach
+  public void setup() {
+      roomSingle = new HotelRoom(HotelRoomType.Single, 111);
+      roomDouble = new HotelRoom(HotelRoomType.Double, 794);
+  }
 
 
 	@Test
@@ -69,7 +69,7 @@ public class HotelRoomTest {
     @Test
     public void testAddReservation() {
         assertThrows(NullPointerException.class, () -> roomDouble.addReservation(null));
-        when(res.getRoom()).thenReturn(roomSingle);
+        when(res.getRoomNumber()).thenReturn(roomSingle.getNumber());
         assertThrows(IllegalArgumentException.class, () -> roomDouble.addReservation(res));
     }
 

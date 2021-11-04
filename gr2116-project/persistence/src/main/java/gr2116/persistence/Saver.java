@@ -74,7 +74,7 @@ public class Saver {
     }
     JSONObject reservationData = new JSONObject();
     reservationData.put("id", reservation.getId());
-    reservationData.put("room", reservation.getRoom().getNumber());
+    reservationData.put("room", reservation.getRoomNumber());
     reservationData.put("startDate", reservation.getStartDate().toString());
     reservationData.put("endDate", reservation.getEndDate().toString());
     return reservationData;

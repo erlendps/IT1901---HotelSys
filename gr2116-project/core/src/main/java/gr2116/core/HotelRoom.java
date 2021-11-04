@@ -52,6 +52,15 @@ public class HotelRoom {
   }
 
   /**
+   * Constructs a hotel room of type Single room and the given room number.
+   *
+   * @param number the room number
+   */
+  public HotelRoom(int number) {
+    this(HotelRoomType.Single, number);
+  }
+
+  /**
    * Returns the room type.
    *
    * @return room type
@@ -85,6 +94,15 @@ public class HotelRoom {
    */
   public final double getPrice() {
     return price;
+  }
+
+  /**
+   * Returns the reservation calendar.
+   *
+   * @return ReservationCalendar
+   */
+  public final ReservationCalendar getCalendar() {
+    return calendar;
   }
 
   /**
@@ -196,10 +214,10 @@ public class HotelRoom {
       throw new NullPointerException("Reservation can not be null");
     }
 
-    if (reservation.getRoom() != this) {
+    if (reservation.getRoomNumber() != getNumber()) {
       throw new IllegalArgumentException(
         "Reservation on room "
-        + Integer.toString(reservation.getRoom().getNumber())
+        + Integer.toString(reservation.getRoomNumber())
         + " can not be registred on room " + Integer.toString(getNumber()));
     }
 
@@ -234,5 +252,30 @@ public class HotelRoom {
       throw new IllegalArgumentException(
         "The startDate must be before the endDate.");
     }
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || this.getClass() != o.getClass()) {
+      return false;
+    }
+    HotelRoom room = (HotelRoom) o;
+    return this.getNumber() == room.getNumber() &&
+        this.getRoomType() == room.getRoomType() &&
+        this.getPrice() == room.getPrice() &&
+        this.getAmenities().equals(room.getAmenities());
+  }
+
+  @Override
+  public int hashCode() {
+    int hash = 13;
+    hash = hash * 31 + getNumber();
+    hash = hash * 13 + getRoomType().hashCode();
+    hash = hash * 5 + getAmenities().hashCode();
+    hash = hash * 7 + (int) getPrice();
+    return hash;
   }
 }

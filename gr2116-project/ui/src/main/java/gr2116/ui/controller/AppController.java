@@ -2,14 +2,14 @@ package gr2116.ui.controller;
 
 import gr2116.core.Hotel;
 import gr2116.core.Person;
-import gr2116.persistence.Loader;
-import gr2116.persistence.Saver;
+import gr2116.persistence.HotelPersistence;
 import gr2116.ui.login.LoginPage;
 import gr2116.ui.main.MainPage;
 import gr2116.ui.money.MoneyPage;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
@@ -20,9 +20,9 @@ import javafx.scene.layout.StackPane;
  * as it receives notifications from various parts of the program.
  */
 public class AppController implements MessageListener {
-  private Collection<Person> persons;
+  private HotelPersistence hotelPersistence = new HotelPersistence();
   private String prefix = "data";
-  private Hotel hotel = new Hotel();
+  private Hotel hotel;
 
   @FXML
   private StackPane root;
@@ -42,8 +42,8 @@ public class AppController implements MessageListener {
       final Message message, final Object data) {
     if (message == Message.SignIn && data instanceof Person) {
       Person person = (Person) data;
-      if (!persons.contains(person)) {
-        persons.add(person);
+      if (!getPersons().contains(person)) {
+        hotel.addPerson(person);
       }
       moveToMainPage(person);
     } else if (message == Message.SignOut) {
@@ -73,8 +73,8 @@ public class AppController implements MessageListener {
     root.getChildren().clear();
     LoginPage loginPage = new LoginPage();
     loginPage.addListener(this);
-    if (persons != null) {
-      loginPage.setLoadedPersons(persons);
+    if (getPersons() != null) {
+      loginPage.setLoadedPersons(getPersons());
     } else {
       throw new IllegalStateException("No loaded persons were set.");
     }
@@ -105,18 +105,19 @@ public class AppController implements MessageListener {
     root.getChildren().add(moneyPage);
   }
 
+  public Collection<Person> getPersons() {
+    return new ArrayList<>(hotel.getPersons());
+  }
+
   /**
-   * Load data from JSON files. Puts this data into persons and loadedRooms,
+   * Load data from JSON files. Creates a hotel object,
    * which is used to create pages with correct data in them.
    */
   public void load() {
-    Loader loader = new Loader();
     try {
-      loader.loadData(prefix);
-      hotel = new Hotel(loader.getRooms());
-      persons = loader.getPersons();
+      hotel = hotelPersistence.loadHotel(prefix);
     } catch (Exception e) {
-      throw new IllegalStateException("Something went wrong loading with prefix " + prefix);
+      throw new IllegalStateException("Something when wrong with loading data. Prefix: " + prefix);
     }
   }
   
@@ -126,9 +127,8 @@ public class AppController implements MessageListener {
    * or bookings might have been made.
    */
   private void save() {
-    Saver saver = new Saver();
     try {
-      saver.writeToFile(hotel.getRooms((room) -> true), persons, prefix);
+      hotelPersistence.saveHotel(hotel, prefix);
     } catch (Exception e) {
       e.printStackTrace();
     }

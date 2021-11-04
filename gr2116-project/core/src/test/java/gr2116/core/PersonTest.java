@@ -79,12 +79,13 @@ public class PersonTest {
         HotelRoom deluxeRoom = mock(HotelRoom.class);
         when(deluxeRoom.isAvailable(today, overmorrow)).thenReturn(true);
         when(deluxeRoom.getPrice(today, overmorrow)).thenReturn(900.0);
+        when(deluxeRoom.getNumber()).thenReturn(105);
 
         tom.makeReservation(deluxeRoom, today, overmorrow);
         assertEquals(1, tom.getReservationIds().size(), "User should have one reservation after booking one room.");
         ArrayList<Reservation> reservations = new ArrayList<Reservation>();
         tom.getReservations().forEach((r) -> reservations.add(r));
-        assertEquals(deluxeRoom, reservations.get(0).getRoom());
+        assertEquals(deluxeRoom.getNumber(), reservations.get(0).getRoomNumber());
     }
 
   @Test
