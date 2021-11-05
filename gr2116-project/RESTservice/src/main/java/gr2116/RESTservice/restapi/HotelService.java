@@ -38,8 +38,9 @@ public class HotelService {
   @GET
   public Hotel getHotel() {
     LOG.debug("Hotel: " + hotel);
-    return new Hotel();
+    return hotel;
   }
+  
   @Path("/person/{username}")
   public PersonResource getPersonResource(@PathParam("username") String username) {
     Collection<Person> matches = hotel.getPersons(p -> p.getUsername() == username);
