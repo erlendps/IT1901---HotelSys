@@ -23,6 +23,7 @@ public class AppController implements MessageListener {
   private HotelPersistence hotelPersistence = new HotelPersistence();
   private String prefix = "data";
   private Hotel hotel;
+  private MainPage mainPage;
 
   @FXML
   private StackPane root;
@@ -42,12 +43,16 @@ public class AppController implements MessageListener {
       final Message message, final Object data) {
     if (message == Message.SignIn && data instanceof Person) {
       Person person = (Person) data;
+      if (mainPage == null) { // Sign in if no one is signed in right now
+        mainPage = new MainPage(person, hotel);
+      }
       if (!getPersons().contains(person)) {
         hotel.addPerson(person);
       }
       moveToMainPage(person);
     } else if (message == Message.SignOut) {
       save();
+      mainPage = null; // Reset the signed in person when signing out
       moveToLoginPage();
     } else if (message == Message.MoneyPage && data instanceof Person) {
       Person person = (Person) data;
@@ -92,8 +97,10 @@ public class AppController implements MessageListener {
    * @param person The person to be logged in as
    */
   public void moveToMainPage(final Person person) {
+    if (mainPage == null) {
+      throw new IllegalStateException("Page was not loaded before being called.");
+    }
     root.getChildren().clear();
-    MainPage mainPage = new MainPage(person, hotel);
     mainPage.addListener(this);
     root.getChildren().add(mainPage);
   }

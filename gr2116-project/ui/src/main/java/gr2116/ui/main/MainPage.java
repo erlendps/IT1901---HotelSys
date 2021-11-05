@@ -4,6 +4,7 @@ import gr2116.core.Hotel;
 import gr2116.core.HotelRoom;
 import gr2116.core.HotelRoomFilter;
 import gr2116.core.Person;
+import gr2116.core.PersonListener;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
 import gr2116.ui.utils.FxmlUtils;
@@ -20,7 +21,7 @@ import javafx.scene.paint.Color;
 /**
  * Main page, which contains the main panel for booking hotel nights.
  */
-public class MainPage extends VBox implements MessageListener {
+public class MainPage extends VBox implements MessageListener, PersonListener {
   private final FilterPanel filterPanel = new FilterPanel();
   private UserPanel userPanel;
   private final Hotel hotel;
@@ -74,6 +75,8 @@ public class MainPage extends VBox implements MessageListener {
 
     filterPane.getChildren().add(filterPanel);
     filterPanel.addListener(this);
+
+    person.addListener(this);
 
     errorLabel.setTextFill(Color.RED);
     errorLabel.setMinHeight(Region.USE_PREF_SIZE);
@@ -161,6 +164,11 @@ public class MainPage extends VBox implements MessageListener {
     if (message == Message.MoneyPage) {
       notifyListeners(Message.MoneyPage, person);
     }
+  }
+
+  @Override
+  public void receiveNotification(Person person) {
+    buildRoomList();
   }
 
   /**
