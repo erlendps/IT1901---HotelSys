@@ -121,7 +121,8 @@ public class MainPage extends VBox implements MessageListener {
                               hotelRoomFilter.getStartDate(),
                               hotelRoomFilter.getEndDate());
         roomItem.setOnMakeReservationButtonAction((event) -> {
-          person.makeReservation(
+          hotelAccess.makeReservation(
+              person,
               hotelRoom,
               hotelRoomFilter.getStartDate(),
               hotelRoomFilter.getEndDate()

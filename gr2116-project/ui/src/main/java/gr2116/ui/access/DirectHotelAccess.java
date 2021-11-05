@@ -6,6 +6,7 @@ import gr2116.core.HotelRoomFilter;
 import gr2116.core.Person;
 import gr2116.persistence.HotelPersistence;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Collection;
 
 /**
@@ -51,5 +52,11 @@ public class DirectHotelAccess implements HotelAccess {
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  @Override
+  public void makeReservation(Person person, HotelRoom hotelRoom,
+      LocalDate startDate, LocalDate endDate) {
+    hotel.makeReservation(person, hotelRoom, startDate, endDate);
   }
 }

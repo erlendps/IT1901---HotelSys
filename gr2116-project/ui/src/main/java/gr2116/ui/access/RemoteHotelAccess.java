@@ -3,6 +3,7 @@ package gr2116.ui.access;
 import gr2116.core.HotelRoom;
 import gr2116.core.HotelRoomFilter;
 import gr2116.core.Person;
+import java.time.LocalDate;
 import java.util.Collection;
 
 
@@ -37,6 +38,13 @@ public class RemoteHotelAccess implements HotelAccess {
 
   @Override
   public void saveHotel() {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void makeReservation(Person person, HotelRoom hotelRoom,
+      LocalDate startDate, LocalDate endDate) {
     // TODO Auto-generated method stub
     
   }

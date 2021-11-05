@@ -46,10 +46,20 @@ public class HotelPersistenceTest {
     kyle.addBalance(144);
     tom.addBalance(1000000000);
 
+    Collection<Person> persons = new ArrayList<Person>();
+    persons.add(rick);
+    persons.add(kyle);
+    persons.add(tom);
+    
     HotelRoom room1 = new HotelRoom(HotelRoomType.Single, 101);
     HotelRoom room2 = new HotelRoom(HotelRoomType.Single, 102);
     HotelRoom room3 = new HotelRoom(HotelRoomType.Quad, 714);
-
+    
+    Collection<HotelRoom> rooms = new ArrayList<HotelRoom>();
+    rooms.add(room1);
+    rooms.add(room2);
+    rooms.add(room3);
+    
     room1.addAmenity(Amenity.Bathtub);
     room1.addAmenity(Amenity.Television);
     room2.addAmenity(Amenity.Fridge);
@@ -60,25 +70,16 @@ public class HotelPersistenceTest {
     room3.addAmenity(Amenity.WashingMachine);
     room3.addAmenity(Amenity.Shower);
 
-    rick.makeReservation(room1, LocalDate.of(2121, 6, 4), LocalDate.of(2121, 6, 7));
-    kyle.makeReservation(room1, LocalDate.of(2121, 6, 11), LocalDate.of(2121, 6, 13));
-    rick.makeReservation(room2, LocalDate.of(2121, 7, 13), LocalDate.of(2121, 7, 22));
-    tom.makeReservation(room3, LocalDate.of(2121, 10, 12), LocalDate.of(2121, 10, 13));
-    tom.makeReservation(room3, LocalDate.of(2121, 11, 12), LocalDate.of(2121, 11, 13));
-    tom.makeReservation(room3, LocalDate.of(2122, 1, 12), LocalDate.of(2122, 1, 13));
-    tom.makeReservation(room3, LocalDate.of(2122, 2, 12), LocalDate.of(2122, 2, 13));
-
-    Collection<Person> persons = new ArrayList<Person>();
-    persons.add(rick);
-    persons.add(kyle);
-    persons.add(tom);
-
-    Collection<HotelRoom> rooms = new ArrayList<HotelRoom>();
-    rooms.add(room1);
-    rooms.add(room2);
-    rooms.add(room3);
-
     Hotel hotel = new Hotel(rooms, persons);
+
+    hotel.makeReservation(rick, room1, LocalDate.of(2121, 6, 4), LocalDate.of(2121, 6, 7));
+    hotel.makeReservation(kyle, room1, LocalDate.of(2121, 6, 11), LocalDate.of(2121, 6, 13));
+    hotel.makeReservation(rick, room2, LocalDate.of(2121, 7, 13), LocalDate.of(2121, 7, 22));
+    hotel.makeReservation(tom, room3, LocalDate.of(2121, 10, 12), LocalDate.of(2121, 10, 13));
+    hotel.makeReservation(tom, room3, LocalDate.of(2121, 11, 12), LocalDate.of(2121, 11, 13));
+    hotel.makeReservation(tom, room3, LocalDate.of(2122, 1, 12), LocalDate.of(2122, 1, 13));
+    hotel.makeReservation(tom, room3, LocalDate.of(2122, 2, 12), LocalDate.of(2122, 2, 13));
+
 
     try {
       hotelPersistence.saveHotel(hotel);
