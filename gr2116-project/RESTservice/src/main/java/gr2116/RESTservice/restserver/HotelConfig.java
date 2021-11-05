@@ -1,11 +1,11 @@
 package gr2116.RESTservice.restserver;
 
-import com.fasterxml.jackson.core.util.JacksonFeature;
 import gr2116.RESTservice.restapi.HotelService;
 import gr2116.core.Hotel;
 import gr2116.persistence.HotelPersistence;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.jackson.JacksonFeature;
 
 /**
  * Configures the rest service,
@@ -37,11 +37,24 @@ public class HotelConfig extends ResourceConfig {
     });
   }
 
+  public HotelConfig() {
+    this(createHotel());
+  }
+
   public void setHotel(Hotel hotel) {
     this.hotel = hotel;
   }
 
   public Hotel getHotel() {
     return hotel;
+  }
+
+  public static Hotel createHotel() {
+    HotelPersistence hotelPersistence = new HotelPersistence();
+    try {
+      return hotelPersistence.loadHotel("data");
+    } catch (Exception e) {
+      return new Hotel();
+    }
   }
 }

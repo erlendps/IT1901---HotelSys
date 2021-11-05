@@ -38,7 +38,7 @@ public class HotelService {
   @GET
   public Hotel getHotel() {
     LOG.debug("Hotel: " + hotel);
-    return hotel;
+    return new Hotel();
   }
   @Path("/person/{username}")
   public PersonResource getPersonResource(@PathParam("username") String username) {
