@@ -46,7 +46,7 @@ public class Loader {
     personsData.keySet().forEach((String k) -> {
       JSONObject personData = personsData.getJSONObject(k);
       Person person = new Person(personData.getString("name"));
-      person.setEmail(personData.getString("email"));
+      person.setUsername(personData.getString("username"));
       person.addBalance(personData.getDouble("balance"));
 
       // Get reservation IDs and add the reservations to person.

@@ -44,9 +44,9 @@ public class PersistenceTest {
         Person rick = new Person("Richard");
         Person kyle = new Person("Kyllard");
         Person tom = new Person("Tom");
-        rick.setEmail("richard@people.com");
-        kyle.setEmail("kyle@people.com");
-        tom.setEmail("tom@richpeople.org");
+        rick.setUsername("richard");
+        kyle.setUsername("kyle");
+        tom.setUsername("tom");
 
         rick.addBalance(1000);
         kyle.addBalance(144);
@@ -114,7 +114,7 @@ public class PersistenceTest {
         assertEquals(1000, rick.getBalance(), "Balance was saved incorrectly for Rick.");
         assertEquals(1000000000, tom.getBalance(), "Balance was saved incorrectly for Tom.");
 
-        assertEquals("kyle@people.com", kyle.getEmail());
+        assertEquals("kyle", kyle.getUsername());
 
         assertEquals(1, kyle.getReservations().size(), "Kyle has the wrong number of reservations, should be 1. Was " + 
         Integer.toString(kyle.getReservations().size()));

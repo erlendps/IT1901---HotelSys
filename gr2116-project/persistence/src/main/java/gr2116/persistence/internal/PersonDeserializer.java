@@ -44,9 +44,9 @@ public class PersonDeserializer extends JsonDeserializer<Person> {
         return null;
       }
       person = new Person(nameNode.asText());
-      JsonNode emailNode = objectNode.get("email");
-      if (emailNode instanceof TextNode) {
-        person.setEmail(emailNode.asText());
+      JsonNode usernameNode = objectNode.get("username");
+      if (usernameNode instanceof TextNode) {
+        person.setUsername(usernameNode.asText());
       }
       JsonNode balanceNode = objectNode.get("balance");
       if (balanceNode instanceof NumericNode) {

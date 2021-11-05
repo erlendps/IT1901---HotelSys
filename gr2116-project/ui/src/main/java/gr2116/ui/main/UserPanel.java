@@ -25,7 +25,7 @@ public class UserPanel extends VBox implements PersonListener {
   private Label nameLabel;
 
   @FXML
-  private Label emailLabel;
+  private Label usernameLabel;
 
   @FXML
   private Label balanceLabel;
@@ -113,13 +113,13 @@ public class UserPanel extends VBox implements PersonListener {
 
   /**
    * Update the person panel with attributes that might have changed.
-   * This includes name, email, balance and reservations.
+   * This includes name, username, balance and reservations.
    *
    * @param person The person to show attributes for
    */
   private void updatePanel(final Person person) {
     nameLabel.setText(person.getName());
-    emailLabel.setText(person.getEmail());
+    usernameLabel.setText(person.getUsername());
     balanceLabel.setText(Double.toString(person.getBalance()));
 
     reservationListView.getItems().clear();

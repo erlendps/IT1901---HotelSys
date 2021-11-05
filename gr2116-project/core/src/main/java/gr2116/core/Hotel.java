@@ -145,6 +145,10 @@ public class Hotel implements Iterable<HotelRoom> {
     return new ArrayList<>(persons);
   }
 
+  public final Collection<Person> getPersons(Predicate<Person> pred) {
+    return persons.stream().filter(pred).collect(Collectors.toList());
+  }
+
   @Override
   public final Iterator<HotelRoom> iterator() {
     return rooms.iterator();

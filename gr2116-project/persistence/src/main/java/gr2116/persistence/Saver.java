@@ -35,7 +35,7 @@ public class Saver {
     }
     JSONObject personData = new JSONObject();
     personData.put("name", person.getName());
-    personData.put("email", person.getEmail());
+    personData.put("username", person.getUsername());
     personData.put("balance", person.getBalance());
     personData.put("reservations", person.getReservationIds());
     return personData;
@@ -85,12 +85,12 @@ public class Saver {
    *
    * @param persons Collection of persons
    *
-   * @return JSON Map of persons, with email as key.
+   * @return JSON Map of persons, with username as key.
    */
   private JSONObject updatePersonData(final Collection<Person> persons) {
     JSONObject personsData = new JSONObject();
     persons.forEach((person) -> {
-      personsData.put(person.getEmail(), makePersonJson(person));
+      personsData.put(person.getUsername(), makePersonJson(person));
     });
     return personsData;
   }

@@ -55,7 +55,7 @@
   } ],
   "persons" : [ {
     "name" : "Richard",
-    "email" : "richard@people.com",
+    "username" : "richard",
     "balance" : 1000.0,
     "reservations" : [ {
       "room" : 101,
@@ -70,7 +70,7 @@
     } ]
   }, {
     "name" : "Kyllard",
-    "email" : "kyle@people.com",
+    "username" : "kyle",
     "balance" : 144.0,
     "reservations" : [ {
       "room" : 101,
@@ -80,7 +80,7 @@
     } ]
   }, {
     "name" : "Tom",
-    "email" : "tom@richpeople.org",
+    "username" : "tom",
     "balance" : 1.0E9,
     "reservations" : [ {
       "room" : 714,

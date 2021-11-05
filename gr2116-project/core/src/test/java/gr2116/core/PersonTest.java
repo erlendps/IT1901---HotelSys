@@ -25,26 +25,26 @@ public class PersonTest {
   }
 
   @Test
-  public void testSetEmail() {
+  public void testSetUsername() {
     assertThrows(IllegalArgumentException.class, () -> {
-      person.setEmail("yolo@noob.home");
+      person.setUsername("yolo!");
     });
     assertThrows(IllegalArgumentException.class, () -> {
-      person.setEmail("y@noob.no");
+      person.setUsername("y sdf");
     });
     assertThrows(IllegalArgumentException.class, () -> {
-      person.setEmail("yolo@n.com");
+      person.setUsername("yolo_K");
     });
     assertThrows(IllegalArgumentException.class, () -> {
-      person.setEmail("yolo(at)noob.net");
+      person.setUsername("yolo(23");
     });
     assertThrows(NullPointerException.class, () -> {
-      person.setEmail(null);
+      person.setUsername(null);
     });
-    person.setEmail("yolo.noob@noob.com");
-    assertEquals("yolo.noob@noob.com", person.getEmail());
-    tom.setEmail("tom@richpeople.com");
-    assertEquals("tom@richpeople.com", tom.getEmail());
+    person.setUsername("yolonoob");
+    assertEquals("yolonoob", person.getUsername());
+    tom.setUsername("tom");
+    assertEquals("tom", tom.getUsername());
   }
 
     @Test

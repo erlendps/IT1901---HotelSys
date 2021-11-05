@@ -57,14 +57,14 @@ class Reservation {
 
 class Person {
     - String name
-    - String email
+    - String username
     - double balance
 
     + Person(String)
     + String getName()
-    + String getEmail()
-    + void setEmail()
-    + {static} boolean isValidEmail()
+    + String getUsername()
+    + void setUsername()
+    + {static} boolean isValidUsername()
     + {static} boolean isValidName()
     + double getBalance()
     + void addBalance(double)

@@ -36,7 +36,7 @@ public class HotelModuleTest {
     room.setPrice(10);
     room.addAmenity(Amenity.Internet);
     person = new Person("Henry");
-    person.setEmail("henry@mail.com");
+    person.setUsername("henry");
     person.addBalance(100);
     Reservation res = new Reservation(
         room, LocalDate.of(2021, 11, 03), LocalDate.of(2021, 11, 05));
@@ -65,7 +65,7 @@ public class HotelModuleTest {
       ],
     "persons":[
       {"name":"Henry",
-      "email": "henry@mail.com",
+      "username": "henry",
       "balance":100.0,
       "reservations":[
         {"room":101,

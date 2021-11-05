@@ -36,9 +36,9 @@ public class HotelPersistenceTest {
     Person rick = new Person("Richard");
     Person kyle = new Person("Kyllard");
     Person tom = new Person("Tom");
-    rick.setEmail("richard@people.com");
-    kyle.setEmail("kyle@people.com");
-    tom.setEmail("tom@richpeople.org");
+    rick.setUsername("richard");
+    kyle.setUsername("kyle");
+    tom.setUsername("tom");
 
     rick.addBalance(1000);
     kyle.addBalance(144);

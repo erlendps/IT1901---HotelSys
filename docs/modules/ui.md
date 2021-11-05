@@ -28,9 +28,9 @@ class FxmlUtils {
 
 class LoginPage {
     - TextField nameTextField
-    - TextField emailTextField
+    - TextField usernameTextField
     - Button signInButton
-    - Label emailErrorLabel
+    - Label usernameErrorLabel
     - Label nameTitleLabel
 
     + loginPage()
@@ -99,7 +99,7 @@ class HotelRoomListItem {
 
 class UserPanel {
     - Label nameLabel
-    - Label emailLabel
+    - Label usernameLabel
     - Label balanceLabel
     - Button signOutButton
     - ListView<Label> reservationListView

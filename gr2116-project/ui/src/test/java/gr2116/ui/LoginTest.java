@@ -38,7 +38,7 @@ public class LoginTest extends ApplicationTest{
   @Test
   public void makeNewUserTest() {
     FxAssert.verifyThat("#signInButton", LabeledMatchers.hasText("Sign in"));
-    clickOn("#emailTextField").write("jonathan@people.com");
+    clickOn("#usernameTextField").write("jonathan");
     clickOn("#signInButton");
     clickOn("#nameTextField").write("Jonathan Spark");
     clickOn("#signInButton");
@@ -47,16 +47,16 @@ public class LoginTest extends ApplicationTest{
   @Test
   public void loginUserTest() {
     FxAssert.verifyThat("#signInButton", LabeledMatchers.hasText("Sign in"));
-    clickOn("#emailTextField").write("tom@richpeople.org");
+    clickOn("#usernameTextField").write("tom");
     clickOn("#signInButton");
   }
 
   @Test
-  public void testInvalidEmail() {
+  public void testInvalidUsername() {
     FxAssert.verifyThat("#signInButton", LabeledMatchers.hasText("Sign in"));
-    clickOn("#emailTextField").write("tp^skm@f?ake.email");
+    clickOn("#usernameTextField").write("tp^skm@f?");
     clickOn("#signInButton");
-    FxAssert.verifyThat("#emailErrorLabel", LabeledMatchers.hasText("Invalid email!"));
+    FxAssert.verifyThat("#usernameErrorLabel", LabeledMatchers.hasText("Invalid username!"));
 
   }
 }
