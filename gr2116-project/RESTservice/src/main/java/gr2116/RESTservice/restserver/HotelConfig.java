@@ -40,4 +40,8 @@ public class HotelConfig extends ResourceConfig {
   public void setHotel(Hotel hotel) {
     this.hotel = hotel;
   }
+
+  public Hotel getHotel() {
+    return hotel;
+  }
 }
