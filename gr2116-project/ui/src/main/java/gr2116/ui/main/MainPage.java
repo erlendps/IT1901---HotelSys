@@ -1,9 +1,9 @@
 package gr2116.ui.main;
 
-import gr2116.core.Hotel;
 import gr2116.core.HotelRoom;
 import gr2116.core.HotelRoomFilter;
 import gr2116.core.Person;
+import gr2116.ui.access.HotelAccess;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
 import gr2116.ui.utils.FxmlUtils;
@@ -23,7 +23,7 @@ import javafx.scene.paint.Color;
 public class MainPage extends VBox implements MessageListener {
   private final FilterPanel filterPanel = new FilterPanel();
   private UserPanel userPanel;
-  private final Hotel hotel;
+  private final HotelAccess hotelAccess;
   private HotelRoomFilter hotelRoomFilter
       = new HotelRoomFilter(null, null, null, null, null);
   private final Person person;
@@ -38,14 +38,14 @@ public class MainPage extends VBox implements MessageListener {
    * @throws NullPointerException throws if person is null.
    * @throws NullPointerException throws if hotel is null.
    */
-  public MainPage(Person person, Hotel hotel) {
+  public MainPage(Person person, HotelAccess hotelAccess) {
     if (person == null) {
       throw new NullPointerException("Person is null.");
     }
-    if (hotel == null) {
-      throw new NullPointerException("Hotel is null.");
+    if (hotelAccess == null) {
+      throw new NullPointerException("HotelAccess is null.");
     }
-    this.hotel = hotel;
+    this.hotelAccess = hotelAccess;
     this.person = person;
     FxmlUtils.loadFxml(this);
   }
@@ -111,7 +111,7 @@ public class MainPage extends VBox implements MessageListener {
       }
     }
     
-    Collection<HotelRoom> filteredRooms = hotel.getRooms(hotelRoomFilter);
+    Collection<HotelRoom> filteredRooms = hotelAccess.getRooms(hotelRoomFilter);
 
     // If dates are valid, add all filterd room.
     for (HotelRoom hotelRoom : filteredRooms) {

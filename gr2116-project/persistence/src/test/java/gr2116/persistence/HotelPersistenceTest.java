@@ -24,10 +24,12 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class HotelPersistenceTest {
   private HotelPersistence hotelPersistence;
+  private HotelPersistence hotelPersistenceNull;
 
   @BeforeEach
   public void setup() {
-    hotelPersistence = new HotelPersistence();
+    hotelPersistence = new HotelPersistence("test");
+    hotelPersistenceNull = new HotelPersistence();
   }
 
   @Test
@@ -79,8 +81,8 @@ public class HotelPersistenceTest {
     Hotel hotel = new Hotel(rooms, persons);
 
     try {
-      hotelPersistence.saveHotel(hotel, "test");
-      Hotel hotel2 = hotelPersistence.loadHotel("test");
+      hotelPersistence.saveHotel(hotel);
+      Hotel hotel2 = hotelPersistence.loadHotel();
       assertEquals(hotel.getRooms().size(), hotel2.getRooms().size());
       assertEquals(hotel.getPersons().size(), hotel2.getPersons().size());
 
@@ -103,9 +105,9 @@ public class HotelPersistenceTest {
   @Test
   public void testPrefixIsNull() {
     Hotel hotel = new Hotel();
-    assertThrows(NullPointerException.class, () -> hotelPersistence.saveHotel(hotel, null));
-    assertThrows(NullPointerException.class, () -> hotelPersistence.loadHotel(null));
-    assertThrows(NullPointerException.class, () -> hotelPersistence.saveHotel(null, "test"));
+    assertThrows(NullPointerException.class, () -> hotelPersistenceNull.saveHotel(hotel));
+    assertThrows(NullPointerException.class, () -> hotelPersistenceNull.loadHotel());
+    assertThrows(NullPointerException.class, () -> hotelPersistence.saveHotel(null));
   }
 
   @AfterAll

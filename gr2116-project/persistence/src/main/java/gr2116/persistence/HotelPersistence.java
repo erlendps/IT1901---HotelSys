@@ -1,10 +1,8 @@
 package gr2116.persistence;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import gr2116.core.Hotel;
 import gr2116.persistence.internal.HotelModule;
-
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,12 +19,24 @@ public class HotelPersistence {
   protected static final String DATA_FOLDER
       = Paths.get(".").toAbsolutePath()
       .normalize().getParent().getParent().resolve("data").toString();
+  private String prefix;
 
   /**
    * Constructor, creates an object mapper with our custom HotelModule.
    */
   public HotelPersistence() {
     mapper = createObjectMapper();
+  }
+
+  /**
+   * Constructor, creates an object mapper with our custom HotelModule.
+   * Also sets a prefix.
+   *
+   * @param prefix the prefix to be set
+   */
+  public HotelPersistence(String prefix) {
+    this();
+    setPrefix(prefix);
   }
 
   /**
@@ -76,13 +86,11 @@ public class HotelPersistence {
   /**
    * Loads from file a Hotel object with the given prefix.
    *
-   * @param prefix the prefix of the file, eg "data" or "test"
-   *
    * @return Hotel object
    *
    * @throws IOException if something went wrong with I/O
    */
-  public final Hotel loadHotel(String prefix) throws IOException {
+  public final Hotel loadHotel() throws IOException {
     if (prefix == null) {
       throw new NullPointerException("Prefix is null.");
     }
@@ -97,11 +105,10 @@ public class HotelPersistence {
    * Saves a Hotel object to file with the given prefix.
    *
    * @param hotel the Hotel to be saved
-   * @param prefix the prefix of the file
    *
    * @throws IOException if something went wrong with I/O
    */
-  public final void saveHotel(Hotel hotel, String prefix) throws IOException {
+  public final void saveHotel(Hotel hotel) throws IOException {
     if (prefix == null) {
       throw new NullPointerException("Prefix is null.");
     }
@@ -113,5 +120,17 @@ public class HotelPersistence {
         StandardCharsets.UTF_8)) {
       writeHotel(hotel, writer);
     }
+  }
+
+  /**
+   * Sets the data filename prefix.
+   *
+   * @param prefix The prefix the be set, eg. "data" or "test"
+   */
+  public void setPrefix(String prefix) {
+    if (!prefix.matches("^([a-z]){3,10}([A-Z]{1}[a-z]{1,8})*$")) {
+      throw new IllegalArgumentException("prefix is not valid");
+    }
+    this.prefix = prefix;
   }
 }
