@@ -230,7 +230,7 @@ public class HotelRoom {
    *
    * @return reservation ids
    */
-  public final Collection<Long> getReservationIds() {
+  public final Collection<String> getReservationIds() {
     return calendar.getReservationIds();
   }
 

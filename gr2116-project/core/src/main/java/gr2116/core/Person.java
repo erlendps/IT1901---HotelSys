@@ -172,8 +172,8 @@ public class Person {
    *
    * @return {@code Collection<Long>} of reservation IDs.
    */
-  public final Collection<Long> getReservationIds() {
-    List<Long> ids = reservations.stream()
+  public final Collection<String> getReservationIds() {
+    List<String> ids = reservations.stream()
         .map((r) -> r.getId())
         .collect(Collectors.toList());
     Collections.sort(ids);    // sorts in ascending order

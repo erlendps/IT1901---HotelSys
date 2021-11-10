@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -152,37 +153,38 @@ public class Hotel implements Iterable<HotelRoom> {
   
   /**
    * <p>
-   * Makes a reservation on the specified {@code hotelRoom}, starting from 
+   * Makes a reservation on the room with the specified {@code hotelRoomNumber}, starting from 
    * {@code startDate} and ending on {@code endDate}. makeReservation() does
    * a series of validations to ensure that the Person object e.g does not 
    * book a room that is occupied. 
    * </p>
    * <p>
    * If everything is valid, the method creates a new Reservation object with
-   * a (pseudorandom) id, the given {@code hotelRoom} and start/endDate.
-   * It then adds the reservation in {@code hotelRoom} collection of reservations,
+   * a (pseudorandom) id, the room with the given {@code hotelRoomNumber} and start/endDate.
+   * It then adds the reservation in the hotelroom with {@code hotelRoomNumber} collection of reservations,
    * and then it adds the reservation in this Person objects reservation collection.
    * Finally it subtracs the price of the booking.
    * </p>
    *
    * @param person - the person to make the reservation
-   * @param hotelRoom - the room the Person object wants to book.
+   * @param hotelRoomNumber - the room number of the room that the Person object wants to book.
    * @param startDate - {@code LocalDate} of when the reservation should start.
    * @param endDate - {@code LocalDate} of when the reservation should end.
    *
-   * @throws NullPointerException if hotelRoom, startDate or endDate is null.
+   * @throws NullPointerException if startDate or endDate is null.
    * @throws IllegalStateException if the start date is before today.
-   * @throws IllegalArgumentException if startDate is chronologically after endDate.
+   * @throws IllegalArgumentException if startDate is chronologically after endDate
+   * @throws IllegalArgumentException if the hotel room number is not a room in the hotel.
    * @throws IllegalStateException  if the {@code Person} does not have enough balance
    *                                to pay for the reservation.
    * @throws IllegalStateException  if hotelRoom is unavailable, e.g already booked, in
    *                                some period between startDate and endDate. 
    */
   public final void makeReservation(final Person person,
-                                    final HotelRoom hotelRoom,
+                                    final int hotelRoomNumber,
                                     final LocalDate startDate,
                                     final LocalDate endDate) {
-    if (person == null || hotelRoom == null || startDate == null || endDate == null) {
+    if (person == null || startDate == null || endDate == null) {
       throw new NullPointerException();
     }
     if (startDate.isBefore(LocalDate.now())) {
@@ -192,6 +194,12 @@ public class Hotel implements Iterable<HotelRoom> {
       throw new IllegalArgumentException(
         "The startDate cannot be after the endDate.");
     }
+    List<HotelRoom> roomMatches = rooms.stream().filter((r) -> r.getNumber() == hotelRoomNumber).toList();
+    if (roomMatches.size() == 0) {
+      throw new IllegalArgumentException("The specified room number is not the number of a room in the hotel.");
+    }
+
+    HotelRoom hotelRoom = roomMatches.get(0);
     double price = hotelRoom.getPrice(startDate, endDate);
     if (price > person.getBalance()) {
       throw new IllegalStateException(

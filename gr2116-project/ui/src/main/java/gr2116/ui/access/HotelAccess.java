@@ -21,6 +21,6 @@ public interface HotelAccess {
 
   void saveHotel();
 
-  void makeReservation(Person person, HotelRoom hotelRoom, LocalDate startDate, LocalDate endDate);
+  void makeReservation(Person person, int hotelRoomNumber, LocalDate startDate, LocalDate endDate);
 
 }
