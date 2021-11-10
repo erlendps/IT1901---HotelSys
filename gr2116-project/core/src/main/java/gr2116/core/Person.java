@@ -3,6 +3,7 @@ package gr2116.core;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Person class. A person has a collection of listerners, a collection of
@@ -173,7 +174,7 @@ public class Person {
   public final Collection<String> getReservationIds() {
     List<String> ids = reservations.stream()
         .map((r) -> r.getId())
-        .toList();
+        .collect(Collectors.toList());
     return ids;
   }
 

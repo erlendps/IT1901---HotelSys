@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * HotelRoom class. Contains a Collection of amenities, a ReservationCalendar,
@@ -154,7 +155,7 @@ public class HotelRoom {
   public final Collection<String> getAmenities() {
     List<String> amen = amenities.stream()
         .map((a) -> a.name())
-        .toList();
+        .collect(Collectors.toList());
     Collections.sort(amen);
     return amen;
   }
