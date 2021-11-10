@@ -99,6 +99,7 @@ public class HotelTest {
     when(room.getPrice()).thenReturn(100.0);
     when(room.getNumber()).thenReturn(999);
     hotel.addRoom(room);
+    hotel.addPerson(tom);
     
     hotel.makeReservation(tom, 999, start, end);
     assertEquals(balanceBefore-room.getPrice(), tom.getBalance(), "Booking one night should cost the same as the price of the hotel room.");
@@ -122,6 +123,7 @@ public class HotelTest {
     when(deluxeRoom.getPrice(today, overmorrow)).thenReturn(900.0);
     when(deluxeRoom.getNumber()).thenReturn(105);
     hotel.addRoom(deluxeRoom);
+    hotel.addPerson(tom);
 
     hotel.makeReservation(tom, 105, today, overmorrow);
     assertEquals(1, tom.getReservationIds().size(), "User should have one reservation after booking one room.");
