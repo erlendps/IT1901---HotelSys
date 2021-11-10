@@ -141,7 +141,7 @@ public class RemoteHotelAccess implements HotelAccess {
   }
 
   @Override
-  public void makeReservation(Person person, HotelRoom hotelRoom,
+  public void makeReservation(Person person, int hotelRoomNumber,
       LocalDate startDate, LocalDate endDate) {
     getHotel().makeReservation(person, hotelRoom, startDate, endDate);
     putPerson(person);

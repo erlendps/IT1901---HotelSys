@@ -123,7 +123,7 @@ public class MainPage extends VBox implements MessageListener {
         roomItem.setOnMakeReservationButtonAction((event) -> {
           hotelAccess.makeReservation(
               person,
-              hotelRoom,
+              hotelRoom.getNumber(),
               hotelRoomFilter.getStartDate(),
               hotelRoomFilter.getEndDate()
           );

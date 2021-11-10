@@ -75,13 +75,13 @@ public class HotelPersistenceTest {
 
     Hotel hotel = new Hotel(rooms, persons);
     
-    hotel.makeReservation(rick, room1, LocalDate.of(2121, 6, 4), LocalDate.of(2121, 6, 7));
-    hotel.makeReservation(kyle, room1, LocalDate.of(2121, 6, 11), LocalDate.of(2121, 6, 13));
-    hotel.makeReservation(rick, room2, LocalDate.of(2121, 7, 13), LocalDate.of(2121, 7, 22));
-    hotel.makeReservation(tom, room3, LocalDate.of(2121, 10, 12), LocalDate.of(2121, 10, 13));
-    hotel.makeReservation(tom, room3, LocalDate.of(2121, 11, 12), LocalDate.of(2121, 11, 13));
-    hotel.makeReservation(tom, room3, LocalDate.of(2122, 1, 12), LocalDate.of(2122, 1, 13));
-    hotel.makeReservation(tom, room3, LocalDate.of(2122, 2, 12), LocalDate.of(2122, 2, 13));
+    hotel.makeReservation(rick, 101, LocalDate.of(2121, 6, 4), LocalDate.of(2121, 6, 7));
+    hotel.makeReservation(kyle, 101, LocalDate.of(2121, 6, 11), LocalDate.of(2121, 6, 13));
+    hotel.makeReservation(rick, 102, LocalDate.of(2121, 7, 13), LocalDate.of(2121, 7, 22));
+    hotel.makeReservation(tom, 714, LocalDate.of(2121, 10, 12), LocalDate.of(2121, 10, 13));
+    hotel.makeReservation(tom, 714, LocalDate.of(2121, 11, 12), LocalDate.of(2121, 11, 13));
+    hotel.makeReservation(tom, 714, LocalDate.of(2122, 1, 12), LocalDate.of(2122, 1, 13));
+    hotel.makeReservation(tom, 714, LocalDate.of(2122, 2, 12), LocalDate.of(2122, 2, 13));
 
 
     try {

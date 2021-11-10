@@ -97,8 +97,10 @@ public class HotelTest {
     when(room.isAvailable(start, end)).thenReturn(true);
     when(room.getPrice(start, end)).thenReturn(100.0);
     when(room.getPrice()).thenReturn(100.0);
+    when(room.getNumber()).thenReturn(999);
+    hotel.addRoom(room);
     
-    hotel.makeReservation(tom, room, start, end);
+    hotel.makeReservation(tom, 999, start, end);
     assertEquals(balanceBefore-room.getPrice(), tom.getBalance(), "Booking one night should cost the same as the price of the hotel room.");
 
     when(room.isAvailable(start.plusDays(2), start.plusDays(2))).thenReturn(true);
@@ -108,7 +110,7 @@ public class HotelTest {
     assertEquals(900, tom.getBalance(), "Booking 0 days should not cost money.");
     */
     assertThrows(IllegalArgumentException.class, () -> 
-        hotel.makeReservation(tom, room, LocalDate.of(2022, 4, 3), LocalDate.of(2022, 4, 1)),
+        hotel.makeReservation(tom, 215, LocalDate.of(2022, 4, 3), LocalDate.of(2022, 4, 1)),
         "Booking must conform to the linear passing of time."
     );
   }
@@ -119,8 +121,9 @@ public class HotelTest {
     when(deluxeRoom.isAvailable(today, overmorrow)).thenReturn(true);
     when(deluxeRoom.getPrice(today, overmorrow)).thenReturn(900.0);
     when(deluxeRoom.getNumber()).thenReturn(105);
+    hotel.addRoom(deluxeRoom);
 
-    hotel.makeReservation(tom, deluxeRoom, today, overmorrow);
+    hotel.makeReservation(tom, 105, today, overmorrow);
     assertEquals(1, tom.getReservationIds().size(), "User should have one reservation after booking one room.");
     ArrayList<Reservation> reservations = new ArrayList<Reservation>();
     tom.getReservations().forEach((r) -> reservations.add(r));

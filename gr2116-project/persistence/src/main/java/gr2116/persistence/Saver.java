@@ -122,7 +122,7 @@ public class Saver {
       final Collection<Reservation> reservations) {
     JSONObject reservationsData = new JSONObject();
     reservations.forEach((reservation) -> {
-      reservationsData.put(Long.toString(reservation.getId()),
+      reservationsData.put(reservation.getId(),
                           makeReservationJson(reservation));
     });
     return reservationsData;

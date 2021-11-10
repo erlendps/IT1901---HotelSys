@@ -55,9 +55,9 @@ public class DirectHotelAccess implements HotelAccess {
   }
 
   @Override
-  public void makeReservation(Person person, HotelRoom hotelRoom,
+  public void makeReservation(Person person, int hotelRoomNumber,
       LocalDate startDate, LocalDate endDate) {
-    hotel.makeReservation(person, hotelRoom, startDate, endDate);
+    hotel.makeReservation(person, hotelRoomNumber, startDate, endDate);
   }
 
   @Override

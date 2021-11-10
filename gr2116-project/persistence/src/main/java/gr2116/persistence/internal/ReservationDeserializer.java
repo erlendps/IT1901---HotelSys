@@ -63,7 +63,7 @@ public class ReservationDeserializer extends JsonDeserializer<Reservation> {
       Reservation reservation = new Reservation(new HotelRoom(roomNode.asInt()), LocalDate.parse(startNode.asText()),
           LocalDate.parse(endNode.asText()));
       JsonNode idNode = objectNode.get("id");
-      if (reservation.getId() == idNode.asLong()) {
+      if (reservation.getId().equals(idNode.asText())) {
         return reservation;
       }
     }

@@ -60,7 +60,7 @@ public class HotelModuleTest {
         {"room":101,
         "startDate":"2021-11-03",
         "endDate":"2021-11-05",
-        "id":1012021110320211105}
+        "id":"1012021110320211105"}
         ]}
       ],
     "persons":[
@@ -71,7 +71,7 @@ public class HotelModuleTest {
         {"room":101,
         "startDate":"2021-11-03",
         "endDate":"2021-11-05",
-        "id":1012021110320211105}
+        "id":"1012021110320211105"}
         ]}
       ]
     }

@@ -25,7 +25,7 @@ public class ReservationSerializer extends JsonSerializer<Reservation> {
     gen.writeNumberField("room", reservation.getRoomNumber());
     gen.writeStringField("startDate", reservation.getStartDate().toString());
     gen.writeStringField("endDate", reservation.getEndDate().toString());
-    gen.writeNumberField("id", reservation.getId());
+    gen.writeStringField("id", reservation.getId());
     gen.writeEndObject();
   }
 }
