@@ -146,10 +146,9 @@ public class Hotel implements Iterable<HotelRoom> {
     return new ArrayList<>(persons);
   }
 
-<<<<<<< HEAD
   public final Collection<Person> getPersons(Predicate<Person> pred) {
     return persons.stream().filter(pred).collect(Collectors.toList());
-=======
+  }
   
   /**
    * <p>
@@ -207,7 +206,6 @@ public class Hotel implements Iterable<HotelRoom> {
     hotelRoom.addReservation(reservation);
     person.addReservation(reservation);
     person.subtractBalance(price);
->>>>>>> f9df2b0 (#103 Move makeReservation to Hotel class)
   }
 
   @Override
