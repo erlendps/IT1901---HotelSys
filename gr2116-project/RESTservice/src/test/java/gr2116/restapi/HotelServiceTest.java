@@ -1,4 +1,4 @@
-package gr2116.RESTservice.restapi;
+package gr2116.restapi;
 
 
 import gr2116.core.Hotel;
