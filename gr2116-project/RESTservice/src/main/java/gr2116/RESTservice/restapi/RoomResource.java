@@ -5,7 +5,10 @@ import gr2116.core.Hotel;
 import gr2116.core.Reservation;
 import gr2116.persistence.HotelPersistence;
 import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import org.slf4j.Logger;
@@ -22,6 +25,9 @@ public class RoomResource {
     @Context
     private HotelPersistence hotelPersistence;
 
+    public void setHotelPersistence(HotelPersistence hotelPersistence) {
+        this.hotelPersistence = hotelPersistence;
+    }
 
     public RoomResource(HotelRoom room, Hotel hotel) {
         this.room = room;
@@ -38,11 +44,19 @@ public class RoomResource {
             }
     }
     
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public HotelRoom getHotelRoom() {
+      LOG.debug("getRoom({})", room.getNumber());
+      return this.room;
+    }
+
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public void addReservationRoom(Reservation reservation) {
-        LOG.debug("addReservationRoom({})", reservation);
-        room.addReservation(reservation);
+    public void addHotelRoom(HotelRoom room) {
+        LOG.debug("addHotelRoom({})", room);
+        hotel.addRoom(room);
+        System.out.println("bruuuuuh");
         autoSaveHotel();
     }
 

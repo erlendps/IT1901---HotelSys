@@ -58,16 +58,21 @@ public class HotelService {
 
   @Path("/rooms/{roomNumber}")
   public RoomResource getRoomResource(@PathParam("roomNumber") String roomNumber) {
+    HotelRoom room;
     //LOG.debug("Sub-resource room for " + username);
     Collection<HotelRoom> matches = hotel.getRooms(p -> p.getNumber() == Integer.parseInt(roomNumber));
     
-     if (matches.size() != 1) {
-      throw new IllegalStateException("Multiple or 0 matches for room number" + roomNumber);
+    if (matches.size() > 1) {
+      throw new IllegalStateException("Multiple matches for room number" + roomNumber);
+    } else if (matches.size() == 0) {
+      room = null;
+    } else {
+      room = matches.iterator().next();
     }
 
-    HotelRoom room = matches.iterator().next();
-
+    System.out.println("bruuuuh");
     RoomResource roomResource = new RoomResource(room, hotel);
+    roomResource.setHotelPersistence(hotelPersistence);
     return roomResource;
   }
 }
