@@ -116,9 +116,9 @@ public class Hotel implements Iterable<HotelRoom> {
    *
    * @return a collection of rooms.
    */
-  public final Collection<HotelRoom> getRooms(
+  public final List<HotelRoom> getRooms(
       final Predicate<HotelRoom> predicate) {
-    return rooms.stream().filter(predicate).collect(Collectors.toList());
+    return rooms.stream().filter(predicate).toList();
   }
 
   /**
@@ -190,9 +190,6 @@ public class Hotel implements Iterable<HotelRoom> {
     if (!getPersons().contains(person)) {
       throw new IllegalArgumentException("Person is not a user.");
     }
-    if (!getRooms().contains(hotelRoom)) {
-      throw new IllegalArgumentException("The hotelroom does not belong to this hotel.");
-    }
     if (startDate.isBefore(LocalDate.now())) {
       throw new IllegalStateException("Cant make a reservation backwards in time.");
     }
@@ -200,7 +197,7 @@ public class Hotel implements Iterable<HotelRoom> {
       throw new IllegalArgumentException(
         "The startDate cannot be after the endDate.");
     }
-    List<HotelRoom> roomMatches = rooms.stream().filter((r) -> r.getNumber() == hotelRoomNumber).toList();
+    List<HotelRoom> roomMatches = getRooms((r) -> r.getNumber() == hotelRoomNumber);
     if (roomMatches.size() == 0) {
       throw new IllegalArgumentException("The specified room number is not the number of a room in the hotel.");
     }
