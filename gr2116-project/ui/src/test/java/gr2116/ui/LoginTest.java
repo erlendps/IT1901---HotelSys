@@ -1,6 +1,8 @@
 package gr2116.ui;
 
 import java.io.IOException;
+
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.framework.junit5.Start;
@@ -29,7 +31,7 @@ public class LoginTest extends ApplicationTest{
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("App.fxml"));
     Parent parent = fxmlLoader.load();
     appController = (AppController) fxmlLoader.getController();
-    appController.setPrefix("testUi");
+    appController.setPrefix("test");
     appController.load();
     stage.setScene(new Scene(parent));
     stage.show();

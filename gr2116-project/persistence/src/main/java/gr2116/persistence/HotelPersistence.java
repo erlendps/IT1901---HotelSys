@@ -5,12 +5,14 @@ import gr2116.core.Hotel;
 import gr2116.persistence.internal.HotelModule;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
 
 /**
@@ -99,11 +101,16 @@ public class HotelPersistence {
     if (prefix == null) {
       throw new NullPointerException("Prefix is null.");
     }
-    try (Reader reader = new FileReader(
-        Paths.get(DATA_FOLDER, prefix + "Hotel.json").toFile(),
-        StandardCharsets.UTF_8)) {
+    try { 
+      Reader reader = new FileReader(
+          Paths.get(DATA_FOLDER, prefix + "Hotel.json").toFile(),
+          StandardCharsets.UTF_8);
       return readHotel(reader);
+    } catch (IOException e) {
+      System.err.println("Could not find " + DATA_FOLDER + "/" + prefix + "Hotel.json");
+      return new Hotel(RoomGenerator.generateRooms());
     }
+      
   }
 
   /**

@@ -52,8 +52,11 @@ public class HotelPersistenceTest {
     persons.add(tom);
     
     HotelRoom room1 = new HotelRoom(HotelRoomType.Single, 101);
+    room1.setPrice(0);
     HotelRoom room2 = new HotelRoom(HotelRoomType.Single, 102);
+    room2.setPrice(20);
     HotelRoom room3 = new HotelRoom(HotelRoomType.Quad, 714);
+    room3.setPrice(300);
     
     Collection<HotelRoom> rooms = new ArrayList<HotelRoom>();
     rooms.add(room1);
@@ -71,7 +74,7 @@ public class HotelPersistenceTest {
     room3.addAmenity(Amenity.Shower);
 
     Hotel hotel = new Hotel(rooms, persons);
-
+    
     hotel.makeReservation(rick, room1, LocalDate.of(2121, 6, 4), LocalDate.of(2121, 6, 7));
     hotel.makeReservation(kyle, room1, LocalDate.of(2121, 6, 11), LocalDate.of(2121, 6, 13));
     hotel.makeReservation(rick, room2, LocalDate.of(2121, 7, 13), LocalDate.of(2121, 7, 22));
@@ -109,11 +112,5 @@ public class HotelPersistenceTest {
     assertThrows(NullPointerException.class, () -> hotelPersistenceNull.saveHotel(hotel));
     assertThrows(NullPointerException.class, () -> hotelPersistenceNull.loadHotel());
     assertThrows(NullPointerException.class, () -> hotelPersistence.saveHotel(null));
-  }
-
-  @AfterAll
-  public static void cleanUp() {
-    File testFile = new File(HotelPersistence.DATA_FOLDER, "testHotel.json");
-    testFile.delete();
   }
 }

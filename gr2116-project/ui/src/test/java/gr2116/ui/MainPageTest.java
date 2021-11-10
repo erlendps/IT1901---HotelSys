@@ -36,7 +36,7 @@ public class MainPageTest extends ApplicationTest{
       
         Parent parent = fxmlLoader.load();
         appController = (AppController) fxmlLoader.getController();
-        appController.setPrefix("testUi");
+        appController.setPrefix("test");
         appController.load();
 
         Person person = new Person("Richard Wilkens");
