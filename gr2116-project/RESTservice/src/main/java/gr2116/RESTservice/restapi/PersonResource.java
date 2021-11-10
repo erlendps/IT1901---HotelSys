@@ -4,15 +4,12 @@ import gr2116.core.Person;
 import gr2116.core.Hotel;
 import gr2116.persistence.HotelPersistence;
 import jakarta.ws.rs.PUT;
-import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.IOException;
-
-import java.util.Collection;
 
 
 public class PersonResource {
