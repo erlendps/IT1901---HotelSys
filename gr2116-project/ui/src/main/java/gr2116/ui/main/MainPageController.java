@@ -7,7 +7,6 @@ import gr2116.core.Person;
 import gr2116.core.PersonListener;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
-import gr2116.ui.utils.FxmlUtils;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
@@ -21,47 +20,76 @@ import javafx.scene.paint.Color;
 /**
  * Main page, which contains the main panel for booking hotel nights.
  */
-public class MainPage extends VBox implements MessageListener, PersonListener {
-  private final FilterPanel filterPanel = new FilterPanel();
-  private UserPanel userPanel;
-  private final Hotel hotel;
+public class MainPageController extends VBox implements MessageListener, PersonListener {
+  private Hotel hotel;
   private HotelRoomFilter hotelRoomFilter
       = new HotelRoomFilter(null, null, null, null, null);
-  private final Person person;
+  private Person person;
   private final Collection<MessageListener> listeners = new HashSet<>();
-
-  /**
-   * Constructs a main page for a given person and hotel.
-   *
-   * @param person the person the main page should be constructed for.
-   * @param hotel the hotel the main page should be constructed for.
-   *
-   * @throws IllegalArgumentException throws if person is null.
-   * @throws IllegalArgumentException throws if hotel is null.
-   */
-  public MainPage(Person person, Hotel hotel) {
-    if (person == null) {
-      throw new IllegalArgumentException("Person is null.");
-    }
-    if (hotel == null) {
-      throw new IllegalArgumentException("Hotel is null.");
-    }
-    this.hotel = hotel;
-    this.person = person;
-    FxmlUtils.loadFxml(this);
-  }
 
   @FXML
   private VBox roomItemContainer;
 
   @FXML
-  private AnchorPane filterPane;
+  private VBox filterPanelView;
 
   @FXML
-  private AnchorPane userPane;
+  private VBox userPanelView;
 
   @FXML
   private Label errorLabel;
+
+  @FXML
+  private UserPanelController userPanelViewController;
+
+  @FXML
+  private FilterPanelController filterPanelViewController;
+
+
+  /**
+   * Constructs a main page for a given person and hotel.
+   *
+   */
+  public MainPageController() {}
+
+  /**
+   * Sets the hotel from which to build the main page.
+   *
+   * @param hotel the hotel the main page should be constructed for.
+   *
+   * @throws IllegalArgumentException throws if hotel is null.
+   */
+  public void setHotel(Hotel hotel) {
+    if (hotel == null) {
+      throw new IllegalArgumentException("Hotel is null.");
+    }
+    this.hotel = hotel;
+    if (person != null) {
+      buildRoomList();
+    }
+  }
+
+  /**
+   * Sets the person to build the main page for.
+   *
+   * @param person the person the main page should be constructed for.
+   *
+   * @throws IllegalArgumentException throws if person is null.
+   */
+  public void setPerson(Person person) {
+    if (person == null) {
+      throw new IllegalArgumentException("Person is null.");
+    }
+    if (this.person != null) {
+      this.person.removeListener(this);
+    }
+    this.person = person;
+    person.addListener(this);
+    userPanelViewController.setPerson(person);
+    if (hotel != null) {
+      buildRoomList();
+    }
+  }
 
   /**
    * Initializes the main page, which includes adding 
@@ -69,18 +97,11 @@ public class MainPage extends VBox implements MessageListener, PersonListener {
    */
   @FXML
   final void initialize() {
-    userPanel = new UserPanel(person);
-    userPane.getChildren().add(userPanel);
-    userPanel.addListener(this);
-
-    filterPane.getChildren().add(filterPanel);
-    filterPanel.addListener(this);
-
-    person.addListener(this);
+    userPanelViewController.addListener(this);
+    filterPanelViewController.addListener(this);
 
     errorLabel.setTextFill(Color.RED);
     errorLabel.setMinHeight(Region.USE_PREF_SIZE);
-    buildRoomList();
   }
 
   /**
@@ -89,6 +110,9 @@ public class MainPage extends VBox implements MessageListener, PersonListener {
    * which is where the user can select to book them.
    */
   private void buildRoomList() {
+    if (person == null || hotel == null) {
+      throw new IllegalStateException("Cannot build room list without person and hotel.");
+    }
     // Sets first empty list of rooms.
     roomItemContainer.getChildren().clear();
     errorLabel.setText("");

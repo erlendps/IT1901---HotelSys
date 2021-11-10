@@ -3,19 +3,17 @@ package gr2116.ui.money;
 import gr2116.core.Person;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
-import gr2116.ui.utils.FxmlUtils;
 import java.util.Collection;
 import java.util.HashSet;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 
 /**
  * Money page class, which is where users can add money to their accounts.
  */
-public class MoneyPage extends AnchorPane {
+public class MoneyPageController {
   private Collection<MessageListener> listeners = new HashSet<>();
   private Person person;
 
@@ -35,9 +33,10 @@ public class MoneyPage extends AnchorPane {
   /**
    * Load FXML for money page. Takes in the person to add money to.
    */
-  public MoneyPage(final Person person) {
+  public MoneyPageController() { }
+
+  public void setPerson(Person person) {
     this.person = person;
-    FxmlUtils.loadFxml(this);
   }
 
   /**
@@ -72,22 +71,24 @@ public class MoneyPage extends AnchorPane {
   /**
    * Checks the given card number, using Luhns algorithm,
    * Luhns algorithm uses a checksum and compares with the control digit (the last digit).
+   *
    * @param cardNumber the given card number.
    * @return whether or not the last digit of the card number is correct. 
    */
   private boolean checkLuhnsAlgorithm(String cardNumber) {
-      int nDigits = cardNumber.length();
-      int nSum = 0;
-      boolean isSecond = false;
-      for (int i = nDigits - 1; i >= 0; i--) {
-        int d = cardNumber.charAt(i) - '0';
-        if (isSecond == true)
-            d = d * 2;
-        nSum += d / 10;
-        nSum += d % 10;
-        isSecond = !isSecond;
+    int nDigits = cardNumber.length();
+    int nSum = 0;
+    boolean isSecond = false;
+    for (int i = nDigits - 1; i >= 0; i--) {
+      int d = cardNumber.charAt(i) - '0';
+      if (isSecond == true) {
+        d = d * 2;
       }
-      return (nSum % 10 == 0);
+      nSum += d / 10;
+      nSum += d % 10;
+      isSecond = !isSecond;
+    }
+    return (nSum % 10 == 0);
   }
  
   /**

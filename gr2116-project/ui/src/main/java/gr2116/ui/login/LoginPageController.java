@@ -10,12 +10,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 
 /**
  * Login page class, which is what meets the user when the program starts.
  */
-public class LoginPage extends AnchorPane {
+public class LoginPageController {
   private Collection<MessageListener> listeners = new HashSet<>();
   private Collection<Person> loadedPersons;
 
@@ -34,9 +33,7 @@ public class LoginPage extends AnchorPane {
   /**
    * Load FXML for login page.
    */
-  public LoginPage() {
-    FxmlUtils.loadFxml(this);
-  }
+  public LoginPageController() {}
 
   /**
    * Take in a collection of persons and add them to the internal state,
