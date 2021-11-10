@@ -58,7 +58,7 @@ public class HotelConfig extends ResourceConfig {
     try {
       return hotelPersistence.loadHotel();
     } catch (IOException e) {
-      System.err.println("Something has gone terribly wrong.");
+      System.err.println("Hotel was not correctly loaded in hotelPersistence.");
       return null;
     }
   }
