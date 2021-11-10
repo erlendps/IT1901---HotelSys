@@ -120,19 +120,6 @@ public class Hotel implements Iterable<HotelRoom> {
     return rooms.stream().filter(predicate).toList();
   }
 
-  /**
-   * Returns the rooms of the hotel that matches the given hotel room filter.
-   * Used in search.
-   *
-   * @param hotelRoomFilter the given hotel room filter.
-   *
-   * @return a collection of rooms.
-   */
-  public final Collection<HotelRoom> getRooms(
-      final HotelRoomFilter hotelRoomFilter) {
-    return getRooms(hotelRoomFilter);
-  }
-
   public final Collection<HotelRoom> getRooms() {
     return new ArrayList<>(rooms);
   }
