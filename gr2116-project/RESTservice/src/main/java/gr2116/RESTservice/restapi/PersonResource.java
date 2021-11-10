@@ -13,47 +13,55 @@ import java.io.IOException;
 
 
 public class PersonResource {
-    private static final Logger LOG = LoggerFactory.getLogger(RoomResource.class);
+  private static final Logger LOG = LoggerFactory.getLogger(RoomResource.class);
 
-    private final String usename;
-    private final Person person;
-    private final Hotel hotel;
+  private final String usename;
+  private final Person person;
+  private final Hotel hotel;
 
-    @Context
-    private HotelPersistence hotelPersistence;
+  @Context
+  private HotelPersistence hotelPersistence;
 
     
-    public PersonResource(String username, Person person, Hotel hotel) {
-      this.person = person;
-      this.usename = username;
-      this.hotel = hotel;
-    }
+  public PersonResource(String username, Person person, Hotel hotel) {
+    this.person = person;
+    this.usename = username;
+    this.hotel = hotel;
+  }
 
-    private void autoSaveHotel() {
+  private void autoSaveHotel() {
     if (hotelPersistence != null) {
       try {
         hotelPersistence.saveHotel(this.hotel);
       } catch (IllegalStateException | IOException e) {
         System.err.println("Couldn't auto-save Hotel: " + e);
       }
-    }
-    }
-
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void addPerson(String name) {
-      LOG.debug("addPerson({})", name);
-      Person person = new Person(name);
-      person.setUsername(usename);
-      hotel.addPerson(person);
-      autoSaveHotel();
+      }
     }
 
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void addBalance(Double balance) {
-      LOG.debug("addBalance({})", balance);
-      person.addBalance(balance);
-      autoSaveHotel();
-    }
+  @PUT
+  @Consumes(MediaType.APPLICATION_JSON)
+  public void addPerson(String name) {
+    LOG.debug("addPerson({})", name);
+    Person person = new Person(name);
+    person.setUsername(usename);
+    hotel.addPerson(person);
+    autoSaveHotel();
+  }
+
+  @PUT
+  @Consumes(MediaType.APPLICATION_JSON)
+  public void addBalance(Double balance) {
+    LOG.debug("addBalance({})", balance);
+    person.addBalance(balance);
+    autoSaveHotel();
+  }
+
+  @PUT
+  @Consumes(MediaType.APPLICATION_JSON)
+  public void addReservation(Reservation reservation) {
+    LOG.debug("addReservation({})", reservation);
+    person.addReservation(reservation);
+    autoSaveHotel();
+  }
 }

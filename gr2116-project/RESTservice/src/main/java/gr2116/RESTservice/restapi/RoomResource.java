@@ -38,12 +38,4 @@ public class RoomResource {
     }
     }
 
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void addReservation(Reservation reservation) {
-      LOG.debug("addReservation({})", reservation);
-      person.addReservation(reservation);
-      autoSaveHotel();
-    }
-
 }

@@ -56,10 +56,13 @@ public class HotelService {
 
   @Path("/room/{username}/{name}")
   public RoomResource getRoomResource(@PathParam("username") String username,@PathParam("name") String name ) {
-    LOG.debug("Sub-resource room for " + username);
-    Person  person = new Person(name);
-    person.setUsername(username);
+    //LOG.debug("Sub-resource room for " + username);
+    Collection<Person> matches = hotel.getPersons(p -> p.getUsername() == username);
+    if (matches.size() != 1) {
+      throw new IllegalStateException("Multiple or 0 matches for username" + username);
+    }
 
+    Person person = matches.iterator().next();
     RoomResource roomResource = new RoomResource(person, hotel);
     return roomResource;
   }
