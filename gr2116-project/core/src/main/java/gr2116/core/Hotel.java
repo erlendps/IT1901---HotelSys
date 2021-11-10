@@ -185,6 +185,12 @@ public class Hotel implements Iterable<HotelRoom> {
     if (person == null || hotelRoom == null || startDate == null || endDate == null) {
       throw new NullPointerException();
     }
+    if (!getPersons().contains(person)) {
+      throw new IllegalArgumentException("Person is not a user.");
+    }
+    if (!getRooms().contains(hotelRoom)) {
+      throw new IllegalArgumentException("The hotelroom does not belong to this hotel.");
+    }
     if (startDate.isBefore(LocalDate.now())) {
       throw new IllegalStateException("Cant make a reservation backwards in time.");
     }
