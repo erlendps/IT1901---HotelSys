@@ -200,7 +200,7 @@ public class FilterPanel extends VBox {
                       roomTypeChoiceBox.getValue(),
                       floorSpinner.isDisable() ? null : floorSpinner.getValue(),
                       amenities);
-      listener.receiveNotification(this, Message.Filter, filter);
+      listener.receiveMessage(this, Message.Filter, filter);
     }
   }
 }

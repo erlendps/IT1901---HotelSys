@@ -11,6 +11,6 @@ public interface MessageListener {
    * @param message The message contained in the notification, chosen from Message Enum
    * @param data An object sent with the notification. Varies depending on message.
    */
-  void receiveNotification(Object from, Message message, Object data);
+  void receiveMessage(Object from, Message message, Object data);
 
 }

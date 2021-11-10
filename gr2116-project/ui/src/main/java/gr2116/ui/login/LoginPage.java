@@ -132,7 +132,7 @@ public class LoginPage extends AnchorPane {
    */
   public final void notifyListeners(final Message message, final Object data) {
     for (MessageListener listener : listeners) {
-      listener.receiveNotification(this, message, data);
+      listener.receiveMessage(this, message, data);
     }
   }
 }

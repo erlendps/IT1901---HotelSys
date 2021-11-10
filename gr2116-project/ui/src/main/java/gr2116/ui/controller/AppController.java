@@ -39,7 +39,7 @@ public class AppController implements MessageListener {
   }
 
   @Override
-  public final void receiveNotification(final Object from,
+  public final void receiveMessage(final Object from,
       final Message message, final Object data) {
     if (message == Message.SignIn && data instanceof Person) {
       Person person = (Person) data;

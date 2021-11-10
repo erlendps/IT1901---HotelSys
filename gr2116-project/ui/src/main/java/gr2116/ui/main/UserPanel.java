@@ -96,7 +96,7 @@ public class UserPanel extends VBox implements PersonListener {
    */
   public final void notifyListeners(final Message message) {
     for (MessageListener listener : listeners) {
-      listener.receiveNotification(this, message, null);
+      listener.receiveMessage(this, message, null);
     }
   }
 
@@ -107,7 +107,7 @@ public class UserPanel extends VBox implements PersonListener {
    * @param person person to update attributes for
    */
   @Override
-  public final void receiveNotification(final Person person) {
+  public final void onPersonChanged(final Person person) {
     updatePanel(person);
   }
 

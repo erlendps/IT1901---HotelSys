@@ -149,7 +149,7 @@ public class MainPage extends VBox implements MessageListener, PersonListener {
    * Includes notification to log out, and filtering.
    */
   @Override
-  public final void receiveNotification(
+  public final void receiveMessage(
       final Object from,
       final Message message,
       final Object data) {
@@ -167,7 +167,7 @@ public class MainPage extends VBox implements MessageListener, PersonListener {
   }
 
   @Override
-  public void receiveNotification(Person person) {
+  public void onPersonChanged(Person person) {
     buildRoomList();
   }
 
@@ -202,7 +202,7 @@ public class MainPage extends VBox implements MessageListener, PersonListener {
       final Message message,
       final Object data) {
     for (MessageListener listener : listeners) {
-      listener.receiveNotification(this, message, data);
+      listener.receiveMessage(this, message, data);
     }
   }
 }

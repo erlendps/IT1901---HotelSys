@@ -277,7 +277,7 @@ public class Person {
    */
   public final void notifyListeners() {
     for (PersonListener listener : listeners) {
-      listener.receiveNotification(this);
+      listener.onPersonChanged(this);
     }
   }
 
