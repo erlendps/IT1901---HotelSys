@@ -13,7 +13,7 @@ public class Reservation implements Iterable<LocalDate> {
   /**
    * The reservation's id.
    */
-  private final long id;
+  private final String id;
   /**
    * The reservation's room.
    */
@@ -89,7 +89,7 @@ public class Reservation implements Iterable<LocalDate> {
    *
    * @return id.
    */
-  public final long getId() {
+  public final String getId() {
     return id;
   }
 
@@ -99,13 +99,13 @@ public class Reservation implements Iterable<LocalDate> {
    *
    * @return {@code long} the id
    */
-  private final long generateId() {
+  private final String generateId() {
     StringBuilder sb = new StringBuilder();
     sb.append(getRoomNumber());
     sb.append(startDate.toString().replace("-", ""));
     sb.append(endDate.toString().replace("-", ""));
 
-    return Long.parseLong(sb.toString());
+    return sb.toString();
   }
 
   @Override
@@ -122,7 +122,7 @@ public class Reservation implements Iterable<LocalDate> {
 
   @Override
   public String toString() {
-    return Long.toString(getId());
+    return getId();
   }
 
   @Override
@@ -134,7 +134,7 @@ public class Reservation implements Iterable<LocalDate> {
       return false;
     }
     Reservation res = (Reservation) o;
-    return getId() == res.getId();
+    return getId().equals(res.getId());
   }
 
   @Override

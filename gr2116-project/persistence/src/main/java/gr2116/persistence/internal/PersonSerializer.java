@@ -14,7 +14,7 @@ import gr2116.core.Reservation;
 public class PersonSerializer extends JsonSerializer<Person> {
 
   /*
-   * format: { "name": "...", "email": "...", "balance": ... , "reservations": [
+   * format: { "name": "...", "username": "...", "balance": ... , "reservations": [
    * ... ] }
    */
   
@@ -25,8 +25,8 @@ public class PersonSerializer extends JsonSerializer<Person> {
     }
     gen.writeStartObject();
     gen.writeStringField("name", person.getName());
-    if (person.getEmail() != null) {
-      gen.writeStringField("email", person.getEmail());
+    if (person.getUsername() != null) {
+      gen.writeStringField("username", person.getUsername());
     }
     gen.writeNumberField("balance", person.getBalance());
     gen.writeArrayFieldStart("reservations");

@@ -1,116 +1,112 @@
-// package gr2116.persistence;
+package gr2116.persistence;
 
-// import gr2116.core.Amenity;
-// import gr2116.core.Hotel;
-// import gr2116.core.HotelRoomType;
-// import gr2116.core.HotelRoom;
-// import gr2116.core.Person;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
-// import java.io.File;
-// import java.io.IOException;
-// import java.time.LocalDate;
-// import java.util.ArrayList;
-// import java.util.Collection;
-
-// import org.junit.jupiter.api.AfterAll;
-// import org.junit.jupiter.api.BeforeEach;
-// import org.junit.jupiter.api.Test;
-
-// import static org.junit.jupiter.api.Assertions.assertEquals;
-// import static org.junit.jupiter.api.Assertions.assertThrows;
-// import static org.junit.jupiter.api.Assertions.assertTrue;
-// import static org.junit.jupiter.api.Assertions.fail;
+import gr2116.core.Amenity;
+import gr2116.core.Hotel;
+import gr2116.core.HotelRoom;
+import gr2116.core.HotelRoomType;
+import gr2116.core.Person;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 
-// public class HotelPersistenceTest {
-//   private HotelPersistence hotelPersistence;
+public class HotelPersistenceTest {
+  private HotelPersistence hotelPersistence;
+  private HotelPersistence hotelPersistenceNull;
 
-//   @BeforeEach
-//   public void setup() {
-//     hotelPersistence = new HotelPersistence();
-//   }
+  @BeforeEach
+  public void setup() {
+    hotelPersistence = new HotelPersistence("test");
+    hotelPersistenceNull = new HotelPersistence();
+  }
 
-//   @Test
-//   public void testSerializingDeserializing() {
-//     // set up data
-//     Person rick = new Person("Richard");
-//     Person kyle = new Person("Kyllard");
-//     Person tom = new Person("Tom");
-//     rick.setEmail("richard@people.com");
-//     kyle.setEmail("kyle@people.com");
-//     tom.setEmail("tom@richpeople.org");
+  @Test
+  public void testSerializingDeserializing() {
+    // set up data
+    Person rick = new Person("Richard");
+    Person kyle = new Person("Kyllard");
+    Person tom = new Person("Tom");
+    rick.setUsername("richard");
+    kyle.setUsername("kyle");
+    tom.setUsername("tom");
 
-//     rick.addBalance(1000);
-//     kyle.addBalance(144);
-//     tom.addBalance(1000000000);
+    rick.addBalance(1000);
+    kyle.addBalance(144);
+    tom.addBalance(1000000000);
 
-//     HotelRoom room1 = new HotelRoom(HotelRoomType.Single, 101);
-//     HotelRoom room2 = new HotelRoom(HotelRoomType.Single, 102);
-//     HotelRoom room3 = new HotelRoom(HotelRoomType.Quad, 714);
+    Collection<Person> persons = new ArrayList<Person>();
+    persons.add(rick);
+    persons.add(kyle);
+    persons.add(tom);
+    
+    HotelRoom room1 = new HotelRoom(HotelRoomType.Single, 101);
+    room1.setPrice(0);
+    HotelRoom room2 = new HotelRoom(HotelRoomType.Single, 102);
+    room2.setPrice(20);
+    HotelRoom room3 = new HotelRoom(HotelRoomType.Quad, 714);
+    room3.setPrice(300);
+    
+    Collection<HotelRoom> rooms = new ArrayList<HotelRoom>();
+    rooms.add(room1);
+    rooms.add(room2);
+    rooms.add(room3);
+    
+    room1.addAmenity(Amenity.Bathtub);
+    room1.addAmenity(Amenity.Television);
+    room2.addAmenity(Amenity.Fridge);
+    room2.addAmenity(Amenity.Internet);
+    room2.addAmenity(Amenity.Shower);
+    room3.addAmenity(Amenity.KitchenFacilities);
+    room3.addAmenity(Amenity.Television);
+    room3.addAmenity(Amenity.WashingMachine);
+    room3.addAmenity(Amenity.Shower);
 
-//     room1.addAmenity(Amenity.Bathtub);
-//     room1.addAmenity(Amenity.Television);
-//     room2.addAmenity(Amenity.Fridge);
-//     room2.addAmenity(Amenity.Internet);
-//     room2.addAmenity(Amenity.Shower);
-//     room3.addAmenity(Amenity.KitchenFacilities);
-//     room3.addAmenity(Amenity.Television);
-//     room3.addAmenity(Amenity.WashingMachine);
-//     room3.addAmenity(Amenity.Shower);
+    Hotel hotel = new Hotel(rooms, persons);
+    
+    hotel.makeReservation(rick, 101, LocalDate.of(2121, 6, 4), LocalDate.of(2121, 6, 7));
+    hotel.makeReservation(kyle, 101, LocalDate.of(2121, 6, 11), LocalDate.of(2121, 6, 13));
+    hotel.makeReservation(rick, 102, LocalDate.of(2121, 7, 13), LocalDate.of(2121, 7, 22));
+    hotel.makeReservation(tom, 714, LocalDate.of(2121, 10, 12), LocalDate.of(2121, 10, 13));
+    hotel.makeReservation(tom, 714, LocalDate.of(2121, 11, 12), LocalDate.of(2121, 11, 13));
+    hotel.makeReservation(tom, 714, LocalDate.of(2122, 1, 12), LocalDate.of(2122, 1, 13));
+    hotel.makeReservation(tom, 714, LocalDate.of(2122, 2, 12), LocalDate.of(2122, 2, 13));
 
-//     rick.makeReservation(room1, LocalDate.of(2121, 6, 4), LocalDate.of(2121, 6, 7));
-//     kyle.makeReservation(room1, LocalDate.of(2121, 6, 11), LocalDate.of(2121, 6, 13));
-//     rick.makeReservation(room2, LocalDate.of(2121, 7, 13), LocalDate.of(2121, 7, 22));
-//     tom.makeReservation(room3, LocalDate.of(2121, 10, 12), LocalDate.of(2121, 10, 13));
-//     tom.makeReservation(room3, LocalDate.of(2121, 11, 12), LocalDate.of(2121, 11, 13));
-//     tom.makeReservation(room3, LocalDate.of(2122, 1, 12), LocalDate.of(2122, 1, 13));
-//     tom.makeReservation(room3, LocalDate.of(2122, 2, 12), LocalDate.of(2122, 2, 13));
 
-//     Collection<Person> persons = new ArrayList<Person>();
-//     persons.add(rick);
-//     persons.add(kyle);
-//     persons.add(tom);
+    try {
+      hotelPersistence.saveHotel(hotel);
+      Hotel hotel2 = hotelPersistence.loadHotel();
+      assertEquals(hotel.getRooms().size(), hotel2.getRooms().size());
+      assertEquals(hotel.getPersons().size(), hotel2.getPersons().size());
 
-//     Collection<HotelRoom> rooms = new ArrayList<HotelRoom>();
-//     rooms.add(room1);
-//     rooms.add(room2);
-//     rooms.add(room3);
+      assertTrue(hotel2.getRooms().contains(room1));
+      assertTrue(hotel2.getRooms().contains(room2));
+      assertTrue(hotel2.getRooms().contains(room3));
 
-//     Hotel hotel = new Hotel(rooms, persons);
+      assertTrue(hotel2.getPersons().contains(rick));
+      assertTrue(hotel2.getPersons().contains(kyle));
+      assertTrue(hotel2.getPersons().contains(tom));
 
-//     try {
-//       hotelPersistence.saveHotel(hotel, "test");
-//       Hotel hotel2 = hotelPersistence.loadHotel("test");
-//       assertEquals(hotel.getRooms().size(), hotel2.getRooms().size());
-//       assertEquals(hotel.getPersons().size(), hotel2.getPersons().size());
+      assertTrue(hotel2.getRooms().equals(hotel.getRooms()));
+      assertTrue(hotel2.getPersons().equals(hotel.getPersons()));
 
-//       assertTrue(hotel2.getRooms().contains(room1));
-//       assertTrue(hotel2.getRooms().contains(room2));
-//       assertTrue(hotel2.getRooms().contains(room3));
+    } catch (IOException e) {
+      fail(e.getMessage());
+    }
+  }
 
-//       assertTrue(hotel2.getPersons().contains(rick));
-//       assertTrue(hotel2.getPersons().contains(kyle));
-//       assertTrue(hotel2.getPersons().contains(tom));
-
-//       assertTrue(hotel2.getRooms().equals(hotel.getRooms()));
-//       assertTrue(hotel2.getPersons().equals(hotel.getPersons()));
-
-//     } catch (IOException e) {
-//       fail(e.getMessage());
-//     }
-//   }
-
-//   @Test
-//   public void testPrefixIsNull() {
-//     Hotel hotel = new Hotel();
-//     assertThrows(IllegalArgumentException.class, () -> hotelPersistence.saveHotel(hotel, null));
-//     assertThrows(IllegalArgumentException.class, () -> hotelPersistence.loadHotel(null));
-//     assertThrows(IllegalArgumentException.class, () -> hotelPersistence.saveHotel(null, "test"));
-//   }
-
-//   @AfterAll
-//   public static void cleanUp() {
-//     File testFile = new File(HotelPersistence.DATA_FOLDER, "testHotel.json");
-//     testFile.delete();
-//   }
-// }
+  @Test
+  public void testPrefixIsNull() {
+    Hotel hotel = new Hotel();
+    assertThrows(IllegalArgumentException.class, () -> hotelPersistenceNull.saveHotel(hotel));
+    assertThrows(IllegalArgumentException.class, () -> hotelPersistenceNull.loadHotel());
+    assertThrows(IllegalArgumentException.class, () -> hotelPersistence.saveHotel(null));
+  }
+}

@@ -1,6 +1,5 @@
 package gr2116.persistence;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -8,7 +7,6 @@ import java.util.List;
 import java.util.Random;
 
 import gr2116.core.Amenity;
-import gr2116.core.Hotel;
 import gr2116.core.HotelRoom;
 import gr2116.core.HotelRoomType;
 
@@ -16,20 +14,21 @@ import gr2116.core.HotelRoomType;
 
 
 public class RoomGenerator {
-  Random random = new Random();
-  int one = 100;
-  int two = 200;
-  int three = 300;
-  int four = 400;
-  int five = 500;
-  int six = 600;
-  int seven = 700;
+  private static Random random = new Random();
+  private static int one = 100;
+  private static int two = 200;
+  private static int three = 300;
+  private static int four = 400;
+  private static int five = 500;
+  private static int six = 600;
+  private static int seven = 700;
+  
 
   public RoomGenerator() {
 
   }
 
-  public Collection<HotelRoom> generateRooms() {
+  public static Collection<HotelRoom> generateRooms() {
     Collection<HotelRoom> rooms = new ArrayList<>();
     for (int i = 0; i < 30; i++) {
       int floor = (int) (random.nextDouble()*7) + 1;
@@ -48,7 +47,7 @@ public class RoomGenerator {
     return rooms;
   }
 
-  public HotelRoomType getRoomType() {
+  private static HotelRoomType getRoomType() {
     int num = (int) (random.nextDouble()*6);
     switch (num) {
       case 0:
@@ -68,7 +67,7 @@ public class RoomGenerator {
     }
   }
 
-  private void setPrice(HotelRoom room) {
+  private static void setPrice(HotelRoom room) {
     switch (room.getRoomType()) {
     case Double:
       room.setPrice(roundUp(getRandomNumber(200, 500)));
@@ -93,12 +92,12 @@ public class RoomGenerator {
     }
   }
 
-  private int getRandomNumber(int min, int max) {
+  private static int getRandomNumber(int min, int max) {
     return random.nextInt(max - min) + min;
   }
 
 
-  private double roundUp(int x) {
+  private static double roundUp(int x) {
     if (x%50 < 25) {
       return x - (x%50); 
     }
@@ -110,7 +109,7 @@ public class RoomGenerator {
   }
 
 
-  private int getNextNumber(int floor) {
+  private static int getNextNumber(int floor) {
     switch (floor) {
       case 1:
         one++;

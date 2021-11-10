@@ -28,7 +28,7 @@
                         <Button fx:id="addFundsButton" mnemonicParsing="false" text="Add funds" />
                      </children>
                   </HBox>
-                  <Label fx:id="emailErrorLabel" />
+                  <Label fx:id="usernameErrorLabel" />
                </children>
                <StackPane.margin>
                   <Insets left="200.0" right="200.0" />

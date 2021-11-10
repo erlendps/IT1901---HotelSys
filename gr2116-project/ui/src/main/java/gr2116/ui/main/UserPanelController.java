@@ -23,7 +23,7 @@ public class UserPanelController implements PersonListener {
   private Label nameLabel;
 
   @FXML
-  private Label emailLabel;
+  private Label usernameLabel;
 
   @FXML
   private Label balanceLabel;
@@ -122,7 +122,7 @@ public class UserPanelController implements PersonListener {
    */
   private void updatePanel() {
     nameLabel.setText(person.getName());
-    emailLabel.setText(person.getEmail());
+    usernameLabel.setText(person.getUsername());
     balanceLabel.setText(Double.toString(person.getBalance()));
 
     reservationListView.getItems().clear();
@@ -132,10 +132,11 @@ public class UserPanelController implements PersonListener {
       String startDate = reservation.getStartDate().toString();
       String endDate = reservation.getEndDate().toString();
       Label label = new Label("Room: " + roomNumber
-      + ". From " + startDate
-      + " to " + endDate + "."
+          + ". From " + startDate
+          + " to " + endDate + "."
       );
-      label.setId("hotelRoom" + Integer.toString(roomNumber) + "reservation" + startDate + "to" + endDate);
+      label.setId("hotelRoom" + Integer.toString(roomNumber)
+          + "reservation" + startDate + "to" + endDate);
       reservationListView.getItems().add(label);
     }
   }

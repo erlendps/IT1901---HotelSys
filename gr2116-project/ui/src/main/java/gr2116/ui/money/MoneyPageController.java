@@ -1,6 +1,7 @@
 package gr2116.ui.money;
 
 import gr2116.core.Person;
+import gr2116.ui.access.HotelAccess;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
 import java.util.Collection;
@@ -16,6 +17,7 @@ import javafx.scene.control.TextField;
 public class MoneyPageController {
   private Collection<MessageListener> listeners = new HashSet<>();
   private Person person;
+  private HotelAccess hotelAccess;
 
   @FXML
   private TextField cardTextField;
@@ -37,6 +39,20 @@ public class MoneyPageController {
 
   public void setPerson(Person person) {
     this.person = person;
+  }
+
+  /**
+   * Sets the hotelAccess.
+   *
+   * @param hotelAccess the hotelAccess
+   *
+   * @throws IllegalArgumentException throws if hotel is null.
+   */
+  public void setHotelAccess(HotelAccess hotelAccess) {
+    if (hotelAccess == null) {
+      throw new IllegalArgumentException("Hotel is null.");
+    }
+    this.hotelAccess = hotelAccess;
   }
 
   /**
@@ -133,7 +149,7 @@ public class MoneyPageController {
         moneyErrorLabel.setText(e.getMessage());
         return;
       }
-      person.addBalance(Integer.parseInt(moneyAmount));
+      hotelAccess.addBalance(person, Double.parseDouble(moneyAmount));
       
       notifyListeners(Message.SignIn, person);
     });

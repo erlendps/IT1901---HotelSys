@@ -1,20 +1,20 @@
 {
-  "kyle@people.com": {
+  "kyle": {
     "balance": 144,
     "reservations": [4011561402419986146],
     "name": "Kyllard",
-    "email": "kyle@people.com"
+    "username": "kyle"
   },
-  "richard@people.com": {
+  "richard": {
     "balance": 1000,
     "reservations": [
       7086614509887759404,
       1944599371997394317
     ],
     "name": "Richard",
-    "email": "richard@people.com"
+    "username": "richard"
   },
-  "tom@richpeople.org": {
+  "tom": {
     "balance": 1.0E9,
     "reservations": [
       4151290367505815759,
@@ -23,6 +23,6 @@
       4285828545207567815
     ],
     "name": "Tom",
-    "email": "tom@richpeople.org"
+    "username": "tom"
   }
 }

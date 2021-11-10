@@ -1,10 +1,10 @@
 package gr2116.ui.main;
 
-import gr2116.core.Hotel;
 import gr2116.core.HotelRoom;
 import gr2116.core.HotelRoomFilter;
 import gr2116.core.Person;
 import gr2116.core.PersonListener;
+import gr2116.ui.access.HotelAccess;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
 import java.time.LocalDate;
@@ -12,7 +12,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -20,8 +19,8 @@ import javafx.scene.paint.Color;
 /**
  * Main page, which contains the main panel for booking hotel nights.
  */
-public class MainPageController extends VBox implements MessageListener, PersonListener {
-  private Hotel hotel;
+public class MainPageController implements MessageListener, PersonListener {
+  private HotelAccess hotelAccess;
   private HotelRoomFilter hotelRoomFilter
       = new HotelRoomFilter(null, null, null, null, null);
   private Person person;
@@ -53,17 +52,17 @@ public class MainPageController extends VBox implements MessageListener, PersonL
   public MainPageController() {}
 
   /**
-   * Sets the hotel from which to build the main page.
+   * Sets the hotelAccess from which to build the main page.
    *
-   * @param hotel the hotel the main page should be constructed for.
+   * @param hotelAccess the hotelAccess the main page should be constructed for.
    *
    * @throws IllegalArgumentException throws if hotel is null.
    */
-  public void setHotel(Hotel hotel) {
-    if (hotel == null) {
+  public void setHotelAccess(HotelAccess hotelAccess) {
+    if (hotelAccess == null) {
       throw new IllegalArgumentException("Hotel is null.");
     }
-    this.hotel = hotel;
+    this.hotelAccess = hotelAccess;
     if (person != null) {
       buildRoomList();
     }
@@ -86,7 +85,7 @@ public class MainPageController extends VBox implements MessageListener, PersonL
     this.person = person;
     person.addListener(this);
     userPanelViewController.setPerson(person);
-    if (hotel != null) {
+    if (hotelAccess != null) {
       buildRoomList();
     }
   }
@@ -110,7 +109,7 @@ public class MainPageController extends VBox implements MessageListener, PersonL
    * which is where the user can select to book them.
    */
   private void buildRoomList() {
-    if (person == null || hotel == null) {
+    if (person == null || hotelAccess == null) {
       throw new IllegalStateException("Cannot build room list without person and hotel.");
     }
     // Sets first empty list of rooms.
@@ -138,7 +137,7 @@ public class MainPageController extends VBox implements MessageListener, PersonL
       }
     }
     
-    Collection<HotelRoom> filteredRooms = hotel.getRooms(hotelRoomFilter);
+    Collection<HotelRoom> filteredRooms = hotelAccess.getRooms(hotelRoomFilter);
 
     // If dates are valid, add all filterd room.
     for (HotelRoom hotelRoom : filteredRooms) {
@@ -148,8 +147,9 @@ public class MainPageController extends VBox implements MessageListener, PersonL
                               hotelRoomFilter.getStartDate(),
                               hotelRoomFilter.getEndDate());
         roomItem.setOnMakeReservationButtonAction((event) -> {
-          person.makeReservation(
-              hotelRoom,
+          hotelAccess.makeReservation(
+              person,
+              hotelRoom.getNumber(),
               hotelRoomFilter.getStartDate(),
               hotelRoomFilter.getEndDate()
           );

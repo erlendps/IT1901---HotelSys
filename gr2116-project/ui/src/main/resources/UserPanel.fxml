@@ -13,8 +13,8 @@
       <Label text="Name:" />
       <Label fx:id="nameLabel" />
       <Separator prefHeight="30.0" prefWidth="200.0" />
-      <Label text="Email:" />
-      <Label fx:id="emailLabel" />
+      <Label text="Username:" />
+      <Label fx:id="usernameLabel" />
       <Separator prefHeight="30.0" prefWidth="200.0" />
       <Label text="Balance:" />
       <Label fx:id="balanceLabel" />

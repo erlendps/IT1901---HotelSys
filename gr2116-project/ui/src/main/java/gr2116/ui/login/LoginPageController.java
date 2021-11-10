@@ -21,12 +21,12 @@ public class LoginPageController {
   @FXML
   private TextField nameTextField;
   @FXML
-  private TextField emailTextField;
+  private TextField usernameTextField;
   @FXML
   private Button signInButton;
 
   @FXML
-  private Label emailErrorLabel;
+  private Label usernameErrorLabel;
   @FXML
   private Label nameTitleLabel;
 
@@ -56,17 +56,17 @@ public class LoginPageController {
   private void initialize() {
     setNameVisible(false);
     signInButton.setOnAction((event) -> {
-      String email = emailTextField.getText();
+      String username = usernameTextField.getText();
       String name = nameTextField.getText();
 
-      if (!Person.isValidEmail(email)) {
-        emailErrorLabel.setText("Invalid email!");
+      if (!Person.isValidUsername(username)) {
+        usernameErrorLabel.setText("Invalid username!");
         return;
       }
       // Find person and if already registred, notify to
       // sign in.
       for (Person loadedPerson : loadedPersons) {
-        if (loadedPerson.getEmail().equals(email)) {
+        if (loadedPerson.getUsername().equals(username)) {
           notifyListeners(Message.SignIn, loadedPerson);
           return;
         }
@@ -77,18 +77,18 @@ public class LoginPageController {
         setNameVisible(true);
         return;
       } else if (!Person.isValidName(name)) {
-        emailErrorLabel.setText("Invalid name!");
+        usernameErrorLabel.setText("Invalid name!");
         return;
       }
       // If both fields were set, create new person and log in.
       Person person = new Person(name);
-      person.setEmail(email);
+      person.setUsername(username);
       notifyListeners(Message.SignIn, person);
     });
   }
 
   /**
-   * The name field should only be visible if the email was not found in the collection of persons,
+   * The name field should only be visible if the username was not found in the collection of persons,
    * in which case a new account will be created. This method sets the field visibility.
    *
    * @param visible Boolean, if true the field is visible.

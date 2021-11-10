@@ -1,16 +1,18 @@
 package gr2116.persistence;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import gr2116.core.Hotel;
 import gr2116.persistence.internal.HotelModule;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
 
 /**
@@ -18,15 +20,30 @@ import java.nio.file.Paths;
  */
 public class HotelPersistence {
   private ObjectMapper mapper;
-  protected static final String DATA_FOLDER
-      = Paths.get(".").toAbsolutePath()
-      .normalize().getParent().getParent().resolve("data").toString();
+  protected static String DATA_FOLDER;
+  private String prefix;
 
   /**
    * Constructor, creates an object mapper with our custom HotelModule.
    */
   public HotelPersistence() {
     mapper = createObjectMapper();
+    File directory = new File(System.getProperty("user.home"), "HotelSys");
+    if (!directory.exists()) {
+      directory.mkdir();
+    }
+    DATA_FOLDER = Paths.get(directory.toString()).toString();
+  }
+
+  /**
+   * Constructor, creates an object mapper with our custom HotelModule.
+   * Also sets a prefix.
+   *
+   * @param prefix the prefix to be set
+   */
+  public HotelPersistence(String prefix) {
+    this();
+    setPrefix(prefix);
   }
 
   /**
@@ -76,32 +93,34 @@ public class HotelPersistence {
   /**
    * Loads from file a Hotel object with the given prefix.
    *
-   * @param prefix the prefix of the file, eg "data" or "test"
-   *
    * @return Hotel object
    *
    * @throws IOException if something went wrong with I/O
    */
-  public final Hotel loadHotel(String prefix) throws IOException {
+  public final Hotel loadHotel() throws IOException {
     if (prefix == null) {
       throw new IllegalArgumentException("Prefix is null.");
     }
-    try (Reader reader = new FileReader(
-        Paths.get(DATA_FOLDER, prefix + "Hotel.json").toFile(),
-        StandardCharsets.UTF_8)) {
+    try { 
+      Reader reader = new FileReader(
+          Paths.get(DATA_FOLDER, prefix + "Hotel.json").toFile(),
+          StandardCharsets.UTF_8);
       return readHotel(reader);
+    } catch (IOException e) {
+      System.err.println("Could not find " + DATA_FOLDER + "/" + prefix + "Hotel.json");
+      return new Hotel(RoomGenerator.generateRooms());
     }
+      
   }
 
   /**
    * Saves a Hotel object to file with the given prefix.
    *
    * @param hotel the Hotel to be saved
-   * @param prefix the prefix of the file
    *
    * @throws IOException if something went wrong with I/O
    */
-  public final void saveHotel(Hotel hotel, String prefix) throws IOException {
+  public final void saveHotel(Hotel hotel) throws IOException {
     if (prefix == null) {
       throw new IllegalArgumentException("Prefix is null.");
     }
@@ -113,5 +132,17 @@ public class HotelPersistence {
         StandardCharsets.UTF_8)) {
       writeHotel(hotel, writer);
     }
+  }
+
+  /**
+   * Sets the data filename prefix.
+   *
+   * @param prefix The prefix the be set, eg. "data" or "test"
+   */
+  public void setPrefix(String prefix) {
+    if (!prefix.matches("^([a-z]){3,10}([A-Z]{1}[a-z]{1,8})*$")) {
+      throw new IllegalArgumentException("prefix is not valid");
+    }
+    this.prefix = prefix;
   }
 }
