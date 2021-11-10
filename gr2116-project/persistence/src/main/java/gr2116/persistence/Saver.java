@@ -180,16 +180,13 @@ public class Saver {
     }
     try (PrintWriter pw = new PrintWriter(personDataJson.getAbsolutePath())) {
       pw.print(updatePersonData(persons).toString(2));
-      pw.flush();
     }
     try (PrintWriter pw = new PrintWriter(roomsDataJson.getAbsolutePath())) {
       pw.print(updateRoomsData(rooms).toString(2));
-      pw.flush();
     }
     try (PrintWriter pw = new PrintWriter(
                               reservationDataJson.getAbsolutePath())) {
       pw.print(updateReservationData(reservations).toString(2));
-      pw.flush();
     }
   }
 }
