@@ -59,4 +59,9 @@ public class DirectHotelAccess implements HotelAccess {
       LocalDate startDate, LocalDate endDate) {
     hotel.makeReservation(person, hotelRoom, startDate, endDate);
   }
+
+  @Override
+  public void addBalance(Person person, double amount) {
+    person.addBalance(amount);
+  }
 }
