@@ -18,16 +18,18 @@ import java.util.Collection;
 public class PersonResource {
     private static final Logger LOG = LoggerFactory.getLogger(RoomResource.class);
 
-    Collection<Person> matches;
+    String usename;
+    Person person;
     Hotel hotel;
 
      @Context
      private HotelPersistence hotelPersistence;
 
     
-    public PersonResource(Collection<Person> matches, Hotel hotel) {
-        this.matches = matches;
-        this.hotel = hotel;
+    public PersonResource(String username, Person person, Hotel hotel) {
+      this.person = person;
+      this.usename = username;
+      this.hotel = hotel;
     }
 
     private void autoSaveHotel() {
@@ -43,7 +45,7 @@ public class PersonResource {
     @PUT
     //@Consumes(MediaType.APPLICATION_JSON)
     public void addPerson() {
-        hotel.addPerson(matches.iterator().next());
+        hotel.addPerson(person);
         autoSaveHotel();
     }
 }
