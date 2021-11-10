@@ -32,7 +32,7 @@ public class Hotel implements Iterable<HotelRoom> {
    * @param rooms a collection of rooms.
    */
   public Hotel(final Collection<HotelRoom> rooms) {
-    rooms.forEach((room) -> this.rooms.add(room));
+    rooms.forEach(this.rooms::add);
   }
 
   /**
