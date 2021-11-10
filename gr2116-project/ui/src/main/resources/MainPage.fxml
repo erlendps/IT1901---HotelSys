@@ -16,7 +16,7 @@
   <children>
     <SplitPane dividerPositions="0.2505567928730512, 0.7505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
-        <fx:include fx:id="userPanelView" source="userPanel.fxml"/>
+        <fx:include fx:id="userPanelView" source="UserPanel.fxml"/>
           <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
             <content>
               <AnchorPane id="Content" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0">
