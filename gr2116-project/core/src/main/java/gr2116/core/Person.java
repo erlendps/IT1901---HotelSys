@@ -2,7 +2,6 @@ package gr2116.core;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -37,12 +36,12 @@ public class Person {
    *
    * @param name - {@code String} that represents the persons name.
    *
-   * @throws NullPointerException if {@code name} is null.
+   * @throws IllegalArgumentException if {@code name} is null.
    * @throws IllegalArgumentException if {@code name} is not valid.
    */
   public Person(final String name) {
     if (name == null) {
-      throw new NullPointerException();
+      throw new IllegalArgumentException();
     }
     if (!isValidName(name)) {
       throw new IllegalArgumentException("The name is not valid");
@@ -73,12 +72,12 @@ public class Person {
    *
    * @param email - the new email.
    *
-   * @throws NullPointerException if {@code email} is null.
+   * @throws IllegalArgumentException if {@code email} is null.
    * @throws IllegalArgumentException if {@code email} is not a valid email.
    */
   public final void setEmail(final String email) {
     if (email == null) {
-      throw new NullPointerException("Email is null");
+      throw new IllegalArgumentException("Email is null");
     }
     if (!isValidEmail(email)) {
       throw new IllegalArgumentException("The email is not valid");
@@ -169,7 +168,7 @@ public class Person {
    * @param startDate - {@code LocalDate} of when the reservation should start.
    * @param endDate - {@code LocalDate} of when the reservation should end.
    *
-   * @throws NullPointerException if hotelRoom, startDate or endDate is null.
+   * @throws IllegalArgumentException if hotelRoom, startDate or endDate is null.
    * @throws IllegalStateException if the start date is before today.
    * @throws IllegalArgumentException if startDate is chronologically after endDate.
    * @throws IllegalStateException  if the {@code Person} does not have enough balance
@@ -181,7 +180,7 @@ public class Person {
                                     final LocalDate startDate,
                                     final LocalDate endDate) {
     if (hotelRoom == null || startDate == null || endDate == null) {
-      throw new NullPointerException();
+      throw new IllegalArgumentException();
     }
     if (startDate.isBefore(LocalDate.now())) {
       throw new IllegalStateException("Cant make a reservation backwards in time.");
@@ -212,11 +211,11 @@ public class Person {
    *
    * @param reservation - the {@code Reservation} to be added.
    *
-   * @throws NullPointerException if reservation is null.
+   * @throws IllegalArgumentException if reservation is null.
    */
   public final void addReservation(final Reservation reservation) {
     if (reservation == null) {
-      throw new NullPointerException();
+      throw new IllegalArgumentException();
     }
     reservations.add(reservation);
     notifyListeners();
@@ -232,7 +231,6 @@ public class Person {
     List<Long> ids = reservations.stream()
         .map((r) -> r.getId())
         .toList();
-    Collections.sort(ids);    // sorts in ascending order
     return ids;
   }
 
