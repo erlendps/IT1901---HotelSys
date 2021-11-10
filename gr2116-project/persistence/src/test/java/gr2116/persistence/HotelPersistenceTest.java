@@ -103,9 +103,9 @@ public class HotelPersistenceTest {
   @Test
   public void testPrefixIsNull() {
     Hotel hotel = new Hotel();
-    assertThrows(NullPointerException.class, () -> hotelPersistence.saveHotel(hotel, null));
-    assertThrows(NullPointerException.class, () -> hotelPersistence.loadHotel(null));
-    assertThrows(NullPointerException.class, () -> hotelPersistence.saveHotel(null, "test"));
+    assertThrows(IllegalArgumentException.class, () -> hotelPersistence.saveHotel(hotel, null));
+    assertThrows(IllegalArgumentException.class, () -> hotelPersistence.loadHotel(null));
+    assertThrows(IllegalArgumentException.class, () -> hotelPersistence.saveHotel(null, "test"));
   }
 
   @AfterAll

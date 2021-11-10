@@ -170,10 +170,10 @@ public class PersistenceTest {
         Collection<Reservation> reservations = new ArrayList<>();
         Collection<HotelRoom> rooms = new ArrayList<>();
         assertDoesNotThrow(() -> saver.writeToFile(rooms, persons, reservations, "empty"));
-        assertThrows(NullPointerException.class, () -> saver.writeToFile(null, persons, reservations, "null"));
-        assertThrows(NullPointerException.class, () -> saver.writeToFile(rooms, null, reservations, "null"));
-        assertThrows(NullPointerException.class, () -> saver.writeToFile(rooms, persons, null, "null"));
-        assertThrows(NullPointerException.class, () -> saver.writeToFile(rooms, persons, reservations, null));
+        assertThrows(IllegalArgumentException.class, () -> saver.writeToFile(null, persons, reservations, "null"));
+        assertThrows(IllegalArgumentException.class, () -> saver.writeToFile(rooms, null, reservations, "null"));
+        assertThrows(IllegalArgumentException.class, () -> saver.writeToFile(rooms, persons, null, "null"));
+        assertThrows(IllegalArgumentException.class, () -> saver.writeToFile(rooms, persons, reservations, null));
     }
     
 

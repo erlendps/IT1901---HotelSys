@@ -84,7 +84,7 @@ public class HotelPersistence {
    */
   public final Hotel loadHotel(String prefix) throws IOException {
     if (prefix == null) {
-      throw new NullPointerException("Prefix is null.");
+      throw new IllegalArgumentException("Prefix is null.");
     }
     try (Reader reader = new FileReader(
         Paths.get(DATA_FOLDER, prefix + "Hotel.json").toFile(),
@@ -103,10 +103,10 @@ public class HotelPersistence {
    */
   public final void saveHotel(Hotel hotel, String prefix) throws IOException {
     if (prefix == null) {
-      throw new NullPointerException("Prefix is null.");
+      throw new IllegalArgumentException("Prefix is null.");
     }
     if (hotel == null) {
-      throw new NullPointerException("Hotel is null.");
+      throw new IllegalArgumentException("Hotel is null.");
     }
     try (Writer writer = new FileWriter(
         Paths.get(DATA_FOLDER, prefix + "Hotel.json").toFile(),

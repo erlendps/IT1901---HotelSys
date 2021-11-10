@@ -53,13 +53,13 @@ public class ReservationTest {
 
     @Test
     public void testConstructor() {
-        assertThrows(NullPointerException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
             new Reservation(null, startDate, endDate));
         
-        assertThrows(NullPointerException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
             new Reservation(room, null, endDate));
         
-        assertThrows(NullPointerException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
             new Reservation(room, startDate, null));
 
         assertThrows(IllegalArgumentException.class, () ->

@@ -19,7 +19,7 @@ public class ReservationSerializer extends JsonSerializer<Reservation> {
   @Override
   public void serialize(Reservation reservation, JsonGenerator gen, SerializerProvider serializers) throws IOException {
     if (reservation == null) {
-      throw new NullPointerException("Reservation is null.");
+      throw new IllegalArgumentException("Reservation is null.");
     }
     gen.writeStartObject();
     gen.writeNumberField("room", reservation.getRoomNumber());

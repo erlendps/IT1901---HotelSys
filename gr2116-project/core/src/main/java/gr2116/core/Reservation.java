@@ -35,7 +35,7 @@ public class Reservation implements Iterable<LocalDate> {
    * @param startDate the given start date.
    * @param endDate the given end date.
    *
-   * @throws NullPointerException if startDate or endDate is null
+   * @throws IllegalArgumentException if startDate or endDate is null
    * @throws IllegalArgumentException if startDate is after endDate
    * @throws NullPointerExceptino if room is null
    */
@@ -43,13 +43,13 @@ public class Reservation implements Iterable<LocalDate> {
                       final LocalDate startDate,
                       final LocalDate endDate) {
     if (startDate == null || endDate == null) {
-      throw new NullPointerException();
+      throw new IllegalArgumentException();
     }
     if (!startDate.isBefore(endDate)) {
       throw new IllegalArgumentException("startDate must be before endDate.");
     }
     if (room == null) {
-      throw new NullPointerException("Rooms is null.");
+      throw new IllegalArgumentException("Rooms cannot be null.");
     }
     this.roomNumber = room.getNumber();
     this.startDate = startDate;

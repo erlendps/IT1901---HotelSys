@@ -50,10 +50,12 @@ public class Hotel implements Iterable<HotelRoom> {
    * Adds the given room to the hotel.
    *
    * @param room the given room.
+   * 
+   * @throws IllegalArgumentException if room is null
    */
   public final boolean addRoom(final HotelRoom room) {
     if (room == null) {
-      throw new NullPointerException("Room cannot be null");
+      throw new IllegalArgumentException("Room cannot be null");
     }
     if (rooms.contains(room)) {
       System.out.println(
@@ -81,11 +83,11 @@ public class Hotel implements Iterable<HotelRoom> {
    *
    * @return true if person was added, false otherwise
    *
-   * @throws NullPointerException if person is null
+   * @throws IllegalArgumentException if person is null
    */
   public final boolean addPerson(final Person person) {
     if (person == null) {
-      throw new NullPointerException("Person cant be null.");
+      throw new IllegalArgumentException("Person cant be null.");
     }
     if (persons.contains(person)) {
       System.out.println(

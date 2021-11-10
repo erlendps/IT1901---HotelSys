@@ -44,11 +44,11 @@ public class UserPanel extends VBox implements PersonListener {
    *
    * @param person the person we want to initialize for
    *
-   * @throws NullPointerException if person is null
+   * @throws IllegalArgumentException if person is null
    */
   public UserPanel(final Person person) {
     if (person == null) {
-      throw new NullPointerException("Error initializing UserPanel: person is null.");
+      throw new IllegalArgumentException("Error initializing UserPanel: person is null.");
     }
     this.person = person;
     person.addListener(this);

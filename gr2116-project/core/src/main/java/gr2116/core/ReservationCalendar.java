@@ -22,12 +22,12 @@ public class ReservationCalendar implements Iterable<Reservation> {
    *
    * @param reservation the given reservation.
    *
-   * @throws NullPointerException if the reservation is null
+   * @throws IllegalArgumentException if the reservation is null
    * @throws IllegalStateException if the room is not available
    */
   public final void addReservation(final Reservation reservation) {
     if (reservation == null) {
-      throw new NullPointerException("Reservation can not be null.");
+      throw new IllegalArgumentException("Reservation can not be null.");
     }
     if (!isAvailable(reservation.getStartDate(), reservation.getEndDate())) {
       throw new IllegalStateException(

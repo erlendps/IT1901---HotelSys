@@ -108,7 +108,7 @@ public class LoginPage extends AnchorPane {
    */
   public final void addListener(final MessageListener listener) {
     if (listener == null) {
-      throw new NullPointerException("Cant add null to listeners.");
+      throw new IllegalArgumentException("Cant add null to listeners.");
     }
     listeners.add(listener);
   }

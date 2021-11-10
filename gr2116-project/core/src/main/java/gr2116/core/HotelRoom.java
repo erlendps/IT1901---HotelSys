@@ -41,7 +41,7 @@ public class HotelRoom {
    */
   public HotelRoom(final HotelRoomType roomType, final int number) {
     if (roomType == null) {
-      throw new NullPointerException();
+      throw new IllegalArgumentException();
     }
     if (number <= 0) {
       throw new IllegalArgumentException("Room number must be greater than zero.");
@@ -135,10 +135,12 @@ public class HotelRoom {
    * Adds the given amenity to the room's collection of amenities.
    *
    * @param amenity the given amenity.
+   * 
+   * @throws IllegalArgumentException if amenity is null
    */
   public final void addAmenity(final Amenity amenity) {
     if (amenity == null) {
-      throw new NullPointerException("Amenity cannot be null.");
+      throw new IllegalArgumentException("Amenity cannot be null.");
     }
     amenities.add(amenity);
   }
@@ -207,10 +209,12 @@ public class HotelRoom {
    * Adds the given reservation to the room's reservation calendar.
    *
    * @param reservation the given reservation.
+   * 
+   * @throws IllegalArgumentException if reservation is null
    */
   public final void addReservation(final Reservation reservation) {
     if (reservation == null) {
-      throw new NullPointerException("Reservation can not be null");
+      throw new IllegalArgumentException("Reservation can not be null");
     }
 
     if (reservation.getRoomNumber() != getNumber()) {
@@ -245,7 +249,7 @@ public class HotelRoom {
   private void verifyChronology(final LocalDate startDate,
       final LocalDate endDate) {
     if (startDate == null || endDate == null) {
-      throw new NullPointerException("Startdate or endDate cannot be null.");
+      throw new IllegalArgumentException("Startdate or endDate cannot be null.");
     }
     if (!startDate.isBefore(endDate)) {
       throw new IllegalArgumentException(

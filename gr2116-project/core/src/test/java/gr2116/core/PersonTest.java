@@ -1,7 +1,6 @@
 package gr2116.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDate;
@@ -85,7 +84,6 @@ public class PersonTest {
 
     tom.makeReservation(deluxeRoom, today, overmorrow);
 
-    assertNotNull(tom.getReservationIds());
     assertEquals(1, tom.getReservationIds().size(),
         "User should have one reservation after booking one room.");
 

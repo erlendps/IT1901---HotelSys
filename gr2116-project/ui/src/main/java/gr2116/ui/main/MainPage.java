@@ -36,15 +36,15 @@ public class MainPage extends VBox implements MessageListener, PersonListener {
    * @param person the person the main page should be constructed for.
    * @param hotel the hotel the main page should be constructed for.
    *
-   * @throws NullPointerException throws if person is null.
-   * @throws NullPointerException throws if hotel is null.
+   * @throws IllegalArgumentException throws if person is null.
+   * @throws IllegalArgumentException throws if hotel is null.
    */
   public MainPage(Person person, Hotel hotel) {
     if (person == null) {
-      throw new NullPointerException("Person is null.");
+      throw new IllegalArgumentException("Person is null.");
     }
     if (hotel == null) {
-      throw new NullPointerException("Hotel is null.");
+      throw new IllegalArgumentException("Hotel is null.");
     }
     this.hotel = hotel;
     this.person = person;
@@ -178,7 +178,7 @@ public class MainPage extends VBox implements MessageListener, PersonListener {
    */
   public final void addListener(final MessageListener listener) {
     if (listener == null) {
-      throw new NullPointerException("Listener is null.");
+      throw new IllegalArgumentException("Listener is null.");
     }
     listeners.add(listener);
   }
