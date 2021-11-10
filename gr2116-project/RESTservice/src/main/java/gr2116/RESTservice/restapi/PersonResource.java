@@ -15,12 +15,12 @@ import java.io.IOException;
 public class PersonResource {
     private static final Logger LOG = LoggerFactory.getLogger(RoomResource.class);
 
-    String usename;
-    Person person;
-    Hotel hotel;
+    private final String usename;
+    private final Person person;
+    private final Hotel hotel;
 
-     @Context
-     private HotelPersistence hotelPersistence;
+    @Context
+    private HotelPersistence hotelPersistence;
 
     
     public PersonResource(String username, Person person, Hotel hotel) {
@@ -44,7 +44,7 @@ public class PersonResource {
     public void addPerson(String name) {
       LOG.debug("addPerson({})", name);
       Person person = new Person(name);
-      person.setUsername(this.usename);
+      person.setUsername(usename);
       hotel.addPerson(person);
       autoSaveHotel();
     }
@@ -53,7 +53,7 @@ public class PersonResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public void addBalance(Double balance) {
       LOG.debug("addBalance({})", balance);
-      this.person.addBalance(balance);
+      person.addBalance(balance);
       autoSaveHotel();
     }
 }

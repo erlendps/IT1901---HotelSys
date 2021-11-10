@@ -2,6 +2,7 @@ package gr2116.RESTservice.restapi;
 
 import gr2116.core.Hotel;
 import gr2116.core.Person;
+import gr2116.core.HotelRoom;
 import gr2116.persistence.HotelPersistence;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
@@ -53,7 +54,13 @@ public class HotelService {
     return personResource;
   }
 
-  public RoomResource getRoomResource() {
-    return new RoomResource();
+  @Path("/room/{username}/{name}")
+  public RoomResource getRoomResource(@PathParam("username") String username,@PathParam("name") String name ) {
+    LOG.debug("Sub-resource room for " + username);
+    Person  person = new Person(name);
+    person.setUsername(username);
+
+    RoomResource roomResource = new RoomResource(person, hotel);
+    return roomResource;
   }
 }
