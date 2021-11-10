@@ -1,5 +1,6 @@
 package gr2116.RESTservice.restapi;
 
+
 import gr2116.core.Hotel;
 import gr2116.core.Person;
 import gr2116.core.HotelRoom;
@@ -12,6 +13,7 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 
 import java.util.Collection;
+import java.util.Iterator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,16 +56,19 @@ public class HotelService {
     return personResource;
   }
 
-  @Path("/room/{username}/{name}")
-  public RoomResource getRoomResource(@PathParam("username") String username,@PathParam("name") String name ) {
+  @Path("/rooms/{roomNumber}")
+  public RoomResource getRoomResource(@PathParam("roomNumber") String roomNumber) {
     //LOG.debug("Sub-resource room for " + username);
-    Collection<Person> matches = hotel.getPersons(p -> p.getUsername() == username);
-    if (matches.size() != 1) {
-      throw new IllegalStateException("Multiple or 0 matches for username" + username);
+    Collection<HotelRoom> matches = hotel.getRooms(p -> p.getNumber() == Integer.parseInt(roomNumber));
+    
+     if (matches.size() != 1) {
+      throw new IllegalStateException("Multiple or 0 matches for room number" + roomNumber);
     }
 
-    Person person = matches.iterator().next();
-    RoomResource roomResource = new RoomResource(person, hotel);
+    HotelRoom room = matches.iterator.next();
+
+    RoomResource roomResource = new RoomResource(room, hotel);
     return roomResource;
   }
 }
+

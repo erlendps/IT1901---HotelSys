@@ -2,6 +2,7 @@ package gr2116.RESTservice.restapi;
 
 import gr2116.core.Person;
 import gr2116.core.Hotel;
+import gr2116.core.Reservation;
 import gr2116.persistence.HotelPersistence;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Consumes;

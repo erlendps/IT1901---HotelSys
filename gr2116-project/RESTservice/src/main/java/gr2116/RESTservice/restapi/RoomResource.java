@@ -1,6 +1,6 @@
 package gr2116.RESTservice.restapi;
 
-import gr2116.core.Person;
+import gr2116.core.HotelRoom;
 import gr2116.core.Hotel;
 import gr2116.core.Reservation;
 import gr2116.persistence.HotelPersistence;
@@ -16,26 +16,34 @@ public class RoomResource {
     
     private static final Logger LOG = LoggerFactory.getLogger(RoomResource.class);
 
-    private final Person person;
+    private final HotelRoom room;
     private final Hotel hotel;
 
     @Context
     private HotelPersistence hotelPersistence;
 
 
-    public RoomResource(Person person, Hotel hotel) {
-      this.person = person;
-      this.hotel = hotel;
+    public RoomResource(HotelRoom room, Hotel hotel) {
+        this.room = room;
+        this.hotel = hotel;
     }
 
     private void autoSaveHotel() {
-    if (hotelPersistence != null) {
-      try {
-        hotelPersistence.saveHotel(hotel);
-      } catch (IllegalStateException | IOException e) {
-        System.err.println("Couldn't auto-save Hotel: " + e);
-      }
+        if (hotelPersistence != null) {
+            try {
+                hotelPersistence.saveHotel(hotel);
+                } catch (IllegalStateException | IOException e) {
+                    System.err.println("Couldn't auto-save Hotel: " + e);
+                }
+            }
     }
+    
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addReservationRoom(Reservation reservation) {
+        LOG.debug("addReservationRoom({})", reservation);
+        room.addReservation(reservation);
+        autoSaveHotel();
     }
 
 }
