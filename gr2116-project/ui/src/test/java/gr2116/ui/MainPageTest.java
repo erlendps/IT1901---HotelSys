@@ -42,6 +42,7 @@ public class MainPageTest extends ApplicationTest{
         Person person = new Person("Richard Wilkens");
         person.setUsername("RichardWilkens");
         person.addBalance(100.0);
+        appController.getHotelAccess().addPerson(person);
         appController.moveToMainPage(person);
         
         stage.setScene(new Scene(parent));
