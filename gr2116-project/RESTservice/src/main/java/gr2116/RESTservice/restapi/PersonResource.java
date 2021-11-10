@@ -41,9 +41,19 @@ public class PersonResource {
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
+    public void addPerson(String name) {
+      LOG.debug("addPerson({})", name);
+      Person person = new Person(name);
+      person.setUsername(this.usename);
+      hotel.addPerson(person);
+      autoSaveHotel();
+    }
+
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
     public void addBalance(Double balance) {
       LOG.debug("addBalance({})", balance);
-      person.addBalance(balance);
+      this.person.addBalance(balance);
       autoSaveHotel();
     }
 }
