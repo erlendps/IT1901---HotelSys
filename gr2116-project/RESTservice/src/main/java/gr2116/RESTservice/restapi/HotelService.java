@@ -65,7 +65,7 @@ public class HotelService {
       throw new IllegalStateException("Multiple or 0 matches for room number" + roomNumber);
     }
 
-    HotelRoom room = matches.iterator.next();
+    HotelRoom room = matches.iterator().next();
 
     RoomResource roomResource = new RoomResource(room, hotel);
     return roomResource;
