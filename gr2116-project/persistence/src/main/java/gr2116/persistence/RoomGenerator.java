@@ -1,6 +1,5 @@
 package gr2116.persistence;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -8,7 +7,6 @@ import java.util.List;
 import java.util.Random;
 
 import gr2116.core.Amenity;
-import gr2116.core.Hotel;
 import gr2116.core.HotelRoom;
 import gr2116.core.HotelRoomType;
 
