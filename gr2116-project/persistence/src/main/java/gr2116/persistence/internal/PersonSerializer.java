@@ -21,7 +21,7 @@ public class PersonSerializer extends JsonSerializer<Person> {
   @Override
   public void serialize(Person person, JsonGenerator gen, SerializerProvider serializer) throws IOException {
     if (person == null) {
-      throw new NullPointerException("Person is null.");
+      throw new IllegalArgumentException("Person is null.");
     }
     gen.writeStartObject();
     gen.writeStringField("name", person.getName());

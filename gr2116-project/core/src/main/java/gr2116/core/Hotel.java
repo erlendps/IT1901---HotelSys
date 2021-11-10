@@ -35,7 +35,7 @@ public class Hotel implements Iterable<HotelRoom> {
    * @param rooms a collection of rooms.
    */
   public Hotel(final Collection<HotelRoom> rooms) {
-    rooms.forEach((room) -> this.rooms.add(room));
+    rooms.forEach(this.rooms::add);
   }
 
   /**
@@ -53,10 +53,12 @@ public class Hotel implements Iterable<HotelRoom> {
    * Adds the given room to the hotel.
    *
    * @param room the given room.
+   * 
+   * @throws IllegalArgumentException if room is null
    */
   public final boolean addRoom(final HotelRoom room) {
     if (room == null) {
-      throw new NullPointerException("Room cannot be null");
+      throw new IllegalArgumentException("Room cannot be null");
     }
     if (rooms.contains(room)) {
       System.out.println(
@@ -84,11 +86,11 @@ public class Hotel implements Iterable<HotelRoom> {
    *
    * @return true if person was added, false otherwise
    *
-   * @throws NullPointerException if person is null
+   * @throws IllegalArgumentException if person is null
    */
   public final boolean addPerson(final Person person) {
     if (person == null) {
-      throw new NullPointerException("Person cant be null.");
+      throw new IllegalArgumentException("Person cant be null.");
     }
     if (persons.contains(person)) {
       System.out.println(
@@ -121,19 +123,6 @@ public class Hotel implements Iterable<HotelRoom> {
     return rooms.stream().filter(predicate).toList();
   }
 
-  /**
-   * Returns the rooms of the hotel that matches the given hotel room filter.
-   * Used in search.
-   *
-   * @param hotelRoomFilter the given hotel room filter.
-   *
-   * @return a collection of rooms.
-   */
-  public final Collection<HotelRoom> getRooms(
-      final HotelRoomFilter hotelRoomFilter) {
-    return getRooms(hotelRoomFilter.getPredicate());
-  }
-
   public final Collection<HotelRoom> getRooms() {
     return new ArrayList<>(rooms);
   }
@@ -148,7 +137,7 @@ public class Hotel implements Iterable<HotelRoom> {
   }
 
   public final Collection<Person> getPersons(Predicate<Person> pred) {
-    return persons.stream().filter(pred).collect(Collectors.toList());
+    return persons.stream().filter(pred).toList();
   }
   
   /**
@@ -171,7 +160,7 @@ public class Hotel implements Iterable<HotelRoom> {
    * @param startDate - {@code LocalDate} of when the reservation should start.
    * @param endDate - {@code LocalDate} of when the reservation should end.
    *
-   * @throws NullPointerException if startDate or endDate is null.
+   * @throws IllegalArgumentException if startDate or endDate is null.
    * @throws IllegalStateException if the start date is before today.
    * @throws IllegalArgumentException if startDate is chronologically after endDate
    * @throws IllegalArgumentException if the hotel room number is not a room in the hotel.
@@ -185,7 +174,7 @@ public class Hotel implements Iterable<HotelRoom> {
                                     final LocalDate startDate,
                                     final LocalDate endDate) {
     if (person == null || startDate == null || endDate == null) {
-      throw new NullPointerException();
+      throw new IllegalArgumentException();
     }
     if (!getPersons().contains(person)) {
       throw new IllegalArgumentException("Person is not a user.");

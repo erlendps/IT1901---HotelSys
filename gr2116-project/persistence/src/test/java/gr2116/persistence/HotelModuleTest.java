@@ -1,24 +1,21 @@
 package gr2116.persistence;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import gr2116.core.Amenity;
 import gr2116.core.Hotel;
 import gr2116.core.HotelRoom;
 import gr2116.core.HotelRoomType;
 import gr2116.core.Person;
 import gr2116.core.Reservation;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import java.time.LocalDate;
 import java.util.Arrays;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 
 public class HotelModuleTest {
@@ -42,7 +39,6 @@ public class HotelModuleTest {
         room, LocalDate.of(2021, 11, 03), LocalDate.of(2021, 11, 05));
     person.addReservation(res);
     room.addReservation(res);
-
     hotel.addPerson(person);
     hotel.addRoom(room);
   }

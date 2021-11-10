@@ -57,7 +57,7 @@ public class HotelTest {
     hotel.addRoom(room1);
     hotel.addRoom(room2);
     assertEquals(Arrays.asList(room1, room2), hotel.getRooms((r) -> true));
-    assertThrows(NullPointerException.class, () -> hotel.addRoom(null));
+    assertThrows(IllegalArgumentException.class, () -> hotel.addRoom(null));
     assertFalse(hotel.addRoom(room1));
   }
 

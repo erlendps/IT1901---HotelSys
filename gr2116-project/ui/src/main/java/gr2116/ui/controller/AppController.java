@@ -2,17 +2,18 @@ package gr2116.ui.controller;
 
 import gr2116.core.Person;
 import gr2116.persistence.HotelPersistence;
-import gr2116.ui.access.DirectHotelAccess;
-import gr2116.ui.access.HotelAccess;
-import gr2116.ui.login.LoginPage;
-import gr2116.ui.main.MainPage;
+import gr2116.ui.login.LoginPageController;
+import gr2116.ui.main.MainPageController;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
-import gr2116.ui.money.MoneyPage;
+import gr2116.ui.money.MoneyPageController;
+import gr2116.ui.access.DirectHotelAccess;
+import gr2116.ui.access.HotelAccess;
 import java.util.ArrayList;
 import java.util.Collection;
 import javafx.fxml.FXML;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 /**
  * The controller for the application.
@@ -24,7 +25,25 @@ public class AppController implements MessageListener {
   private HotelAccess hotelAccess = new DirectHotelAccess(hotelPersistence);
 
   @FXML
-  private StackPane root;
+  private MainPageController mainPageViewController;
+
+  @FXML
+  private VBox mainPageView;
+
+  @FXML
+  private LoginPageController loginPageViewController;
+
+  @FXML
+  private AnchorPane loginPageView;
+
+  @FXML
+  private MoneyPageController moneyPageViewController;
+
+  @FXML
+  private AnchorPane moneyPageView;
+
+  @FXML
+  private AnchorPane root;
 
   /**
    * Initialize the program.
@@ -32,12 +51,15 @@ public class AppController implements MessageListener {
    */
   @FXML
   private void initialize() {
+    loginPageViewController.addListener(this);
+    mainPageViewController.addListener(this);
+    moneyPageViewController.addListener(this);
     load();
     moveToLoginPage();
   }
 
   @Override
-  public final void receiveNotification(final Object from,
+  public final void receiveMessage(final Object from,
       final Message message, final Object data) {
     if (message == Message.SignIn && data instanceof Person) {
       Person person = (Person) data;
@@ -72,14 +94,12 @@ public class AppController implements MessageListener {
    */
   public void moveToLoginPage() {
     root.getChildren().clear();
-    LoginPage loginPage = new LoginPage();
-    loginPage.addListener(this);
     if (getPersons() != null) {
-      loginPage.setLoadedPersons(getPersons());
+      loginPageViewController.setLoadedPersons(getPersons());
     } else {
       throw new IllegalStateException("No loaded persons were set.");
     }
-    root.getChildren().add(loginPage);
+    root.getChildren().add(loginPageView);
   }
 
   /**
@@ -93,10 +113,10 @@ public class AppController implements MessageListener {
    * @param person The person to be logged in as
    */
   public void moveToMainPage(final Person person) {
+    mainPageViewController.setPerson(person);
+    mainPageViewController.setHotelAccess(hotelAccess);
     root.getChildren().clear();
-    MainPage mainPage = new MainPage(person, hotelAccess);
-    mainPage.addListener(this);
-    root.getChildren().add(mainPage);
+    root.getChildren().add(mainPageView);
   }
 
   /**
@@ -106,9 +126,9 @@ public class AppController implements MessageListener {
    */
   public void moveToMoneyPage(final Person person) {
     root.getChildren().clear();
-    MoneyPage moneyPage = new MoneyPage(person, hotelAccess);
-    moneyPage.addListener(this);
-    root.getChildren().add(moneyPage);
+    moneyPageViewController.setPerson(person);
+    moneyPageViewController.setHotelAccess(hotelAccess);
+    root.getChildren().add(moneyPageView);
   }
 
   public Collection<Person> getPersons() {

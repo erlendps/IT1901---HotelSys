@@ -50,7 +50,7 @@ public class HotelRoomTest {
     assertFalse(roomSingle.hasAmenity(Amenity.Bathtub));
     roomSingle.addAmenity(Amenity.Bathtub);
     assertTrue(roomSingle.hasAmenity(Amenity.Bathtub));
-    assertThrows(NullPointerException.class, () -> roomSingle.addAmenity(null));
+    assertThrows(IllegalArgumentException.class, () -> roomSingle.addAmenity(null));
   }
 
   @Test
@@ -70,7 +70,7 @@ public class HotelRoomTest {
   
   @Test
   public void testAddReservation() {
-    assertThrows(NullPointerException.class, () -> roomDouble.addReservation(null));
+    assertThrows(IllegalArgumentException.class, () -> roomDouble.addReservation(null));
     when(res.getRoomNumber()).thenReturn(roomSingle.getNumber());
     assertThrows(IllegalArgumentException.class, () -> roomDouble.addReservation(res));
   }

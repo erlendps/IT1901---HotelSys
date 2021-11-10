@@ -1,7 +1,6 @@
 package gr2116.core;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,12 +36,12 @@ public class Person {
    *
    * @param name - {@code String} that represents the persons name.
    *
-   * @throws NullPointerException if {@code name} is null.
+   * @throws IllegalArgumentException if {@code name} is null.
    * @throws IllegalArgumentException if {@code name} is not valid.
    */
   public Person(final String name) {
     if (name == null) {
-      throw new NullPointerException();
+      throw new IllegalArgumentException();
     }
     if (!isValidName(name)) {
       throw new IllegalArgumentException("The name is not valid");
@@ -73,12 +72,12 @@ public class Person {
    *
    * @param username - the new username.
    *
-   * @throws NullPointerException if {@code username} is null.
+   * @throws IllegalArgumentException if {@code username} is null.
    * @throws IllegalArgumentException if {@code username} is not a valid username.
    */
   public final void setUsername(final String username) {
     if (username == null) {
-      throw new NullPointerException("Username is null");
+      throw new IllegalArgumentException("Username is null");
     }
     if (!isValidUsername(username)) {
       throw new IllegalArgumentException("The username is not valid");
@@ -156,11 +155,11 @@ public class Person {
    *
    * @param reservation - the {@code Reservation} to be added.
    *
-   * @throws NullPointerException if reservation is null.
+   * @throws IllegalArgumentException if reservation is null.
    */
   public final void addReservation(final Reservation reservation) {
     if (reservation == null) {
-      throw new NullPointerException();
+      throw new IllegalArgumentException();
     }
     reservations.add(reservation);
     notifyListeners();
@@ -168,15 +167,13 @@ public class Person {
 
   /**
    * Returns a Collection of the reservation IDs for this Person objects. E.g all
-   * reservation IDs that belong to this Person. Needs to be sorted in increasing order.
+   * reservation IDs that belong to this Person
    *
    * @return {@code Collection<Long>} of reservation IDs.
    */
   public final Collection<String> getReservationIds() {
     List<String> ids = reservations.stream()
-        .map((r) -> r.getId())
-        .collect(Collectors.toList());
-    Collections.sort(ids);    // sorts in ascending order
+        .map((r) -> r.getId()).toList();
     return ids;
   }
 
@@ -223,7 +220,7 @@ public class Person {
    */
   public final void notifyListeners() {
     for (PersonListener listener : listeners) {
-      listener.receiveNotification(this);
+      listener.onPersonChanged(this);
     }
   }
 

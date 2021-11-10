@@ -1,25 +1,21 @@
 package gr2116.persistence;
 
-import gr2116.core.Amenity;
-import gr2116.core.Hotel;
-import gr2116.core.HotelRoomType;
-import gr2116.core.HotelRoom;
-import gr2116.core.Person;
-
-import java.io.File;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import gr2116.core.Amenity;
+import gr2116.core.Hotel;
+import gr2116.core.HotelRoom;
+import gr2116.core.HotelRoomType;
+import gr2116.core.Person;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 
 public class HotelPersistenceTest {
@@ -109,8 +105,8 @@ public class HotelPersistenceTest {
   @Test
   public void testPrefixIsNull() {
     Hotel hotel = new Hotel();
-    assertThrows(NullPointerException.class, () -> hotelPersistenceNull.saveHotel(hotel));
-    assertThrows(NullPointerException.class, () -> hotelPersistenceNull.loadHotel());
-    assertThrows(NullPointerException.class, () -> hotelPersistence.saveHotel(null));
+    assertThrows(IllegalArgumentException.class, () -> hotelPersistenceNull.saveHotel(hotel));
+    assertThrows(IllegalArgumentException.class, () -> hotelPersistenceNull.loadHotel());
+    assertThrows(IllegalArgumentException.class, () -> hotelPersistence.saveHotel(null));
   }
 }

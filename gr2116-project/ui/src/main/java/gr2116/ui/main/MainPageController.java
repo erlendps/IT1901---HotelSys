@@ -3,16 +3,15 @@ package gr2116.ui.main;
 import gr2116.core.HotelRoom;
 import gr2116.core.HotelRoomFilter;
 import gr2116.core.Person;
+import gr2116.core.PersonListener;
 import gr2116.ui.access.HotelAccess;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
-import gr2116.ui.utils.FxmlUtils;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -20,47 +19,76 @@ import javafx.scene.paint.Color;
 /**
  * Main page, which contains the main panel for booking hotel nights.
  */
-public class MainPage extends VBox implements MessageListener {
-  private final FilterPanel filterPanel = new FilterPanel();
-  private UserPanel userPanel;
-  private final HotelAccess hotelAccess;
+public class MainPageController implements MessageListener, PersonListener {
+  private HotelAccess hotelAccess;
   private HotelRoomFilter hotelRoomFilter
       = new HotelRoomFilter(null, null, null, null, null);
-  private final Person person;
+  private Person person;
   private final Collection<MessageListener> listeners = new HashSet<>();
-
-  /**
-   * Constructs a main page for a given person and hotel.
-   *
-   * @param person the person the main page should be constructed for.
-   * @param hotel the hotel the main page should be constructed for.
-   *
-   * @throws NullPointerException throws if person is null.
-   * @throws NullPointerException throws if hotel is null.
-   */
-  public MainPage(Person person, HotelAccess hotelAccess) {
-    if (person == null) {
-      throw new NullPointerException("Person is null.");
-    }
-    if (hotelAccess == null) {
-      throw new NullPointerException("HotelAccess is null.");
-    }
-    this.hotelAccess = hotelAccess;
-    this.person = person;
-    FxmlUtils.loadFxml(this);
-  }
 
   @FXML
   private VBox roomItemContainer;
 
   @FXML
-  private AnchorPane filterPane;
+  private VBox filterPanelView;
 
   @FXML
-  private AnchorPane userPane;
+  private VBox userPanelView;
 
   @FXML
   private Label errorLabel;
+
+  @FXML
+  private UserPanelController userPanelViewController;
+
+  @FXML
+  private FilterPanelController filterPanelViewController;
+
+
+  /**
+   * Constructs a main page for a given person and hotel.
+   *
+   */
+  public MainPageController() {}
+
+  /**
+   * Sets the hotelAccess from which to build the main page.
+   *
+   * @param hotelAccess the hotelAccess the main page should be constructed for.
+   *
+   * @throws IllegalArgumentException throws if hotel is null.
+   */
+  public void setHotelAccess(HotelAccess hotelAccess) {
+    if (hotelAccess == null) {
+      throw new IllegalArgumentException("Hotel is null.");
+    }
+    this.hotelAccess = hotelAccess;
+    if (person != null) {
+      buildRoomList();
+    }
+  }
+
+  /**
+   * Sets the person to build the main page for.
+   *
+   * @param person the person the main page should be constructed for.
+   *
+   * @throws IllegalArgumentException throws if person is null.
+   */
+  public void setPerson(Person person) {
+    if (person == null) {
+      throw new IllegalArgumentException("Person is null.");
+    }
+    if (this.person != null) {
+      this.person.removeListener(this);
+    }
+    this.person = person;
+    person.addListener(this);
+    userPanelViewController.setPerson(person);
+    if (hotelAccess != null) {
+      buildRoomList();
+    }
+  }
 
   /**
    * Initializes the main page, which includes adding 
@@ -68,16 +96,11 @@ public class MainPage extends VBox implements MessageListener {
    */
   @FXML
   final void initialize() {
-    userPanel = new UserPanel(person);
-    userPane.getChildren().add(userPanel);
-    userPanel.addListener(this);
-
-    filterPane.getChildren().add(filterPanel);
-    filterPanel.addListener(this);
+    userPanelViewController.addListener(this);
+    filterPanelViewController.addListener(this);
 
     errorLabel.setTextFill(Color.RED);
     errorLabel.setMinHeight(Region.USE_PREF_SIZE);
-    buildRoomList();
   }
 
   /**
@@ -86,6 +109,9 @@ public class MainPage extends VBox implements MessageListener {
    * which is where the user can select to book them.
    */
   private void buildRoomList() {
+    if (person == null || hotelAccess == null) {
+      throw new IllegalStateException("Cannot build room list without person and hotel.");
+    }
     // Sets first empty list of rooms.
     roomItemContainer.getChildren().clear();
     errorLabel.setText("");
@@ -147,7 +173,7 @@ public class MainPage extends VBox implements MessageListener {
    * Includes notification to log out, and filtering.
    */
   @Override
-  public final void receiveNotification(
+  public final void receiveMessage(
       final Object from,
       final Message message,
       final Object data) {
@@ -164,6 +190,11 @@ public class MainPage extends VBox implements MessageListener {
     }
   }
 
+  @Override
+  public void onPersonChanged(Person person) {
+    buildRoomList();
+  }
+
   /**
    * Add a listener to the main page.
    *
@@ -171,7 +202,7 @@ public class MainPage extends VBox implements MessageListener {
    */
   public final void addListener(final MessageListener listener) {
     if (listener == null) {
-      throw new NullPointerException("Listener is null.");
+      throw new IllegalArgumentException("Listener is null.");
     }
     listeners.add(listener);
   }
@@ -195,7 +226,7 @@ public class MainPage extends VBox implements MessageListener {
       final Message message,
       final Object data) {
     for (MessageListener listener : listeners) {
-      listener.receiveNotification(this, message, data);
+      listener.receiveMessage(this, message, data);
     }
   }
 }

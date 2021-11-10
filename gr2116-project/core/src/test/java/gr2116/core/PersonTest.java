@@ -35,7 +35,7 @@ public class PersonTest {
     assertThrows(IllegalArgumentException.class, () -> {
       person.setUsername("yolo(23");
     });
-    assertThrows(NullPointerException.class, () -> {
+    assertThrows(IllegalArgumentException.class, () -> {
       person.setUsername(null);
     });
     person.setUsername("yolonoob");

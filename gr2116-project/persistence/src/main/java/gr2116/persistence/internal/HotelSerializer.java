@@ -19,7 +19,7 @@ public class HotelSerializer extends JsonSerializer<Hotel> {
   @Override
   public void serialize(Hotel hotel, JsonGenerator gen, SerializerProvider serializers) throws IOException {
     if (hotel == null) {
-      throw new NullPointerException("Hotel is null.");
+      throw new IllegalArgumentException("Hotel is null.");
     }
     gen.writeStartObject();
     gen.writeArrayFieldStart("rooms");
