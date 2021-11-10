@@ -130,7 +130,7 @@ public class Hotel implements Iterable<HotelRoom> {
    */
   public final Collection<HotelRoom> getRooms(
       final HotelRoomFilter hotelRoomFilter) {
-    return getRooms(hotelRoomFilter.getPredicate());
+    return getRooms(hotelRoomFilter);
   }
 
   public final Collection<HotelRoom> getRooms() {
