@@ -3,6 +3,8 @@ package gr2116.persistence;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import gr2116.core.Hotel;
 import gr2116.persistence.internal.HotelModule;
+
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,9 +18,7 @@ import java.nio.file.Paths;
  */
 public class HotelPersistence {
   private ObjectMapper mapper;
-  protected static final String DATA_FOLDER
-      = Paths.get(".").toAbsolutePath()
-      .normalize().getParent().getParent().resolve("data").toString();
+  protected static String DATA_FOLDER;
   private String prefix;
 
   /**
@@ -26,6 +26,11 @@ public class HotelPersistence {
    */
   public HotelPersistence() {
     mapper = createObjectMapper();
+    File directory = new File(System.getProperty("user.home"), "HotelSys");
+    if (!directory.exists()) {
+      directory.mkdir();
+    }
+    DATA_FOLDER = Paths.get(directory.toString()).toString();
   }
 
   /**
