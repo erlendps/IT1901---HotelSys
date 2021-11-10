@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 /**
  * Hotel Class.
@@ -116,7 +115,7 @@ public class Hotel implements Iterable<HotelRoom> {
    */
   public final Collection<HotelRoom> getRooms(
       final Predicate<HotelRoom> predicate) {
-    return rooms.stream().filter(predicate).collect(Collectors.toList());
+    return rooms.stream().filter(predicate).toList();
   }
 
   /**

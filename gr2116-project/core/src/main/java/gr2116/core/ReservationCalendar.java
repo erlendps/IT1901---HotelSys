@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * ReservationCalendar class. Implements Iterable.
@@ -46,7 +45,7 @@ public class ReservationCalendar implements Iterable<Reservation> {
   public final Collection<Long> getReservationIds() {
     List<Long> ids = reservations.stream()
         .map((r) -> r.getId())
-        .collect(Collectors.toList());
+        .toList();
     Collections.sort(ids);    // sorts in ascending order.
     return ids;
   }

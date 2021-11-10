@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Person class. A person has a collection of listerners, a collection of
@@ -232,7 +231,7 @@ public class Person {
   public final Collection<Long> getReservationIds() {
     List<Long> ids = reservations.stream()
         .map((r) -> r.getId())
-        .collect(Collectors.toList());
+        .toList();
     Collections.sort(ids);    // sorts in ascending order
     return ids;
   }

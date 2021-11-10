@@ -13,7 +13,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import gr2116.core.*;
 
@@ -95,9 +94,9 @@ public class PersistenceTest {
 
         // Checks if the persons saved are in the list.
         // Also checks if there are multiple instances of them in the list.
-        List<Person> rickList = persons.stream().filter((Person p) -> p.getName().equals("Richard")).collect(Collectors.toList());
-        List<Person> kyleList = persons.stream().filter((Person p) -> p.getName().equals("Kyllard")).collect(Collectors.toList());
-        List<Person> tomList = persons.stream().filter((Person p) -> p.getName().equals("Tom")).collect(Collectors.toList());
+        List<Person> rickList = persons.stream().filter((Person p) -> p.getName().equals("Richard")).toList();
+        List<Person> kyleList = persons.stream().filter((Person p) -> p.getName().equals("Kyllard")).toList();
+        List<Person> tomList = persons.stream().filter((Person p) -> p.getName().equals("Tom")).toList();
         assertEquals(1, rickList.size(), "There was not 1 instance of person Rick in the loaded data, there were " + 
         Integer.toString(rickList.size()));
         assertEquals(1, kyleList.size(), "There was not 1 instance of person Kyle in the loaded data, there were " + 
@@ -129,9 +128,9 @@ public class PersistenceTest {
 
         // Checks if the rooms saved are in the list.
         // Also checks if there are multiple instances of them in the list.
-        List<HotelRoom> room1List = rooms.stream().filter((HotelRoom r) -> r.getNumber() == 101).collect(Collectors.toList());
-        List<HotelRoom> room2List = rooms.stream().filter((HotelRoom r) -> r.getNumber() == 102).collect(Collectors.toList());
-        List<HotelRoom> room3List = rooms.stream().filter((HotelRoom r) -> r.getNumber() == 714).collect(Collectors.toList());
+        List<HotelRoom> room1List = rooms.stream().filter((HotelRoom r) -> r.getNumber() == 101).toList();
+        List<HotelRoom> room2List = rooms.stream().filter((HotelRoom r) -> r.getNumber() == 102).toList();
+        List<HotelRoom> room3List = rooms.stream().filter((HotelRoom r) -> r.getNumber() == 714).toList();
         assertEquals(1, room1List.size(), "There was not 1 instance of room '101' in the loaded data, there were " + 
         Integer.toString(room1List.size()));
         assertEquals(1, room2List.size(), "There was not 1 instance of room '102' in the loaded data, there were " + 
