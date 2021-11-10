@@ -3,7 +3,7 @@ package gr2116.core;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,7 +15,7 @@ public class HotelRoom {
   /**
    * A collection of amenities included in the hotel room.
    */
-  private final Collection<Amenity> amenities = new HashSet<Amenity>();
+  private final Collection<Amenity> amenities = EnumSet.noneOf(Amenity.class);
   /**
    * A calendar keeping track of when the room is reserved.
    */
