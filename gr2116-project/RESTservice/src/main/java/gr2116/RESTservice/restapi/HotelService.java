@@ -48,7 +48,7 @@ public class HotelService {
       throw new IllegalStateException("Multiple or 0 matches for username" + username);
     }
     // TODO: Add Person object to person resource here
-    PersonResource personResource = new PersonResource(username);
+    PersonResource personResource = new PersonResource(matches, hotel);
     return personResource;
   }
 
