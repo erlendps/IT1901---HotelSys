@@ -147,16 +147,13 @@ public class HotelRoom {
   }
 
   /**
-   * Returns a collection of the names of the room's amenities
-   * that is sorted.
+   * Returns a collection of the names of the room's amenities.
    *
    * @return amenities
    */
   public final Collection<String> getAmenities() {
     List<String> amen = amenities.stream()
-        .map((a) -> a.name())
-        .collect(Collectors.toList());
-    Collections.sort(amen);
+        .map((a) -> a.name()).toList();
     return amen;
   }
 

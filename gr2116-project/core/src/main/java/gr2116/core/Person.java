@@ -167,14 +167,13 @@ public class Person {
 
   /**
    * Returns a Collection of the reservation IDs for this Person objects. E.g all
-   * reservation IDs that belong to this Person. Needs to be sorted in increasing order.
+   * reservation IDs that belong to this Person
    *
    * @return {@code Collection<Long>} of reservation IDs.
    */
   public final Collection<String> getReservationIds() {
     List<String> ids = reservations.stream()
-        .map((r) -> r.getId())
-        .collect(Collectors.toList());
+        .map((r) -> r.getId()).toList();
     return ids;
   }
 

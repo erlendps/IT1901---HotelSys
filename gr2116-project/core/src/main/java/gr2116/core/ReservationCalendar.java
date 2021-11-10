@@ -39,15 +39,12 @@ public class ReservationCalendar implements Iterable<Reservation> {
 
   /**
    * Returns collection of ids of reservation caladar's reservations.
-   * Is sorted.
    *
    * @return stream of reservation ids.
    */
   public final Collection<String> getReservationIds() {
     List<String> ids = reservations.stream()
-        .map((r) -> r.getId())
-        .collect(Collectors.toList());
-    Collections.sort(ids);    // sorts in ascending order.
+        .map((r) -> r.getId()).toList();
     return ids;
   }
 

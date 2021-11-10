@@ -120,7 +120,7 @@ public class Hotel implements Iterable<HotelRoom> {
    */
   public final List<HotelRoom> getRooms(
       final Predicate<HotelRoom> predicate) {
-    return rooms.stream().filter(predicate).collect(Collectors.toList());
+    return rooms.stream().filter(predicate).toList();
   }
 
   public final Collection<HotelRoom> getRooms() {
@@ -137,7 +137,7 @@ public class Hotel implements Iterable<HotelRoom> {
   }
 
   public final Collection<Person> getPersons(Predicate<Person> pred) {
-    return persons.stream().filter(pred).collect(Collectors.toList());
+    return persons.stream().filter(pred).toList();
   }
   
   /**
