@@ -23,7 +23,7 @@ public class HotelConfig extends ResourceConfig {
   */
   public HotelConfig(Hotel hotel) {
     setHotel(hotel);
-    hotelPersistence = new HotelPersistence();
+    hotelPersistence = new HotelPersistence("data");
     // todoPersistence.setSaveFile("server-todolist.json");
     register(HotelService.class);
     register(HotelModuleObjectMapperProvider.class);
@@ -50,9 +50,9 @@ public class HotelConfig extends ResourceConfig {
   }
 
   public static Hotel createHotel() {
-    HotelPersistence hotelPersistence = new HotelPersistence();
+    HotelPersistence hotelPersistence = new HotelPersistence("data");
     try {
-      return hotelPersistence.loadHotel("data");
+      return hotelPersistence.loadHotel();
     } catch (Exception e) {
       return new Hotel();
     }
