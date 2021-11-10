@@ -1,6 +1,8 @@
 package gr2116.ui.money;
 
+import gr2116.core.HotelRoom;
 import gr2116.core.Person;
+import gr2116.ui.access.HotelAccess;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
 import gr2116.ui.utils.FxmlUtils;
@@ -18,6 +20,7 @@ import javafx.scene.layout.AnchorPane;
 public class MoneyPage extends AnchorPane {
   private Collection<MessageListener> listeners = new HashSet<>();
   private Person person;
+  private HotelAccess hotelAccess;
 
   @FXML
   private TextField cardTextField;
@@ -35,8 +38,9 @@ public class MoneyPage extends AnchorPane {
   /**
    * Load FXML for money page. Takes in the person to add money to.
    */
-  public MoneyPage(final Person person) {
+  public MoneyPage(final Person person, final HotelAccess hotelAccess) {
     this.person = person;
+    this.hotelAccess = hotelAccess;
     FxmlUtils.loadFxml(this);
   }
 
@@ -132,7 +136,7 @@ public class MoneyPage extends AnchorPane {
         moneyErrorLabel.setText(e.getMessage());
         return;
       }
-      person.addBalance(Integer.parseInt(moneyAmount));
+      hotelAccess.addBalance(person, Double.parseDouble(moneyAmount));
       
       notifyListeners(Message.SignIn, person);
     });

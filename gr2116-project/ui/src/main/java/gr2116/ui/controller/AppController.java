@@ -106,7 +106,7 @@ public class AppController implements MessageListener {
    */
   public void moveToMoneyPage(final Person person) {
     root.getChildren().clear();
-    MoneyPage moneyPage = new MoneyPage(person);
+    MoneyPage moneyPage = new MoneyPage(person, hotelAccess);
     moneyPage.addListener(this);
     root.getChildren().add(moneyPage);
   }
