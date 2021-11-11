@@ -9,19 +9,19 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="1280.0" type="AnchorPane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gr2116.ui.login.LoginPage">
+<AnchorPane maxHeight="Infinity" maxWidth="Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gr2116.ui.login.LoginPageController">
    <children>
       <StackPane layoutX="93.0" layoutY="34.0" prefHeight="267.0" prefWidth="440.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox alignment="CENTER" prefHeight="257.0" prefWidth="510.0">
                <children>
-                  <Label text="Email:" />
-                  <TextField fx:id="emailTextField" />
-                  <Label fx:id="nameTitleLabel" text="Email not recognised, choose a name to create account:" />
+                  <Label text="Username:" />
+                  <TextField fx:id="usernameTextField" />
+                  <Label fx:id="nameTitleLabel" text="Username not recognised, choose a name to create account:" />
                   <TextField fx:id="nameTextField" />
                   <Separator prefHeight="30.0" />
                   <Button fx:id="signInButton" mnemonicParsing="false" text="Sign in" />
-                  <Label fx:id="emailErrorLabel" />
+                  <Label fx:id="usernameErrorLabel" />
                </children>
                <StackPane.margin>
                   <Insets left="200.0" right="200.0" />
@@ -30,4 +30,4 @@
          </children>
       </StackPane>
    </children>
-</fx:root>
+</AnchorPane>

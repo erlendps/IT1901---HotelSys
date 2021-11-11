@@ -10,33 +10,30 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 
 /**
  * Login page class, which is what meets the user when the program starts.
  */
-public class LoginPage extends AnchorPane {
+public class LoginPageController {
   private Collection<MessageListener> listeners = new HashSet<>();
   private Collection<Person> loadedPersons;
 
   @FXML
   private TextField nameTextField;
   @FXML
-  private TextField emailTextField;
+  private TextField usernameTextField;
   @FXML
   private Button signInButton;
 
   @FXML
-  private Label emailErrorLabel;
+  private Label usernameErrorLabel;
   @FXML
   private Label nameTitleLabel;
 
   /**
    * Load FXML for login page.
    */
-  public LoginPage() {
-    FxmlUtils.loadFxml(this);
-  }
+  public LoginPageController() {}
 
   /**
    * Take in a collection of persons and add them to the internal state,
@@ -59,17 +56,17 @@ public class LoginPage extends AnchorPane {
   private void initialize() {
     setNameVisible(false);
     signInButton.setOnAction((event) -> {
-      String email = emailTextField.getText();
+      String username = usernameTextField.getText();
       String name = nameTextField.getText();
 
-      if (!Person.isValidEmail(email)) {
-        emailErrorLabel.setText("Invalid email!");
+      if (!Person.isValidUsername(username)) {
+        usernameErrorLabel.setText("Invalid username!");
         return;
       }
       // Find person and if already registred, notify to
       // sign in.
       for (Person loadedPerson : loadedPersons) {
-        if (loadedPerson.getEmail().equals(email)) {
+        if (loadedPerson.getUsername().equals(username)) {
           notifyListeners(Message.SignIn, loadedPerson);
           return;
         }
@@ -80,18 +77,18 @@ public class LoginPage extends AnchorPane {
         setNameVisible(true);
         return;
       } else if (!Person.isValidName(name)) {
-        emailErrorLabel.setText("Invalid name!");
+        usernameErrorLabel.setText("Invalid name!");
         return;
       }
       // If both fields were set, create new person and log in.
       Person person = new Person(name);
-      person.setEmail(email);
+      person.setUsername(username);
       notifyListeners(Message.SignIn, person);
     });
   }
 
   /**
-   * The name field should only be visible if the email was not found in the collection of persons,
+   * The name field should only be visible if the username was not found in the collection of persons,
    * in which case a new account will be created. This method sets the field visibility.
    *
    * @param visible Boolean, if true the field is visible.
@@ -108,7 +105,7 @@ public class LoginPage extends AnchorPane {
    */
   public final void addListener(final MessageListener listener) {
     if (listener == null) {
-      throw new NullPointerException("Cant add null to listeners.");
+      throw new IllegalArgumentException("Cant add null to listeners.");
     }
     listeners.add(listener);
   }
@@ -132,7 +129,7 @@ public class LoginPage extends AnchorPane {
    */
   public final void notifyListeners(final Message message, final Object data) {
     for (MessageListener listener : listeners) {
-      listener.receiveNotification(this, message, data);
+      listener.receiveMessage(this, message, data);
     }
   }
 }

@@ -48,18 +48,18 @@ public class ReservationTest {
         sb.append(101);
         sb.append(startDate.toString().replace("-", ""));
         sb.append(endDate.toString().replace("-", ""));
-        assertEquals(Long.parseLong(sb.toString()), res.getId());
+        assertEquals(sb.toString(), res.getId());
     }
 
     @Test
     public void testConstructor() {
-        assertThrows(NullPointerException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
             new Reservation(null, startDate, endDate));
         
-        assertThrows(NullPointerException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
             new Reservation(room, null, endDate));
         
-        assertThrows(NullPointerException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
             new Reservation(room, startDate, null));
 
         assertThrows(IllegalArgumentException.class, () ->

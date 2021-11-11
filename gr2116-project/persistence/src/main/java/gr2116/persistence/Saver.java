@@ -31,11 +31,11 @@ public class Saver {
    */
   private JSONObject makePersonJson(final Person person) {
     if (person == null) {
-      throw new NullPointerException("Person is null.");
+      throw new IllegalArgumentException("Person is null.");
     }
     JSONObject personData = new JSONObject();
     personData.put("name", person.getName());
-    personData.put("email", person.getEmail());
+    personData.put("username", person.getUsername());
     personData.put("balance", person.getBalance());
     personData.put("reservations", person.getReservationIds());
     return personData;
@@ -50,7 +50,7 @@ public class Saver {
    */
   private JSONObject makeRoomJson(final HotelRoom room) {
     if (room == null) {
-      throw new NullPointerException("HotelRoom is null.");
+      throw new IllegalArgumentException("HotelRoom is null.");
     }
     JSONObject roomData = new JSONObject();
     roomData.put("number", room.getNumber());
@@ -70,7 +70,7 @@ public class Saver {
    */
   private JSONObject makeReservationJson(final Reservation reservation) {
     if (reservation == null) {
-      throw new NullPointerException("Reservation is null.");
+      throw new IllegalArgumentException("Reservation is null.");
     }
     JSONObject reservationData = new JSONObject();
     reservationData.put("id", reservation.getId());
@@ -85,12 +85,12 @@ public class Saver {
    *
    * @param persons Collection of persons
    *
-   * @return JSON Map of persons, with email as key.
+   * @return JSON Map of persons, with username as key.
    */
   private JSONObject updatePersonData(final Collection<Person> persons) {
     JSONObject personsData = new JSONObject();
     persons.forEach((person) -> {
-      personsData.put(person.getEmail(), makePersonJson(person));
+      personsData.put(person.getUsername(), makePersonJson(person));
     });
     return personsData;
   }
@@ -122,7 +122,7 @@ public class Saver {
       final Collection<Reservation> reservations) {
     JSONObject reservationsData = new JSONObject();
     reservations.forEach((reservation) -> {
-      reservationsData.put(Long.toString(reservation.getId()),
+      reservationsData.put(reservation.getId(),
                           makeReservationJson(reservation));
     });
     return reservationsData;
@@ -161,10 +161,10 @@ public class Saver {
       final String prefix)
       throws FileNotFoundException {
     if (rooms == null || persons == null || reservations == null) {
-      throw new NullPointerException("Rooms, persons or reservations cannot be null.");
+      throw new IllegalArgumentException("Rooms, persons or reservations cannot be null.");
     } 
     if (prefix == null) {
-      throw new NullPointerException("Prefix cannot be null");
+      throw new IllegalArgumentException("Prefix cannot be null");
     }
     File personDataJson = new File(DATA_FOLDER + "/" + prefix + "Person.json");
     File roomsDataJson = new File(DATA_FOLDER + "/" + prefix + "Rooms.json");
@@ -180,16 +180,13 @@ public class Saver {
     }
     try (PrintWriter pw = new PrintWriter(personDataJson.getAbsolutePath())) {
       pw.print(updatePersonData(persons).toString(2));
-      pw.flush();
     }
     try (PrintWriter pw = new PrintWriter(roomsDataJson.getAbsolutePath())) {
       pw.print(updateRoomsData(rooms).toString(2));
-      pw.flush();
     }
     try (PrintWriter pw = new PrintWriter(
                               reservationDataJson.getAbsolutePath())) {
       pw.print(updateReservationData(reservations).toString(2));
-      pw.flush();
     }
   }
 }

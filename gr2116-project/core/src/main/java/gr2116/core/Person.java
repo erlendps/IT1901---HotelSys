@@ -1,15 +1,13 @@
 package gr2116.core;
 
-import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
  * Person class. A person has a collection of listerners, a collection of
- * reservaitons, a name, an email and a balance.
+ * reservaitons, a name, an username and a balance.
  */
 public class Person {
   /**
@@ -25,9 +23,9 @@ public class Person {
    */
   private final String name;
   /**
-   * The Person objects email.
+   * The Person objects username.
    */
-  private String email;
+  private String username;
   /**
    * The Person objects balance.
    */
@@ -38,12 +36,12 @@ public class Person {
    *
    * @param name - {@code String} that represents the persons name.
    *
-   * @throws NullPointerException if {@code name} is null.
+   * @throws IllegalArgumentException if {@code name} is null.
    * @throws IllegalArgumentException if {@code name} is not valid.
    */
   public Person(final String name) {
     if (name == null) {
-      throw new NullPointerException();
+      throw new IllegalArgumentException();
     }
     if (!isValidName(name)) {
       throw new IllegalArgumentException("The name is not valid");
@@ -61,43 +59,43 @@ public class Person {
   }
 
   /**
-   * Returns the email.
+   * Returns the username.
    *
-   * @return {@code email} that is associated with this person.
+   * @return {@code username} that is associated with this person.
    */
-  public final String getEmail() {
-    return email;
+  public final String getUsername() {
+    return username;
   }
 
   /**
-   * Sets the email if some conditions are met and notifies listeners.
+   * Sets the username if some conditions are met and notifies listeners.
    *
-   * @param email - the new email.
+   * @param username - the new username.
    *
-   * @throws NullPointerException if {@code email} is null.
-   * @throws IllegalArgumentException if {@code email} is not a valid email.
+   * @throws IllegalArgumentException if {@code username} is null.
+   * @throws IllegalArgumentException if {@code username} is not a valid username.
    */
-  public final void setEmail(final String email) {
-    if (email == null) {
-      throw new NullPointerException("Email is null");
+  public final void setUsername(final String username) {
+    if (username == null) {
+      throw new IllegalArgumentException("Username is null");
     }
-    if (!isValidEmail(email)) {
-      throw new IllegalArgumentException("The email is not valid");
+    if (!isValidUsername(username)) {
+      throw new IllegalArgumentException("The username is not valid");
     }
-    this.email = email;
+    this.username = username;
     notifyListeners();
   }
 
   /**
-   * Validation method that uses regex to check if the email provided is valid.
+   * Validation method that uses regex to check if the username provided is valid.
    *
-   * @param email - the email that will be validated.
+   * @param username - the username that will be validated.
    *
-   * @return {@code true} if the email is valid, {@code false} otherwise.
+   * @return {@code true} if the username is valid, {@code false} otherwise.
    */
-  public static boolean isValidEmail(final String email) {
-    String regex = "^[a-zA-Z0-9._-]{2,20}@[a-zA-Z0-9.]{2,20}.(no|com|net|org)$";
-    return email.matches(regex);
+  public static boolean isValidUsername(final String username) {
+    String regex = "^[a-zA-Z]+$";
+    return username.matches(regex);
   }
 
   /**
@@ -152,72 +150,16 @@ public class Person {
   }
 
   /**
-   * <p>
-   * Makes a reservation on the specified {@code hotelRoom}, starting from 
-   * {@code startDate} and ending on {@code endDate}. makeReservation() does
-   * a series of validations to ensure that the Person object e.g does not 
-   * book a room that is occupied. 
-   * </p>
-   * <p>
-   * If everything is valid, the method creates a new Reservation object with
-   * a (pseudorandom) id, the given {@code hotelRoom} and start/endDate.
-   * It then adds the reservation in {@code hotelRoom} collection of reservations,
-   * and then it adds the reservation in this Person objects reservation collection.
-   * Finally it subtracs the price of the booking.
-   * </p>
-   *
-   * @param hotelRoom - the room the Person object wants to book.
-   * @param startDate - {@code LocalDate} of when the reservation should start.
-   * @param endDate - {@code LocalDate} of when the reservation should end.
-   *
-   * @throws NullPointerException if hotelRoom, startDate or endDate is null.
-   * @throws IllegalStateException if the start date is before today.
-   * @throws IllegalArgumentException if startDate is chronologically after endDate.
-   * @throws IllegalStateException  if the {@code Person} does not have enough balance
-   *                                to pay for the reservation.
-   * @throws IllegalStateException  if hotelRoom is unavailable, e.g already booked, in
-   *                                some period between startDate and endDate. 
-   */
-  public final void makeReservation(final HotelRoom hotelRoom,
-                                    final LocalDate startDate,
-                                    final LocalDate endDate) {
-    if (hotelRoom == null || startDate == null || endDate == null) {
-      throw new NullPointerException();
-    }
-    if (startDate.isBefore(LocalDate.now())) {
-      throw new IllegalStateException("Cant make a reservation backwards in time.");
-    }
-    if (startDate.isAfter(endDate)) {
-      throw new IllegalArgumentException(
-        "The startDate cannot be after the endDate.");
-    }
-    double price = hotelRoom.getPrice(startDate, endDate);
-    if (price > getBalance()) {
-      throw new IllegalStateException(
-        "The person cannot afford this reservation.");
-    }
-    if (!hotelRoom.isAvailable(startDate, endDate)) {
-      throw new IllegalStateException(
-        "The room is not available at this time.");
-    }
-
-    Reservation reservation = new Reservation(hotelRoom, startDate, endDate);
-    hotelRoom.addReservation(reservation);
-    addReservation(reservation);
-    subtractBalance(price);
-  }
-
-  /**
    * Adds the given reservation to the Person objects collection of reservations and 
    * notifies listeners.
    *
    * @param reservation - the {@code Reservation} to be added.
    *
-   * @throws NullPointerException if reservation is null.
+   * @throws IllegalArgumentException if reservation is null.
    */
   public final void addReservation(final Reservation reservation) {
     if (reservation == null) {
-      throw new NullPointerException();
+      throw new IllegalArgumentException();
     }
     reservations.add(reservation);
     notifyListeners();
@@ -225,15 +167,13 @@ public class Person {
 
   /**
    * Returns a Collection of the reservation IDs for this Person objects. E.g all
-   * reservation IDs that belong to this Person. Needs to be sorted in increasing order.
+   * reservation IDs that belong to this Person
    *
    * @return {@code Collection<Long>} of reservation IDs.
    */
-  public final Collection<Long> getReservationIds() {
-    List<Long> ids = reservations.stream()
-        .map((r) -> r.getId())
-        .collect(Collectors.toList());
-    Collections.sort(ids);    // sorts in ascending order
+  public final Collection<String> getReservationIds() {
+    List<String> ids = reservations.stream()
+        .map((r) -> r.getId()).toList();
     return ids;
   }
 
@@ -280,7 +220,7 @@ public class Person {
    */
   public final void notifyListeners() {
     for (PersonListener listener : listeners) {
-      listener.receiveNotification(this);
+      listener.onPersonChanged(this);
     }
   }
 
@@ -294,7 +234,7 @@ public class Person {
     }
     Person p = (Person) o;
     return this.getName().equals(p.getName()) &&
-        this.getEmail().equals(p.getEmail()) &&
+        this.getUsername().equals(p.getUsername()) &&
         this.getReservations().equals(p.getReservations());
   }
 
@@ -302,7 +242,7 @@ public class Person {
   public int hashCode() {
     int hash = 5;
     hash = hash * 17 + getName().hashCode();
-    hash = hash * 31 + (getEmail() == null ? 0 : getEmail().hashCode());
+    hash = hash * 31 + (getUsername() == null ? 0 : getUsername().hashCode());
     hash = hash * 5 + getReservations().hashCode();
     return hash;
   }

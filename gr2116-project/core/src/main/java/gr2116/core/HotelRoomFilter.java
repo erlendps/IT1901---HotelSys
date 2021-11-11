@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 /**
  * Component that lets you filter on hotelRoom objects.
  */
-public class HotelRoomFilter {
+public class HotelRoomFilter implements Predicate<HotelRoom> {
   private final LocalDate startDate;
   private final LocalDate endDate;
   private final HotelRoomType roomType;
@@ -56,34 +56,6 @@ public class HotelRoomFilter {
   }
 
   /**
-   * Creates a predicate that is used for filtering the rooms based on all the chocies
-   * the user has made.
-   *
-   * @return {@code Predicate<HotelRoom>} that filters based on user choices.
-   */
-  public final Predicate<HotelRoom> getPredicate() {
-    return (room) -> {
-      if (hasValidDates() && !room.isAvailable(startDate, endDate)) {
-        return false;
-      }
-      if (roomType != null && room.getRoomType() != roomType) {
-        return false;
-      }
-      if (floor != null && room.getFloor() != floor) {
-        return false;
-      }
-      if (amenities != null) {
-        for (Entry<Amenity, Boolean> entry : amenities.entrySet()) {
-          if (amenities.get(entry.getKey()) && !room.hasAmenity(entry.getKey())) {
-            return false;
-          }
-        }
-      }
-      return true;
-    };
-  }
-
-  /**
    * Returns the start date of this filter.
    *
    * @return startDate
@@ -108,5 +80,32 @@ public class HotelRoomFilter {
    */
   public final HotelRoomType getRoomType() {
     return roomType;
+  }
+
+  
+  /**
+   * Tests if a hotel room matches this filter.
+   *
+   * @return whether or not the hotel room matches the filter
+   */
+  @Override
+  public boolean test(HotelRoom room) {
+    if (hasValidDates() && !room.isAvailable(startDate, endDate)) {
+      return false;
+    }
+    if (roomType != null && room.getRoomType() != roomType) {
+      return false;
+    }
+    if (floor != null && room.getFloor() != floor) {
+      return false;
+    }
+    if (amenities != null) {
+      for (Entry<Amenity, Boolean> entry : amenities.entrySet()) {
+        if (amenities.get(entry.getKey()) && !room.hasAmenity(entry.getKey())) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 }

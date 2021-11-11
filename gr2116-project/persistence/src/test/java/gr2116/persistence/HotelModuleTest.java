@@ -1,24 +1,21 @@
 package gr2116.persistence;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import gr2116.core.Amenity;
 import gr2116.core.Hotel;
 import gr2116.core.HotelRoom;
 import gr2116.core.HotelRoomType;
 import gr2116.core.Person;
 import gr2116.core.Reservation;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import java.time.LocalDate;
 import java.util.Arrays;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 
 public class HotelModuleTest {
@@ -36,13 +33,12 @@ public class HotelModuleTest {
     room.setPrice(10);
     room.addAmenity(Amenity.Internet);
     person = new Person("Henry");
-    person.setEmail("henry@mail.com");
+    person.setUsername("henry");
     person.addBalance(100);
     Reservation res = new Reservation(
         room, LocalDate.of(2021, 11, 03), LocalDate.of(2021, 11, 05));
     person.addReservation(res);
     room.addReservation(res);
-
     hotel.addPerson(person);
     hotel.addRoom(room);
   }
@@ -60,18 +56,18 @@ public class HotelModuleTest {
         {"room":101,
         "startDate":"2021-11-03",
         "endDate":"2021-11-05",
-        "id":1012021110320211105}
+        "id":"1012021110320211105"}
         ]}
       ],
     "persons":[
       {"name":"Henry",
-      "email": "henry@mail.com",
+      "username": "henry",
       "balance":100.0,
       "reservations":[
         {"room":101,
         "startDate":"2021-11-03",
         "endDate":"2021-11-05",
-        "id":1012021110320211105}
+        "id":"1012021110320211105"}
         ]}
       ]
     }

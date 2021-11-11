@@ -5,7 +5,7 @@ import gr2116.core.HotelRoomFilter;
 import gr2116.core.HotelRoomType;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
-import gr2116.ui.utils.FxmlUtils;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -28,7 +28,7 @@ import javafx.scene.layout.VBox;
 /**
  * The panel where users select filters for hotel rooms.
  */
-public class FilterPanel extends VBox {
+public class FilterPanelController {
 
   private Collection<MessageListener> listeners = new HashSet<>();
   private HashMap<Amenity, Boolean> amenities = new HashMap<>();
@@ -60,9 +60,7 @@ public class FilterPanel extends VBox {
   /**
    * Constructor for FilterPanel.
    */
-  public FilterPanel() {
-    FxmlUtils.loadFxml(this);
-  }
+  public FilterPanelController() {}
 
   /**
    * Initializes the component. Sets action for buttons and adds data for filtering.
@@ -71,8 +69,8 @@ public class FilterPanel extends VBox {
   private void initialize() {
 
     // Does not sort by floor.
-    floorSpinner.setDisable(true);
     roomTypeDescription.setText("Select a room type.");
+    floorSpinner.setDisable(true);
     floorSpinner.setValueFactory(
         new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20, 1));
     
@@ -200,7 +198,7 @@ public class FilterPanel extends VBox {
                       roomTypeChoiceBox.getValue(),
                       floorSpinner.isDisable() ? null : floorSpinner.getValue(),
                       amenities);
-      listener.receiveNotification(this, Message.Filter, filter);
+      listener.receiveMessage(this, Message.Filter, filter);
     }
   }
 }

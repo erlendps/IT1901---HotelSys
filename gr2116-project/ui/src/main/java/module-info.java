@@ -4,6 +4,8 @@ module gr2116.ui {
     requires javafx.controls;
     requires javafx.fxml;
 
+    requires java.net.http;
+
     requires gr2116.core;
     requires gr2116.persistence;
     

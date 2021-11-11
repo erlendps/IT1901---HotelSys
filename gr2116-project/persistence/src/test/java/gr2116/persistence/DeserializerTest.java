@@ -1,18 +1,16 @@
 package gr2116.persistence;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import gr2116.core.HotelRoom;
-import gr2116.core.Person;
-import gr2116.core.Reservation;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import gr2116.core.HotelRoom;
+import gr2116.core.Person;
+import gr2116.core.Reservation;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DeserializerTest {
   private static ObjectMapper mapper;
@@ -27,7 +25,7 @@ public class DeserializerTest {
         {"room":101,
         "startDate":"2021-11-03",
         "endDate":"2021-11-05",
-        "id":1012021110320211105}
+        "id":"1012021110320211105"}
         }
       """;
 
@@ -40,7 +38,7 @@ public class DeserializerTest {
           {"room":101,
           "startDate":"2021-11-03",
           "endDate":"2021-11-05",
-          "id":1012021110320211105}
+          "id":"1012021110320211105"}
           ]
         }
       """;
@@ -52,7 +50,7 @@ public class DeserializerTest {
           {"room":101,
           "startDate":"2021-11-03",
           "endDate":"2021-11-05",
-          "id":1012021110320211105}
+          "id":"1012021110320211105"}
           ]
         }
       """;

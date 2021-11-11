@@ -14,9 +14,9 @@
     <skipTests>false</skipTests>
     <jackson.version>2.12.5</jackson.version>
   </properties>
-
   <dependencyManagement>
     <dependencies>
+
       <!-- JUnit testing with Jupiter -->
       <dependency>
         <groupId>org.junit.jupiter</groupId>
@@ -34,12 +34,12 @@
 
       <!-- Mockito for testing -->
       <dependency>
-          <groupId>org.mockito</groupId>
-          <artifactId>mockito-core</artifactId>
-          <version>3.12.4</version>
-          <scope>test</scope>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>3.12.4</version>
+        <scope>test</scope>
       </dependency>
-      
+
       <dependency>
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter-params</artifactId>
@@ -54,37 +54,38 @@
         <artifactId>jackson-core</artifactId>
         <version>${jackson.version}</version>
       </dependency>
+
       <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
       <dependency>
-          <groupId>com.fasterxml.jackson.core</groupId>
-          <artifactId>jackson-databind</artifactId>
-          <version>${jackson.version}</version>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>${jackson.version}</version>
       </dependency>
-
     </dependencies>
   </dependencyManagement>
 
   <build>
     <pluginManagement>
       <plugins>
+
         <!-- Maven compiler -->
         <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
-        <configuration>
-          <release>16</release>
-        </configuration>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.1</version>
+          <configuration>
+            <release>16</release>
+          </configuration>
         </plugin>
 
         <!-- Surefire is used to execute the unit tests of the app -->
         <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0-M5</version>
-        <configuration>
-          <skipTests>${skipTests}</skipTests>
-        </configuration>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.0.0-M5</version>
+          <configuration>
+            <skipTests>${skipTests}</skipTests>
+          </configuration>
         </plugin>
 
         <!-- Checkstyle plugin for checking style -->
@@ -94,11 +95,11 @@
           <version>3.1.2</version>
           <dependencies>
             <dependency>
-                <groupId>com.puppycrawl.tools</groupId>
-                <artifactId>checkstyle</artifactId>
-                <version>9.0.1</version>
+              <groupId>com.puppycrawl.tools</groupId>
+              <artifactId>checkstyle</artifactId>
+              <version>9.0.1</version>
             </dependency>
-        </dependencies>
+          </dependencies>
           <configuration>
             <configLocation>custom_google_checks.xml</configLocation>
             <!--<encoding>UTF-8</encoding> -->
@@ -169,5 +170,7 @@
     <module>ui</module>
     <module>RESTservice</module>
     <module>persistence</module>
+    <module>webapp</module>
   </modules>
+
 </project>

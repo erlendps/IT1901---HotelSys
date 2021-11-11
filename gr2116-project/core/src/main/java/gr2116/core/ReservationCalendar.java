@@ -23,12 +23,12 @@ public class ReservationCalendar implements Iterable<Reservation> {
    *
    * @param reservation the given reservation.
    *
-   * @throws NullPointerException if the reservation is null
+   * @throws IllegalArgumentException if the reservation is null
    * @throws IllegalStateException if the room is not available
    */
   public final void addReservation(final Reservation reservation) {
     if (reservation == null) {
-      throw new NullPointerException("Reservation can not be null.");
+      throw new IllegalArgumentException("Reservation can not be null.");
     }
     if (!isAvailable(reservation.getStartDate(), reservation.getEndDate())) {
       throw new IllegalStateException(
@@ -39,15 +39,12 @@ public class ReservationCalendar implements Iterable<Reservation> {
 
   /**
    * Returns collection of ids of reservation caladar's reservations.
-   * Is sorted.
    *
    * @return stream of reservation ids.
    */
-  public final Collection<Long> getReservationIds() {
-    List<Long> ids = reservations.stream()
-        .map((r) -> r.getId())
-        .collect(Collectors.toList());
-    Collections.sort(ids);    // sorts in ascending order.
+  public final Collection<String> getReservationIds() {
+    List<String> ids = reservations.stream()
+        .map((r) -> r.getId()).toList();
     return ids;
   }
 

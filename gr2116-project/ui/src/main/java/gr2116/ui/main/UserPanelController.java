@@ -5,19 +5,17 @@ import gr2116.core.PersonListener;
 import gr2116.core.Reservation;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
-import gr2116.ui.utils.FxmlUtils;
 import java.util.Collection;
 import java.util.HashSet;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.VBox;
 
 /**
  * UserPanel, the panel to see your balance, your reservations and log out.
  */
-public class UserPanel extends VBox implements PersonListener {
+public class UserPanelController implements PersonListener {
   private Collection<MessageListener> listeners = new HashSet<>();
   private Person person;
 
@@ -25,7 +23,7 @@ public class UserPanel extends VBox implements PersonListener {
   private Label nameLabel;
 
   @FXML
-  private Label emailLabel;
+  private Label usernameLabel;
 
   @FXML
   private Label balanceLabel;
@@ -40,19 +38,25 @@ public class UserPanel extends VBox implements PersonListener {
   private ListView<Label> reservationListView;
 
   /**
+   * Initialize the user panel.
+   *
+   */
+  public UserPanelController() { }
+
+  /**
    * Initialize the user panel with a person. This persons' attributes will be displayed.
    *
    * @param person the person we want to initialize for
    *
-   * @throws NullPointerException if person is null
+   * @throws IllegalArgumentException if person is null
    */
-  public UserPanel(final Person person) {
+  public void setPerson(Person person) {
     if (person == null) {
-      throw new NullPointerException("Error initializing UserPanel: person is null.");
+      throw new IllegalArgumentException("Error initializing UserPanel: person is null.");
     }
     this.person = person;
     person.addListener(this);
-    FxmlUtils.loadFxml(this);
+    updatePanel();
   }
 
   /**
@@ -68,7 +72,6 @@ public class UserPanel extends VBox implements PersonListener {
     makeDepositButton.setOnAction((event) -> {
       notifyListeners(Message.MoneyPage);
     });
-    updatePanel(person);
   }
 
   /**
@@ -96,7 +99,7 @@ public class UserPanel extends VBox implements PersonListener {
    */
   public final void notifyListeners(final Message message) {
     for (MessageListener listener : listeners) {
-      listener.receiveNotification(this, message, null);
+      listener.receiveMessage(this, message, null);
     }
   }
 
@@ -107,19 +110,19 @@ public class UserPanel extends VBox implements PersonListener {
    * @param person person to update attributes for
    */
   @Override
-  public final void receiveNotification(final Person person) {
-    updatePanel(person);
+  public final void onPersonChanged(final Person person) {
+    if (this.person == person) {
+      updatePanel();
+    }
   }
 
   /**
    * Update the person panel with attributes that might have changed.
    * This includes name, email, balance and reservations.
-   *
-   * @param person The person to show attributes for
    */
-  private void updatePanel(final Person person) {
+  private void updatePanel() {
     nameLabel.setText(person.getName());
-    emailLabel.setText(person.getEmail());
+    usernameLabel.setText(person.getUsername());
     balanceLabel.setText(Double.toString(person.getBalance()));
 
     reservationListView.getItems().clear();
@@ -129,10 +132,11 @@ public class UserPanel extends VBox implements PersonListener {
       String startDate = reservation.getStartDate().toString();
       String endDate = reservation.getEndDate().toString();
       Label label = new Label("Room: " + roomNumber
-      + ". From " + startDate
-      + " to " + endDate + "."
+          + ". From " + startDate
+          + " to " + endDate + "."
       );
-      label.setId("hotelRoom" + Integer.toString(roomNumber) + "reservation" + startDate + "to" + endDate);
+      label.setId("hotelRoom" + Integer.toString(roomNumber)
+          + "reservation" + startDate + "to" + endDate);
       reservationListView.getItems().add(label);
     }
   }

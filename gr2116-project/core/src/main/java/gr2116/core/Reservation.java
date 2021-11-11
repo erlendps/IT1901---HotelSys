@@ -13,7 +13,7 @@ public class Reservation implements Iterable<LocalDate> {
   /**
    * The reservation's id.
    */
-  private final long id;
+  private final String id;
   /**
    * The reservation's room.
    */
@@ -35,7 +35,7 @@ public class Reservation implements Iterable<LocalDate> {
    * @param startDate the given start date.
    * @param endDate the given end date.
    *
-   * @throws NullPointerException if startDate or endDate is null
+   * @throws IllegalArgumentException if startDate or endDate is null
    * @throws IllegalArgumentException if startDate is after endDate
    * @throws NullPointerExceptino if room is null
    */
@@ -43,13 +43,13 @@ public class Reservation implements Iterable<LocalDate> {
                       final LocalDate startDate,
                       final LocalDate endDate) {
     if (startDate == null || endDate == null) {
-      throw new NullPointerException();
+      throw new IllegalArgumentException();
     }
     if (!startDate.isBefore(endDate)) {
       throw new IllegalArgumentException("startDate must be before endDate.");
     }
     if (room == null) {
-      throw new NullPointerException("Rooms is null.");
+      throw new IllegalArgumentException("Rooms cannot be null.");
     }
     this.roomNumber = room.getNumber();
     this.startDate = startDate;
@@ -89,7 +89,7 @@ public class Reservation implements Iterable<LocalDate> {
    *
    * @return id.
    */
-  public final long getId() {
+  public final String getId() {
     return id;
   }
 
@@ -99,13 +99,13 @@ public class Reservation implements Iterable<LocalDate> {
    *
    * @return {@code long} the id
    */
-  private final long generateId() {
+  private final String generateId() {
     StringBuilder sb = new StringBuilder();
     sb.append(getRoomNumber());
     sb.append(startDate.toString().replace("-", ""));
     sb.append(endDate.toString().replace("-", ""));
 
-    return Long.parseLong(sb.toString());
+    return sb.toString();
   }
 
   @Override
@@ -122,7 +122,7 @@ public class Reservation implements Iterable<LocalDate> {
 
   @Override
   public String toString() {
-    return Long.toString(getId());
+    return getId();
   }
 
   @Override
@@ -134,7 +134,7 @@ public class Reservation implements Iterable<LocalDate> {
       return false;
     }
     Reservation res = (Reservation) o;
-    return getId() == res.getId();
+    return getId().equals(res.getId());
   }
 
   @Override

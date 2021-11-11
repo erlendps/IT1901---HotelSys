@@ -63,7 +63,7 @@ public enum Amenity {
    */
   Amenity(final String name, final String description) {
     if (name == null || description == null) {
-      throw new NullPointerException("Name or description cannot be null.");
+      throw new IllegalArgumentException("Name or description cannot be null.");
     }
     this.name = name;
     this.description = description;

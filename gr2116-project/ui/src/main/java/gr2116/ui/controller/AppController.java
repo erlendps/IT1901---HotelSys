@@ -1,18 +1,19 @@
 package gr2116.ui.controller;
 
-import gr2116.core.Hotel;
 import gr2116.core.Person;
 import gr2116.persistence.HotelPersistence;
-import gr2116.ui.login.LoginPage;
-import gr2116.ui.main.MainPage;
-import gr2116.ui.money.MoneyPage;
+import gr2116.ui.login.LoginPageController;
+import gr2116.ui.main.MainPageController;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
-
+import gr2116.ui.money.MoneyPageController;
+import gr2116.ui.access.DirectHotelAccess;
+import gr2116.ui.access.HotelAccess;
 import java.util.ArrayList;
 import java.util.Collection;
 import javafx.fxml.FXML;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 /**
  * The controller for the application.
@@ -20,13 +21,29 @@ import javafx.scene.layout.StackPane;
  * as it receives notifications from various parts of the program.
  */
 public class AppController implements MessageListener {
-  private HotelPersistence hotelPersistence = new HotelPersistence();
-  private String prefix = "data";
-  private Hotel hotel;
-  private MainPage mainPage;
+  private HotelPersistence hotelPersistence = new HotelPersistence("data");
+  private HotelAccess hotelAccess = new DirectHotelAccess(hotelPersistence);
 
   @FXML
-  private StackPane root;
+  private MainPageController mainPageViewController;
+
+  @FXML
+  private VBox mainPageView;
+
+  @FXML
+  private LoginPageController loginPageViewController;
+
+  @FXML
+  private AnchorPane loginPageView;
+
+  @FXML
+  private MoneyPageController moneyPageViewController;
+
+  @FXML
+  private AnchorPane moneyPageView;
+
+  @FXML
+  private AnchorPane root;
 
   /**
    * Initialize the program.
@@ -34,25 +51,24 @@ public class AppController implements MessageListener {
    */
   @FXML
   private void initialize() {
+    loginPageViewController.addListener(this);
+    mainPageViewController.addListener(this);
+    moneyPageViewController.addListener(this);
     load();
     moveToLoginPage();
   }
 
   @Override
-  public final void receiveNotification(final Object from,
+  public final void receiveMessage(final Object from,
       final Message message, final Object data) {
     if (message == Message.SignIn && data instanceof Person) {
       Person person = (Person) data;
-      if (mainPage == null) { // Sign in if no one is signed in right now
-        mainPage = new MainPage(person, hotel);
-      }
       if (!getPersons().contains(person)) {
-        hotel.addPerson(person);
+        hotelAccess.addPerson(person);
       }
       moveToMainPage(person);
     } else if (message == Message.SignOut) {
       save();
-      mainPage = null; // Reset the signed in person when signing out
       moveToLoginPage();
     } else if (message == Message.MoneyPage && data instanceof Person) {
       Person person = (Person) data;
@@ -60,11 +76,13 @@ public class AppController implements MessageListener {
     }
   }
 
+  /**
+   * Sets the data filename prefix.
+   *
+   * @param prefix The prefix the be set
+   */
   public void setPrefix(String prefix) {
-    if (!prefix.matches("^([a-z]){3,10}([A-Z]{1}[a-z]{1,8})*$")) {
-      throw new IllegalArgumentException("prefix is not valid");
-    }
-    this.prefix = prefix;
+    hotelPersistence.setPrefix(prefix);
   }
 
   /**
@@ -76,14 +94,12 @@ public class AppController implements MessageListener {
    */
   public void moveToLoginPage() {
     root.getChildren().clear();
-    LoginPage loginPage = new LoginPage();
-    loginPage.addListener(this);
     if (getPersons() != null) {
-      loginPage.setLoadedPersons(getPersons());
+      loginPageViewController.setLoadedPersons(getPersons());
     } else {
       throw new IllegalStateException("No loaded persons were set.");
     }
-    root.getChildren().add(loginPage);
+    root.getChildren().add(loginPageView);
   }
 
   /**
@@ -97,23 +113,30 @@ public class AppController implements MessageListener {
    * @param person The person to be logged in as
    */
   public void moveToMainPage(final Person person) {
-    if (mainPage == null) {
-      throw new IllegalStateException("Page was not loaded before being called.");
-    }
+    mainPageViewController.setPerson(person);
+    mainPageViewController.setHotelAccess(hotelAccess);
     root.getChildren().clear();
-    mainPage.addListener(this);
-    root.getChildren().add(mainPage);
+    root.getChildren().add(mainPageView);
   }
 
+  /**
+   * Moves to money page.
+   *
+   * @param person The person to make the money page for
+   */
   public void moveToMoneyPage(final Person person) {
     root.getChildren().clear();
-    MoneyPage moneyPage = new MoneyPage(person);
-    moneyPage.addListener(this);
-    root.getChildren().add(moneyPage);
+    moneyPageViewController.setPerson(person);
+    moneyPageViewController.setHotelAccess(hotelAccess);
+    root.getChildren().add(moneyPageView);
   }
 
   public Collection<Person> getPersons() {
-    return new ArrayList<>(hotel.getPersons());
+    return new ArrayList<>(hotelAccess.getPersons());
+  }
+
+  public HotelAccess getHotelAccess() {
+    return hotelAccess;
   }
 
   /**
@@ -121,11 +144,7 @@ public class AppController implements MessageListener {
    * which is used to create pages with correct data in them.
    */
   public void load() {
-    try {
-      hotel = hotelPersistence.loadHotel(prefix);
-    } catch (Exception e) {
-      throw new IllegalStateException("Something when wrong with loading data. Prefix: " + prefix);
-    }
+    hotelAccess.loadHotel();
   }
   
   /**
@@ -134,10 +153,6 @@ public class AppController implements MessageListener {
    * or bookings might have been made.
    */
   private void save() {
-    try {
-      hotelPersistence.saveHotel(hotel, prefix);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    hotelAccess.saveHotel();
   }
 }

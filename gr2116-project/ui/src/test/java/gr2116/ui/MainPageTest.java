@@ -36,12 +36,13 @@ public class MainPageTest extends ApplicationTest{
       
         Parent parent = fxmlLoader.load();
         appController = (AppController) fxmlLoader.getController();
-        appController.setPrefix("testUi");
+        appController.setPrefix("test");
         appController.load();
 
         Person person = new Person("Richard Wilkens");
-        person.setEmail("RichardWilkins@gmail.com");
+        person.setUsername("RichardWilkens");
         person.addBalance(100.0);
+        appController.getHotelAccess().addPerson(person);
         appController.moveToMainPage(person);
         
         stage.setScene(new Scene(parent));
@@ -51,7 +52,7 @@ public class MainPageTest extends ApplicationTest{
     @Test
     public void checkUserPane() {
         FxAssert.verifyThat("#nameLabel", LabeledMatchers.hasText("Richard Wilkens"));
-        FxAssert.verifyThat("#emailLabel", LabeledMatchers.hasText("RichardWilkins@gmail.com"));
+        FxAssert.verifyThat("#usernameLabel", LabeledMatchers.hasText("RichardWilkens"));
         FxAssert.verifyThat("#balanceLabel", LabeledMatchers.hasText("100.0"));
     }
     
