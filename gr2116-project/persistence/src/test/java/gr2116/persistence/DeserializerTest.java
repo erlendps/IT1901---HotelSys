@@ -22,37 +22,37 @@ public class DeserializerTest {
   }
 
   private final String reservationString = """
+      {"room":101,
+      "startDate":"2021-11-03",
+      "endDate":"2021-11-05",
+      "id":"1012021110320211105"}
+      }
+      """;
+
+  private final String roomString = """
+      {"number":101,
+      "type":"Double",
+      "amenities":["Internet"],
+      "price":10.0,
+      "reservations":[
         {"room":101,
         "startDate":"2021-11-03",
         "endDate":"2021-11-05",
         "id":"1012021110320211105"}
-        }
-      """;
-
-  private final String roomString = """
-        {"number":101,
-        "type":"Double",
-        "amenities":["Internet"],
-        "price":10.0,
-        "reservations":[
-          {"room":101,
-          "startDate":"2021-11-03",
-          "endDate":"2021-11-05",
-          "id":"1012021110320211105"}
-          ]
-        }
+        ]
+      }
       """;
 
   private final String personString = """
-        {"name":"Henry",
-        "balance":80.0,
-        "reservations":[
-          {"room":101,
-          "startDate":"2021-11-03",
-          "endDate":"2021-11-05",
-          "id":"1012021110320211105"}
-          ]
-        }
+      {"name":"Henry",
+      "balance":80.0,
+      "reservations":[
+        {"room":101,
+        "startDate":"2021-11-03",
+        "endDate":"2021-11-05",
+        "id":"1012021110320211105"}
+        ]
+      }
       """;
 
   @Test
@@ -97,18 +97,19 @@ public class DeserializerTest {
       assertNull(mapper.readValue(badString, HotelRoom.class));
       // "reservations" is not array
       badString = """
-      {"number":101,
-      "type":"Double",
-      "amenities":["Internet"],
-      "price":10.0,
-      "reservations": 34229
-      }
-    """;
+          {"number":101,
+          "type":"Double",
+          "amenities":["Internet"],
+          "price":10.0,
+          "reservations": 34229
+          }
+          """;
       assertNull(mapper.readValue(badString, HotelRoom.class));
     } catch (JsonProcessingException e) {
       fail(e.getMessage());
     }
   }
+
   @Test
   public void testPersonDeserializer() {
     try {
@@ -121,12 +122,12 @@ public class DeserializerTest {
       assertNull(mapper.readValue(badString, Person.class));
       // "reservations" is not an array
       badString = """
-      {"name":"Henry",
-      "balance":80.0,
-      "reservations": 102421
-      }
-    """;
-    assertNull(mapper.readValue(badString, Person.class));
+          {"name":"Henry",
+          "balance":80.0,
+          "reservations": 102421
+          }
+          """;
+      assertNull(mapper.readValue(badString, Person.class));
     } catch (JsonProcessingException e) {
       fail(e.getMessage());
     }

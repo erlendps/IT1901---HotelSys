@@ -90,7 +90,7 @@ public class HotelRoomListItem extends HBox {
     amenitiesLabel.setMinHeight(Region.USE_PREF_SIZE);
   }
 
-/**
+  /**
    * Sets the totalPriceLabel to given price.
    *
    * @param price given total price
@@ -100,7 +100,7 @@ public class HotelRoomListItem extends HBox {
     totalPriceLabel.setText(price);
   }
 
-/**
+  /**
    * Sets errorLabel to given error.
    *
    * @param error given error

@@ -93,16 +93,7 @@ public class HotelRoom {
   public final double getPrice() {
     return price;
   }
-
-  /**
-   * Returns the reservation calendar.
-   *
-   * @return ReservationCalendar
-   */
-  public final ReservationCalendar getCalendar() {
-    return calendar;
-  }
-
+  
   /**
    * Returns the cost of staying from the given
    * start date to the given end date.
@@ -118,6 +109,15 @@ public class HotelRoom {
     return price * (startDate.until(endDate).getDays());
   }
 
+  /**
+   * Returns the reservation calendar.
+   *
+   * @return ReservationCalendar
+   */
+  public final ReservationCalendar getCalendar() {
+    return calendar;
+  }
+  
   /**
    * Sets the daily price to the given price.
    *
@@ -262,10 +262,10 @@ public class HotelRoom {
       return false;
     }
     HotelRoom room = (HotelRoom) o;
-    return this.getNumber() == room.getNumber() &&
-        this.getRoomType() == room.getRoomType() &&
-        this.getPrice() == room.getPrice() &&
-        this.getAmenities().equals(room.getAmenities());
+    return this.getNumber() == room.getNumber()
+        && this.getRoomType() == room.getRoomType()
+        && this.getPrice() == room.getPrice()
+        && this.getAmenities().equals(room.getAmenities());
   }
 
   @Override

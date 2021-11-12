@@ -10,10 +10,8 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.NumericNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
-
 import gr2116.core.Person;
 import gr2116.core.Reservation;
-
 import java.io.IOException;
 
 /**
@@ -24,7 +22,8 @@ public class PersonDeserializer extends JsonDeserializer<Person> {
   private ReservationDeserializer reservationDeserializer = new ReservationDeserializer();
 
   @Override
-  public Person deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+  public Person deserialize(JsonParser p, DeserializationContext ctxt)
+      throws IOException, JsonProcessingException {
     TreeNode treeNode = p.getCodec().readTree(p);
     return deserialize((JsonNode) treeNode);
   }
@@ -51,7 +50,9 @@ public class PersonDeserializer extends JsonDeserializer<Person> {
       JsonNode balanceNode = objectNode.get("balance");
       if (balanceNode instanceof NumericNode) {
         person.addBalance(balanceNode.asDouble());
-      } else return null;
+      } else {
+        return null;
+      }
       JsonNode reservationNode = objectNode.get("reservations");
       if (reservationNode instanceof ArrayNode) {
         for (JsonNode reservation : (ArrayNode) reservationNode) {
@@ -60,7 +61,9 @@ public class PersonDeserializer extends JsonDeserializer<Person> {
             person.addReservation(res);
           }
         }
-      } else return null;
+      } else {
+        return null;
+      }
       return person;
     }
     return null;

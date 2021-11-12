@@ -17,7 +17,7 @@ public class Hotel implements Iterable<HotelRoom> {
   private final Collection<HotelRoom> rooms = new ArrayList<>();
 
   /**
-   * The hotel's collection of Persons
+   * The hotel's collection of Persons.
    */
   private final Collection<Person> persons = new ArrayList<>(); 
 
@@ -93,7 +93,7 @@ public class Hotel implements Iterable<HotelRoom> {
     }
     if (persons.contains(person)) {
       System.out.println(
-        "[Warning]: Tried to add a person that was already added.");
+          "[Warning]: Tried to add a person that was already added.");
       return false;
     }
     persons.add(person);
@@ -149,7 +149,8 @@ public class Hotel implements Iterable<HotelRoom> {
    * <p>
    * If everything is valid, the method creates a new Reservation object with
    * a (pseudorandom) id, the room with the given {@code hotelRoomNumber} and start/endDate.
-   * It then adds the reservation in the hotelroom with {@code hotelRoomNumber} collection of reservations,
+   * It then adds the reservation in the hotelroom
+   * with {@code hotelRoomNumber} collection of reservations,
    * and then it adds the reservation in this Person objects reservation collection.
    * Finally it subtracs the price of the booking.
    * </p>
@@ -187,7 +188,8 @@ public class Hotel implements Iterable<HotelRoom> {
     }
     List<HotelRoom> roomMatches = getRooms((r) -> r.getNumber() == hotelRoomNumber);
     if (roomMatches.size() == 0) {
-      throw new IllegalArgumentException("The specified room number is not the number of a room in the hotel.");
+      throw new IllegalArgumentException(
+        "The specified room number is not the number of a room in the hotel.");
     }
 
     HotelRoom hotelRoom = roomMatches.get(0);

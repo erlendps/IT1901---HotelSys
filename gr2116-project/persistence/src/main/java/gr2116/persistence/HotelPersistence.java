@@ -55,7 +55,7 @@ public class HotelPersistence {
   /**
    * Returns a new instance of a ObjectMapper, registered with a HotelModule.
    *
-   * @return
+   * @return a new instance of a ObjectMapper, registered with a HotelModule
    */
   public static final ObjectMapper createObjectMapper() {
     return new ObjectMapper().registerModule(createHotelModule());

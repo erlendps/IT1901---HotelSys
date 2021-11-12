@@ -3,11 +3,9 @@ package gr2116.persistence.internal;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-
 import gr2116.core.Hotel;
 import gr2116.core.HotelRoom;
 import gr2116.core.Person;
-
 import java.io.IOException;
 
 public class HotelSerializer extends JsonSerializer<Hotel> {
@@ -17,7 +15,8 @@ public class HotelSerializer extends JsonSerializer<Hotel> {
    */
 
   @Override
-  public void serialize(Hotel hotel, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+  public void serialize(Hotel hotel, JsonGenerator gen,
+      SerializerProvider serializers) throws IOException {
     if (hotel == null) {
       throw new IllegalArgumentException("Hotel is null.");
     }

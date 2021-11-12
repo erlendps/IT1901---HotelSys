@@ -232,9 +232,9 @@ public class Person {
       return false;
     }
     Person p = (Person) o;
-    return this.getName().equals(p.getName()) &&
-        this.getUsername().equals(p.getUsername()) &&
-        this.getReservations().equals(p.getReservations());
+    return this.getName().equals(p.getName())
+        && this.getUsername().equals(p.getUsername())
+        && this.getReservations().equals(p.getReservations());
   }
 
   @Override

@@ -56,7 +56,8 @@ public class HotelService {
   public RoomResource getRoomResource(@PathParam("roomNumber") String roomNumber) {
     HotelRoom room;
     //LOG.debug("Sub-resource room for " + username);
-    Collection<HotelRoom> matches = hotel.getRooms(p -> p.getNumber() == Integer.parseInt(roomNumber));
+    Collection<HotelRoom> matches =
+        hotel.getRooms(p -> p.getNumber() == Integer.parseInt(roomNumber));
     
     if (matches.size() > 1) {
       throw new IllegalStateException("Multiple matches for room number" + roomNumber);
