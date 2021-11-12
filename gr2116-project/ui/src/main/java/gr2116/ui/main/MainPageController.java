@@ -136,7 +136,6 @@ public class MainPageController implements MessageListener, PersonListener {
         );
       }
     }
-    
     Collection<HotelRoom> filteredRooms = hotelAccess.getRooms(hotelRoomFilter);
 
     // If dates are valid, add all filterd room.
@@ -147,6 +146,7 @@ public class MainPageController implements MessageListener, PersonListener {
                               hotelRoomFilter.getStartDate(),
                               hotelRoomFilter.getEndDate());
         roomItem.setOnMakeReservationButtonAction((event) -> {
+          try {
           hotelAccess.makeReservation(
               person,
               hotelRoom.getNumber(),
@@ -154,6 +154,11 @@ public class MainPageController implements MessageListener, PersonListener {
               hotelRoomFilter.getEndDate()
           );
           buildRoomList();
+          } catch (IllegalStateException e) {
+            buildRoomList();
+            errorLabel.setText("Unfortunately the room (#" + hotelRoom.getNumber()
+                + ") has already been taken.");
+          } 
         });
         roomItem.setTotalPriceLabel(Double.toString(totalPrice));
         if (person.getBalance() < totalPrice) {

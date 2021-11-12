@@ -60,6 +60,20 @@ public class RemoteHotelAccess implements HotelAccess {
     return hotel;
   }
 
+  public void updateHotel() {
+    HttpRequest request = HttpRequest.newBuilder(endpointBaseUri)
+        .header("Accepct", "application/json")
+        .GET()
+        .build();
+    try {
+      final HttpResponse<String> response = 
+          HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+      this.hotel = mapper.readValue(response.body(), Hotel.class);
+    } catch (IOException | InterruptedException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
   private boolean putPerson(Person person) {
     try {
       String json = mapper.writeValueAsString(person);
@@ -70,7 +84,6 @@ public class RemoteHotelAccess implements HotelAccess {
           .build();
       final HttpResponse<String> response =
           HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-      System.out.println(response.toString());
       Boolean added = mapper.readValue(response.body(), Boolean.class);
       if (added != null) {
         return true;
@@ -90,7 +103,6 @@ public class RemoteHotelAccess implements HotelAccess {
 
   @Override
   public Collection<Person> getPersons() {
-    System.out.println(hotel);
     return getHotel().getPersons();
   }
 
@@ -144,6 +156,7 @@ public class RemoteHotelAccess implements HotelAccess {
   @Override
   public void makeReservation(Person person, int hotelRoomNumber,
       LocalDate startDate, LocalDate endDate) {
+    updateHotel();
     getHotel().makeReservation(person, hotelRoomNumber, startDate, endDate);
     putPerson(person);
 
