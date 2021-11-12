@@ -2,18 +2,18 @@ package gr2116.ui.controller;
 
 import gr2116.core.Person;
 import gr2116.persistence.HotelPersistence;
+import gr2116.ui.access.DirectHotelAccess;
+import gr2116.ui.access.HotelAccess;
 import gr2116.ui.login.LoginPageController;
 import gr2116.ui.main.MainPageController;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
 import gr2116.ui.money.MoneyPageController;
-import gr2116.ui.access.DirectHotelAccess;
-import gr2116.ui.access.HotelAccess;
 import java.util.ArrayList;
 import java.util.Collection;
 import javafx.fxml.FXML;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.SplitPane;
+import javafx.scene.layout.StackPane;
 
 /**
  * The controller for the application.
@@ -28,22 +28,22 @@ public class AppController implements MessageListener {
   private MainPageController mainPageViewController;
 
   @FXML
-  private VBox mainPageView;
+  private SplitPane mainPageView;
 
   @FXML
   private LoginPageController loginPageViewController;
 
   @FXML
-  private AnchorPane loginPageView;
+  private StackPane loginPageView;
 
   @FXML
   private MoneyPageController moneyPageViewController;
 
   @FXML
-  private AnchorPane moneyPageView;
+  private StackPane moneyPageView;
 
   @FXML
-  private AnchorPane root;
+  private StackPane root;
 
   /**
    * Initialize the program.
