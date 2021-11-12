@@ -30,5 +30,15 @@ Brukeren har behov for å kunne se tidligere reservasjoner brukeren har gjort. D
 * Når brukeren logger seg inn skal tidligere reserverte rom lastes inn.
 
 
+# Brukerhistorie 3: Reservere rom hjemmefra
+> Som privatperson ønsker jeg å kunne reservere hotellrom hjemmefra, slik at rommet er stelt i stand innen jeg kommer til hotellet.
+> _- Bruker_
 
+Brukeren har behov for å kunne reservere hotellrom over internett. Det skaper fleksibilitet, og det ville vært tungvint å måtte møte opp på hotellet for å reservere rom hver gang. Reservasjons-, rom- og brukerdata må derfor lagres på en server og programmet må kunne hente ut og sende data fra hvor som helst. 
 
+## Viktig å kunne se
+* En nylig oppdatert oversikt over hvilke rom som er ledige
+
+## Viktig å kunne gjøre
+* Logge inn med samme bruker og se reservasjonene sine fra hvilken som helst maskin, hvor som helst
+* Reservere rom og være sikker på at man har fått dette rommet (Ikke dobbeltbookinger)
