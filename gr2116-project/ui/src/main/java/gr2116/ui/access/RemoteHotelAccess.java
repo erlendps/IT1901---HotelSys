@@ -120,7 +120,7 @@ public class RemoteHotelAccess implements HotelAccess {
   }
 
   private URI roomUri(Integer number) {
-    return endpointBaseUri.resolve("rooms").resolve(uriParam(number.toString()));
+    return endpointBaseUri.resolve("rooms/").resolve(uriParam(number.toString()));
   }
 
   private boolean putRoom(HotelRoom room) {
