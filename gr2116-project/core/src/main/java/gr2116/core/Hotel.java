@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -15,12 +17,12 @@ public class Hotel implements Iterable<HotelRoom> {
   /**
    * The hotel's collection of rooms.
    */
-  private final Collection<HotelRoom> rooms = new ArrayList<>();
+  private final Map<String, HotelRoom> rooms = new LinkedHashMap<>();
 
   /**
    * The hotel's collection of Persons
    */
-  private final Collection<Person> persons = new ArrayList<>(); 
+  private final Map<String, Person> persons = new LinkedHashMap<>(); 
 
   /**
    * Constructs an empty hotel.
@@ -35,7 +37,7 @@ public class Hotel implements Iterable<HotelRoom> {
    * @param rooms a collection of rooms.
    */
   public Hotel(final Collection<HotelRoom> rooms) {
-    rooms.forEach(this.rooms::add);
+    rooms.forEach((room) -> this.rooms.put(String.valueOf(room.getNumber()), room));
   }
 
   /**
@@ -46,7 +48,7 @@ public class Hotel implements Iterable<HotelRoom> {
    */
   public Hotel(final Collection<HotelRoom> rooms, final Collection<Person> persons) {
     this(rooms);
-    persons.forEach((person) -> this.persons.add(person));
+    persons.forEach((person) -> this.persons.put(person.getUsername(), person));
   }
 
   /**
@@ -56,18 +58,11 @@ public class Hotel implements Iterable<HotelRoom> {
    * 
    * @throws IllegalArgumentException if room is null
    */
-  public final boolean addRoom(final HotelRoom room) {
+  public final HotelRoom addRoom(final HotelRoom room) {
     if (room == null) {
       throw new IllegalArgumentException("Room cannot be null");
     }
-    if (rooms.contains(room)) {
-      System.out.println(
-          "[Warning]: Tried to add a room that was already added.");
-      return false;
-    } else {
-      rooms.add(room);
-      return true;
-    }
+    return rooms.put(String.valueOf(room.getNumber()), room);
   }
 
   /**
@@ -76,7 +71,7 @@ public class Hotel implements Iterable<HotelRoom> {
    * @param room the given room.
    */
   public final void removeRoom(final HotelRoom room) {
-    rooms.remove(room);
+    rooms.remove(String.valueOf(room.getNumber()));
   }
 
   /**
@@ -88,17 +83,17 @@ public class Hotel implements Iterable<HotelRoom> {
    *
    * @throws IllegalArgumentException if person is null
    */
-  public final boolean addPerson(final Person person) {
+  public final Person addPerson(final Person person) {
     if (person == null) {
       throw new IllegalArgumentException("Person cant be null.");
     }
+    /*
     if (persons.contains(person)) {
       System.out.println(
         "[Warning]: Tried to add a person that was already added.");
       return false;
-    }
-    persons.add(person);
-    return true;
+    } */
+    return persons.put(person.getUsername(), person);
   }
 
   /**
@@ -107,7 +102,7 @@ public class Hotel implements Iterable<HotelRoom> {
    * @param person person to be removed from the hotel.
    */
   public final void removePerson(final Person person) {
-    persons.remove(person);
+    persons.remove(person.getUsername());
   }
 
   /**
@@ -118,13 +113,13 @@ public class Hotel implements Iterable<HotelRoom> {
    *
    * @return a collection of rooms.
    */
-  public final List<HotelRoom> getRooms(
+  public final Collection<HotelRoom> getRooms(
       final Predicate<HotelRoom> predicate) {
-    return rooms.stream().filter(predicate).toList();
+    return getRooms().stream().filter(predicate).collect(Collectors.toList());
   }
 
   public final Collection<HotelRoom> getRooms() {
-    return new ArrayList<>(rooms);
+    return new ArrayList<>(rooms.values());
   }
 
   /**
@@ -133,11 +128,11 @@ public class Hotel implements Iterable<HotelRoom> {
    * @return new collection of the persons
    */
   public final Collection<Person> getPersons() {
-    return new ArrayList<>(persons);
+    return new ArrayList<>(persons.values());
   }
 
   public final Collection<Person> getPersons(Predicate<Person> pred) {
-    return persons.stream().filter(pred).toList();
+    return getPersons().stream().filter(pred).toList();
   }
   
   /**
@@ -186,12 +181,12 @@ public class Hotel implements Iterable<HotelRoom> {
       throw new IllegalArgumentException(
         "The startDate cannot be after the endDate.");
     }
-    List<HotelRoom> roomMatches = getRooms((r) -> r.getNumber() == hotelRoomNumber);
+    Collection<HotelRoom> roomMatches = getRooms((r) -> r.getNumber() == hotelRoomNumber);
     if (roomMatches.size() == 0) {
       throw new IllegalArgumentException("The specified room number is not the number of a room in the hotel.");
     }
 
-    HotelRoom hotelRoom = roomMatches.get(0);
+    HotelRoom hotelRoom = roomMatches.iterator().next();
     double price = hotelRoom.getPrice(startDate, endDate);
     if (price > person.getBalance()) {
       throw new IllegalStateException(
@@ -210,6 +205,6 @@ public class Hotel implements Iterable<HotelRoom> {
 
   @Override
   public final Iterator<HotelRoom> iterator() {
-    return rooms.iterator();
+    return getRooms().iterator();
   }
 }
