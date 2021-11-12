@@ -32,7 +32,9 @@ public class RemoteHotelAccessTest {
     }
 
     @Test
-    public
+    public void testGetHotel(){
+
+    }
 
 
 
