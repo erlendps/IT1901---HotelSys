@@ -43,7 +43,7 @@ public class RoomGenerator {
     for (int i = 0; i < amount; i++) {
 
       // Put room on a random floor and get the next available room number on this floor
-      int floor = random.nextInt() % 7 + 1;
+      int floor = Math.abs(random.nextInt() % 7) + 1;
       int number = getNextNumber(floor);
       
       // Get a random room type
@@ -54,10 +54,10 @@ public class RoomGenerator {
       setPrice(room);
       
       // Add a random number of amenities
-      int maxNumOfAmenities = random.nextInt() % 8;
+      int maxNumOfAmenities = Math.abs(random.nextInt() % 8);
       List<Amenity> amenities = new ArrayList<>(Arrays.asList(Amenity.values()));
       for (int j = maxNumOfAmenities; j > 0; j--) {
-        int index = random.nextInt() % 8;
+        int index = Math.abs(random.nextInt() % 8);
 
         // the maxNumOfAmenities only puts an upper bound on the number, as some might be added multiple times.
         room.addAmenity(amenities.get(index));
