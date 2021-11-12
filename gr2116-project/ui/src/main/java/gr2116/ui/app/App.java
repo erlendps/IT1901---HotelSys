@@ -16,6 +16,7 @@ public class App extends Application {
    */
   @Override
   public final void start(final Stage stage) throws Exception {
+    System.out.println("Running LocalApp.");
     Parent parent = FXMLLoader.load(
         getClass().getClassLoader().getResource("App.fxml"));
     stage.setScene(new Scene(parent));

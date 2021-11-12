@@ -12,6 +12,7 @@ import gr2116.ui.access.HotelAccess;
 import gr2116.ui.access.RemoteHotelAccess;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collection;
 import javafx.fxml.FXML;
@@ -25,8 +26,10 @@ import javafx.scene.layout.VBox;
  */
 public class AppController implements MessageListener {
   private HotelPersistence hotelPersistence = new HotelPersistence("data");
-  private HotelAccess hotelAccess = new RemoteHotelAccess(hotelPersistence, URI.create("http://localhost:8080/rest/hotel/"));
-  //private HotelAccess hotelAccess = new DirectHotelAccess(hotelPersistence);
+  private HotelAccess hotelAccess;
+
+  @FXML
+  private String endpointUri;
 
   @FXML
   private MainPageController mainPageViewController;
@@ -58,6 +61,23 @@ public class AppController implements MessageListener {
     loginPageViewController.addListener(this);
     mainPageViewController.addListener(this);
     moneyPageViewController.addListener(this);
+    if (endpointUri != null) {
+      RemoteHotelAccess remoteHotelAccess;
+      try {
+        System.out.println("Using endpoint URI @ " + endpointUri);
+        remoteHotelAccess = new RemoteHotelAccess(hotelPersistence, new URI(endpointUri));
+        hotelAccess = remoteHotelAccess;
+        System.out.println("Using RemoteHotelAccess as access model.");
+      } catch (URISyntaxException e) {
+        System.err.println("Failed to create a URI with endpoint: " + endpointUri);
+        System.err.println(e);
+      }
+    }
+    if (hotelAccess == null) {
+      DirectHotelAccess directHotelAccess = new DirectHotelAccess(hotelPersistence);
+      hotelAccess = directHotelAccess;
+      System.out.println("Using DirectHotelAccess as access model.");
+    }
     load();
     moveToLoginPage();
   }
