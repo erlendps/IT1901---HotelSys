@@ -28,8 +28,11 @@ public class RemoteHotelAccessTest {
         wireMockServer = new WireMockServer(config.portNumber());
         wireMockServer.start();
         WireMock.configureFor("localhost", config.portNumber());
-        hotelAccess = new RemoteTodoModelAccess(new URI("http://localhost:" + wireMockServer.port() + "/hotel"));
+        hotelAccess = new RemoteHotelAccess(new URI("http://localhost:" + wireMockServer.port() + "/hotel"));
     }
+
+    @Test
+    public
 
 
 
