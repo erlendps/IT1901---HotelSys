@@ -55,7 +55,6 @@ public class HotelService {
     } else {
       person = matches.iterator().next();
     }
-    // TODO: Add Person object to person resource here
     PersonResource personResource = new PersonResource(username, person, hotel);
     return personResource;
   }
