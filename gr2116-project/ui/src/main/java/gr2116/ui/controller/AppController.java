@@ -9,6 +9,9 @@ import gr2116.ui.message.MessageListener;
 import gr2116.ui.money.MoneyPageController;
 import gr2116.ui.access.DirectHotelAccess;
 import gr2116.ui.access.HotelAccess;
+import gr2116.ui.access.RemoteHotelAccess;
+
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
 import javafx.fxml.FXML;
@@ -22,7 +25,8 @@ import javafx.scene.layout.VBox;
  */
 public class AppController implements MessageListener {
   private HotelPersistence hotelPersistence = new HotelPersistence("data");
-  private HotelAccess hotelAccess = new DirectHotelAccess(hotelPersistence);
+  private HotelAccess hotelAccess = new RemoteHotelAccess(hotelPersistence, URI.create("http://localhost:8080/rest/hotel/"));
+  //private HotelAccess hotelAccess = new DirectHotelAccess(hotelPersistence);
 
   @FXML
   private MainPageController mainPageViewController;

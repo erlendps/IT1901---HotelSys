@@ -29,8 +29,8 @@ public class RemoteHotelAccess implements HotelAccess {
   private ObjectMapper mapper;
   private Hotel hotel;
 
-  public RemoteHotelAccess(URI endpointBaseUri) {
-    hotelPersistence = new HotelPersistence();
+  public RemoteHotelAccess(HotelPersistence hotelPersistence, URI endpointBaseUri) {
+    this.hotelPersistence = hotelPersistence;
     this.endpointBaseUri = endpointBaseUri;
     mapper = HotelPersistence.createObjectMapper();
   }
@@ -40,7 +40,7 @@ public class RemoteHotelAccess implements HotelAccess {
   }
 
   private URI personUri(String name) {
-    return endpointBaseUri.resolve("person").resolve(uriParam(name));
+    return endpointBaseUri.resolve("person/").resolve(uriParam(name));
   }
 
   private Hotel getHotel() {
@@ -63,14 +63,16 @@ public class RemoteHotelAccess implements HotelAccess {
   private boolean putPerson(Person person) {
     try {
       String json = mapper.writeValueAsString(person);
+      System.out.println(json);
       HttpRequest request = HttpRequest.newBuilder(personUri(person.getUsername()))
           .header("Accept", "application/json")
           .header("Content-Type", "application/json")
           .PUT(BodyPublishers.ofString(json))
           .build();
+      System.out.println("request good");
       final HttpResponse<String> response =
           HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-      
+      System.out.println(response.toString());
       Boolean added = mapper.readValue(response.body(), Boolean.class);
       if (added != null) {
         return true;
@@ -90,6 +92,7 @@ public class RemoteHotelAccess implements HotelAccess {
 
   @Override
   public Collection<Person> getPersons() {
+    System.out.println(hotel);
     return getHotel().getPersons();
   }
 
@@ -147,7 +150,7 @@ public class RemoteHotelAccess implements HotelAccess {
     putPerson(person);
 
     // Find list of rooms with matching IDs (which should only be one) and put first
-    putRoom(getHotel().getRooms((r) -> r.getNumber() == hotelRoomNumber).get(0));
+    putRoom(getHotel().getRooms((r) -> r.getNumber() == hotelRoomNumber).iterator().next());
   }
 
   @Override
