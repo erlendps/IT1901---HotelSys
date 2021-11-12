@@ -63,13 +63,11 @@ public class RemoteHotelAccess implements HotelAccess {
   private boolean putPerson(Person person) {
     try {
       String json = mapper.writeValueAsString(person);
-      System.out.println(json);
       HttpRequest request = HttpRequest.newBuilder(personUri(person.getUsername()))
           .header("Accept", "application/json")
           .header("Content-Type", "application/json")
           .PUT(BodyPublishers.ofString(json))
           .build();
-      System.out.println("request good");
       final HttpResponse<String> response =
           HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
       System.out.println(response.toString());
