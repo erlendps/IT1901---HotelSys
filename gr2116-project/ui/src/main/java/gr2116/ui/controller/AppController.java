@@ -179,4 +179,9 @@ public class AppController implements MessageListener {
   private void save() {
     hotelAccess.saveHotel();
   }
+
+  public void setHotelAccess(HotelAccess hotelAccess) {
+    this.hotelAccess = hotelAccess;
+  }
 }
+
