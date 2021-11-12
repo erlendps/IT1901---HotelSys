@@ -65,14 +65,13 @@ public class PersonResource {
 
   @PUT
   @Consumes(MediaType.APPLICATION_JSON)
-  public void addPerson(String name) {
-    LOG.debug("addPerson({})", name);
-    Person person = new Person(name);
-    person.setUsername(username);
-    hotel.addPerson(person);
+  public boolean addPerson(Person person) {
+    LOG.debug("addPerson({})", person);
+    Person oldPerson = hotel.addPerson(person);
     autoSaveHotel();
+    return oldPerson == null;
   }
-
+  /*
   @PUT
   @Consumes(MediaType.APPLICATION_JSON)
   public void addBalance(Double balance) {
@@ -87,5 +86,5 @@ public class PersonResource {
     LOG.debug("addReservation({})", reservation);
     person.addReservation(reservation);
     autoSaveHotel();
-  }
+  } */
 }

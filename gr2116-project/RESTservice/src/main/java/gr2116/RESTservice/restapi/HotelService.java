@@ -47,11 +47,15 @@ public class HotelService {
   @Path("/person/{username}")
   public PersonResource getPersonResource(@PathParam("username") String username) {
     Collection<Person> matches = hotel.getPersons(p -> p.getUsername() == username);
-    if (matches.size() != 1) {
-      throw new IllegalStateException("Multiple or 0 matches for username" + username);
+    Person person;
+    if (matches.size() > 1) {
+      throw new IllegalStateException("Multiple matches for person " + username);
+    } else if (matches.size() == 0) {
+      person = null;
+    } else {
+      person = matches.iterator().next();
     }
     // TODO: Add Person object to person resource here
-    Person person = matches.iterator().next();
     PersonResource personResource = new PersonResource(username, person, hotel);
     return personResource;
   }
@@ -59,8 +63,8 @@ public class HotelService {
   @Path("/rooms/{roomNumber}")
   public RoomResource getRoomResource(@PathParam("roomNumber") String roomNumber) {
     HotelRoom room;
-    //LOG.debug("Sub-resource room for " + username);
-    Collection<HotelRoom> matches = hotel.getRooms(p -> p.getNumber() == Integer.parseInt(roomNumber));
+    Integer number = Integer.parseInt(roomNumber);
+    Collection<HotelRoom> matches = hotel.getRooms(p -> p.getNumber() == number);
     
     if (matches.size() > 1) {
       throw new IllegalStateException("Multiple matches for room number" + roomNumber);
@@ -70,8 +74,9 @@ public class HotelService {
       room = matches.iterator().next();
     }
 
-    System.out.println("bruuuuh");
-    RoomResource roomResource = new RoomResource(room, hotel);
+    LOG.debug("Sub-resource room for room number " + number + ": " + room);
+
+    RoomResource roomResource = new RoomResource(number, room, hotel);
     roomResource.setHotelPersistence(hotelPersistence);
     return roomResource;
   }
