@@ -2,10 +2,8 @@ package gr2116.core;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * HotelRoom class. Contains a Collection of amenities, a ReservationCalendar,

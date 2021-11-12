@@ -3,7 +3,6 @@ package gr2116.ui.login;
 import gr2116.core.Person;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
-import gr2116.ui.utils.FxmlUtils;
 import java.util.Collection;
 import java.util.HashSet;
 import javafx.fxml.FXML;

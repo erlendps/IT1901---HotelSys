@@ -1,19 +1,17 @@
 package gr2116.RESTservice.restapi;
 
-import gr2116.core.HotelRoom;
 import gr2116.core.Hotel;
-import gr2116.core.Reservation;
+import gr2116.core.HotelRoom;
 import gr2116.persistence.HotelPersistence;
-import jakarta.ws.rs.PUT;
-import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
+import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.io.IOException;
 
 public class RoomResource {
     
