@@ -180,6 +180,11 @@ public class AppController implements MessageListener {
     hotelAccess.saveHotel();
   }
 
+  /**
+   * Sets hotelAcess.
+   *
+   * @param hoteAcess the given hotelAcess
+   */
   public void setHotelAccess(HotelAccess hotelAccess) {
     this.hotelAccess = hotelAccess;
   }
