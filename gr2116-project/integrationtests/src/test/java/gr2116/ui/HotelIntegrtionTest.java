@@ -1,4 +1,4 @@
-package hotel.ui;
+package gr2116.ui;
 
 import java.io.IOException;
 
