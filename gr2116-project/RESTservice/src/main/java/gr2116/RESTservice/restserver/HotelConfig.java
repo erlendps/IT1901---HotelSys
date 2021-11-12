@@ -3,13 +3,10 @@ package gr2116.RESTservice.restserver;
 import gr2116.RESTservice.restapi.HotelService;
 import gr2116.core.Hotel;
 import gr2116.persistence.HotelPersistence;
-
 import java.io.IOException;
-
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
-import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.jackson.JacksonFeature;
-import gr2116.persistence.RoomGenerator;
+import org.glassfish.jersey.server.ResourceConfig;
 
 /**
  * Configures the rest service,

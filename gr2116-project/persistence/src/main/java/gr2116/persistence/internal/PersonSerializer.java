@@ -3,10 +3,9 @@ package gr2116.persistence.internal;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import java.io.IOException;
-
 import gr2116.core.Person;
 import gr2116.core.Reservation;
+import java.io.IOException;
 
 /**
  * Serializer for Person class.
@@ -19,7 +18,8 @@ public class PersonSerializer extends JsonSerializer<Person> {
    */
   
   @Override
-  public void serialize(Person person, JsonGenerator gen, SerializerProvider serializer) throws IOException {
+  public void serialize(Person person, JsonGenerator gen,
+        SerializerProvider serializer) throws IOException {
     if (person == null) {
       throw new IllegalArgumentException("Person is null.");
     }
@@ -35,6 +35,5 @@ public class PersonSerializer extends JsonSerializer<Person> {
     }
     gen.writeEndArray();
     gen.writeEndObject();
-
   }
 }

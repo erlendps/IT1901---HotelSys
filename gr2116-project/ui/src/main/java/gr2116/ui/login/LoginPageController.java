@@ -3,7 +3,6 @@ package gr2116.ui.login;
 import gr2116.core.Person;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
-import gr2116.ui.utils.FxmlUtils;
 import java.util.Collection;
 import java.util.HashSet;
 import javafx.fxml.FXML;
@@ -88,8 +87,10 @@ public class LoginPageController {
   }
 
   /**
-   * The name field should only be visible if the username was not found in the collection of persons,
-   * in which case a new account will be created. This method sets the field visibility.
+   * The name field should only be visible
+   * if the username was not found in the collection of persons,
+   * in which case a new account will be created.
+   * This method sets the field visibility.
    *
    * @param visible Boolean, if true the field is visible.
    */

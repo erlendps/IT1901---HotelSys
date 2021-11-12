@@ -61,6 +61,7 @@ public class MoneyPageController {
    * 1) That all characters are digits (0-9) and the length is 16.
    * 2) That the first four digits matches a Visa or a Mastercard
    * 3) That the control digit (last digit) is correct.
+   *
    * @param cardNumber the given card number.
    */
   private void validateCardNumber(String cardNumber) {
@@ -75,12 +76,15 @@ public class MoneyPageController {
     int firstTwo = Integer.parseInt(cardNumber.substring(0, 2));
     int firstFour = Integer.parseInt(cardNumber.substring(0, 4));
 
-    if (!(first == 4 || (51 <= firstTwo && firstTwo <= 55) || (2221 <= firstFour && firstFour <= 2720))) {
-      throw new IllegalArgumentException("The first four digits of the card number has invalid format.");
+    if (!(first == 4 || (51 <= firstTwo && firstTwo <= 55)
+        || (2221 <= firstFour && firstFour <= 2720))) {
+      throw new IllegalArgumentException(
+        "The first four digits of the card number has invalid format.");
     } 
 
     if (!checkLuhnsAlgorithm(cardNumber)) {
-      throw new IllegalArgumentException("The control digit (last digit) of the card number has invalid format.");
+      throw new IllegalArgumentException(
+        "The control digit (last digit) of the card number has invalid format.");
     }
   }
 
@@ -92,19 +96,19 @@ public class MoneyPageController {
    * @return whether or not the last digit of the card number is correct. 
    */
   private boolean checkLuhnsAlgorithm(String cardNumber) {
-    int nDigits = cardNumber.length();
-    int nSum = 0;
+    int numberOfDigits = cardNumber.length();
+    int checkSum = 0;
     boolean isSecond = false;
-    for (int i = nDigits - 1; i >= 0; i--) {
+    for (int i = numberOfDigits - 1; i >= 0; i--) {
       int d = cardNumber.charAt(i) - '0';
       if (isSecond == true) {
         d = d * 2;
       }
-      nSum += d / 10;
-      nSum += d % 10;
+      checkSum += d / 10;
+      checkSum += d % 10;
       isSecond = !isSecond;
     }
-    return (nSum % 10 == 0);
+    return (checkSum % 10 == 0);
   }
  
   /**
@@ -112,7 +116,7 @@ public class MoneyPageController {
    * Money can only be a posiitve integer, strictly less than one million.
    * (1 000 000)
    *
-   * @param moneyAmount
+   * @param moneyAmount the amount to validate
    * @throws IllegalArgumentException if balance is not a positive integer between 1 and 999 999.
    */
   private void validateMoneyAmount(String moneyAmount) {
@@ -128,6 +132,7 @@ public class MoneyPageController {
     }
     
   }
+  
   /**
    * Initialize MoneyPage. Sets action for the add funds-button.
    */

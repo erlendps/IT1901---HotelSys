@@ -47,31 +47,31 @@ public class HotelModuleTest {
   The string is generated from the hotel that is generated in the setup() methd
   */
   private static final String hotelString = """
-    {"rooms":[
-      {"number":101,
-      "type":"Double",
-      "amenities":["Internet"],
-      "price":10.0,
-      "reservations":[
-        {"room":101,
-        "startDate":"2021-11-03",
-        "endDate":"2021-11-05",
-        "id":"1012021110320211105"}
-        ]}
-      ],
-    "persons":[
-      {"name":"Henry",
-      "username": "henry",
-      "balance":100.0,
-      "reservations":[
-        {"room":101,
-        "startDate":"2021-11-03",
-        "endDate":"2021-11-05",
-        "id":"1012021110320211105"}
-        ]}
-      ]
-    }
-  """;
+      {"rooms":[
+        {"number":101,
+        "type":"Double",
+        "amenities":["Internet"],
+        "price":10.0,
+        "reservations":[
+          {"room":101,
+          "startDate":"2021-11-03",
+          "endDate":"2021-11-05",
+          "id":"1012021110320211105"}
+          ]}
+        ],
+      "persons":[
+        {"name":"Henry",
+        "username": "henry",
+        "balance":100.0,
+        "reservations":[
+          {"room":101,
+          "startDate":"2021-11-03",
+          "endDate":"2021-11-05",
+          "id":"1012021110320211105"}
+          ]}
+        ]
+      }
+      """;
 
   @Test
   public void testSerializers() {

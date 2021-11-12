@@ -1,17 +1,17 @@
 package gr2116.RESTservice.restapi;
 
-import gr2116.core.Person;
 import gr2116.core.Hotel;
+import gr2116.core.Person;
 import gr2116.core.Reservation;
 import gr2116.persistence.HotelPersistence;
-import jakarta.ws.rs.PUT;
-import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
+import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.io.IOException;
 
 
 /**
@@ -43,13 +43,13 @@ public class PersonResource {
 
 
   /**
-  * Gets the corresponding person
+  * Gets the corresponding person.
   *
   * @return the corresponding person
   */
   @GET
   public Person getPerson(){
-    LOG.debug("getPerson({})",username);
+    LOG.debug("getPerson({})", username);
     return this.person;
   }
   
@@ -60,8 +60,8 @@ public class PersonResource {
       } catch (IllegalStateException | IOException e) {
         System.err.println("Couldn't auto-save Hotel: " + e);
       }
-      }
     }
+  }
 
   @PUT
   @Consumes(MediaType.APPLICATION_JSON)

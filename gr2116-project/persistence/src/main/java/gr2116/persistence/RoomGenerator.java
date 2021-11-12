@@ -1,16 +1,13 @@
 package gr2116.persistence;
 
+import gr2116.core.Amenity;
+import gr2116.core.HotelRoom;
+import gr2116.core.HotelRoomType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
-
-import gr2116.core.Amenity;
-import gr2116.core.HotelRoom;
-import gr2116.core.HotelRoomType;
-
-
 
 
 public class RoomGenerator {
@@ -31,7 +28,7 @@ public class RoomGenerator {
   public static Collection<HotelRoom> generateRooms() {
     Collection<HotelRoom> rooms = new ArrayList<>();
     for (int i = 0; i < 30; i++) {
-      int floor = (int) (random.nextDouble()*7) + 1;
+      int floor = (int) (random.nextDouble() * 7) + 1;
       int number = getNextNumber(floor);
       HotelRoomType type = getRoomType();
       HotelRoom room = new HotelRoom(type, number);
@@ -48,7 +45,7 @@ public class RoomGenerator {
   }
 
   private static HotelRoomType getRoomType() {
-    int num = (int) (random.nextDouble()*6);
+    int num = (int) (random.nextDouble() * 6);
     switch (num) {
       case 0:
         return HotelRoomType.Single;
@@ -69,26 +66,26 @@ public class RoomGenerator {
 
   private static void setPrice(HotelRoom room) {
     switch (room.getRoomType()) {
-    case Double:
-      room.setPrice(roundUp(getRandomNumber(200, 500)));
-      break;
-    case Penthouse:
-      room.setPrice(roundUp(getRandomNumber(1300, 2000)));
-      break;
-    case Quad:
-      room.setPrice(roundUp(getRandomNumber(600, 1000)));
-      break;
-    case Single:
-      room.setPrice(roundUp(getRandomNumber(100, 300)));
-      break;
-    case Suite:
-      room.setPrice(roundUp(getRandomNumber(900, 1400)));
-      break;
-    case Triple:
-      room.setPrice(roundUp(getRandomNumber(400, 700)));
-      break;
-    default:
-      break;
+      case Double:
+        room.setPrice(roundUp(getRandomNumber(200, 500)));
+        break;
+      case Penthouse:
+        room.setPrice(roundUp(getRandomNumber(1300, 2000)));
+        break;
+      case Quad:
+        room.setPrice(roundUp(getRandomNumber(600, 1000)));
+        break;
+      case Single:
+        room.setPrice(roundUp(getRandomNumber(100, 300)));
+        break;
+      case Suite:
+        room.setPrice(roundUp(getRandomNumber(900, 1400)));
+        break;
+      case Triple:
+        room.setPrice(roundUp(getRandomNumber(400, 700)));
+        break;
+      default:
+        break;
     }
   }
 
@@ -98,14 +95,13 @@ public class RoomGenerator {
 
 
   private static double roundUp(int x) {
-    if (x%50 < 25) {
-      return x - (x%50); 
+    if (x % 50 < 25) {
+      return x - (x % 50); 
+    } else if (x % 50 > 25) {
+      return x + (50 - (x % 50)); 
+    } else {
+      return x + 25; 
     }
-    else if (x%50 > 25) {
-        return x + (50 - (x%50)); 
-    }
-    else 
-        return x + 25; 
   }
 
 
