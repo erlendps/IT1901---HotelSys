@@ -44,9 +44,20 @@ public class HotelService {
     return hotel;
   }
   
+  /**
+   * Returns a PersonResource for the given person. If the given person does not exist in the
+   * hotel, it will create a PersonResource where the person is null. It checks if the person
+   * already exists, and if it does, the PersonResource will be iniated with that person object.
+   * The PersonResource is responsible for handling request from baseURI/person/{username}
+   *
+   * @param username the Persons username
+   *
+   * @return PersonResource iniated with null if the person does not exist, or initiated with 
+   *         the person that matches the username if it exists.
+   */
   @Path("/person/{username}")
   public PersonResource getPersonResource(@PathParam("username") String username) {
-    Collection<Person> matches = hotel.getPersons(p -> p.getUsername() == username);
+    Collection<Person> matches = hotel.getPersons(p -> p.getUsername().equals(username));
     Person person;
     if (matches.size() > 1) {
       throw new IllegalStateException("Multiple matches for person " + username);
@@ -55,7 +66,10 @@ public class HotelService {
     } else {
       person = matches.iterator().next();
     }
+
+    LOG.debug("Sub-resource person for person with username: " + username + ", " + person);
     PersonResource personResource = new PersonResource(username, person, hotel);
+    personResource.setHotelPersistence(hotelPersistence);
     return personResource;
   }
 
@@ -75,7 +89,7 @@ public class HotelService {
 
     LOG.debug("Sub-resource room for room number " + number + ": " + room);
 
-    RoomResource roomResource = new RoomResource(number, room, hotel);
+    RoomResource roomResource = new RoomResource(room, hotel);
     roomResource.setHotelPersistence(hotelPersistence);
     return roomResource;
   }

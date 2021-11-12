@@ -20,7 +20,6 @@ public class RoomResource {
 
   private final HotelRoom room;
   private final Hotel hotel;
-  private final int roomNumber;
 
   @Context
   private HotelPersistence hotelPersistence;
@@ -29,8 +28,7 @@ public class RoomResource {
     this.hotelPersistence = hotelPersistence;
   }
 
-  public RoomResource(int roomNumber, HotelRoom room, Hotel hotel) {
-    this.roomNumber = roomNumber;
+  public RoomResource(HotelRoom room, Hotel hotel) {
     this.room = room;
     this.hotel = hotel;
   }
@@ -58,14 +56,8 @@ public class RoomResource {
   public boolean addHotelRoom(HotelRoom room) {
     LOG.debug("addHotelRoom({})", room);
     HotelRoom oldRoom = this.hotel.addRoom(room);
-    System.out.println("bruuuuuh");
     autoSaveHotel();
     return oldRoom == null;
-  }
-
-  @PUT
-  public boolean addHotelRoom() {
-    return addHotelRoom(new HotelRoom(roomNumber));
   }
 
   @DELETE
