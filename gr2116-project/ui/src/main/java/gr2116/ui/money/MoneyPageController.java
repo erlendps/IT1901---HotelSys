@@ -1,6 +1,7 @@
 package gr2116.ui.money;
 
 import gr2116.core.Person;
+import gr2116.ui.DynamicText;
 import gr2116.ui.access.HotelAccess;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
@@ -67,10 +68,10 @@ public class MoneyPageController {
   private void validateCardNumber(String cardNumber) {
     cardNumber = cardNumber.replaceAll(" ", "");
     if (!cardNumber.matches("[0-9]+")) {
-      throw new IllegalArgumentException("Card number must contain numbers only.");
+      throw new IllegalArgumentException(DynamicText.NonNumericCardNumberError.getMessage());
     }
     if (cardNumber.length() != 16) {
-      throw new IllegalArgumentException("Card numbers must be exactly 16 characters long.");
+      throw new IllegalArgumentException(DynamicText.WrongLengthCardNumberError.getMessage());
     }
     int first = Integer.parseInt(cardNumber.substring(0, 1));
     int firstTwo = Integer.parseInt(cardNumber.substring(0, 2));
@@ -79,12 +80,12 @@ public class MoneyPageController {
     if (!(first == 4 || (51 <= firstTwo && firstTwo <= 55)
         || (2221 <= firstFour && firstFour <= 2720))) {
       throw new IllegalArgumentException(
-        "The first four digits of the card number has invalid format.");
+        DynamicText.InvalidCardIdentifierError.getMessage());
     } 
 
     if (!checkLuhnsAlgorithm(cardNumber)) {
       throw new IllegalArgumentException(
-        "The control digit (last digit) of the card number has invalid format.");
+        DynamicText.InvalidCardControlDigitError.getMessage());
     }
   }
 
@@ -121,14 +122,14 @@ public class MoneyPageController {
    */
   private void validateMoneyAmount(String moneyAmount) {
     if (!moneyAmount.matches("^[0-9]+$")) {
-      throw new IllegalArgumentException("Balance must be a positive integer.");
+      throw new IllegalArgumentException(DynamicText.NonIntegerError.getMessage());
     }
     if (moneyAmount.length() > 6) {
-      throw new IllegalArgumentException("Balance must be less than 1 000 000.");
+      throw new IllegalArgumentException(DynamicText.TooLargeBalanceError.getMessage());
     }
     int money = Integer.parseInt(moneyAmount);
     if (money == 0) {
-      throw new IllegalArgumentException("Balance must be strictly greater than zero.");
+      throw new IllegalArgumentException(DynamicText.ZeroBalanceError.getMessage());
     }
     
   }
