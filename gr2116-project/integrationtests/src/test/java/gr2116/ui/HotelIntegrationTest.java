@@ -21,7 +21,7 @@ import gr2116.persistence.HotelPersistence;
 import gr2116.ui.access.RemoteHotelAccess;
 
 
-public class HotelIntegrtionTest extends ApplicationTest {
+public class HotelIntegrationTest extends ApplicationTest {
 
     AppController appController;
     HotelPersistence hotelPersistence;
