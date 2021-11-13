@@ -32,7 +32,11 @@ Innloggingsiden er lik som den var i [innlevering 1](../release1/README.md).
 
 ## Realisert
 
-Appen bygger på konseptene fra den første innleveringen. [(Se release1)](../release1/README.md). Noen endringer er gjort i hovedsiden. Nå kan man velge etasje og fasilteter. Det er lettere for brukeren å finne ønskelig rom, samt at funksjonaliteten i [brukerhistorie 1](../brukerhistorier/brukerhistorier.md) innfris. Det har blitt mulig å fjerne valgte filter, slik at brukeren lett kan nullstille valgene. Rom har fått pris, som beregnes ut i fra antall valgte netter. For å legge til penger på sin konto kan man trykke på 'Velg Deposit'.
+Appen bygger på konseptene fra den første og den andre innleveringen. Se [release1](../release1/README.md) og [(release2)](../release2/README.md). Nytt i den tredje utgivelsen er at appen er rigget opp med et REST API. Når man reserverer rom eller lager brukerkonto blir dette nå lagret på en server. Dermed kan man i teorien benytte appen hvor som helst, enn om det er hjemme, fra jobb eller på hotellet. Istedenfor e-post registrerer man seg nå med brukernavn. Brukernavnet må oppfylle krav, som nevnt under.
+
+## Brukernavn
+
+Brukernavn må utelukkende bestå av bokstaver, store eller små.
 
 ## Kortnummer
 
@@ -45,3 +49,5 @@ På siden for å legge inn penger på kontoen sin, må man skrive inn et gyldig 
 Under følger noen fungerende (men falske) kortnummer for testing:
 * 4106 5778 3149 6288
 * 5172 3119 4781 6718
+
+
