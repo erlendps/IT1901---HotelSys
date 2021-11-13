@@ -9,7 +9,6 @@ import java.io.IOException;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.jackson.JacksonFeature;
-import gr2116.persistence.RoomGenerator;
 
 /**
  * Configures the rest service,

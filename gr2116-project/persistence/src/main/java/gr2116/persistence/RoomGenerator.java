@@ -17,20 +17,13 @@ import gr2116.core.HotelRoomType;
  */
 public class RoomGenerator {
   private static Random random = new Random();
-  private static int one = 100;
-  private static int two = 200;
-  private static int three = 300;
-  private static int four = 400;
-  private static int five = 500;
-  private static int six = 600;
-  private static int seven = 700;
+  private static int[] roomNumbers = new int[7];
   
   /**
-   * Create a new RoomGenerator app. This is not necessary,
+   * Create a new RoomGenerator object. This is not necessary,
    * as the methods are supposed to be accessed statically.
    */
   public RoomGenerator() {
-
   }
 
   /**
@@ -39,11 +32,17 @@ public class RoomGenerator {
    * @return A collection of HotelRoom objects
    */
   public static Collection<HotelRoom> generateRooms(int amount) {
+    
     Collection<HotelRoom> rooms = new ArrayList<>();
+    // Set room numbers to start at 100, 200, 300..
+    for (int i = 0; i < 7; i++) {
+      roomNumbers[i] = (i+1)*100;
+    }
+
     for (int i = 0; i < amount; i++) {
 
-      // Put room on a random floor and get the next available room number on this floor
-      int floor = Math.abs(random.nextInt() % 7) + 1;
+      // Put room on a random floor (1 <= x <= 7) and get the next available room number on this floor
+      int floor = random.nextInt(7) + 1;
       int number = getNextNumber(floor);
       
       // Get a random room type
@@ -57,9 +56,11 @@ public class RoomGenerator {
       int maxNumOfAmenities = Math.abs(random.nextInt() % 8);
       List<Amenity> amenities = new ArrayList<>(Arrays.asList(Amenity.values()));
       for (int j = maxNumOfAmenities; j > 0; j--) {
-        int index = Math.abs(random.nextInt() % 8);
+        int index = random.nextInt(8);
 
-        // the maxNumOfAmenities only puts an upper bound on the number, as some might be added multiple times.
+        // The maxNumOfAmenities only puts an upper bound on the number, as some might be added multiple times.
+        // This behaviour is okay, as it does not really matter what number of amenities a room has.
+        // In that case, the amenity will still only be listed once - see implementation of addAmenity.
         room.addAmenity(amenities.get(index));
       }
       rooms.add(room);
@@ -72,7 +73,7 @@ public class RoomGenerator {
    * @return A hotel room type from the HotelRoomType enum.
    */
   private static HotelRoomType getRoomType() {
-    int num = random.nextInt() % 6;
+    int num = random.nextInt(6);
     switch (num) {
       case 0:
         return HotelRoomType.Single;
@@ -87,7 +88,8 @@ public class RoomGenerator {
       case 5:
         return HotelRoomType.Penthouse;
       default:
-        return HotelRoomType.Single;
+        // This should of course never happen
+        throw new IllegalStateException("Implementation of random is broken - room type was set to a number x: x < 0 or x > 5");
     }
   }
 
@@ -117,12 +119,12 @@ public class RoomGenerator {
       room.setPrice(roundUp50(getRandomNumber(400, 700)));
       break;
     default:
-      break;
+      throw new IllegalArgumentException("Room did not have a valid room type.");
     }
   }
 
   /**
-   * Get a random number between min and max
+   * Get a random integer between min and max
    * @param min Lower bound for random number
    * @param max 
    * @return
@@ -132,7 +134,7 @@ public class RoomGenerator {
   }
 
   /**
-   * Round to ceiling 50
+   * Round to 'nearest' ceiling 50
    * @param x Number to round
    * @return Rounded number
    */
@@ -154,31 +156,11 @@ public class RoomGenerator {
    * @return An available room number
    */
   private static int getNextNumber(int floor) {
-    switch (floor) {
-      case 1:
-        one++;
-        return one;
-      case 2:
-        two++;
-        return two;
-      case 3:
-        three++;
-        return three;
-      case 4:
-        four++;
-        return four;
-      case 5:
-        five++;
-        return five;
-      case 6:
-        six++;
-        return six;
-      case 7:
-        seven++;
-        return seven;
-      default:
-        seven++;
-        return seven;
+    if (1 <= floor && floor <= 7) {
+      roomNumbers[floor-1]++;
+      return roomNumbers[floor-1];
+    } else {
+      throw new IllegalArgumentException("Floor must satisfy x: 1 ≤ x ≤ 7");
     }
   }
 }
