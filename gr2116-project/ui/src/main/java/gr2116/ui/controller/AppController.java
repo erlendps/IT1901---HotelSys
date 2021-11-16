@@ -155,12 +155,31 @@ public class AppController implements MessageListener {
     root.getChildren().add(moneyPageView);
   }
 
+  /**
+   * Returns a collection of Person objects.
+   *
+   * @return Collection of Person
+   */
   public Collection<Person> getPersons() {
     return new ArrayList<>(hotelAccess.getPersons());
   }
 
+  /**
+   * Returns the hotelAccess model.
+   *
+   * @return HotelAccess that this controller uses
+   */
   public HotelAccess getHotelAccess() {
     return hotelAccess;
+  }
+
+  /**
+   * Returns this controllers HotelPersistence.
+   *
+   * @return HotelPersistence
+   */
+  public HotelPersistence getHotelPersistence() {
+    return hotelPersistence;
   }
 
   /**
