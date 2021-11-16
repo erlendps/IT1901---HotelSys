@@ -9,8 +9,6 @@ import gr2116.ui.main.MainPageController;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
 import gr2116.ui.money.MoneyPageController;
-import gr2116.ui.access.DirectHotelAccess;
-import gr2116.ui.access.HotelAccess;
 import gr2116.ui.access.RemoteHotelAccess;
 
 import java.net.URI;
