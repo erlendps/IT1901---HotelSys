@@ -1,8 +1,7 @@
 package gr2116.RESTservice.restapi;
 
-import gr2116.core.Person;
 import gr2116.core.Hotel;
-import gr2116.core.Reservation;
+import gr2116.core.Person;
 import gr2116.persistence.HotelPersistence;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Produces;
@@ -11,9 +10,9 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
+import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.io.IOException;
 
 
 /**
@@ -51,19 +50,6 @@ public class PersonResource {
     this.username = username;
     this.hotel = hotel;
   }
-
-
-  /**
-  * Gets the corresponding person
-  *
-  * @return the corresponding person
-  */
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  public Person getPerson(){
-    LOG.debug("getPerson({})",username);
-    return this.person;
-  }
   
   /**
    * Helper method that saves the hotel.
@@ -75,15 +61,27 @@ public class PersonResource {
       } catch (IllegalStateException | IOException e) {
         System.err.println("Couldn't auto-save Hotel: " + e);
       }
-      }
     }
+  }
+
+  /**
+  * Gets the corresponding person.
+  *
+  * @return the corresponding person
+  */
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  public Person getPerson(){
+    LOG.debug("getPerson({})", username);
+    return this.person;
+  }
   
   /**
    * Adds (either replaces or adds a new instance) of the given person.
    *
    * @param person the person to be added/shall replace
    *
-   * @return true if the oldPerson was replaced, false if its a new Person
+   * @return false if the oldPerson was replaced, true if its a new Person
    */
   @PUT
   @Consumes(MediaType.APPLICATION_JSON)

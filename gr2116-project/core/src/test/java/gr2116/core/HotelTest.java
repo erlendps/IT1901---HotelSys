@@ -17,7 +17,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * Test class for Hotel class
+ * Test class for Hotel class.
  */
 public class HotelTest {
   Hotel hotel;
@@ -42,7 +42,6 @@ public class HotelTest {
     when(room1.getNumber()).thenReturn(101);
     when(room2.getNumber()).thenReturn(102);
     Hotel fullHotel = new Hotel(rooms);
-    System.out.println(fullHotel.getRooms());
     assertEquals(rooms, fullHotel.getRooms());
   }
 
@@ -63,7 +62,6 @@ public class HotelTest {
     hotel.addRoom(room2);
     assertEquals(Arrays.asList(room1, room2), hotel.getRooms());
     assertThrows(IllegalArgumentException.class, () -> hotel.addRoom(null));
-    //assertFalse(hotel.addRoom(room1));
   }
 
   @Test
@@ -95,7 +93,6 @@ public class HotelTest {
   @Test
   public void testMakeReservation() {
     HotelRoom room = mock(HotelRoom.class);
-    double balanceBefore = tom.getBalance();
     
     LocalDate start = LocalDate.now();
     LocalDate end = LocalDate.now().plusDays(1);
@@ -105,9 +102,11 @@ public class HotelTest {
     when(room.getNumber()).thenReturn(999);
     hotel.addRoom(room);
     hotel.addPerson(tom);
-    
+
+    double balanceBefore = tom.getBalance();
     hotel.makeReservation(tom, 999, start, end);
-    assertEquals(balanceBefore-room.getPrice(), tom.getBalance(), "Booking one night should cost the same as the price of the hotel room.");
+    assertEquals(balanceBefore - room.getPrice(), tom.getBalance(),
+        "Booking one night should cost the same as the price of the hotel room.");
 
     when(room.isAvailable(start.plusDays(2), start.plusDays(2))).thenReturn(true);
     when(room.getPrice(start.plusDays(2), start.plusDays(2))).thenReturn(0.0);
@@ -120,9 +119,9 @@ public class HotelTest {
         "Booking must conform to the linear passing of time."
     );
   }
+
   @Test
   public void testReservationConstistency() {
-    //HotelRoom deluxeRoom = new HotelRoom(HotelRoomType.Suite, 900); // The room is on the 9th floor.
     HotelRoom deluxeRoom = mock(HotelRoom.class);
     when(deluxeRoom.isAvailable(today, overmorrow)).thenReturn(true);
     when(deluxeRoom.getPrice(today, overmorrow)).thenReturn(900.0);
@@ -131,7 +130,8 @@ public class HotelTest {
     hotel.addPerson(tom);
 
     hotel.makeReservation(tom, 105, today, overmorrow);
-    assertEquals(1, tom.getReservationIds().size(), "User should have one reservation after booking one room.");
+    assertEquals(1, tom.getReservationIds().size(),
+        "User should have one reservation after booking one room.");
     ArrayList<Reservation> reservations = new ArrayList<Reservation>();
     tom.getReservations().forEach((r) -> reservations.add(r));
     assertEquals(deluxeRoom.getNumber(), reservations.get(0).getRoomNumber());

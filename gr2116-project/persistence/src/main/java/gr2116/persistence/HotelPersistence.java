@@ -3,16 +3,13 @@ package gr2116.persistence;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import gr2116.core.Hotel;
 import gr2116.persistence.internal.HotelModule;
-
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
 
 /**
@@ -58,7 +55,7 @@ public class HotelPersistence {
   /**
    * Returns a new instance of a ObjectMapper, registered with a HotelModule.
    *
-   * @return
+   * @return a new instance of a ObjectMapper, registered with a HotelModule
    */
   public static final ObjectMapper createObjectMapper() {
     return new ObjectMapper().registerModule(createHotelModule());

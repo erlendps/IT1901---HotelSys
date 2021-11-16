@@ -1,6 +1,7 @@
 package gr2116.ui.money;
 
 import gr2116.core.Person;
+import gr2116.ui.DynamicText;
 import gr2116.ui.access.HotelAccess;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
@@ -61,26 +62,30 @@ public class MoneyPageController {
    * 1) That all characters are digits (0-9) and the length is 16.
    * 2) That the first four digits matches a Visa or a Mastercard
    * 3) That the control digit (last digit) is correct.
+   *
    * @param cardNumber the given card number.
    */
   private void validateCardNumber(String cardNumber) {
     cardNumber = cardNumber.replaceAll(" ", "");
     if (!cardNumber.matches("[0-9]+")) {
-      throw new IllegalArgumentException("Card number must contain numbers only.");
+      throw new IllegalArgumentException(DynamicText.NonNumericCardNumberError.getMessage());
     }
     if (cardNumber.length() != 16) {
-      throw new IllegalArgumentException("Card numbers must be exactly 16 characters long.");
+      throw new IllegalArgumentException(DynamicText.WrongLengthCardNumberError.getMessage());
     }
     int first = Integer.parseInt(cardNumber.substring(0, 1));
     int firstTwo = Integer.parseInt(cardNumber.substring(0, 2));
     int firstFour = Integer.parseInt(cardNumber.substring(0, 4));
 
-    if (!(first == 4 || (51 <= firstTwo && firstTwo <= 55) || (2221 <= firstFour && firstFour <= 2720))) {
-      throw new IllegalArgumentException("The first four digits of the card number has invalid format.");
+    if (!(first == 4 || (51 <= firstTwo && firstTwo <= 55)
+        || (2221 <= firstFour && firstFour <= 2720))) {
+      throw new IllegalArgumentException(
+        DynamicText.InvalidCardIdentifierError.getMessage());
     } 
 
     if (!checkLuhnsAlgorithm(cardNumber)) {
-      throw new IllegalArgumentException("The control digit (last digit) of the card number has invalid format.");
+      throw new IllegalArgumentException(
+        DynamicText.InvalidCardControlDigitError.getMessage());
     }
   }
 
@@ -92,19 +97,19 @@ public class MoneyPageController {
    * @return whether or not the last digit of the card number is correct. 
    */
   private boolean checkLuhnsAlgorithm(String cardNumber) {
-    int nDigits = cardNumber.length();
-    int nSum = 0;
+    int numberOfDigits = cardNumber.length();
+    int checkSum = 0;
     boolean isSecond = false;
-    for (int i = nDigits - 1; i >= 0; i--) {
+    for (int i = numberOfDigits - 1; i >= 0; i--) {
       int d = cardNumber.charAt(i) - '0';
       if (isSecond == true) {
         d = d * 2;
       }
-      nSum += d / 10;
-      nSum += d % 10;
+      checkSum += d / 10;
+      checkSum += d % 10;
       isSecond = !isSecond;
     }
-    return (nSum % 10 == 0);
+    return (checkSum % 10 == 0);
   }
  
   /**
@@ -112,22 +117,23 @@ public class MoneyPageController {
    * Money can only be a posiitve integer, strictly less than one million.
    * (1 000 000)
    *
-   * @param moneyAmount
+   * @param moneyAmount the amount to validate
    * @throws IllegalArgumentException if balance is not a positive integer between 1 and 999 999.
    */
   private void validateMoneyAmount(String moneyAmount) {
     if (!moneyAmount.matches("^[0-9]+$")) {
-      throw new IllegalArgumentException("Balance must be a positive integer.");
+      throw new IllegalArgumentException(DynamicText.NonIntegerError.getMessage());
     }
     if (moneyAmount.length() > 6) {
-      throw new IllegalArgumentException("Balance must be less than 1 000 000.");
+      throw new IllegalArgumentException(DynamicText.TooLargeBalanceError.getMessage());
     }
     int money = Integer.parseInt(moneyAmount);
     if (money == 0) {
-      throw new IllegalArgumentException("Balance must be strictly greater than zero.");
+      throw new IllegalArgumentException(DynamicText.ZeroBalanceError.getMessage());
     }
     
   }
+  
   /**
    * Initialize MoneyPage. Sets action for the add funds-button.
    */

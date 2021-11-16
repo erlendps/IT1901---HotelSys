@@ -3,6 +3,7 @@ package gr2116.ui.main;
 import gr2116.core.HotelRoom;
 import gr2116.core.HotelRoomFilter;
 import gr2116.core.Person;
+import gr2116.ui.DynamicText;
 import gr2116.ui.access.HotelAccess;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
@@ -115,25 +116,16 @@ public class MainPageController implements MessageListener {
       LocalDate endDate = hotelRoomFilter.getEndDate();
 
       if (startDate == null || endDate == null) {
-        errorLabel.setText(
-            "You must choose both a start date "
-            + "and an end date to make a reservation."
-        );
+        errorLabel.setText(DynamicText.StartAndEndError.getMessage());
       } else if (!startDate.isBefore(endDate)) {
-        errorLabel.setText(
-            "You must choose an end date which is "
-            + "after the start date to make a reservation."
-        );
+        errorLabel.setText(DynamicText.TimeOrderError.getMessage());
       } else if (startDate.isBefore(LocalDate.now())) {
-        errorLabel.setText(
-            "You must choose a start date that is "
-            + "today or later to make a reservation." 
-        );
+        errorLabel.setText(DynamicText.BeforeNowError.getMessage());
       }
     }
     Collection<HotelRoom> filteredRooms = hotelAccess.getRooms(hotelRoomFilter);
 
-    // If dates are valid, add all filterd room.
+    // If dates are valid, add all filtered room.
     for (HotelRoom hotelRoom : filteredRooms) {
       HotelRoomListItem roomItem = new HotelRoomListItem(hotelRoom);
       if (hotelRoomFilter.hasValidDates()) {
@@ -159,8 +151,7 @@ public class MainPageController implements MessageListener {
         roomItem.setTotalPriceLabel(Double.toString(totalPrice));
         if (person.getBalance() < totalPrice) {
           roomItem.setOnMakeReservationButtonAction(null);
-          roomItem.setErrorLabel("You don't have enough money to "
-                                  + "make this reservation.");
+          roomItem.setErrorLabel(DynamicText.NotEnoughMoneyError.getMessage());
         }
       } else {
         roomItem.setOnMakeReservationButtonAction(null);

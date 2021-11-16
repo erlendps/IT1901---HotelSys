@@ -1,16 +1,13 @@
 package gr2116.persistence;
 
+import gr2116.core.Amenity;
+import gr2116.core.HotelRoom;
+import gr2116.core.HotelRoomType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
-
-import gr2116.core.Amenity;
-import gr2116.core.HotelRoom;
-import gr2116.core.HotelRoomType;
-
-
 
 /**
  * Class to generate rooms for demoing of the app.
@@ -141,12 +138,11 @@ public class RoomGenerator {
   private static double roundUp50(int x) {
     if (x%50 < 25) {
       return x - (x%50); 
-    }
+    } 
     else if (x%50 > 25) {
-        return x + (50 - (x%50)); 
-    }
-    else 
-        return x + 25; 
+      return x + (50 - (x%50)); 
+    } 
+    return x + 25;
   }
 
   /**

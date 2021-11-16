@@ -96,18 +96,16 @@ public class MainPageTest extends ApplicationTest{
         
         clickOn((lookup("#startDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateFrom + '\n');
         clickOn((lookup("#endDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateTo + '\n');
-        FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText("You must choose an end date which is " 
-                                                                + "after the start date to make a reservation."));
+        FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText(DynamicText.TimeOrderError.getMessage()));
 
         dateFrom = systemFormat.format(LocalDate.now().minusDays(2));
-        dateTo = systemFormat.format(LocalDate.now().plusDays(1));
+        dateTo = systemFormat.format(LocalDate.now().plusDays(1));  
         
         clickOn((lookup("#startDatePicker").queryAs(DatePicker.class)).getEditor()).eraseText(10);
         clickOn((lookup("#endDatePicker").queryAs(DatePicker.class)).getEditor()).eraseText(10);
         clickOn((lookup("#startDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateFrom + '\n');
         clickOn((lookup("#endDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateTo + '\n');
-        FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText("You must choose a start date that is "
-                                                                + "today or later to make a reservation." ));
+        FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText(DynamicText.BeforeNowError.getMessage()));
     }
 
     @Test
@@ -124,8 +122,7 @@ public class MainPageTest extends ApplicationTest{
         clickOn((lookup("#endDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateTo + '\n');
 
         FxAssert.verifyThat("#hotelRoom102TotalPriceLabel", LabeledMatchers.hasText("60.0"));
-        FxAssert.verifyThat("#hotelRoom714ErrorLabel", LabeledMatchers.hasText("You don't have enough money to "
-                                                                + "make this reservation."));
+        FxAssert.verifyThat("#hotelRoom714ErrorLabel", LabeledMatchers.hasText(DynamicText.NotEnoughMoneyError.getMessage()));
     }
 
     @Test
@@ -135,18 +132,18 @@ public class MainPageTest extends ApplicationTest{
         clickOn("#cardTextField").write("1234 5678 1234 5678");
         clickOn("#moneyAmountTextField").write("100");
         clickOn("#addFundsButton");
-        FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText("The first four digits of the card number has invalid format."));
+        FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText(DynamicText.InvalidCardIdentifierError.getMessage()));
         clickOn("#cardTextField").eraseText(19);
 
         clickOn("#cardTextField").write("4106 5778 3149 6289");
         clickOn("#moneyAmountTextField").write("100");
         clickOn("#addFundsButton");
-        FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText("The control digit (last digit) of the card number has invalid format."));
+        FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText(DynamicText.InvalidCardControlDigitError.getMessage()));
         clickOn("#cardTextField").eraseText(19);
         
         clickOn("#cardTextField").write("1");
         clickOn("#addFundsButton");
-        FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText("Card numbers must be exactly 16 characters long."));
+        FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText(DynamicText.WrongLengthCardNumberError.getMessage()));
         clickOn("#cardTextField").eraseText(1);
     }
 
@@ -157,17 +154,17 @@ public class MainPageTest extends ApplicationTest{
         clickOn("#cardTextField").write("4106 5778 3149 6288");
         clickOn("#moneyAmountTextField").write("-100");
         clickOn("#addFundsButton");
-        FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText("Balance must be a positive integer."));
+        FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText(DynamicText.NonIntegerError.getMessage()));
         
         clickOn("#moneyAmountTextField").eraseText(4);
         clickOn("#moneyAmountTextField").write("100000000");
         clickOn("#addFundsButton");
-        FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText("Balance must be less than 1 000 000."));
+        FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText(DynamicText.TooLargeBalanceError.getMessage()));
 
         clickOn("#moneyAmountTextField").eraseText(9);
         clickOn("#moneyAmountTextField").write("0");
         clickOn("#addFundsButton");
-        FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText("Balance must be strictly greater than zero."));
+        FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText(DynamicText.ZeroBalanceError.getMessage()));
     }
 
     @Test

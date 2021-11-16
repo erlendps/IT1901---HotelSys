@@ -1,7 +1,5 @@
 package gr2116.persistence.internal;
 
-import java.io.IOException;
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.TreeNode;
@@ -12,11 +10,11 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.NumericNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
-
 import gr2116.core.Amenity;
 import gr2116.core.HotelRoom;
 import gr2116.core.HotelRoomType;
 import gr2116.core.Reservation;
+import java.io.IOException;
 
 /**
  * Deserializer for HotelRoom class.
@@ -31,7 +29,8 @@ public class RoomDeserializer extends JsonDeserializer<HotelRoom> {
    */
 
   @Override
-  public HotelRoom deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+  public HotelRoom deserialize(JsonParser p, DeserializationContext ctxt)
+      throws IOException, JsonProcessingException {
     TreeNode treeNode = p.getCodec().readTree(p);
     return deserialize((JsonNode) treeNode);
   }
@@ -61,18 +60,24 @@ public class RoomDeserializer extends JsonDeserializer<HotelRoom> {
         for (JsonNode amenity : (ArrayNode) amenityNode) {
           room.addAmenity(Amenity.valueOf(amenity.asText()));
         }
-      } else return null;
+      } else {
+        return null;
+      }
       JsonNode priceNode = objectNode.get("price");
       if (priceNode instanceof NumericNode && priceNode.asDouble() >= 0) {
         room.setPrice(priceNode.asDouble());
-      } else return null;
+      } else {
+        return null;
+      }
       JsonNode reservationNode = objectNode.get("reservations");
       if (reservationNode instanceof ArrayNode) {
         for (JsonNode res : (ArrayNode) reservationNode) {
           Reservation reservation = reservationDeserializer.deserialize(res);
           room.addReservation(reservation);
         }
-      } else return null;
+      } else {
+        return null;
+      }
       return room;
     }
     return null;

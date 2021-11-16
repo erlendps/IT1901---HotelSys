@@ -2,7 +2,6 @@ package gr2116.persistence.internal;
 
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-
 import gr2116.core.Hotel;
 import gr2116.core.HotelRoom;
 import gr2116.core.Person;

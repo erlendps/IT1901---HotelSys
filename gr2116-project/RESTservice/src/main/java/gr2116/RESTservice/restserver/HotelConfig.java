@@ -3,12 +3,10 @@ package gr2116.RESTservice.restserver;
 import gr2116.RESTservice.restapi.HotelService;
 import gr2116.core.Hotel;
 import gr2116.persistence.HotelPersistence;
-
 import java.io.IOException;
-
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
-import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.jackson.JacksonFeature;
+import org.glassfish.jersey.server.ResourceConfig;
 
 /**
  * Configures the rest service,
@@ -40,18 +38,38 @@ public class HotelConfig extends ResourceConfig {
     });
   }
 
+  /**
+   * Constructor that initializes this HotelConfig with a the hotel created from
+   * the createHotel() method.
+   */
   public HotelConfig() {
     this(createHotel());
   }
 
+  /**
+   * Sets this HotelConfig's hotel.
+   *
+   * @param hotel the hotel to be set
+   */
   public void setHotel(Hotel hotel) {
     this.hotel = hotel;
   }
 
+  /**
+   * Returns the hotel.
+   *
+   * @return this hotel
+   */
   public Hotel getHotel() {
     return hotel;
   }
 
+  /**
+   * It first tries to load an already saved hotel. If this fails, hotelPersistence will
+   * return a default (random) empty hotel initiated with 30 or so rooms.
+   *
+   * @return hotel
+   */
   public static Hotel createHotel() {
     HotelPersistence hotelPersistence = new HotelPersistence("data");
     try {

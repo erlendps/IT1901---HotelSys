@@ -9,9 +9,6 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-
-import java.time.LocalDate;
-
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -95,14 +92,14 @@ public class FilterPanelController {
     startDatePicker.setDayCellFactory(param -> new DateCell() {
       public void updateItem(LocalDate date, boolean empty) {
         super.updateItem(date, empty);
-        setDisable(empty || date.compareTo(LocalDate.now()) < 0 );
+        setDisable(empty || date.compareTo(LocalDate.now()) < 0);
       }
     });
 
     endDatePicker.setDayCellFactory(param -> new DateCell() {
       public void updateItem(LocalDate date, boolean empty) {
         super.updateItem(date, empty);
-        setDisable(empty || date.compareTo(LocalDate.now()) < 0 );
+        setDisable(empty || date.compareTo(LocalDate.now()) < 0);
       }
     });
 
@@ -149,14 +146,14 @@ public class FilterPanelController {
      * Constructor, specify which amenity this is a checkbox for.
      */
     AmenityCheckBox(final Amenity amenity) {
+      getChildren().add(checkBox);
       Label label = new Label(amenity.getName());
+      getChildren().add(label);
       checkBox.selectedProperty().addListener((obs, oldValue, newValue) -> {
         amenities.put(amenity, newValue);
         notifyListeners();
       });
       checkBox.setId("amenity" + amenity.toString().replace(" ", ""));
-      getChildren().add(checkBox);
-      getChildren().add(label);
     }
 
     /**

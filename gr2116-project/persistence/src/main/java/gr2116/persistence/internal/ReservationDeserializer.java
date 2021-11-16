@@ -1,8 +1,5 @@
 package gr2116.persistence.internal;
 
-import java.io.IOException;
-import java.time.LocalDate;
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.TreeNode;
@@ -12,9 +9,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.NumericNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
-
 import gr2116.core.HotelRoom;
 import gr2116.core.Reservation;
+import java.io.IOException;
+import java.time.LocalDate;
 
 /**
  * Deserializer for Reservation class.
@@ -60,8 +58,10 @@ public class ReservationDeserializer extends JsonDeserializer<Reservation> {
       } catch (Exception e) {
         return null;
       }
-      Reservation reservation = new Reservation(new HotelRoom(roomNode.asInt()), LocalDate.parse(startNode.asText()),
-          LocalDate.parse(endNode.asText()));
+      Reservation reservation = new Reservation(
+          new HotelRoom(roomNode.asInt()), LocalDate.parse(startNode.asText()),
+          LocalDate.parse(endNode.asText())
+      );
       JsonNode idNode = objectNode.get("id");
       if (reservation.getId().equals(idNode.asText())) {
         return reservation;
