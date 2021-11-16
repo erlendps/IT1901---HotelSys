@@ -8,5 +8,6 @@
         <fx:include fx:id="loginPageView" source="LoginPage.fxml"/>
         <fx:include fx:id="mainPageView" source="MainPage.fxml"/>
         <fx:include fx:id="moneyPageView" source="MoneyPage.fxml"/>
+        <fx:include fx:id="remoteErrorPageView" source="RemoteErrorPage.fxml"/>
     </children>
 </StackPane>
