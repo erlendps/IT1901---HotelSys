@@ -6,6 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Remote FXML Application, the booking system application.
+ */
 public class RemoteApp extends Application {
   
   /**

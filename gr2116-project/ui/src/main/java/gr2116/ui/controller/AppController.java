@@ -9,6 +9,7 @@ import gr2116.ui.main.MainPageController;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
 import gr2116.ui.money.MoneyPageController;
+import gr2116.ui.remoteerror.RemoteErrorPageController;
 import gr2116.ui.access.RemoteHotelAccess;
 
 import java.net.URI;
@@ -50,6 +51,12 @@ public class AppController implements MessageListener {
   private StackPane moneyPageView;
 
   @FXML
+  private RemoteErrorPageController remoteErrorPageViewController;
+
+  @FXML
+  private StackPane remoteErrorPageView;
+
+  @FXML
   private StackPane root;
 
   /**
@@ -61,6 +68,7 @@ public class AppController implements MessageListener {
     loginPageViewController.addListener(this);
     mainPageViewController.addListener(this);
     moneyPageViewController.addListener(this);
+    remoteErrorPageViewController.addListener(this);
     if (endpointUri != null) {
       RemoteHotelAccess remoteHotelAccess;
       try {
@@ -78,8 +86,12 @@ public class AppController implements MessageListener {
       hotelAccess = directHotelAccess;
       System.out.println("Using DirectHotelAccess as access model.");
     }
-    load();
-    moveToLoginPage();
+    try {
+      load();
+      moveToLoginPage();
+    } catch (RuntimeException e) {
+      moveToRemoteErrorPage();
+    }
   }
 
   @Override
@@ -97,6 +109,13 @@ public class AppController implements MessageListener {
     } else if (message == Message.MoneyPage && data instanceof Person) {
       Person person = (Person) data;
       moveToMoneyPage(person);
+    } else if (message == Message.Reconnect) {
+      try {
+        load();
+        moveToLoginPage();
+      } catch (RuntimeException e) {
+        remoteErrorPageViewController.incrementFailures();
+      }
     }
   }
 
@@ -153,6 +172,14 @@ public class AppController implements MessageListener {
     moneyPageViewController.setPerson(person);
     moneyPageViewController.setHotelAccess(hotelAccess);
     root.getChildren().add(moneyPageView);
+  }
+
+  /**
+   * Moves to the RemoteErrorPage. This page is loaded if there is an error with the REST API.
+   */
+  public void moveToRemoteErrorPage() {
+    root.getChildren().clear();
+    root.getChildren().add(remoteErrorPageView);
   }
 
   /**

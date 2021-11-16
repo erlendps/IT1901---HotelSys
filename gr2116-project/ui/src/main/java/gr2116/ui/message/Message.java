@@ -8,5 +8,6 @@ public enum Message {
   SignIn,
   SignOut,
   Filter,
-  MoneyPage
+  MoneyPage,
+  Reconnect
 }
