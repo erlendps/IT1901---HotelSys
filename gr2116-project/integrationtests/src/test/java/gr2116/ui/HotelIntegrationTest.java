@@ -23,26 +23,26 @@ import gr2116.ui.access.RemoteHotelAccess;
 
 public class HotelIntegrationTest extends ApplicationTest {
 
-    AppController appController;
-    HotelPersistence hotelPersistence;
+  AppController appController;
+  HotelPersistence hotelPersistence;
 
-    @Start
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("App.fxml"));
-        Parent parent = fxmlLoader.load();
-        appController = (AppController) fxmlLoader.getController();
-        appController.setPrefix("test");
-        appController.load();
-        stage.setScene(new Scene(parent));
-        stage.show();
-    }
+  @Start
+  public void start(Stage stage) throws IOException {
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("AppIT.fxml"));
+    Parent parent = fxmlLoader.load();
+    appController = (AppController) fxmlLoader.getController();
+    appController.setPrefix("test");
+    stage.setScene(new Scene(parent));
+    stage.show();
+  }
 
-    @BeforeEach
-    public void setUp() throws URISyntaxException {
-        URI baseUri = new URI("http://localhost:8080/rest/hotel");
-        System.out.println("Base RemoteTodoModelAcces URI: " + baseUri);
-        appController.setHotelAccess(new RemoteHotelAccess(hotelPersistence,baseUri));
-    }
+  @BeforeEach
+  public void setUp() throws URISyntaxException {
+    URI baseUri = new URI("http://localhost:8080/rest/hotel");
+    System.out.println("Base Hotel URI: " + baseUri);
+    appController.setHotelAccess(new RemoteHotelAccess(appController.getHotelPersistence(), baseUri));
+    appController.load();
+  }
 
     @Test
     public void testController_initial(){

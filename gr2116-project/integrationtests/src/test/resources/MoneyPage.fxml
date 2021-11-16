@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="Infinity" maxWidth="Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gr2116.ui.money.MoneyPageController">
+   <children>
+      <StackPane layoutX="93.0" layoutY="34.0" prefHeight="267.0" prefWidth="440.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="257.0" prefWidth="510.0">
+               <children>
+                  <Label fx:id="moneyErrorLabel" alignment="TOP_CENTER" textFill="RED" />
+                  <Label text="Card number" />
+                  <TextField fx:id="cardTextField" maxWidth="500.0" />
+                  <Label fx:id="nameTitleLabel" text="Amount" />
+                  <TextField fx:id="moneyAmountTextField" maxWidth="300.0" prefHeight="26.0" prefWidth="300.0" />
+                  <Separator prefHeight="30.0" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                     <children>
+                        <Button fx:id="moneyCancelButton" mnemonicParsing="false" text="Cancel" />
+                        <Button fx:id="addFundsButton" mnemonicParsing="false" text="Add funds" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="usernameErrorLabel" />
+               </children>
+               <StackPane.margin>
+                  <Insets left="200.0" right="200.0" />
+               </StackPane.margin>
+            </VBox>
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>
