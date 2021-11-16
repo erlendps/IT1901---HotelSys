@@ -3,7 +3,6 @@ package gr2116.ui.main;
 import gr2116.core.HotelRoom;
 import gr2116.core.HotelRoomFilter;
 import gr2116.core.Person;
-import gr2116.core.PersonListener;
 import gr2116.ui.access.HotelAccess;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
@@ -19,7 +18,7 @@ import javafx.scene.paint.Color;
 /**
  * Main page, which contains the main panel for booking hotel nights.
  */
-public class MainPageController implements MessageListener, PersonListener {
+public class MainPageController implements MessageListener {
   private HotelAccess hotelAccess;
   private HotelRoomFilter hotelRoomFilter
       = new HotelRoomFilter(null, null, null, null, null);
@@ -79,11 +78,7 @@ public class MainPageController implements MessageListener, PersonListener {
     if (person == null) {
       throw new IllegalArgumentException("Person is null.");
     }
-    if (this.person != null) {
-      this.person.removeListener(this);
-    }
     this.person = person;
-    person.addListener(this);
     userPanelViewController.setPerson(person);
     if (hotelAccess != null) {
       buildRoomList();
@@ -146,6 +141,7 @@ public class MainPageController implements MessageListener, PersonListener {
                               hotelRoomFilter.getStartDate(),
                               hotelRoomFilter.getEndDate());
         roomItem.setOnMakeReservationButtonAction((event) -> {
+          // surrounded in a try/catch to handle the event that the room has already been booked
           try {
           hotelAccess.makeReservation(
               person,
@@ -195,15 +191,12 @@ public class MainPageController implements MessageListener, PersonListener {
     }
   }
 
-  @Override
-  public void onPersonChanged(Person person) {
-    buildRoomList();
-  }
-
   /**
    * Add a listener to the main page.
    *
    * @param listener The listener to be added
+   *
+   * @throws IllegalArgumentException if the listener is null
    */
   public final void addListener(final MessageListener listener) {
     if (listener == null) {
