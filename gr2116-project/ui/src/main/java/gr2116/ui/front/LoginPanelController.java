@@ -26,6 +26,8 @@ public class LoginPanelController {
 
   @FXML
   private void loginButtonOnAction() {
+    setErrorLabel("");
+    
     String username = usernameTextField.getText();
     if (!Person.isValidUsername(username)) {
       setErrorLabel(DynamicText.InvalidUsername.getMessage());

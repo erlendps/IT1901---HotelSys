@@ -30,9 +30,23 @@ public class SignUpPanelController {
 
   @FXML
   private void signUpButtonOnAction() {
+    setErrorLabel("");
+    
     String username = usernameTextField.getText();
     if (!Person.isValidUsername(username)) {
       setErrorLabel(DynamicText.InvalidUsername.getMessage());
+      return;
+    }
+    
+    String firstName = firstNameTextField.getText();
+    if (!Person.isValidName(firstName)) {
+      setErrorLabel(DynamicText.InvalidFirstName.getMessage());
+      return;
+    }
+    
+    String lastName = lastNameTextField.getText();
+    if (!Person.isValidName(lastName)) {
+      setErrorLabel(DynamicText.InvalidLastName.getMessage());
       return;
     }
     
@@ -41,19 +55,7 @@ public class SignUpPanelController {
       setErrorLabel(DynamicText.InvalidPassword.getMessage());
       return;
     }
-
-    String firstName = firstNameTextField.getText();
-    if (!Person.isValidName(firstName)) {
-      setErrorLabel(DynamicText.InvalidFirstName.getMessage());
-      return;
-    }
-
-    String lastName = lastNameTextField.getText();
-    if (!Person.isValidName(lastName)) {
-      setErrorLabel(DynamicText.InvalidLastName.getMessage());
-      return;
-    }
-
+    
     Person person = new Person(username);
     person.setFirstName(firstName);
     person.setLastName(lastName);

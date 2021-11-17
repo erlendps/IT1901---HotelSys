@@ -25,7 +25,8 @@ public enum DynamicText {
   InvalidLastName("The last name is invalid."),
   InvalidPassword("The password is invalid."),
   UsernameTaken("The username is taken."),
-  UsernameHasNoMatches("The username does not match an existing user.");
+  UsernameHasNoMatches("The username does not match an existing user."),
+  WrongPassword("Incorrect password.");
 
   private final String message;
 

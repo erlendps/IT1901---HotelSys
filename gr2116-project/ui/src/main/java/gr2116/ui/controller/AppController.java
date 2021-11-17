@@ -120,6 +120,11 @@ public class AppController implements MessageListener {
             .setErrorLabel(DynamicText.UsernameHasNoMatches.getMessage());
         return;
       }
+      if (!person.getHashedPassword().equals(dataPerson.getHashedPassword())) {
+        frontPageViewController.getLoginPanelViewController()
+            .setErrorLabel(DynamicText.WrongPassword.getMessage());
+        return;
+      }
       moveToMainPage(person);
     } else if (message == Message.SignOut) {
       save();

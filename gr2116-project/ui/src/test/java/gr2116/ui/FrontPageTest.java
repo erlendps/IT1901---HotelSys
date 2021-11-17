@@ -52,8 +52,13 @@ public class FrontPageTest extends ApplicationTest {
     FxAssert.verifyThat("#errorLabel",
         LabeledMatchers.hasText(DynamicText.InvalidLastName.getMessage()));
     clickOn("#lastNameTextField").write("Spark");
-    // TODO: add tests for password.
     clickOn("#signUpButton");
+    FxAssert.verifyThat("#errorLabel",
+        LabeledMatchers.hasText(DynamicText.InvalidPassword.getMessage()));
+    clickOn("#passwordTextField").write("password123");
+    clickOn("#signUpButton");
+    FxAssert.verifyThat("#nameLabel",
+        LabeledMatchers.hasText("Jonathan Spark"));
   }
 
   @Test
@@ -64,8 +69,21 @@ public class FrontPageTest extends ApplicationTest {
     clickOn("#loginButton");
     FxAssert.verifyThat("#errorLabel",
         LabeledMatchers.hasText(DynamicText.InvalidUsername.getMessage()));
-    clickOn("#usernameTextField").write("tom");
-    // TODO: add tests for password.
+    clickOn("#usernameTextField").write("thomas");
     clickOn("#loginButton");
+    FxAssert.verifyThat("#errorLabel",
+        LabeledMatchers.hasText(DynamicText.InvalidPassword.getMessage()));
+    clickOn("#passwordTextField").write("password1234");
+    clickOn("#loginButton");
+    FxAssert.verifyThat("#errorLabel",
+        LabeledMatchers.hasText(DynamicText.UsernameHasNoMatches.getMessage()));
+    clickOn("#usernameTextField").eraseText(6).write("tom"); 
+    clickOn("#loginButton");
+    FxAssert.verifyThat("#errorLabel",
+        LabeledMatchers.hasText(DynamicText.WrongPassword.getMessage()));
+    clickOn("#passwordTextField").eraseText(1);
+    clickOn("#loginButton");
+    FxAssert.verifyThat("#nameLabel",
+        LabeledMatchers.hasText("Tom Hanks"));
   }
 }
