@@ -179,11 +179,10 @@
         <artifactId>maven-checkstyle-plugin</artifactId>
       </plugin>
 
-      <!-- run spotbugs plugin 
       <plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
-      </plugin> -->
+      </plugin>
 
       <!-- JaCoCo for Maven test coverage --> 
       <plugin>
