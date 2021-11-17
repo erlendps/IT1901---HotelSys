@@ -1,6 +1,7 @@
 package gr2116.ui.front;
 
 import gr2116.core.Person;
+import gr2116.ui.DynamicText;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
 import java.util.Collection;
@@ -31,25 +32,25 @@ public class SignUpPanelController {
   private void signUpButtonOnAction() {
     String username = usernameTextField.getText();
     if (!Person.isValidUsername(username)) {
-      setErrorLabel("Invalid username!");
+      setErrorLabel(DynamicText.InvalidUsername.getMessage());
       return;
     }
     
     String password = passwordTextField.getText();
     if (!Person.isValidPassword(password)) {
-      setErrorLabel("Invalid password!");
+      setErrorLabel(DynamicText.InvalidPassword.getMessage());
       return;
     }
 
     String firstName = firstNameTextField.getText();
     if (!Person.isValidName(firstName)) {
-      setErrorLabel("Invalid first name!");
+      setErrorLabel(DynamicText.InvalidFirstName.getMessage());
       return;
     }
 
     String lastName = lastNameTextField.getText();
     if (!Person.isValidName(lastName)) {
-      setErrorLabel("Invalid last name!");
+      setErrorLabel(DynamicText.InvalidLastName.getMessage());
       return;
     }
 

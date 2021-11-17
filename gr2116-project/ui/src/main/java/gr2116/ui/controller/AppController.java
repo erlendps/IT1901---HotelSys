@@ -2,6 +2,7 @@ package gr2116.ui.controller;
 
 import gr2116.core.Person;
 import gr2116.persistence.HotelPersistence;
+import gr2116.ui.DynamicText;
 import gr2116.ui.access.DirectHotelAccess;
 import gr2116.ui.access.HotelAccess;
 import gr2116.ui.main.MainPageController;
@@ -104,7 +105,7 @@ public class AppController implements MessageListener {
           ).findAny().orElse(null);
       if (person != null) {
         frontPageViewController.getSignUpPanelViewController()
-            .setErrorLabel("The username is taken.");
+            .setErrorLabel(DynamicText.UsernameTaken.getMessage());
         return;
       }
       hotelAccess.addPerson(dataPerson);
@@ -116,7 +117,7 @@ public class AppController implements MessageListener {
           ).findAny().orElse(null);
       if (person == null) {
         frontPageViewController.getLoginPanelViewController()
-            .setErrorLabel("The username is not in use.");
+            .setErrorLabel(DynamicText.UsernameHasNoMatches.getMessage());
         return;
       }
       moveToMainPage(person);
