@@ -7,42 +7,34 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class PersonTest {
-  private Person person;
-  private Person tom;
 
   @BeforeEach
   public final void setup() {
-    person = new Person("MrGameandWatch");
-    tom = new Person("TomHaddleford");
-    tom.addBalance(1000);
   }
 
-  // TODO: change tests, username is final, name is not.
-  // @Test
-  // public void testSetUsername() {
-  //   assertThrows(IllegalArgumentException.class, () -> {
-  //     person.setUsername("yolo!");
-  //   });
-  //   assertThrows(IllegalArgumentException.class, () -> {
-  //     person.setUsername("y sdf");
-  //   });
-  //   assertThrows(IllegalArgumentException.class, () -> {
-  //     person.setUsername("yolo_K");
-  //   });
-  //   assertThrows(IllegalArgumentException.class, () -> {
-  //     person.setUsername("yolo(23");
-  //   });
-  //   assertThrows(IllegalArgumentException.class, () -> {
-  //     person.setUsername(null);
-  //   });
-  //   person.setUsername("yolonoob");
-  //   assertEquals("yolonoob", person.getUsername());
-  //   tom.setUsername("tom");
-  //   assertEquals("tom", tom.getUsername());
-  // }
+  @Test
+  public void testUsername() {
+    assertThrows(IllegalArgumentException.class, () -> {
+      new Person("yolo!");
+    });
+    assertThrows(IllegalArgumentException.class, () -> {
+      new Person("y sdf");
+    });
+    assertThrows(IllegalArgumentException.class, () -> {
+      new Person("yolo(23");
+    });
+    assertThrows(IllegalArgumentException.class, () -> {
+      new Person(null);
+    });
+    Person person;
+    person = new Person("yolonoob");
+    assertEquals("yolonoob", person.getUsername());
+    person = new Person("tom");
+    assertEquals("tom", person.getUsername());
+  }
 
   @Test
-  public void testName() {
+  public void testName() { //TODO: extend test
     assertThrows(IllegalArgumentException.class, () -> new Person(""));
   }
 }

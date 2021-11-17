@@ -126,6 +126,9 @@ public class AppController implements MessageListener {
     } else if (message == Message.MoneyPage && data instanceof Person) {
       Person person = (Person) data;
       moveToMoneyPage(person);
+    } else if (message == Message.MainPage && data instanceof Person) {
+      Person person = (Person) data;
+      moveToMainPage(person);
     } else if (message == Message.Reconnect) {
       try {
         load();

@@ -42,7 +42,7 @@ public class Person {
    */
   public Person(final String username) {
     if (!isValidUsername(username)) {
-      throw new IllegalArgumentException("The name is not valid");
+      throw new IllegalArgumentException("The username is not valid");
     }
     this.username = username;
   }

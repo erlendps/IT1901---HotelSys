@@ -15,7 +15,7 @@
         </ScrollPane>
         <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
             <children>
-                <Label fx:id="errorLabel" wrapText="true"/>
+                <Label fx:id="errorLabel" wrapText="true" textFill="RED" />
                 <fx:include fx:id="filterPanelView" source="FilterPanel.fxml"/>
             </children>
         </VBox>
