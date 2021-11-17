@@ -43,6 +43,10 @@ public class PersonDeserializer extends JsonDeserializer<Person> {
         return null;
       }
       person = new Person(usernameNode.asText());
+      JsonNode passwordNode = objectNode.get("password");
+      if (passwordNode instanceof TextNode) {
+        person.setHashedPassword(passwordNode.asText());
+      }
       JsonNode firstNameNode = objectNode.get("firstName");
       if (firstNameNode instanceof TextNode) {
         person.setFirstName(firstNameNode.asText());

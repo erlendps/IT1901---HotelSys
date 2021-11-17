@@ -127,20 +127,32 @@ public class Person {
     if (password == null) {
       return false;
     }
-    return true; // TODO: implement password verification
+    if (password.length() < 6) {
+      return false;
+    }
+    if (PasswordUtil.hashPassword(password) == null) {
+      return false;
+    }
+    return true;
   }
 
   public void setPassword(String password) {
     if (!isValidPassword(password)) {
       throw new IllegalArgumentException("Invalid password!");
     }
-    this.password = password;
+    this.password = PasswordUtil.hashPassword(password);
   }
 
-  public String getPasswordHash() {
-    return password; // TODO: hash the password.
+  public void setHashedPassword(String hashed) {
+    if (password != null) {
+      throw new IllegalStateException("Cannot override a password with a hash.");
+    }
+    password = hashed;
   }
 
+  public String getHashedPassword() {
+    return password;
+  }
 
 
   /**

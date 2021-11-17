@@ -1,6 +1,7 @@
 package gr2116.ui.front;
 
 import gr2116.core.Person;
+import gr2116.ui.DynamicText;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
 import java.util.Collection;
@@ -29,30 +30,32 @@ public class SignUpPanelController {
 
   @FXML
   private void signUpButtonOnAction() {
+    setErrorLabel("");
+    
     String username = usernameTextField.getText();
     if (!Person.isValidUsername(username)) {
-      setErrorLabel("Invalid username!");
+      setErrorLabel(DynamicText.InvalidUsername.getMessage());
+      return;
+    }
+    
+    String firstName = firstNameTextField.getText();
+    if (!Person.isValidName(firstName)) {
+      setErrorLabel(DynamicText.InvalidFirstName.getMessage());
+      return;
+    }
+    
+    String lastName = lastNameTextField.getText();
+    if (!Person.isValidName(lastName)) {
+      setErrorLabel(DynamicText.InvalidLastName.getMessage());
       return;
     }
     
     String password = passwordTextField.getText();
     if (!Person.isValidPassword(password)) {
-      setErrorLabel("Invalid password!");
+      setErrorLabel(DynamicText.InvalidPassword.getMessage());
       return;
     }
-
-    String firstName = firstNameTextField.getText();
-    if (!Person.isValidName(firstName)) {
-      setErrorLabel("Invalid first name!");
-      return;
-    }
-
-    String lastName = lastNameTextField.getText();
-    if (!Person.isValidName(lastName)) {
-      setErrorLabel("Invalid last name!");
-      return;
-    }
-
+    
     Person person = new Person(username);
     person.setFirstName(firstName);
     person.setLastName(lastName);

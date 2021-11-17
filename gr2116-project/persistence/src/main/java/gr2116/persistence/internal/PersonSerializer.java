@@ -31,6 +31,9 @@ public class PersonSerializer extends JsonSerializer<Person> {
     if (person.getLastName() != null) {
       gen.writeStringField("lastName", person.getLastName());
     }
+    if (person.getHashedPassword() != null) {
+      gen.writeStringField("password", person.getHashedPassword());
+    }
     gen.writeNumberField("balance", person.getBalance());
     gen.writeArrayFieldStart("reservations");
     for (Reservation res : person.getReservations()) {

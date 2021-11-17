@@ -37,6 +37,8 @@ public class HotelPersistenceTest {
     rick.setFirstName("Richard");
     kyle.setFirstName("Kyle");
     tom.setFirstName("Tom");
+    tom.setLastName("Hanks");
+    tom.setPassword("password123");
 
     rick.addBalance(1000);
     kyle.addBalance(144);
