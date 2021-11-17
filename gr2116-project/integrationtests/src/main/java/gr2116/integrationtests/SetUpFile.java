@@ -18,12 +18,20 @@ public class SetUpFile {
   public static void main(String[] args) {
     HotelPersistence hotelPersistence = new HotelPersistence("testIt");
     // set up data
-    Person rick = new Person("Richard");
-    Person kyle = new Person("Kyllard");
-    Person tom = new Person("Tom");
-    rick.setUsername("richard");
-    kyle.setUsername("kyle");
-    tom.setUsername("tom");
+    Person rick = new Person("rick");
+    Person kyle = new Person("kyle");
+    Person tom = new Person("tom");
+    rick.setFirstName("Richard");
+    rick.setLastName("Willy");
+    rick.setPassword("bananas");
+
+    kyle.setFirstName("Kyllard");
+    kyle.setLastName("Smarting");
+    kyle.setPassword("owingyou1");
+
+    tom.setFirstName("Thomas");
+    tom.setLastName("Wonka");
+    kyle.setPassword("blueballing");
 
     rick.addBalance(1000);
     kyle.addBalance(144);

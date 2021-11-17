@@ -53,10 +53,13 @@ public class HotelIT extends ApplicationTest {
 
   @Test
   public void testLogin() {
-    FxAssert.verifyThat("#signInButton", LabeledMatchers.hasText("Sign in"));
+    FxAssert.verifyThat("#startLoginButton", LabeledMatchers.hasText("Login"));
+    clickOn("#startLoginButton");
     clickOn("#usernameTextField").write("tom");
-    clickOn("#signInButton");
+    clickOn("#passwordTextField").write("blueballing");
+    clickOn("#loginButton");
     FxAssert.verifyThat("#usernameLabel", LabeledMatchers.hasText("tom"));
+    FxAssert.verifyThat("#nameLabel", LabeledMatchers.hasText("Thomas Wonka"));
   }
 
   @AfterAll

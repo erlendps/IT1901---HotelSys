@@ -40,8 +40,7 @@
          <children>
             <Button fx:id="makeReservationButton" mnemonicParsing="false" text="Button" />
             <Label fx:id="errorLabel" alignment="TOP_LEFT" maxWidth="138.0"
-            prefWidth="138.0" text="Label" textOverrun="CLIP" wrapText="true"
-            textFill="RED" >
+            prefWidth="138.0" text="Label" textOverrun="CLIP" wrapText="true" textFill="RED" >
                <VBox.margin>
                   <Insets top="6.0" />
                </VBox.margin>
