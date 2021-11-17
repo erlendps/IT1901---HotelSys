@@ -2,8 +2,8 @@
 @startuml
 
 class HotelService {
-    - String HOTEL_MODEL_SERVICE_PATH
-    - Logger LOG
+    - {static} String HOTEL_MODEL_SERVICE_PATH
+    - {static} Logger LOG
     - Hotel hotel
     - HotelPersictence hotelPersictence 
 
@@ -13,7 +13,7 @@ class HotelService {
 }
 
 class PersonResource {
-    - Logger LOG 
+    - {static} Logger LOG 
     - String username;
     - Person person;
     - Hotel hotel;
@@ -28,7 +28,7 @@ class PersonResource {
 }
 
 class RoomResource{
-    - Logger LOG
+    - {static} Logger LOG
     - HotelRoom room
     - HotelPersistence hotelPersistence
 
@@ -48,7 +48,7 @@ class HotelConfig{
     + HotelConfig() 
     + void setHotel(Hotel)
     + Hotel getHotel()
-    + Hotel createHotel()
+    + {static} Hotel createHotel()
 }
 
 class HotelITConfig{
@@ -59,7 +59,7 @@ class HotelITConfig{
     + HotelITConfig()
     + void setHotel(Hotel)
     + Hotel getHotel()
-    + Hotel createHotel()
+    + {static} Hotel createHotel()
 }
 
 class HotelModuleObjectMapperProvider{
