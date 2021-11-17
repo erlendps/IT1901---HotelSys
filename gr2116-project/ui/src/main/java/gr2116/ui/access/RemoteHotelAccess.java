@@ -75,7 +75,7 @@ public class RemoteHotelAccess implements HotelAccess {
   private Hotel getHotel() {
     if (hotel == null) {
       HttpRequest request = HttpRequest.newBuilder(endpointBaseUri)
-          .header("Accepct", "application/json")
+          .header("Accept", "application/json")
           .GET()
           .build();
       try {
@@ -99,7 +99,7 @@ public class RemoteHotelAccess implements HotelAccess {
    */
   public void updateHotel() {
     HttpRequest request = HttpRequest.newBuilder(endpointBaseUri)
-        .header("Accepct", "application/json")
+        .header("Accept", "application/json")
         .GET()
         .build();
     try {

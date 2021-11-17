@@ -4,6 +4,7 @@ module gr2116.RESTservice {
   requires jersey.common;
   requires jersey.server;
   requires jersey.media.json.jackson;
+  requires java.net.http;
 
   requires org.glassfish.hk2.api;
   requires org.slf4j;
@@ -12,4 +13,5 @@ module gr2116.RESTservice {
   requires gr2116.persistence;
 
   opens gr2116.RESTservice.restapi to jersey.server;
+  opens gr2116.RESTservice.restserver;
 }
