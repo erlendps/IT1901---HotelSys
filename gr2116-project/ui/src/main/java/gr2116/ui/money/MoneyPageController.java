@@ -127,7 +127,7 @@ public class MoneyPageController {
     if (moneyAmount.length() > 6) {
       throw new IllegalArgumentException(DynamicText.TooLargeBalanceError.getMessage());
     }
-    int money = Integer.parseInt(moneyAmount);
+    double money = Double.parseDouble(moneyAmount);
     if (money == 0) {
       throw new IllegalArgumentException(DynamicText.ZeroBalanceError.getMessage());
     }
