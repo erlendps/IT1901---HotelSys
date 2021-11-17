@@ -68,6 +68,15 @@ class HotelModuleObjectMapperProvider{
     + ObjectMapper getContext(final Class<?>)
 }
 
+interface "ResourceConfig"{
+}
+
+interface "ContextResolver<ObjectMapper>"{ 
+}
+
+HotelConfig ..|> "ResourceConfig"
+HotelITConfig ..|> "ResourceConfig"
+HotelModuleObjectMapperProvider ..|> "ContextResolver<ObjectMapper>"
 
 @enduml
 ```
