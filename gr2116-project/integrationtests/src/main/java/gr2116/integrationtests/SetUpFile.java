@@ -31,11 +31,11 @@ public class SetUpFile {
 
     tom.setFirstName("Thomas");
     tom.setLastName("Wonka");
-    kyle.setPassword("blueballing");
+    tom.setPassword("blueballing");
 
     rick.addBalance(1000);
     kyle.addBalance(400);
-    tom.addBalance(1000000000);
+    tom.addBalance(10000);
 
     Collection<Person> persons = new ArrayList<Person>();
     persons.add(rick);
