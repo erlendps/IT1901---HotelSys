@@ -9,7 +9,7 @@
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>jakarta.ws.rs.Application</param-name>
-            <param-value>gr2116.RESTservice.restserver.HotelConfig</param-value>
+            <param-value>gr2116.RESTservice.restserver.HotelITConfig</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
