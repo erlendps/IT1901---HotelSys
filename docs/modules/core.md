@@ -67,7 +67,7 @@ class HotelRoomFilter{
 
 class PasswordUtil{
     - {static} byte[] salt
-    
+
     + {static} String hashPassword(String)
 }
 
@@ -146,6 +146,9 @@ interface "Iterable<HotelRoom>" {
 interface "Iterable<LocalDate>" {
 }
 
+interface "Predicate<HotelRoom>"{
+}
+
 enum HotelRoomType {
     - String name
     - String description
@@ -173,6 +176,7 @@ HotelRoom --> "1" HotelRoomType : roomType
 HotelRoom --> "1" ReservationCalendar : calendar
 HotelRoomFilter --> "1" HotelRoomType : roomType
 HotelRoomFilter --> "n" Amenity : amenities
+HotelRoomFilter ..|> "Predicate<HotelRoom>"
 ReservationCalendar --> "n" Reservation : reservations
 ReservationCalendar ..|> "Iterable<Reservation>"
 Reservation ..|> "Iterable<LocalDate>"
