@@ -222,7 +222,7 @@ public class AppController implements MessageListener {
    * Files might have been modified, as users might have been created 
    * or bookings might have been made.
    */
-  private void save() {
+  public void save() {
     hotelAccess.saveHotel();
   }
 
