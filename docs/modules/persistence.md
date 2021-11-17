@@ -25,6 +25,35 @@ class Saver {
     + void writeToFile(Collection<HotelRoom>, Collection<Person>, Collection<Reservation>)
 }
 
+class HotelPersistence{
+    - ObjectMapper mapper
+    - {static} String DATA_FOLDER;
+    - String prefix
+
+    + HotelPersistence()
+    + HotelPersistence(String)
+    + {static} HotelModule createHotelModule()
+    + {static} ObjectMapper createObjectMapper()
+    - Hotel readHotel(Reader)
+    - writeHotel(Hotel, Writer)
+    + Hotel loadHotel() 
+    + saveHotel(Hotel)
+    + setPrefix(String)
+}
+
+class RoomGenrator {
+    - {static} Random random
+    - {static} int[] roomNumbers
+
+    + RoomGenerator()
+    + {static} Collection<HotelRoom> generateRooms(int)
+    + {static} HotelRoomType getRoomType()
+    + {static} void setPrice(HotelRoom) 
+    + {static} int getRandomNumber(int, int)
+    + {static} double roundUp50(int)
+    + {static} int getNextNumber(int)
+}
+
 class Person {
     see core module
 }
