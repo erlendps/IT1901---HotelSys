@@ -13,5 +13,5 @@ module gr2116.RESTservice {
   requires gr2116.persistence;
 
   opens gr2116.RESTservice.restapi to jersey.server;
-  opens gr2116.RESTservice.restserver;
+  opens gr2116.RESTservice.restserver to jersey.server;
 }
