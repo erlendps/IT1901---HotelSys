@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<StackPane maxHeight="Infinity" maxWidth="Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gr2116.ui.front.FrontPageController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="257.0" prefWidth="510.0">
+         <children>
+            <Label text="HotelSys">
+               <font>
+                  <Font name="Verdana Bold" size="32.0" />
+               </font>
+            </Label>
+            <Separator prefHeight="50.0" />
+            <VBox fx:id="panelContainer">
+               <children>
+                  <VBox fx:id="defaultPanel" alignment="CENTER" spacing="20.0">
+                     <children>
+                        <Label text="Welcome to HotelSys!" wrapText="true" />
+                        <Label text="Sign up or log in to make or access your reservations." wrapText="true" />
+                        <HBox alignment="CENTER" spacing="20.0">
+                           <children>
+                              <Button mnemonicParsing="false" text="Sign up" onAction="#startSignUpButtonOnAction" />
+                              <Button mnemonicParsing="false" text="Log in"
+                              onAction="#startLoginButtonOnAction" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <fx:include fx:id="loginPanelView" source="LoginPanel.fxml"/>
+                  <fx:include fx:id="signUpPanelView" source="SignUpPanel.fxml"/>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+   <StackPane.margin>
+      <Insets left="200.0" right="200.0" />
+   </StackPane.margin>
+</StackPane>

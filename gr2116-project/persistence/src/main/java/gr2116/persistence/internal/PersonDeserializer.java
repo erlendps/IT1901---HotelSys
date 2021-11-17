@@ -38,14 +38,18 @@ public class PersonDeserializer extends JsonDeserializer<Person> {
   protected Person deserialize(JsonNode jsonNode) {
     if (jsonNode instanceof ObjectNode objectNode) {
       Person person;
-      JsonNode nameNode = objectNode.get("name");
-      if (!(nameNode instanceof TextNode)) {
+      JsonNode usernameNode = objectNode.get("username");
+      if (!(usernameNode instanceof TextNode)) {
         return null;
       }
-      person = new Person(nameNode.asText());
-      JsonNode usernameNode = objectNode.get("username");
-      if (usernameNode instanceof TextNode) {
-        person.setUsername(usernameNode.asText());
+      person = new Person(usernameNode.asText());
+      JsonNode firstNameNode = objectNode.get("firstName");
+      if (firstNameNode instanceof TextNode) {
+        person.setFirstName(firstNameNode.asText());
+      }
+      JsonNode lastNameNode = objectNode.get("lastName");
+      if (lastNameNode instanceof TextNode) {
+        person.setLastName(lastNameNode.asText());
       }
       JsonNode balanceNode = objectNode.get("balance");
       if (balanceNode instanceof NumericNode) {

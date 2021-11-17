@@ -31,7 +31,7 @@ public class HotelTest {
   @BeforeEach
   public void setup() {
     hotel = new Hotel();
-    tom = new Person("Tom Haddleford");
+    tom = new Person("TomHaddleford");
     tom.addBalance(1000);
   }
 

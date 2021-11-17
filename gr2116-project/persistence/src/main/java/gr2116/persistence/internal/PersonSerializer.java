@@ -24,9 +24,12 @@ public class PersonSerializer extends JsonSerializer<Person> {
       throw new IllegalArgumentException("Person is null.");
     }
     gen.writeStartObject();
-    gen.writeStringField("name", person.getName());
-    if (person.getUsername() != null) {
-      gen.writeStringField("username", person.getUsername());
+    gen.writeStringField("username", person.getUsername());
+    if (person.getFirstName() != null) {
+      gen.writeStringField("firstName", person.getFirstName());
+    }
+    if (person.getLastName() != null) {
+      gen.writeStringField("lastName", person.getLastName());
     }
     gen.writeNumberField("balance", person.getBalance());
     gen.writeArrayFieldStart("reservations");

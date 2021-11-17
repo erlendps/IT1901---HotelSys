@@ -4,13 +4,13 @@ import gr2116.core.Person;
 import gr2116.persistence.HotelPersistence;
 import gr2116.ui.access.DirectHotelAccess;
 import gr2116.ui.access.HotelAccess;
-import gr2116.ui.login.LoginPageController;
 import gr2116.ui.main.MainPageController;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
 import gr2116.ui.money.MoneyPageController;
 import gr2116.ui.remoteerror.RemoteErrorPageController;
 import gr2116.ui.access.RemoteHotelAccess;
+import gr2116.ui.front.FrontPageController;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -39,10 +39,10 @@ public class AppController implements MessageListener {
   private SplitPane mainPageView;
 
   @FXML
-  private LoginPageController loginPageViewController;
+  private FrontPageController frontPageViewController;
 
   @FXML
-  private StackPane loginPageView;
+  private StackPane frontPageView;
 
   @FXML
   private MoneyPageController moneyPageViewController;
@@ -65,7 +65,7 @@ public class AppController implements MessageListener {
    */
   @FXML
   private void initialize() {
-    loginPageViewController.addListener(this);
+    frontPageViewController.addListener(this);
     mainPageViewController.addListener(this);
     moneyPageViewController.addListener(this);
     remoteErrorPageViewController.addListener(this);
@@ -88,7 +88,7 @@ public class AppController implements MessageListener {
     }
     try {
       load();
-      moveToLoginPage();
+      moveToFrontPage();
     } catch (RuntimeException e) {
       moveToRemoteErrorPage();
     }
@@ -97,22 +97,39 @@ public class AppController implements MessageListener {
   @Override
   public final void receiveMessage(final Object from,
       final Message message, final Object data) {
-    if (message == Message.SignIn && data instanceof Person) {
-      Person person = (Person) data;
-      if (!getPersons().contains(person)) {
-        hotelAccess.addPerson(person);
+    if (message == Message.SignUp && data instanceof Person) {
+      Person dataPerson = (Person) data;
+      Person person = hotelAccess.getPersons().stream().filter(
+            (Person p) -> p.getUsername().equals(dataPerson.getUsername())
+          ).findAny().orElse(null);
+      if (person != null) {
+        frontPageViewController.getSignUpPanelViewController()
+            .setErrorLabel("The username is taken.");
+        return;
+      }
+      hotelAccess.addPerson(dataPerson);
+      moveToMainPage(dataPerson);
+    } else if (message == Message.Login && data instanceof Person) {
+      Person dataPerson = (Person) data;
+      Person person = hotelAccess.getPersons().stream().filter(
+            (Person p) -> p.getUsername().equals(dataPerson.getUsername())
+          ).findAny().orElse(null);
+      if (person == null) {
+        frontPageViewController.getLoginPanelViewController()
+            .setErrorLabel("The username is not in use.");
+        return;
       }
       moveToMainPage(person);
     } else if (message == Message.SignOut) {
       save();
-      moveToLoginPage();
+      moveToFrontPage();
     } else if (message == Message.MoneyPage && data instanceof Person) {
       Person person = (Person) data;
       moveToMoneyPage(person);
     } else if (message == Message.Reconnect) {
       try {
         load();
-        moveToLoginPage();
+        moveToFrontPage();
       } catch (RuntimeException e) {
         remoteErrorPageViewController.incrementFailures();
       }
@@ -131,18 +148,14 @@ public class AppController implements MessageListener {
   /**
    * Move to the login page.
    * This involves clearing AppControllers children,
-   * creating a new LoginPage instance,
+   * creating a new FrontPage instance,
    * adding AppController as a listener and setting the persons from own memory.
    * AppController finally adds the login page as a child instance of itself.
    */
-  public void moveToLoginPage() {
+  public void moveToFrontPage() {
     root.getChildren().clear();
-    if (getPersons() != null) {
-      loginPageViewController.setLoadedPersons(getPersons());
-    } else {
-      throw new IllegalStateException("No loaded persons were set.");
-    }
-    root.getChildren().add(loginPageView);
+    root.getChildren().add(frontPageView);
+    frontPageViewController.showDefaultPanel();
   }
 
   /**
@@ -150,7 +163,7 @@ public class AppController implements MessageListener {
    * This involves clearing AppControllers children,
    * creating a new MainPage instance,
    * adding AppController as a listener and setting the rooms from memory.
-   * The MainPage is created with the selected person (which is usually selected from LoginPage).
+   * The MainPage is created with the selected person (which is usually selected from FrontPage).
    * Finally adds MainPage as a child of itself.
    *
    * @param person The person to be logged in as

@@ -5,7 +5,7 @@
 
 <StackPane fx:id="root" maxHeight="Infinity" maxWidth="Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gr2116.ui.controller.AppController">
     <children>
-        <fx:include fx:id="loginPageView" source="LoginPage.fxml"/>
+        <fx:include fx:id="frontPageView" source="FrontPage.fxml"/>
         <fx:include fx:id="mainPageView" source="MainPage.fxml"/>
         <fx:include fx:id="moneyPageView" source="MoneyPage.fxml"/>
         <fx:include fx:id="remoteErrorPageView" source="RemoteErrorPage.fxml"/>

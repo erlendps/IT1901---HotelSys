@@ -20,11 +20,13 @@ public class Person {
   /**
    * The Person objects name.
    */
-  private final String name;
+  private String firstName;
+  private String lastName;
   /**
    * The Person objects username.
    */
-  private String username;
+  private final String username;
+  private String password;
   /**
    * The Person objects balance.
    */
@@ -33,28 +35,57 @@ public class Person {
   /**
    * Constructs a Person object with a given name.
    *
-   * @param name - {@code String} that represents the persons name.
+   * @param username - {@code String} that represents the persons username.
    *
    * @throws IllegalArgumentException if {@code name} is null.
    * @throws IllegalArgumentException if {@code name} is not valid.
    */
-  public Person(final String name) {
-    if (name == null) {
-      throw new IllegalArgumentException();
-    }
-    if (!isValidName(name)) {
+  public Person(final String username) {
+    if (!isValidUsername(username)) {
       throw new IllegalArgumentException("The name is not valid");
     }
-    this.name = name;
+    this.username = username;
   }
 
   /**
-   * Returns the name.
+   * Returns the full name.
    *
    * @return {@code name}
    */
   public final String getName() {
-    return name;
+    return firstName + " " + lastName;
+  }
+
+  /**
+   * Returns the first name.
+   *
+   * @return {@code firstName}
+   */
+  public final String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    if (!isValidName(firstName)) {
+      throw new IllegalArgumentException("The name is not valid");
+    }
+    this.firstName = firstName;
+  }
+
+  /**
+   * Returns the last name.
+   *
+   * @return {@code lastName}
+   */
+  public final String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    if (!isValidName(lastName)) {
+      throw new IllegalArgumentException("The name is not valid");
+    }
+    this.lastName = lastName;
   }
 
   /**
@@ -67,25 +98,6 @@ public class Person {
   }
 
   /**
-   * Sets the username if some conditions are met and notifies listeners.
-   *
-   * @param username - the new username.
-   *
-   * @throws IllegalArgumentException if {@code username} is null.
-   * @throws IllegalArgumentException if {@code username} is not a valid username.
-   */
-  public final void setUsername(final String username) {
-    if (username == null) {
-      throw new IllegalArgumentException("Username is null");
-    }
-    if (!isValidUsername(username)) {
-      throw new IllegalArgumentException("The username is not valid");
-    }
-    this.username = username;
-    notifyListeners();
-  }
-
-  /**
    * Validation method that uses regex to check if the username provided is valid.
    *
    * @param username - the username that will be validated.
@@ -93,6 +105,9 @@ public class Person {
    * @return {@code true} if the username is valid, {@code false} otherwise.
    */
   public static boolean isValidUsername(final String username) {
+    if (username == null) {
+      return false;
+    }
     String regex = "^[a-zA-Z]+$";
     return username.matches(regex);
   }
@@ -107,6 +122,26 @@ public class Person {
   public static boolean isValidName(final String name) {
     return name.matches("([A-Za-z]+.* *)+");
   }
+
+  public static boolean isValidPassword(String password) {
+    if (password == null) {
+      return false;
+    }
+    return true; // TODO: implement password verification
+  }
+
+  public void setPassword(String password) {
+    if (!isValidPassword(password)) {
+      throw new IllegalArgumentException("Invalid password!");
+    }
+    this.password = password;
+  }
+
+  public String getPasswordHash() {
+    return password; // TODO: hash the password.
+  }
+
+
 
   /**
    * Returns the balance of this Person object.
