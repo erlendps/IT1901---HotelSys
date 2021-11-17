@@ -34,7 +34,7 @@ public class SetUpFile {
     kyle.setPassword("blueballing");
 
     rick.addBalance(1000);
-    kyle.addBalance(144);
+    kyle.addBalance(400);
     tom.addBalance(1000000000);
 
     Collection<Person> persons = new ArrayList<Person>();

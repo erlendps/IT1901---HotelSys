@@ -20,6 +20,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 
+import javax.imageio.plugins.tiff.FaxTIFFTagSet;
+
 import gr2116.persistence.HotelPersistence;
 import gr2116.ui.access.RemoteHotelAccess;
 
@@ -40,9 +42,7 @@ public class HotelIT extends ApplicationTest {
 
   @BeforeEach
   public void setUp() throws URISyntaxException {
-    URI baseUri = new URI("http://localhost:8080/rest/hotel");
-    System.out.println("Base Hotel URI: " + baseUri);
-    appController.setHotelAccess(new RemoteHotelAccess(appController.getHotelPersistence(), baseUri));
+    System.out.println("Base Hotel URI: http://localhost:8080/rest/hotel" );
   }
 
 
@@ -55,11 +55,37 @@ public class HotelIT extends ApplicationTest {
   public void testLogin() {
     FxAssert.verifyThat("#startLoginButton", LabeledMatchers.hasText("Login"));
     clickOn("#startLoginButton");
-    clickOn("#usernameTextField").write("tom");
+    clickOn("#usernameTextField").write("hahahaha");
     clickOn("#passwordTextField").write("blueballing");
+    clickOn("#loginButton");
+    FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText("The username is not in use."));
+    clickOn("#usernameTextField").eraseText(8);
+    clickOn("#usernameTextField").write("tom");
     clickOn("#loginButton");
     FxAssert.verifyThat("#usernameLabel", LabeledMatchers.hasText("tom"));
     FxAssert.verifyThat("#nameLabel", LabeledMatchers.hasText("Thomas Wonka"));
+  }
+
+  @Test
+  public void createUser() throws InterruptedException {
+    FxAssert.verifyThat("#startSignUpButton", LabeledMatchers.hasText("Sign up"));
+    clickOn("#startSignUpButton");
+    clickOn("#usernameTextField").write("tom");
+    clickOn("#firstNameTextField").write("Thomas");
+    clickOn("#passwordTextField").write("bananana");
+    clickOn("#signUpButton");
+    FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText("Invalid last name!"));
+    clickOn("#firstNameTextField").eraseText(6);
+    clickOn("#lastNameTextField").write("Bruhman");
+    clickOn("#signUpButton");
+    FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText("Invalid first name!"));
+    clickOn("#firstNameTextField").write("Thomas");
+    clickOn("#signUpButton");
+    FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText("The username is taken."));
+    clickOn("#usernameTextField").eraseText(3);
+    clickOn("#usernameTextField").write("tomas");
+    clickOn("#signUpButton");
+    FxAssert.verifyThat("#nameLabel", LabeledMatchers.hasText("Thomas Bruhman"));
   }
 
   @AfterAll
