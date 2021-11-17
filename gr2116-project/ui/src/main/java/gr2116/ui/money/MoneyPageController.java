@@ -157,11 +157,11 @@ public class MoneyPageController {
       }
       hotelAccess.addBalance(person, Double.parseDouble(moneyAmount));
       
-      notifyListeners(Message.SignIn, person);
+      notifyListeners(Message.MainPage, person);
     });
 
     moneyCancelButton.setOnAction((event) -> {
-      notifyListeners(Message.SignIn, person);
+      notifyListeners(Message.MainPage, person);
     });
 
   }

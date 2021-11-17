@@ -1,0 +1,67 @@
+package gr2116.ui;
+
+import gr2116.ui.controller.AppController;
+import java.io.IOException;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import org.junit.jupiter.api.Test;
+import org.testfx.api.FxAssert;
+import org.testfx.framework.junit5.ApplicationTest;
+import org.testfx.framework.junit5.Start;
+import org.testfx.matcher.control.LabeledMatchers;
+
+/**
+ * FXML Application, the booking system application.
+ */
+
+public class FrontPageTest extends ApplicationTest {
+  AppController appController;
+  /**
+   * Start the app, load FXML and show scene.
+   *
+   * @throws IOException if App.fxml cannot be loaded
+   */
+
+  @Start
+  public void start(Stage stage) throws IOException {
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("App.fxml"));
+    Parent parent = fxmlLoader.load();
+    stage.setScene(new Scene(parent));
+    stage.show();
+    appController = (AppController) fxmlLoader.getController();
+    appController.setPrefix("test");
+    appController.load();
+  }
+  
+  @Test
+  public void signUpTest() {
+    FxAssert.verifyThat("#startSignUpButton", LabeledMatchers.hasText("Sign up"));
+    clickOn("#startSignUpButton");
+    FxAssert.verifyThat("#signUpButton", LabeledMatchers.hasText("Sign up"));
+    clickOn("#signUpButton");
+    FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText("Invalid username!"));
+    clickOn("#usernameTextField").write("jonathan");
+    clickOn("#signUpButton");
+    FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText("Invalid first name!"));
+    clickOn("#firstNameTextField").write("Jonathan");
+    clickOn("#signUpButton");
+    FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText("Invalid last name!"));
+    clickOn("#lastNameTextField").write("Spark");
+    // TODO: add tests for password.
+    clickOn("#signUpButton");
+  }
+
+  @Test
+  public void loginTest() {
+    FxAssert.verifyThat("#startLoginButton", LabeledMatchers.hasText("Login"));
+    clickOn("#startLoginButton");
+    FxAssert.verifyThat("#loginButton", LabeledMatchers.hasText("Login"));
+    clickOn("#loginButton");
+    FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText("Invalid username!"));
+    clickOn("#usernameTextField").write("tom");
+    // TODO: add tests for password.
+    clickOn("#loginButton");
+  }
+}

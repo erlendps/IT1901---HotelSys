@@ -9,7 +9,7 @@
         <String fx:id="endpointUri" fx:value="http://localhost:8080/rest/hotel"/>
     </fx:define>
     <children>
-        <fx:include fx:id="loginPageView" source="LoginPage.fxml"/>
+        <fx:include fx:id="frontPageView" source="FrontPage.fxml"/>
         <fx:include fx:id="mainPageView" source="MainPage.fxml"/>
         <fx:include fx:id="moneyPageView" source="MoneyPage.fxml"/>
         <fx:include fx:id="remoteErrorPageView" source="RemoteErrorPage.fxml"/>

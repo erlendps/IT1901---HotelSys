@@ -95,7 +95,6 @@ public class MainPageController implements MessageListener {
     userPanelViewController.addListener(this);
     filterPanelViewController.addListener(this);
 
-    errorLabel.setTextFill(Color.RED);
     errorLabel.setMinHeight(Region.USE_PREF_SIZE);
   }
 

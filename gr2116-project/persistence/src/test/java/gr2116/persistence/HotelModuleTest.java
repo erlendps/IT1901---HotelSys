@@ -32,8 +32,9 @@ public class HotelModuleTest {
     room = new HotelRoom(HotelRoomType.Double, 101);
     room.setPrice(10);
     room.addAmenity(Amenity.Internet);
-    person = new Person("Henry");
-    person.setUsername("henry");
+    person = new Person("henry");
+    person.setFirstName("Henry");
+    person.setLastName("Peterson");
     person.addBalance(100);
     Reservation res = new Reservation(
         room, LocalDate.of(2021, 11, 03), LocalDate.of(2021, 11, 05));
@@ -60,8 +61,9 @@ public class HotelModuleTest {
           ]}
         ],
       "persons":[
-        {"name":"Henry",
-        "username": "henry",
+        {"username": "henry",
+        "firstName":"Henry",
+        "lastName":"Peterson",
         "balance":100.0,
         "reservations":[
           {"room":101,
@@ -89,7 +91,7 @@ public class HotelModuleTest {
       assertEquals(1, hotel2.getPersons().size());
       assertEquals(1, hotel2.getRooms().size());
       assertEquals(101, hotel2.getRooms().iterator().next().getNumber());
-      assertEquals("Henry", hotel2.getPersons().iterator().next().getName());
+      assertEquals("Henry", hotel2.getPersons().iterator().next().getFirstName());
       assertEquals(Arrays.asList("Internet"), hotel2.getRooms().iterator().next().getAmenities());
       // the string is generated from setup(), and there are custom implementations of 
       // .equals(o) for Person, rooms and reservation, therefore the next tests will work

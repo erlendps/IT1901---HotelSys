@@ -1,7 +1,6 @@
 package gr2116.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -31,7 +30,7 @@ public class HotelTest {
   @BeforeEach
   public void setup() {
     hotel = new Hotel();
-    tom = new Person("Tom Haddleford");
+    tom = new Person("tomhaddleford");
     tom.addBalance(1000);
   }
 
@@ -82,7 +81,9 @@ public class HotelTest {
     hotel.addRoom(room1);
     hotel.addRoom(room2);
     hotel.addRoom(room3);
-    assertEquals(Arrays.asList(room1), hotel.getRooms((room) -> room.getRoomType() == HotelRoomType.Single));
+    assertEquals(Arrays.asList(room1), hotel.getRooms(
+        (room) -> room.getRoomType() == HotelRoomType.Single)
+    );
     assertEquals(Arrays.asList(room2, room3), hotel.getRooms((room) -> room.getNumber() > 101));
     
     when(room1.hasAmenity(Amenity.Internet)).thenReturn(true);

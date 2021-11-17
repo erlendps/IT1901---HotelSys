@@ -10,7 +10,7 @@ class AppController {
 
     - void initialize()
     + void receiveNotification(Object, Message, Object)
-    - void moveToLoginPage()
+    - void moveToFrontPage()
     - void moveToMainPage(Person)
     - void load()
     - void save()
@@ -26,14 +26,14 @@ class FxmlUtils {
     + {static} void loadFxml
 }
 
-class LoginPage {
+class FrontPage {
     - TextField nameTextField
     - TextField usernameTextField
     - Button signInButton
     - Label usernameErrorLabel
     - Label nameTitleLabel
 
-    + loginPage()
+    + FrontPage()
     + void setLoadedPersons(Collection<Person>)
     - void initialize()
     - void setNameVisible(boolean)
@@ -124,8 +124,8 @@ class Hotel
 AppController ..|> MessageListener
 AppController --> "n" Person : loadedPersons
 AppController --> "n" HotelRoom : loadedRooms
-LoginPage --> "n" MessageListener : listeners
-LoginPage --> "n" Person : loadedPersons
+FrontPage --> "n" MessageListener : listeners
+FrontPage --> "n" Person : loadedPersons
 MainPage --> "1" FilterPanel : filterPanel
 MainPage --> "1" UserPanel : userPanel
 MainPage --> "1" Hotel : hotel
