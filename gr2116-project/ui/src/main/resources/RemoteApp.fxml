@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.layout.StackPane?>
 
+
 <StackPane fx:id="root" maxHeight="Infinity" maxWidth="Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gr2116.ui.controller.AppController">
+    <fx:define>
+        <String fx:id="endpointUri" fx:value="http://localhost:8080/rest/hotel/"/>
+    </fx:define>
     <children>
         <fx:include fx:id="loginPageView" source="LoginPage.fxml"/>
         <fx:include fx:id="mainPageView" source="MainPage.fxml"/>

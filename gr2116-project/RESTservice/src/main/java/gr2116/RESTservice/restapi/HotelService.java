@@ -40,24 +40,51 @@ public class HotelService {
     return hotel;
   }
   
+  /**
+   * Returns a PersonResource for the given person. If the given person does not exist in the
+   * hotel, it will create a PersonResource where the person is null. It checks if the person
+   * already exists, and if it does, the PersonResource will be iniated with that person object.
+   * The PersonResource is responsible for handling request from baseURI/person/{username}
+   *
+   * @param username the Persons username
+   *
+   * @return PersonResource iniated with null if the person does not exist, or initiated with 
+   *         the person that matches the username if it exists.
+   */
   @Path("/person/{username}")
   public PersonResource getPersonResource(@PathParam("username") String username) {
-    Collection<Person> matches = hotel.getPersons(p -> p.getUsername() == username);
-    if (matches.size() != 1) {
-      throw new IllegalStateException("Multiple or 0 matches for username" + username);
+    Collection<Person> matches = hotel.getPersons(p -> p.getUsername().equals(username));
+    Person person;
+    if (matches.size() > 1) {
+      throw new IllegalStateException("Multiple matches for person " + username);
+    } else if (matches.size() == 0) {
+      person = null;
+    } else {
+      person = matches.iterator().next();
     }
-    // TODO: Add Person object to person resource here
-    Person person = matches.iterator().next();
+
+    LOG.debug("Sub-resource person for person with username: " + username + ", " + person);
     PersonResource personResource = new PersonResource(username, person, hotel);
+    personResource.setHotelPersistence(hotelPersistence);
     return personResource;
   }
 
+  /**
+   * Returns a RoomResource for the given room. If the given room does not exist in the
+   * hotel, it will create a RoomResource where the room is null. It checks if the room
+   * already exists, and if it does, the RoomResource will be iniated with that HotelRoom object.
+   * The RoomResource is responsible for handling request from baseURI/rooms/{roomNumber}.
+   *
+   * @param roomNumber the roomNumber of the room
+   *
+   * @return RoomResource iniated with null if the room does not exist, or initiated with 
+   *         the room that matches the roomNumber if it exists.
+   */
   @Path("/rooms/{roomNumber}")
   public RoomResource getRoomResource(@PathParam("roomNumber") String roomNumber) {
     HotelRoom room;
-    //LOG.debug("Sub-resource room for " + username);
-    Collection<HotelRoom> matches =
-        hotel.getRooms(p -> p.getNumber() == Integer.parseInt(roomNumber));
+    Integer number = Integer.parseInt(roomNumber);
+    Collection<HotelRoom> matches = hotel.getRooms(p -> p.getNumber() == number);
     
     if (matches.size() > 1) {
       throw new IllegalStateException("Multiple matches for room number" + roomNumber);
@@ -67,7 +94,8 @@ public class HotelService {
       room = matches.iterator().next();
     }
 
-    System.out.println("bruuuuh");
+    LOG.debug("Sub-resource room for room number " + number + ": " + room);
+
     RoomResource roomResource = new RoomResource(room, hotel);
     roomResource.setHotelPersistence(hotelPersistence);
     return roomResource;

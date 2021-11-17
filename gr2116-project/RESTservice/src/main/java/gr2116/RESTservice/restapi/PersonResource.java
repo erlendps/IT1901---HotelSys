@@ -2,11 +2,12 @@ package gr2116.RESTservice.restapi;
 
 import gr2116.core.Hotel;
 import gr2116.core.Person;
-import gr2116.core.Reservation;
 import gr2116.persistence.HotelPersistence;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.GET;
 import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import java.io.IOException;
@@ -29,6 +30,15 @@ public class PersonResource {
   private HotelPersistence hotelPersistence;
 
   /**
+   * Sets the HotelPersistence for this resource.
+   *
+   * @param hotelPersistence
+   */
+  public void setHotelPersistence(HotelPersistence hotelPersistence) {
+    this.hotelPersistence = hotelPersistence;
+  }
+
+  /**
   * Initializes PersonResource. Each method wil check and use what is needed.
   *
   * @param username the name of the person, needed to add a new person
@@ -40,19 +50,10 @@ public class PersonResource {
     this.username = username;
     this.hotel = hotel;
   }
-
-
-  /**
-  * Gets the corresponding person.
-  *
-  * @return the corresponding person
-  */
-  @GET
-  public Person getPerson(){
-    LOG.debug("getPerson({})", username);
-    return this.person;
-  }
   
+  /**
+   * Helper method that saves the hotel.
+   */
   private void autoSaveHotel() {
     if (hotelPersistence != null) {
       try {
@@ -63,29 +64,47 @@ public class PersonResource {
     }
   }
 
+  /**
+  * Gets the corresponding person.
+  *
+  * @return the corresponding person
+  */
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  public Person getPerson(){
+    LOG.debug("getPerson({})", username);
+    return this.person;
+  }
+  
+  /**
+   * Adds (either replaces or adds a new instance) of the given person.
+   *
+   * @param person the person to be added/shall replace
+   *
+   * @return false if the oldPerson was replaced, true if its a new Person
+   */
   @PUT
   @Consumes(MediaType.APPLICATION_JSON)
-  public void addPerson(String name) {
-    LOG.debug("addPerson({})", name);
-    Person person = new Person(name);
-    person.setUsername(username);
-    hotel.addPerson(person);
+  public boolean addPerson(Person person) {
+    LOG.debug("addPerson({})", person);
+    Person oldPerson = hotel.addPerson(person);
     autoSaveHotel();
+    return oldPerson == null;
   }
 
-  @PUT
-  @Consumes(MediaType.APPLICATION_JSON)
-  public void addBalance(Double balance) {
-    LOG.debug("addBalance({})", balance);
-    person.addBalance(balance);
+  /**
+   * Deletes the requested person.
+   *
+   * @return true if the person was deleted
+   */
+  @DELETE
+  public boolean removePerson() {
+    LOG.debug("removePerson({})", person);
+    if (person == null) {
+      throw new IllegalArgumentException("Person is null, cannot delete.");
+    }
+    hotel.removePerson(person);
     autoSaveHotel();
-  }
-
-  @PUT
-  @Consumes(MediaType.APPLICATION_JSON)
-  public void addReservation(Reservation reservation) {
-    LOG.debug("addReservation({})", reservation);
-    person.addReservation(reservation);
-    autoSaveHotel();
+    return true;
   }
 }

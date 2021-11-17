@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.VBox?>
+
+<SplitPane dividerPositions="0.25, 0.75" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gr2116.ui.main.MainPageController">
+    <items>
+        <fx:include fx:id="userPanelView" source="UserPanel.fxml"/>
+        <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
+            <content>
+                <VBox fx:id="roomItemContainer" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+            </content>
+        </ScrollPane>
+        <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+            <children>
+                <Label fx:id="errorLabel" wrapText="true"/>
+                <fx:include fx:id="filterPanelView" source="FilterPanel.fxml"/>
+            </children>
+        </VBox>
+    </items>
+</SplitPane>

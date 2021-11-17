@@ -9,6 +9,11 @@ import gr2116.ui.main.MainPageController;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
 import gr2116.ui.money.MoneyPageController;
+import gr2116.ui.remoteerror.RemoteErrorPageController;
+import gr2116.ui.access.RemoteHotelAccess;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collection;
 import javafx.fxml.FXML;
@@ -22,7 +27,10 @@ import javafx.scene.layout.StackPane;
  */
 public class AppController implements MessageListener {
   private HotelPersistence hotelPersistence = new HotelPersistence("data");
-  private HotelAccess hotelAccess = new DirectHotelAccess(hotelPersistence);
+  private HotelAccess hotelAccess;
+
+  @FXML
+  private String endpointUri;
 
   @FXML
   private MainPageController mainPageViewController;
@@ -43,6 +51,12 @@ public class AppController implements MessageListener {
   private StackPane moneyPageView;
 
   @FXML
+  private RemoteErrorPageController remoteErrorPageViewController;
+
+  @FXML
+  private StackPane remoteErrorPageView;
+
+  @FXML
   private StackPane root;
 
   /**
@@ -54,8 +68,30 @@ public class AppController implements MessageListener {
     loginPageViewController.addListener(this);
     mainPageViewController.addListener(this);
     moneyPageViewController.addListener(this);
-    load();
-    moveToLoginPage();
+    remoteErrorPageViewController.addListener(this);
+    if (endpointUri != null) {
+      RemoteHotelAccess remoteHotelAccess;
+      try {
+        System.out.println("Using endpoint URI @ " + endpointUri);
+        remoteHotelAccess = new RemoteHotelAccess(hotelPersistence, new URI(endpointUri));
+        hotelAccess = remoteHotelAccess;
+        System.out.println("Using RemoteHotelAccess as access model.");
+      } catch (URISyntaxException e) {
+        System.err.println("Failed to create a URI with endpoint: " + endpointUri);
+        System.err.println(e);
+      }
+    }
+    if (hotelAccess == null) {
+      DirectHotelAccess directHotelAccess = new DirectHotelAccess(hotelPersistence);
+      hotelAccess = directHotelAccess;
+      System.out.println("Using DirectHotelAccess as access model.");
+    }
+    try {
+      load();
+      moveToLoginPage();
+    } catch (RuntimeException e) {
+      moveToRemoteErrorPage();
+    }
   }
 
   @Override
@@ -73,6 +109,13 @@ public class AppController implements MessageListener {
     } else if (message == Message.MoneyPage && data instanceof Person) {
       Person person = (Person) data;
       moveToMoneyPage(person);
+    } else if (message == Message.Reconnect) {
+      try {
+        load();
+        moveToLoginPage();
+      } catch (RuntimeException e) {
+        remoteErrorPageViewController.incrementFailures();
+      }
     }
   }
 
@@ -131,12 +174,39 @@ public class AppController implements MessageListener {
     root.getChildren().add(moneyPageView);
   }
 
+  /**
+   * Moves to the RemoteErrorPage. This page is loaded if there is an error with the REST API.
+   */
+  public void moveToRemoteErrorPage() {
+    root.getChildren().clear();
+    root.getChildren().add(remoteErrorPageView);
+  }
+
+  /**
+   * Returns a collection of Person objects.
+   *
+   * @return Collection of Person
+   */
   public Collection<Person> getPersons() {
     return new ArrayList<>(hotelAccess.getPersons());
   }
 
+  /**
+   * Returns the hotelAccess model.
+   *
+   * @return HotelAccess that this controller uses
+   */
   public HotelAccess getHotelAccess() {
     return hotelAccess;
+  }
+
+  /**
+   * Returns this controllers HotelPersistence.
+   *
+   * @return HotelPersistence
+   */
+  public HotelPersistence getHotelPersistence() {
+    return hotelPersistence;
   }
 
   /**
@@ -155,4 +225,14 @@ public class AppController implements MessageListener {
   private void save() {
     hotelAccess.saveHotel();
   }
+
+  /**
+   * Sets hotelAcess.
+   *
+   * @param hoteAcess the given hotelAcess
+   */
+  public void setHotelAccess(HotelAccess hotelAccess) {
+    this.hotelAccess = hotelAccess;
+  }
 }
+

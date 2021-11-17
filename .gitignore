@@ -10,3 +10,6 @@ org.eclipse.*.prefs
 
 # ignore maven build folder
 target/
+
+# intellij
+.idea/

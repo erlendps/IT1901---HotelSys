@@ -1,6 +1,7 @@
 package gr2116.core;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.List;
@@ -106,7 +107,7 @@ public class HotelRoom {
   public final double getPrice(final LocalDate startDate,
       final LocalDate endDate) {
     verifyChronology(startDate, endDate);
-    return price * (startDate.until(endDate).getDays());
+    return price * (ChronoUnit.DAYS.between(startDate, endDate));
   }
 
   /**

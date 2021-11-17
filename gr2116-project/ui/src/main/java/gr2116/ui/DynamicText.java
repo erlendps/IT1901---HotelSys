@@ -14,7 +14,8 @@ public enum DynamicText {
   InvalidCardControlDigitError("The control digit (last digit) of the card number has invalid format."),
   NonIntegerError("Balance must be a positive integer."),
   TooLargeBalanceError("Balance must be less than 1 000 000."),
-  ZeroBalanceError("Balance must be strictly greater than zero.");
+  ZeroBalanceError("Balance must be strictly greater than zero."),
+  RemoteServerError("Error reading from the server. Perhaps the REST api is not online?");
 
   private final String message;
 

@@ -105,7 +105,7 @@ public class HotelPersistence {
       return readHotel(reader);
     } catch (IOException e) {
       System.err.println("Could not find " + DATA_FOLDER + "/" + prefix + "Hotel.json");
-      return new Hotel(RoomGenerator.generateRooms());
+      return new Hotel(RoomGenerator.generateRooms(30)); // Generate 30 rooms, can be changed
     }
       
   }

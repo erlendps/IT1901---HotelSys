@@ -171,6 +171,7 @@
     <module>RESTservice</module>
     <module>persistence</module>
     <module>webapp</module>
+    <module>integrationtests</module>
   </modules>
 
 </project>

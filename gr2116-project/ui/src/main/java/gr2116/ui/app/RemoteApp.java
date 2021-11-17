@@ -7,18 +7,18 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * FXML Application, the booking system application.
+ * Remote FXML Application, the booking system application.
  */
-public class App extends Application {
-
+public class RemoteApp extends Application {
+  
   /**
    * Start the app, load FXML and show scene.
    */
   @Override
   public final void start(final Stage stage) throws Exception {
-    System.out.println("Running LocalApp.");
+    System.out.println("Running RemoteApp.");
     Parent parent = FXMLLoader.load(
-        getClass().getClassLoader().getResource("App.fxml"));
+        getClass().getClassLoader().getResource("RemoteApp.fxml"));
     stage.setScene(new Scene(parent));
     stage.show();
   }
@@ -29,6 +29,7 @@ public class App extends Application {
    * @param args Main method needs to have these
    */
   public static void main(final String[] args) {
-    launch(App.class, args);
+    launch(RemoteApp.class, args);
   }
+
 }
