@@ -49,6 +49,28 @@ class HotelRoom {
     + int hashCode()
 }
 
+class HotelRoomFilter{
+    - LocalDate startDate;
+    - LocalDate endDate;
+    - HotelRoomType roomType;
+    - HashMap<Amenity, Boolean> amenities;
+    - Integer floor;
+
+    + HotelRoomFilter(LocalDate, LocalDate, 
+    HotelRoomType, Integer, HashMap<Amenity, Boolean>)
+    + boolean hasValidDates()
+    + LocalDate getStartDate()
+    + LocalDate getEndDate()
+    + HotelRoomType getRoomType()
+    + boolean test(HotelRoom room) 
+}
+
+class PasswordUtil{
+    - {static} byte[] salt
+    
+    + {static} String hashPassword(String)
+}
+
 class ReservationCalendar {
     - Collection<Reservation> reservations
     + void addReservation(Reservation)
@@ -144,10 +166,13 @@ enum Amenity {
 }
 ' defining the relations
 Hotel --> "n" HotelRoom : rooms
+Hotel --> "n" Person: people
 Hotel ..|> "Iterable<HotelRoom>"
 HotelRoom --> "n" Amenity : amenities
 HotelRoom --> "1" HotelRoomType : roomType
 HotelRoom --> "1" ReservationCalendar : calendar
+HotelRoomFilter --> "1" HotelRoomType : roomType
+HotelRoomFilter --> "n" Amenity : amenities
 ReservationCalendar --> "n" Reservation : reservations
 ReservationCalendar ..|> "Iterable<Reservation>"
 Reservation ..|> "Iterable<LocalDate>"
