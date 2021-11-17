@@ -20,3 +20,7 @@ generere klassediagrammer med PlantUML. Disse kan man også se under [images](..
 ## persistence
 
 ![klassediagram persistence](../images/persistence.png "Klassediagram persistence")
+
+## RESTserver
+
+![klassediagram RESTserver](../images/RESTserver.PNG "Klassediagram RESTserver")

@@ -3,86 +3,117 @@
 @startuml
 ' defining all the classes in core module
 class Hotel {
-    +Hotel()
-    +Hotel(Collection<HotelRoom>)
-    +void addRoom(HotelRoom)
-    +void removeRoom(HotelRoom)
-    +Collection<HotelRoom> getRooms(Predicate<HotelRoom>)
-    +Collection<HotelRoom> getRooms()
-    +Iterator<HotelRoom> iterator()
+    - Map<String, HotelRoom> rooms
+    - Map<String, Person> persons
+
+    + Hotel()
+    + Hotel(Collection<HotelRoom>)
+    + Hotel(Collection<HotelRoom>, Collection<Person>)
+    + void addRoom(HotelRoom)
+    + void removeRoom(HotelRoom)
+    + void removePerson(Person)
+    + Collection<HotelRoom> getRooms  (Predicate<HotelRoom>)
+    + Collection<HotelRoom> getRooms()
+    + Collection<Person> getPersons()
+    + Collection<Person> getPersons(Predicate<Person>)
+    + void makeReservation(Person, int, LocalDate, LocalDate)
+    + Iterator<HotelRoom> iterator()
 }
 
 class HotelRoom {
+    - Collection<Amenity> amenities 
+    - ReservationCalendar calendar
+    - HotelRoomType roomType
     - int number
     - double price
 
     + HotelRoom(HotelRoomType, int)
+    + HotelRoom(int)
     + HotelRoomType getRoomType()
     + int getFloor()
     + int getNumber()
     + double getPrice()
     + double getPrice(LocalDate, LocalDate)
+    + ReservationCalendar getCalendar()
     + void setPrice(double)
     + void addAmenity(Amenity)
     + Collection<String> getAmenities()
     + void removeAmenity(Amenity)
     + boolean hasAmenity()
-    + boolean isAvailable()
+    + boolean isAvailable(LocalDate)
     + boolean isAvailable(LocalDate, LocalDate)
     + void addReservation(Reservation)
-    + Collection<Long> getReservationIds()
+    + Collection<String> getReservationIds()
     - void verifyChronology(LocalDate, LocalDate)
+    + boolean equals(Object)
+    + int hashCode()
 }
 
 class ReservationCalendar {
+    - Collection<Reservation> reservations
     + void addReservation(Reservation)
-    + Collection<Long> getReservationIds
+    + Collection<String> getReservationIds
     + boolean isAvailable(LocalDate)
     + boolean isAvailable(LocalDate, LocalDate)
     + Iterator<Reservation> iterator()
 }
 
 class Reservation {
-    - long id
+    - string id
+    - int roomNumber
     - LocalDate startDate
     - LocalDate endDate
     
-    + Reservation(long, HotelRoom, LocalDate, LocalDate)
+    + Reservation(HotelRoom, LocalDate, LocalDate)
+    + int getRoomNumber()
     + HotelRoom getRoom()
     + LocalDate getStartDate()
     + LocalDate getEndDate()
-    + long getId()
+    + string getId()
+    + String generateId()
     + Iterator<LocalDate> iterator()
+    + String toString()
+    + boolean equals(Object)
+    + int hashCode() 
 }
 
 class Person {
-    - String name
+    - Collection<PersonListener> listeners
+    - Collection<Reservation> reservations
+    - String firstName
+    - String lastName
     - String username
+    - String password
     - double balance
 
     + Person(String)
     + String getName()
+    + String getFirstName()
+    + setFirstName(String)
+    + getLastName()
+    + setLastName(String)
     + String getUsername()
-    + void setUsername()
-    + {static} boolean isValidUsername()
-    + {static} boolean isValidName()
+    + {static} boolean isValidUsername(String)
+    + {static} boolean isValidName(String)
+    + setPassword(String)
     + double getBalance()
     + void addBalance(double)
     + void subtractBalance(double)
-    + void makeReservation(HotelRoom, LocalDate, LocalDate)
     + void addReservation()
-    + Collection<Long> getReservationIds()
+    + Collection<String> getReservationIds()
     + boolean hasReservation(Reservation)
     + Collection<Reservation> getReservations()
     + void addListener(PersonListener)
     + void removeListener(PersonListener)
     + void notifyListeners()
+    + boolean equals(Object)
+    + int hashCode()
 
 
 }
 
 interface PersonListener {
-    + void receiveNotification(Person)
+    + void onPersonChanged(Person)
 }
 interface "Iterable<Reservation>" {
 }
@@ -99,6 +130,7 @@ enum HotelRoomType {
     ~ HotelRoomType(String, String)
     + String getName()
     + String getDescription()
+    + public String toString() 
 }
 
 enum Amenity {
@@ -108,6 +140,7 @@ enum Amenity {
     ~ Amenity(String, String)
     + String getName()
     + String getDescription()
+    + public String toString()
 }
 ' defining the relations
 Hotel --> "n" HotelRoom : rooms
