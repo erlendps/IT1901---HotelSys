@@ -9,8 +9,9 @@ class Hotel {
     + Hotel()
     + Hotel(Collection<HotelRoom>)
     + Hotel(Collection<HotelRoom>, Collection<Person>)
-    + void addRoom(HotelRoom)
+    + HotelRoom addRoom(HotelRoom)
     + void removeRoom(HotelRoom)
+    + Person addPerson(Person) 
     + void removePerson(Person)
     + Collection<HotelRoom> getRooms  (Predicate<HotelRoom>)
     + Collection<HotelRoom> getRooms()
@@ -39,7 +40,7 @@ class HotelRoom {
     + void addAmenity(Amenity)
     + Collection<String> getAmenities()
     + void removeAmenity(Amenity)
-    + boolean hasAmenity()
+    + boolean hasAmenity(Amenity)
     + boolean isAvailable(LocalDate)
     + boolean isAvailable(LocalDate, LocalDate)
     + void addReservation(Reservation)
@@ -62,7 +63,7 @@ class HotelRoomFilter{
     + LocalDate getStartDate()
     + LocalDate getEndDate()
     + HotelRoomType getRoomType()
-    + boolean test(HotelRoom room) 
+    + boolean test(HotelRoom) 
 }
 
 class PasswordUtil{
@@ -73,8 +74,9 @@ class PasswordUtil{
 
 class ReservationCalendar {
     - Collection<Reservation> reservations
+
     + void addReservation(Reservation)
-    + Collection<String> getReservationIds
+    + Collection<String> getReservationIds()
     + boolean isAvailable(LocalDate)
     + boolean isAvailable(LocalDate, LocalDate)
     + Iterator<Reservation> iterator()
@@ -92,7 +94,7 @@ class Reservation {
     + LocalDate getStartDate()
     + LocalDate getEndDate()
     + string getId()
-    + String generateId()
+    - String generateId()
     + Iterator<LocalDate> iterator()
     + String toString()
     + boolean equals(Object)
@@ -117,11 +119,14 @@ class Person {
     + String getUsername()
     + {static} boolean isValidUsername(String)
     + {static} boolean isValidName(String)
-    + setPassword(String)
+    + {static} boolean isValidPassword(string)
+    + void setPassword(String)
+    + void setHashedPassword(String)
+    + String getHashedPassword()
     + double getBalance()
     + void addBalance(double)
     + void subtractBalance(double)
-    + void addReservation()
+    + void addReservation(Reservation)
     + Collection<String> getReservationIds()
     + boolean hasReservation(Reservation)
     + Collection<Reservation> getReservations()
@@ -130,8 +135,6 @@ class Person {
     + void notifyListeners()
     + boolean equals(Object)
     + int hashCode()
-
-
 }
 
 interface PersonListener {
@@ -152,10 +155,11 @@ interface "Predicate<HotelRoom>"{
 enum HotelRoomType {
     - String name
     - String description
+
     ~ HotelRoomType(String, String)
     + String getName()
     + String getDescription()
-    + public String toString() 
+    + String toString() 
 }
 
 enum Amenity {
@@ -165,7 +169,7 @@ enum Amenity {
     ~ Amenity(String, String)
     + String getName()
     + String getDescription()
-    + public String toString()
+    + String toString()
 }
 ' defining the relations
 Hotel --> "n" HotelRoom : rooms
