@@ -108,6 +108,45 @@
             <version>0.0.8</version>
             <configuration>
               <mainClass>gr2116.ui/gr2116.ui.app.RemoteApp</mainClass>
+              <!-- rest of options are for jlink https://dev.to/cherrychain/javafx-jlink-and-jpackage-h9-->
+              <!-- using name+FX to indicate that its a javafx app -->
+              <compress>2</compress>
+              <noHeaderFiles>true</noHeaderFiles>
+              <stripDebug>true</stripDebug>
+              <noManPages>true</noManPages>
+              <launcher>remotehotelsysfx</launcher>
+              <jlinkImageName>remotehotelsysfx</jlinkImageName>
+              <jlinkZipName>remotehotelsysfx</jlinkZipName>
+            </configuration>
+          </plugin>
+          <!-- jpackage -->
+          <plugin>
+            <groupId>org.panteleyev</groupId>
+            <artifactId>jpackage-maven-plugin</artifactId>
+            <version>1.4.0</version>
+            <configuration>
+              <name>HotelSys</name>
+              <appVersion>1.0.0</appVersion>
+              <vendor>gr2116</vendor>
+              <destination>target/RemoteHotelSys</destination>
+              <module>gr2116.ui/gr2116.ui.app.RemoteApp</module>
+              <runtimeImage>target/remotehotelsysfx</runtimeImage>
+              <javaOptions>
+                <option>-Dfile.encoding=UTF-8</option>
+              </javaOptions>
+
+              <!-- linux -->
+              <linuxShortcut>true</linuxShortcut>
+              <linuxPackageName>remotehotelsys</linuxPackageName>
+              <linuxMenuGroup>HotelSys</linuxMenuGroup>
+
+              <!-- MacOS-->
+              <macPackageName>remotehotelsys</macPackageName>
+
+              <!-- Windows -->
+              <winDirChooser>true</winDirChooser>
+              <winMenu>true</winMenu>
+              <winMenuGroup>HotelSys</winMenuGroup>
             </configuration>
           </plugin>
         </plugins>
@@ -146,7 +185,6 @@
         </configuration>
       </plugin>
 
-
       <!-- JavaFX maven plugin -->
       <plugin>
         <groupId>org.openjfx</groupId>
@@ -154,11 +192,45 @@
         <version>0.0.8</version>
         <configuration>
           <mainClass>gr2116.ui/gr2116.ui.app.App</mainClass>
-          <!-- rest of options are for jlink -->
+          <!-- rest of options are for jlink https://dev.to/cherrychain/javafx-jlink-and-jpackage-h9-->
+          <!-- using name+FX to indicate that its a javafx app -->
           <compress>2</compress>
           <noHeaderFiles>true</noHeaderFiles>
           <stripDebug>true</stripDebug>
           <noManPages>true</noManPages>
+          <launcher>hotelsysfx</launcher>
+          <jlinkImageName>hotelsysfx</jlinkImageName>
+          <jlinkZipName>hotelsysfx</jlinkZipName>
+        </configuration>
+      </plugin>
+
+      <!-- jpackage -->
+      <plugin>
+        <groupId>org.panteleyev</groupId>
+        <artifactId>jpackage-maven-plugin</artifactId>
+        <version>1.4.0</version>
+        <configuration>
+          <name>HotelSysFX</name>
+          <appVersion>1.0.0</appVersion>
+          <vendor>gr2116</vendor>
+          <destination>target/HotelSys</destination>
+          <module>gr2116.ui/gr2116.ui.app.App</module>
+          <runtimeImage>target/hotelsysfx</runtimeImage>
+          <javaOptions>
+            <option>-Dfile.encoding=UTF-8</option>
+          </javaOptions>
+          <!-- linux -->
+          <linuxShortcut>true</linuxShortcut>
+          <linuxPackageName>hotelsys</linuxPackageName>
+          <linuxMenuGroup>HotelSys</linuxMenuGroup>
+
+          <!-- MacOS-->
+          <macPackageName>hotelsys</macPackageName>
+
+          <!-- Windows -->
+          <winDirChooser>true</winDirChooser>
+          <winMenu>true</winMenu>
+          <winMenuGroup>HotelSys</winMenuGroup>
         </configuration>
       </plugin>
 
