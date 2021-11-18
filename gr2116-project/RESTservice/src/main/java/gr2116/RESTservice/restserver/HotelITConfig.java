@@ -13,7 +13,7 @@ import org.glassfish.jersey.server.ResourceConfig;
  * e.g. JSON support with Jackson and
  * injectable Hotel and HotelPersistance
  */
-public class HotelConfig extends ResourceConfig {
+public class HotelITConfig extends ResourceConfig {
   private Hotel hotel;
   private HotelPersistence hotelPersistence;
   
@@ -22,17 +22,17 @@ public class HotelConfig extends ResourceConfig {
   *
   * @param hotel hotel instance to serve
   */
-  public HotelConfig(Hotel hotel) {
+  public HotelITConfig(Hotel hotel) {
     setHotel(hotel);
-    hotelPersistence = new HotelPersistence("data");
+    hotelPersistence = new HotelPersistence("testIt");
     register(HotelService.class);
     register(HotelModuleObjectMapperProvider.class);
     register(JacksonFeature.class);
     register(new AbstractBinder() {
       @Override
       protected void configure() {
-        bind(HotelConfig.this.hotel);
-        bind(HotelConfig.this.hotelPersistence);
+        bind(HotelITConfig.this.hotel);
+        bind(HotelITConfig.this.hotelPersistence);
       }
     });
   }
@@ -41,7 +41,7 @@ public class HotelConfig extends ResourceConfig {
    * Constructor that initializes this HotelConfig with a the hotel created from
    * the createHotel() method.
    */
-  public HotelConfig() {
+  public HotelITConfig() {
     this(createHotel());
   }
 
@@ -70,7 +70,7 @@ public class HotelConfig extends ResourceConfig {
    * @return hotel
    */
   public static Hotel createHotel() {
-    HotelPersistence hotelPersistence = new HotelPersistence("data");
+    HotelPersistence hotelPersistence = new HotelPersistence("testIt");
     try {
       return hotelPersistence.loadHotel();
     } catch (IOException e) {

@@ -12,7 +12,7 @@ module gr2116.ui {
     opens gr2116.ui.app to javafx.graphics;
     opens gr2116.ui.controller to javafx.fxml;
     opens gr2116.ui.main to javafx.fxml;
-    opens gr2116.ui.login to javafx.fxml;
+    opens gr2116.ui.front to javafx.fxml;
     opens gr2116.ui.money to javafx.fxml;
     opens gr2116.ui.remoteerror to javafx.fxml;
 }

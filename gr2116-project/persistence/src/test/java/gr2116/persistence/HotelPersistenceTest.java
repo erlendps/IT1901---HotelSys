@@ -31,12 +31,14 @@ public class HotelPersistenceTest {
   @Test
   public void testSerializingDeserializing() {
     // set up data
-    Person rick = new Person("Richard");
-    Person kyle = new Person("Kyllard");
-    Person tom = new Person("Tom");
-    rick.setUsername("richard");
-    kyle.setUsername("kyle");
-    tom.setUsername("tom");
+    Person rick = new Person("richard");
+    Person kyle = new Person("kyle");
+    Person tom = new Person("tom");
+    rick.setFirstName("Richard");
+    kyle.setFirstName("Kyle");
+    tom.setFirstName("Tom");
+    tom.setLastName("Hanks");
+    tom.setPassword("password123");
 
     rick.addBalance(1000);
     kyle.addBalance(144);

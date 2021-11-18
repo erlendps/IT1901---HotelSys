@@ -127,7 +127,7 @@ public class MoneyPageController {
     if (moneyAmount.length() > 6) {
       throw new IllegalArgumentException(DynamicText.TooLargeBalanceError.getMessage());
     }
-    int money = Integer.parseInt(moneyAmount);
+    double money = Double.parseDouble(moneyAmount);
     if (money == 0) {
       throw new IllegalArgumentException(DynamicText.ZeroBalanceError.getMessage());
     }
@@ -157,11 +157,11 @@ public class MoneyPageController {
       }
       hotelAccess.addBalance(person, Double.parseDouble(moneyAmount));
       
-      notifyListeners(Message.SignIn, person);
+      notifyListeners(Message.MainPage, person);
     });
 
     moneyCancelButton.setOnAction((event) -> {
-      notifyListeners(Message.SignIn, person);
+      notifyListeners(Message.MainPage, person);
     });
 
   }

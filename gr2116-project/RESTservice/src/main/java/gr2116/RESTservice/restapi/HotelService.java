@@ -17,10 +17,10 @@ import org.slf4j.LoggerFactory;
 /**
  * The top-level rest service for Hotel.
  */
-@Path(HotelService.HOTEL_MODEL_SERVICE_PATH)
+@Path(HotelService.HOTEL_SERVICE_PATH)
 @Produces(MediaType.APPLICATION_JSON)
 public class HotelService {
-  public static final String HOTEL_MODEL_SERVICE_PATH = "hotel";
+  public static final String HOTEL_SERVICE_PATH = "hotel";
   private static final Logger LOG = LoggerFactory.getLogger(HotelService.class);
 
   @Context

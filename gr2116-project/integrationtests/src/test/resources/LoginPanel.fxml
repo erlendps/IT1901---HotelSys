@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gr2116.ui.front.LoginPanelController">
+    <Label text="Username:" />
+    <TextField fx:id="usernameTextField" />
+    <Label text="Password:" />
+    <TextField fx:id="passwordTextField" />
+    <Separator prefHeight="30.0" />
+    <HBox alignment="CENTER" spacing="20.0">
+        <children>
+            <Button mnemonicParsing="false" onAction="#cancelButtonOnAction" text="Cancel" />
+            <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginButtonOnAction" text="Login" />
+        </children>
+    </HBox>
+    <Label fx:id="errorLabel" textFill="RED" />
+    <VBox.margin>
+    <Insets left="200.0" right="200.0" />
+    </VBox.margin>
+</VBox>

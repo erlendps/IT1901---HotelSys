@@ -5,9 +5,12 @@ package gr2116.ui.message;
  * These are for example used in listeners.
  */
 public enum Message {
-  SignIn,
+  Login,
+  SignUp,
   SignOut,
   Filter,
+  MainPage,
   MoneyPage,
-  Reconnect
+  Reconnect,
+  Cancel
 }

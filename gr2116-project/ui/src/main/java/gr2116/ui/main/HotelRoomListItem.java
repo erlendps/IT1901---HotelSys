@@ -68,7 +68,6 @@ public class HotelRoomListItem extends HBox {
     totalPriceLabel.setText("");
     // No error messeage.
     errorLabel.setText("");
-    errorLabel.setTextFill(Color.RED);
     errorLabel.setMinHeight(Region.USE_PREF_SIZE);
 
     // Sets id used in the tests.

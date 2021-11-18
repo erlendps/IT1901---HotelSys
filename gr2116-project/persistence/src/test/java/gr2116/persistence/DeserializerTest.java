@@ -44,7 +44,8 @@ public class DeserializerTest {
       """;
 
   private final String personString = """
-      {"name":"Henry",
+      {"username":"henry",
+      "firstName":"Henry",
       "balance":80.0,
       "reservations":[
         {"room":101,
@@ -115,14 +116,15 @@ public class DeserializerTest {
     try {
       assertNotNull(mapper.readValue(personString, Person.class));
       // "name" is not a text field
-      String badString = personString.replaceFirst("\"Henry\"", "4332");
+      String badString = personString.replaceFirst("\"henry\"", "4332");
       assertNull(mapper.readValue(badString, Person.class));
       // "balance" is not a numeric field
       badString = personString.replaceFirst("80.0", "\"4332\"");
       assertNull(mapper.readValue(badString, Person.class));
       // "reservations" is not an array
       badString = """
-          {"name":"Henry",
+          {"username":"henry",
+          "firstName":"Henry",
           "balance":80.0,
           "reservations": 102421
           }

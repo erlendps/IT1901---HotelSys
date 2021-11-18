@@ -142,4 +142,8 @@ public class HotelPersistence {
     }
     this.prefix = prefix;
   }
+
+  public String getPrefix() {
+    return prefix;
+  }
 }

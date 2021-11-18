@@ -14,7 +14,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 /**
  * Main page, which contains the main panel for booking hotel nights.
@@ -95,7 +94,6 @@ public class MainPageController implements MessageListener {
     userPanelViewController.addListener(this);
     filterPanelViewController.addListener(this);
 
-    errorLabel.setTextFill(Color.RED);
     errorLabel.setMinHeight(Region.USE_PREF_SIZE);
   }
 
