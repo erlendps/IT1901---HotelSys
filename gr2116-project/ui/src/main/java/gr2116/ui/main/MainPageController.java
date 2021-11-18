@@ -24,6 +24,7 @@ public class MainPageController implements MessageListener {
       = new HotelRoomFilter(null, null, null, null, null);
   private Person person;
   private final Collection<MessageListener> listeners = new HashSet<>();
+  private final HotelRoomSorter hotelRoomSorter = new HotelRoomSorter();
 
   @FXML
   private VBox roomItemContainer;
@@ -43,12 +44,16 @@ public class MainPageController implements MessageListener {
   @FXML
   private FilterPanelController filterPanelViewController;
 
-
   /**
-   * Constructs a main page for a given person and hotel.
-   *
+   * Initializes the main page, which includes adding 
+   * the user panel and the filter panel to the respective panes.
    */
-  public MainPageController() {}
+  @FXML
+  final void initialize() {
+    userPanelViewController.addListener(this);
+    filterPanelViewController.addListener(this);
+    errorLabel.setMinHeight(Region.USE_PREF_SIZE);
+  }
 
   /**
    * Sets the hotelAccess from which to build the main page.
@@ -86,18 +91,6 @@ public class MainPageController implements MessageListener {
   }
 
   /**
-   * Initializes the main page, which includes adding 
-   * the user panel and the filter panel to the respective panes.
-   */
-  @FXML
-  final void initialize() {
-    userPanelViewController.addListener(this);
-    filterPanelViewController.addListener(this);
-
-    errorLabel.setMinHeight(Region.USE_PREF_SIZE);
-  }
-
-  /**
    * Build list of rooms according to selected filters.
    * Puts the filtered rooms into the roomItemContainer, 
    * which is where the user can select to book them.
@@ -121,25 +114,27 @@ public class MainPageController implements MessageListener {
         errorLabel.setText(DynamicText.BeforeNowError.getMessage());
       }
     }
-    Collection<HotelRoom> filteredRooms = hotelAccess.getRooms(hotelRoomFilter);
-
-    // If dates are valid, add all filtered room.
+    Collection<HotelRoom> filteredRooms
+        = hotelRoomSorter.sortRooms(hotelAccess.getRooms(hotelRoomFilter));
+    
+    // Add filtered rooms.
     for (HotelRoom hotelRoom : filteredRooms) {
       HotelRoomListItem roomItem = new HotelRoomListItem(hotelRoom);
       if (hotelRoomFilter.hasValidDates()) {
         double totalPrice = hotelRoom.getPrice(
-                              hotelRoomFilter.getStartDate(),
-                              hotelRoomFilter.getEndDate());
+            hotelRoomFilter.getStartDate(),
+            hotelRoomFilter.getEndDate()
+        );
         roomItem.setOnMakeReservationButtonAction((event) -> {
           // surrounded in a try/catch to handle the event that the room has already been booked
           try {
-          hotelAccess.makeReservation(
-              person,
-              hotelRoom.getNumber(),
-              hotelRoomFilter.getStartDate(),
-              hotelRoomFilter.getEndDate()
-          );
-          buildRoomList();
+            hotelAccess.makeReservation(
+                person,
+                hotelRoom.getNumber(),
+                hotelRoomFilter.getStartDate(),
+                hotelRoomFilter.getEndDate()
+            );
+            buildRoomList();
           } catch (IllegalStateException e) {
             buildRoomList();
             errorLabel.setText("Unfortunately the room (#" + hotelRoom.getNumber()
@@ -156,6 +151,24 @@ public class MainPageController implements MessageListener {
       }
       roomItemContainer.getChildren().add(roomItem);
     }
+  }
+
+  @FXML
+  private void sortByPrice() {
+    hotelRoomSorter.sortByPrice();
+    buildRoomList();
+  }
+
+  @FXML
+  private void sortByRoomNumber() {
+    hotelRoomSorter.sortByRoomNumber();
+    buildRoomList();
+  }
+
+  @FXML
+  private void sortByAmenityCount() {
+    hotelRoomSorter.sortByAmenityCount();
+    buildRoomList();
   }
 
   /**
