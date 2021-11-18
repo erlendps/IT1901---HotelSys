@@ -18,19 +18,25 @@ Det er tester for alle de tre lagene. Jacoco brukes til å sjekke testdekningsgr
 
 Startsiden:
 
-*BILDE*
+<img src="../images/start_page.png"
+     alt="Skjermbilde av hovedsiden."
+     style="float: left; margin-right: 10px; width: 100%" />
 
 Siden for å logge inn:
 
-*BILDE*
+<img src="../images/start_page_login.png"
+     alt="Skjermbilde av hovedsiden."
+     style="float: left; margin-right: 10px; width: 100%" />
 
 Siden for å registrere seg:
 
-*BILDE
+<img src="../images/start_page_register.png"
+     alt="Skjermbilde av hovedsiden."
+     style="float: left; margin-right: 10px; width: 100%" />
 
 Så, et bilde av hvordan hovedsiden ser ut.
 
-<img src="../images/main_page_release_2.png"
+<img src="../images/main_page_release_3.png"
      alt="Skjermbilde av hovedsiden."
      style="float: left; margin-right: 10px; width: 100%" />
 
