@@ -16,19 +16,30 @@ Det er tester for alle de tre lagene. Jacoco brukes til å sjekke testdekningsgr
 
 ## Skjermbilder
 
-Under vises et skjermbilde for hvordan hovedsiden ser ut foreløpig. 
+Startsiden:
+
+*BILDE*
+
+Siden for å logge inn:
+
+*BILDE*
+
+Siden for å registrere seg:
+
+*BILDE
+
+Så, et bilde av hvordan hovedsiden ser ut.
 
 <img src="../images/main_page_release_2.png"
      alt="Skjermbilde av hovedsiden."
      style="float: left; margin-right: 10px; width: 100%" />
 
-Under vises et skjermbilden av siden for å legge inn penger. Kortnummer må være gyldig for at penger skal kunne settes inn, se eget avsnitt.
+Skjermbilde av siden for å legge inn penger. Kortnummer må være gyldig for at penger skal kunne settes inn, se eget avsnitt.
 
 <img src="../images/deposit_page_release_2.png"
-     alt="Skjermbilde av hovedsiden."
+     alt="Skjermbilde av pengesiden."
      style="float: left; margin-right: 10px; width: 100%" />
 
-Innloggingsiden er lik som den var i [innlevering 1](../release1/README.md).
 
 ## Realisert
 
