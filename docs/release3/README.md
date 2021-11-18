@@ -49,11 +49,19 @@ Skjermbilde av siden for å legge inn penger. Kortnummer må være gyldig for at
 
 ## Realisert
 
-Appen bygger på konseptene fra den første og den andre innleveringen. Se [release1](../release1/README.md) og [(release2)](../release2/README.md). Nytt i den tredje utgivelsen er at appen er rigget opp med et REST API. Når man reserverer rom eller lager brukerkonto blir dette nå lagret på en server. Dermed kan man i teorien benytte appen hvor som helst, enn om det er hjemme, fra jobb eller på hotellet. Istedenfor e-post registrerer man seg nå med brukernavn. Brukernavnet må oppfylle krav, som nevnt under.
+Appen bygger på konseptene fra den første og den andre innleveringen. Se [release1](../release1/README.md) og [(release2)](../release2/README.md). Nytt i den tredje utgivelsen er at appen er rigget opp med et REST API. Når man reserverer rom eller lager brukerkonto blir dette nå lagret på en server. Dermed kan man i teorien benytte appen hvor som helst, enn om det er hjemme, fra jobb eller på hotellet. Istedenfor e-post registrerer man seg nå med et brukernavn, og man lager et passord som man senere må bruke for å kunne logge inn. Brukernavnet må oppfylle krav, som nevnt under. Passordet blir hashet; det blir aldri lagret på serveren i klartekst. Vi har også realisert funksjonalitet som tillater å sortere hotellrom etter pris, romnummer og antallet fasiliteter på et rom.
 
 ## Brukernavn
 
 Brukernavn må utelukkende bestå av bokstaver, store eller små.
+
+## Passord
+
+Passord må ha 6 eller flere tegn.
+
+## Fornavn og etternavn
+
+Alle navn er gyldige. Grunnen til at vi har gjort det slik er at det finnes [svært mange ulike navnekonvensjoner](https://www.kalzumeus.com/2010/06/17/falsehoods-programmers-believe-about-names/).
 
 ## Kortnummer
 
