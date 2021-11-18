@@ -1,33 +1,9 @@
 ```plantuml
 @startuml
-class Loader {
-    - {static} Path METADATA_FOLDER
-    - boolean loaded
-    - Map<String, Reservation> reservationMap
-    - void loadPersons(JSONObject)
-    - Reservation getReservation(JSONObject, String, HotelRoom)
-    - void loadRoomsAndReservations(JSONObject, JSONObject)
-    + void loadData(JSONObject, JSONObject, JSONObject)
-    + void loadData()
-    + Collection<Person> getPersons()
-    + Collection<HotelRoom> getRooms()
-    + JSONObject getAsJson(String)
-}
-
-class Saver {
-    - JSONObject makePersonJson(Person)
-    - JSONObject makeRoomJson(HotelRoom)
-    - JSONObject makeReservationJson(Reservation)
-    - JSONObject updatePersonData(Collection<Person>)
-    - JSONObject updateRoomJSON(Collection<HotelRoom>)
-    - JSONObject updateReservationData(Collection<Reservation>)
-    + void writeToFile(Collection<HotelRoom>, Collection<Person>)
-    + void writeToFile(Collection<HotelRoom>, Collection<Person>, Collection<Reservation>)
-}
 
 class HotelPersistence{
     - ObjectMapper mapper
-    - {static} String DATA_FOLDER;
+    # {static} String DATA_FOLDER; 
     - String prefix
 
     + HotelPersistence()
@@ -35,10 +11,10 @@ class HotelPersistence{
     + {static} HotelModule createHotelModule()
     + {static} ObjectMapper createObjectMapper()
     - Hotel readHotel(Reader)
-    - writeHotel(Hotel, Writer)
+    - void writeHotel(Hotel, Writer)
     + Hotel loadHotel() 
-    + saveHotel(Hotel)
-    + setPrefix(String)
+    + void saveHotel(Hotel)
+    + void setPrefix(String)
 }
 
 class RoomGenrator {
@@ -54,20 +30,88 @@ class RoomGenrator {
     + {static} int getNextNumber(int)
 }
 
-class Person {
-    see core module
+class HotelDeserializer {
+    - PersonDeserializer personDeserializer
+    - RoomDeserializer roomDeserializer
+
+    + Hotel deserialize(JsonParser, DeserializationContext)
+    - Hotel deserialize(JsonNode) 
 }
 
-class HotelRoom {
-    see core module
+class HotelModule{
+    - {static} String NAME
+
+    + HotelModule()
 }
 
-class Reservation {
-    see core module
+class HotelSerializer{
+    + void serialize(Hotel, JsonGenerator, SerializerProvider)
 }
 
-Loader --> "n" Person : persons
-Loader --> "n" HotelRoom : rooms
-Loader --> "n" Reservation
+class PersonDeserializer{
+    - ReservationDeserializer reservationDeserializer
+
+    + Person deserialize(JsonParser, DeserializationContext)
+    # Person deserialize(JsonNode) 
+}
+
+class PersonSerializer{
+    + void serialize(Person, JsonGenerator, SerializerProvider)
+}
+
+class ReservationDeserializer{
+    + Reservation deserialize(JsonParser, DeserializationContext)
+    # Reservation deserialize(JsonNode)
+}
+
+class ReservationSerializer{
+    + void serialize(Reservation, JsonGenerator, SerializerProvider)
+}
+
+class RoomDeserializer{
+    - ReservationDeserializer reservationDeserializer
+
+    + HotelRoom deserialize(JsonParser, DeserializationContext)
+    # HotelRoom deserialize(JsonNode)
+}
+
+class RoomSerializer{
+    + void serialize(HotelRoom, JsonGenerator, SerializerProvider)
+}
+
+interface "JsonDeserializer<Hotel>"{
+}
+interface "SimpleModule"{
+}
+interface "JsonSerializer<Hotel>"{
+}
+interface "JsonDeserializer<Person>"{
+}
+interface "JsonSerializer<Person>"{
+}
+interface "JsonDeserializer<Reservation>"{
+}
+interface "JsonSerializer<Reservation>"{
+}
+interface "JsonDeserializer<HotelRoom>"{
+}
+interface "JsonSerializer<HotelRoom>"{
+}
+
+HotelDeserializer ..|> "JsonDeserializer<Hotel>"
+HotelModule ..|> "SimpleModule"
+HotelSerializer ..|> "JsonSerializer<Hotel>"
+PersonDeserializer ..|> "JsonDeserializer<Person>"
+PersonSerializer ..|> "JsonSerializer<Person>"
+ReservationDeserializer ..|> "JsonDeserializer<Reservation>"
+ReservationSerializer ..|> "JsonSerializer<Reservation>"
+RoomDeserializer ..|> "JsonDeserializer<HotelRoom>"
+RoomSerializer ..|> "JsonSerializer<HotelRoom>"
+
+RoomDeserializer --> ReservationDeserializer
+PersonDeserializer --> ReservationDeserializer
+HotelDeserializer --> PersonDeserializer
+HotelDeserializer --> ReservationDeserializer
+
 @enduml
 ```
