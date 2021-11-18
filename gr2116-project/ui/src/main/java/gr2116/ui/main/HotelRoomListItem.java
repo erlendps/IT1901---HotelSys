@@ -9,7 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
 
 /**
  * A gui element for displaying hotel rooms in a list.
