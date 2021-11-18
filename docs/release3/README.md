@@ -4,7 +4,7 @@ Issues for innlevering 3 kan finnes under milestone [Release 3](https://gitlab.s
 
 ## Arkitektur 
 
-Klassediagram for alle modulene er generert med PlantUML, og kan ses i [modules](../modules/README.md). I tillegg ligger alle diagrammene i [images](../images). **!!!IKKE FERDIG!!!**
+Klassediagram for alle modulene er generert med PlantUML, og kan ses i [modules](../modules/README.md). I tillegg ligger alle diagrammene i [images](../images).
 
 ## Arbeidsvaner
 
