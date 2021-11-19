@@ -347,13 +347,13 @@ DirectHotelAccess -> "1" HotelPersistence : hotelPersistence
 FrontPageController --> "1" LoginPanelController : loginPanelController
 FrontPageController --> "1" SignUpPanelController : signUpPanelController
 FrontPageController ..|> MessageListener
-FrontPageController --> "n" MessageListener : listners
+FrontPageController --> "n" MessageListener : listeners
 
-LoginPanelController --> "n" MessageListener : listners
+LoginPanelController --> "n" MessageListener : listeners
 
-SignUpPanelController --> "n" MessageListener : listners
+SignUpPanelController --> "n" MessageListener : listeners
 
-FilterPanelController --> "n" MessageListener : listners
+FilterPanelController --> "n" MessageListener : listeners
 FilterPanelController --> "n" Amenity : amenities
 
 AmenityCheckBox --+ FilterPanelController
@@ -367,18 +367,18 @@ SortProperty --+ HotelRoomSorter
 MainPageController --> "1" HotelAccess : hotelAcces
 MainPageController --> "1" HotelRoomFilter : hotelRoomFilter
 MainPageController --> "1" Person : person
-MainPageController --> "n" MessageListener : listners
+MainPageController --> "n" MessageListener : listeners
 MainPageController --> "1" HotelRoomSorter : hotelRoomSorter
 
-UserPanelController  --> "n" MessageListener : listners
+UserPanelController  --> "n" MessageListener : listeners
 UserPanelController --> "1" Person : person
 UserPanelController ..|> MessageListener
 
-MoneyPageController --> "n" MessageListener : listners
+MoneyPageController --> "n" MessageListener : listeners
 MoneyPageController --> "1" Person : person
-MoneyPageController --> "1" HotelAccess : hotelAcces
+MoneyPageController --> "1" HotelAccess : hotelAccess
 
-RemoteErrorPageController --> "n" MessageListener : listners
+RemoteErrorPageController --> "n" MessageListener : listeners
 
 @enduml
 ```
