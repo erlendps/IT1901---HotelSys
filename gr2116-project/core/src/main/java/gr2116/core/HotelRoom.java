@@ -36,8 +36,8 @@ public class HotelRoom {
   /**
    * Constructs a hotel room, of the given type and with the given room number.
    *
-   * @param roomType the given room type.
-   * @param number the given room number.
+   * @param roomType the type of room to construct
+   * @param number the room's number
    */
   public HotelRoom(final HotelRoomType roomType, final int number) {
     if (roomType == null) {
@@ -134,7 +134,7 @@ public class HotelRoom {
   /**
    * Adds the given amenity to the room's collection of amenities.
    *
-   * @param amenity the given amenity.
+   * @param amenity the amenity to add
    * 
    * @throws IllegalArgumentException if amenity is null
    */
@@ -159,7 +159,7 @@ public class HotelRoom {
   /**
    * Removes the given amenity to the room's collection of amenities.
    *
-   * @param amenity the given amenity.
+   * @param amenity the amenity to remove
    */
   public final void removeAmenity(final Amenity amenity) {
     amenities.remove(amenity);
@@ -168,7 +168,7 @@ public class HotelRoom {
   /**
    * Returns whether or not the room includes the given amenity.
    *
-   * @param amenity the given amenity.
+   * @param amenity the amenity to check
    *
    * @return true if the room includes the amenity, false otherwise.
    */
@@ -179,7 +179,7 @@ public class HotelRoom {
   /**
    * Returns whether or not the room is available on the given date.
    *
-   * @param date the given date.
+   * @param date the date to check
    *
    * @return true if the room is available, false otherwise.
    */
@@ -191,8 +191,8 @@ public class HotelRoom {
    * Returns whether or not the room is available between the given
    * start date and end date.
    *
-   * @param startDate the given start date.
-   * @param endDate the given end date.
+   * @param startDate the start date of the interval
+   * @param endDate the end date of the interval
    *
    * @return true if the room is available, false otherwise.
    */
@@ -205,7 +205,7 @@ public class HotelRoom {
   /**
    * Adds the given reservation to the room's reservation calendar.
    *
-   * @param reservation the given reservation.
+   * @param reservation the reservation to add
    * 
    * @throws IllegalArgumentException if reservation is null
    */
@@ -238,8 +238,8 @@ public class HotelRoom {
    * Verifies that the start date is before the end date.
    * Throws and IllegalArgumentException this is not the case.
    *
-   * @param startDate the given start date.
-   * @param endDate the given end date.
+   * @param startDate the start date of the interval
+   * @param endDate the end date of the interval
    *
    * @throws IllegalArgumentException if startDate is chronologically after endDate.
    */

@@ -17,19 +17,23 @@ import java.nio.file.Paths;
  */
 public class HotelPersistence {
   private ObjectMapper mapper;
-  protected static String DATA_FOLDER;
+  private String dataFolder;
   private String prefix;
 
   /**
    * Constructor, creates an object mapper with our custom HotelModule.
+   *
+   * @throws IllegalStateException if the HotelSys directory couldn't be created
    */
   public HotelPersistence() {
     mapper = createObjectMapper();
     File directory = new File(System.getProperty("user.home"), "HotelSys");
     if (!directory.exists()) {
-      directory.mkdir();
+      if (!directory.mkdir()) {
+        throw new IllegalStateException("HotelSys directory couldn't be created.");
+      }
     }
-    DATA_FOLDER = Paths.get(directory.toString()).toString();
+    dataFolder = Paths.get(directory.toString()).toString();
   }
 
   /**
@@ -100,11 +104,13 @@ public class HotelPersistence {
     }
     try { 
       Reader reader = new FileReader(
-          Paths.get(DATA_FOLDER, prefix + "Hotel.json").toFile(),
+          Paths.get(dataFolder, prefix + "Hotel.json").toFile(),
           StandardCharsets.UTF_8);
-      return readHotel(reader);
+      Hotel hotel = readHotel(reader);
+      reader.close();
+      return hotel;
     } catch (IOException e) {
-      System.err.println("Could not find " + DATA_FOLDER + "/" + prefix + "Hotel.json");
+      System.err.println("Could not find " + dataFolder + "/" + prefix + "Hotel.json");
       return new Hotel(RoomGenerator.generateRooms(30)); // Generate 30 rooms, can be changed
     }
       
@@ -125,7 +131,7 @@ public class HotelPersistence {
       throw new IllegalArgumentException("Hotel is null.");
     }
     try (Writer writer = new FileWriter(
-        Paths.get(DATA_FOLDER, prefix + "Hotel.json").toFile(),
+        Paths.get(dataFolder, prefix + "Hotel.json").toFile(),
         StandardCharsets.UTF_8)) {
       writeHotel(hotel, writer);
     }

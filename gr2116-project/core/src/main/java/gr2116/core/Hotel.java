@@ -52,7 +52,7 @@ public class Hotel implements Iterable<HotelRoom> {
   /**
    * Adds the given room to the hotel.
    *
-   * @param room the given room.
+   * @param room the HotelRoom to add
    * 
    * @throws IllegalArgumentException if room is null
    */
@@ -66,7 +66,7 @@ public class Hotel implements Iterable<HotelRoom> {
   /**
    * Removes the given room from the hotel.
    *
-   * @param room the given room.
+   * @param room the HotelRoom to remove
    */
   public final void removeRoom(final HotelRoom room) {
     rooms.remove(String.valueOf(room.getNumber()));
@@ -75,7 +75,7 @@ public class Hotel implements Iterable<HotelRoom> {
   /**
    * Adds a new person (user) to the Hotel.
    *
-   * @param person the person to be added
+   * @param person the Person to be added
    *
    * @return true if person was added, false otherwise
    *
