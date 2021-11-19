@@ -11,7 +11,7 @@ generere klassediagrammer med PlantUML. Disse kan man også se under [images](..
 
 ## core
 
-![klassediagram core](../images/core.png "Klassediagram core")
+![klassediagram core](../images/core.PNG "Klassediagram core")
 
 ## ui
 
