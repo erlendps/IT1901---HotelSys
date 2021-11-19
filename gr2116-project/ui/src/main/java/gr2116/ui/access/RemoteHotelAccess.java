@@ -191,18 +191,6 @@ public class RemoteHotelAccess implements HotelAccess {
   }
 
   /**
-   * Saves the hotel. Not really important here since the REST API takes care of saving.
-   */
-  @Override
-  public void saveHotel() {
-    try {
-      hotelPersistence.saveHotel(hotel);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
-  /**
    * Helper method that returns a URI for the room with the given number. E.g a room with number
    * 411, the method would return http://localhost:8080/rest/hotel/rooms/411.
    *

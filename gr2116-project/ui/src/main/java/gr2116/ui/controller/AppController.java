@@ -108,6 +108,7 @@ public class AppController implements MessageListener {
         return;
       }
       hotelAccess.addPerson(dataPerson);
+
       moveToMainPage(dataPerson);
     } else if (message == Message.Login && data instanceof Person) {
       Person dataPerson = (Person) data;
@@ -126,7 +127,6 @@ public class AppController implements MessageListener {
       }
       moveToMainPage(person);
     } else if (message == Message.SignOut) {
-      save();
       moveToFrontPage();
     } else if (message == Message.MoneyPage && data instanceof Person) {
       Person person = (Person) data;
@@ -236,15 +236,6 @@ public class AppController implements MessageListener {
    */
   public void load() {
     hotelAccess.loadHotel();
-  }
-  
-  /**
-   * Save data to JSON files, from memory.
-   * Files might have been modified, as users might have been created 
-   * or bookings might have been made.
-   */
-  public void save() {
-    hotelAccess.saveHotel();
   }
 
   /**

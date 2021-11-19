@@ -21,8 +21,6 @@ public interface HotelAccess {
 
   void loadHotel();
 
-  void saveHotel();
-
   void makeReservation(Person person, int hotelRoomNumber, LocalDate startDate, LocalDate endDate);
 
   void addBalance(Person person, double amount);

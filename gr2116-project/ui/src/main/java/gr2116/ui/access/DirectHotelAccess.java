@@ -25,6 +25,7 @@ public class DirectHotelAccess implements HotelAccess {
   @Override
   public void addPerson(Person person) {
     hotel.addPerson(person);
+    saveHotel();
   }
 
   @Override
@@ -46,7 +47,6 @@ public class DirectHotelAccess implements HotelAccess {
     }
   }
 
-  @Override
   public void saveHotel() {
     try {
       hotelPersistence.saveHotel(hotel);
@@ -59,10 +59,12 @@ public class DirectHotelAccess implements HotelAccess {
   public void makeReservation(Person person, int hotelRoomNumber,
       LocalDate startDate, LocalDate endDate) {
     hotel.makeReservation(person, hotelRoomNumber, startDate, endDate);
+    saveHotel();
   }
 
   @Override
   public void addBalance(Person person, double amount) {
     person.addBalance(amount);
+    saveHotel();
   }
 }
