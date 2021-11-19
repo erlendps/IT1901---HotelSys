@@ -30,7 +30,7 @@ public class RoomResource {
   /**
    * Sets the HotelPersistence for this resource.
    *
-   * @param hotelPersistence
+   * @param hotelPersistence the HotelPersistance to be set
    */
   public void setHotelPersistence(HotelPersistence hotelPersistence) {
     this.hotelPersistence = hotelPersistence;

@@ -17,14 +17,18 @@ import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
+/**
+ * Tests HotelModule class.
+ */
 public class HotelModuleTest {
   private ObjectMapper mapper;
   private Hotel hotel;
   private HotelRoom room;
   private Person person;
 
-
+  /**
+   * Setup for tests.
+   */
   @BeforeEach
   public void setup() {
     mapper = HotelPersistence.createObjectMapper();

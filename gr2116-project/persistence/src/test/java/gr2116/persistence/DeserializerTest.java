@@ -12,6 +12,9 @@ import gr2116.core.Reservation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Tests HotelDeserializer, PersonDeserializer, ReservationDeserializer and RoomDeserializer.
+ */
 public class DeserializerTest {
   private static ObjectMapper mapper;
 

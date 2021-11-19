@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * Deserializes Hotel from json.
+ */
 public class HotelDeserializer extends JsonDeserializer<Hotel> {
   private final PersonDeserializer personDeserializer = new PersonDeserializer();
   private final RoomDeserializer roomDeserializer = new RoomDeserializer();

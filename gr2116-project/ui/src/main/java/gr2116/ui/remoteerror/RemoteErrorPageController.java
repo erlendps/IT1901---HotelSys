@@ -37,7 +37,7 @@ public class RemoteErrorPageController {
   public void initialize() {
     errorText.setText(DynamicText.RemoteServerError.getMessage());
     reconnectButton.setOnAction((event) -> {
-      notifyListeners(Message.Reconnect);
+      notifyListeners(Message.Reconnect, null);
     });
   }
 
@@ -78,10 +78,10 @@ public class RemoteErrorPageController {
    * @param message The message (from Message Enum)
    * @param data The object to send with the notification
    */
-  public final void notifyListeners(final Message message) {
+  public final void notifyListeners(final Message message, final Object data) {
     System.out.println(listeners);
     for (MessageListener listener : listeners) {
-      listener.receiveMessage(this, message, null);
+      listener.receiveMessage(this, message, data);
     }
   }
 }

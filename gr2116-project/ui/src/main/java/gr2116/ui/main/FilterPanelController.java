@@ -190,11 +190,12 @@ public class FilterPanelController {
    */
   public final void notifyListeners() {
     for (MessageListener listener : listeners) {
-      HotelRoomFilter filter = new HotelRoomFilter(startDatePicker.getValue(),
-                      endDatePicker.getValue(),
-                      roomTypeChoiceBox.getValue(),
-                      floorSpinner.isDisable() ? null : floorSpinner.getValue(),
-                      amenities);
+      HotelRoomFilter filter = new HotelRoomFilter(
+          startDatePicker.getValue(),
+          endDatePicker.getValue(),
+          roomTypeChoiceBox.getValue(),
+          floorSpinner.isDisable() ? null : floorSpinner.getValue(),
+          amenities);
       listener.receiveMessage(this, Message.Filter, filter);
     }
   }

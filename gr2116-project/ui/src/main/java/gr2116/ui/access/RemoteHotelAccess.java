@@ -66,7 +66,7 @@ public class RemoteHotelAccess implements HotelAccess {
    * If this.hotel is null, the method sends a GET-request to the rest api and request the Hotel
    * object stored there. If it gets a valid response, it will set this.hotel to the hotel stored
    * in the database. Else, if this.hotel is <b>not</b> null it will return the this.hotel.
-   * 
+   *
    * @return either the hotel stored within this, or the hotel stored in the database
    *
    * @throws RunTimeException if something goes wrong with the response. Most likely since the 

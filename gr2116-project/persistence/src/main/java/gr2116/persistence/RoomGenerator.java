@@ -25,6 +25,7 @@ public class RoomGenerator {
 
   /**
    * Generate <i>amount</i> different rooms and return them as a collection.
+   *
    * @param amount The amount of rooms to generate
    * @return A collection of HotelRoom objects
    */
@@ -70,6 +71,7 @@ public class RoomGenerator {
 
   /**
    * Returns a random room type.
+   *
    * @return A hotel room type from the HotelRoomType enum.
    */
   private static HotelRoomType getRoomType() {
@@ -97,6 +99,7 @@ public class RoomGenerator {
   /**
    * Set the price of the room according to the room type.
    * Fancier rooms like Suites or Penthouses are more expensive than simple rooms.
+   *
    * @param room Room to set price for
    */
   private static void setPrice(HotelRoom room) {
@@ -128,8 +131,8 @@ public class RoomGenerator {
    * Get a random integer between min and max.
    *
    * @param min Lower bound for random number
-   * @param max 
-   * @return
+   * @param max upper bound for random number
+   * @return a random number between min and max
    */
   private static int getRandomNumber(int min, int max) {
     return random.nextInt(max - min) + min;
@@ -153,6 +156,7 @@ public class RoomGenerator {
   /**
    * Get the next available room number for floor <i>floor</i>.
    * For instance, with parameter 1, the rooms 101, 102, 103 ... will be generated in succession.
+   *
    * @param floor The floor to get a room number for
    * @return An available room number
    */

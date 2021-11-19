@@ -19,14 +19,15 @@ import org.testfx.matcher.base.NodeMatchers;
 import org.testfx.matcher.control.LabeledMatchers;
 
 /**
- * 
+ * Tests the main page of the application.
  */
 public class MainPageTest extends ApplicationTest {
   AppController appController;
   
   /**
    * Start the app, load FXML and show scene.
-   * @throws IOException
+   *
+   * @throws IOException if loading of fxml fails.
    */
   @Start
   public void start(Stage stage) throws IOException {

@@ -25,11 +25,14 @@ import org.testfx.matcher.base.NodeMatchers;
 import org.testfx.matcher.control.LabeledMatchers;
 
 /**
- * 
+ * Integration test class for the program as a whole.
  */
 public class HotelIT extends ApplicationTest {
   AppController appController;
 
+  /**
+   * Initializes the app, to be tested.
+   */
   @Start
   public void start(Stage stage) throws IOException {
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("AppIT.fxml"));

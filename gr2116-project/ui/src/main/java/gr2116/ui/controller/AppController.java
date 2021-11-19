@@ -248,9 +248,9 @@ public class AppController implements MessageListener {
   }
 
   /**
-   * Sets hotelAcess.
+   * Sets hotelAccess.
    *
-   * @param hoteAcess the given hotelAcess
+   * @param hotelAccess the given hotelAcess
    */
   public void setHotelAccess(HotelAccess hotelAccess) {
     this.hotelAccess = hotelAccess;

@@ -7,7 +7,9 @@ import java.time.LocalDate;
 import java.util.Collection;
 
 /**
- * 
+ * Interface to access a Hotel.
+ * Implemented by DirectHotelAccess and RemoteHotelAccess.
+ * Makes switching between direct/remote easy.
 */
 public interface HotelAccess {
 

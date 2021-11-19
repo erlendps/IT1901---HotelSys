@@ -23,7 +23,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * 
+ * Tests HotelService.
  */
 public class HotelServiceTest extends JerseyTest {
   private ObjectMapper mapper;

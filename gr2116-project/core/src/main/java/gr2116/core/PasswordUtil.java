@@ -8,15 +8,16 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
 /**
- * 
+ * Utility class for hashing Person passwords.
  */
 public class PasswordUtil {
   private static byte[] salt = new byte[16];
 
   /**
-   * 
-   * @param password
-   * @return
+   * Hashes the given password string with PBKDF2WithHmacSHA1.
+   *
+   * @param password the password to hash
+   * @return the hashed password
    */
   public static String hashPassword(String password) {
     KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
