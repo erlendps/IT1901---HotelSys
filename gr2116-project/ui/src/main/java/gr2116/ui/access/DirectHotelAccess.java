@@ -47,6 +47,9 @@ public class DirectHotelAccess implements HotelAccess {
     }
   }
 
+  /**
+   * Saves the hotel to file.
+   */
   public void saveHotel() {
     try {
       hotelPersistence.saveHotel(hotel);
