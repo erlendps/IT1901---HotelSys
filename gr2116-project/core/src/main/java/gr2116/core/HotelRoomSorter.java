@@ -1,6 +1,5 @@
-package gr2116.ui.main;
+package gr2116.core;
 
-import gr2116.core.HotelRoom;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -11,7 +10,10 @@ import java.util.List;
 public class HotelRoomSorter {
   private SortProperty sortProperty = SortProperty.ByRoomNumber;
 
-  private enum SortProperty {
+  /**
+   * Used for selecting what property to sort by when sorting rooms.
+   */
+  public enum SortProperty {
     ByPrice((HotelRoom roomA, HotelRoom roomB) -> {
       return roomA.getPrice() < roomB.getPrice() ? -1 : 1;
     }),
@@ -47,38 +49,19 @@ public class HotelRoomSorter {
   }
 
   /**
-   * Sets the sort property to sort by price.
-   * Switches between increasing and decreasing if property is already price.
+   * Returns the current sort property.
+   *
+   * @param sortProperty the current sort property
+   * @throws IllegalArgumentException if sortProperty is null
    */
-  public void sortByPrice() {
-    if (sortProperty == SortProperty.ByPrice) {
-      sortProperty = SortProperty.ByPriceDecreasing;
-    } else {
-      sortProperty = SortProperty.ByPrice;
+  public void setSortProperty(SortProperty sortProperty) {
+    if (sortProperty == null) {
+      throw new IllegalArgumentException("Sort property cannot be null!");
     }
+    this.sortProperty = sortProperty;
   }
 
-  /**
-   * Sets the sort property to sort by room number.
-   * Switches between increasing and decreasing if property is already room number.
-   */
-  public void sortByRoomNumber() {
-    if (sortProperty == SortProperty.ByRoomNumber) {
-      sortProperty = SortProperty.ByRoomNumberDecreasing;
-    } else {
-      sortProperty = SortProperty.ByRoomNumber;
-    }
-  }
-  
-  /**
-   * Sets the sort property to sort by anemity count.
-   * Switches between increasing and decreasing if property is already amenity count.
-   */
-  public void sortByAmenityCount() {
-    if (sortProperty == SortProperty.ByAmenityCountDecreasing) {
-      sortProperty = SortProperty.ByAmenityCount;
-    } else {
-      sortProperty = SortProperty.ByAmenityCountDecreasing;
-    }
+  public SortProperty getSortProperty() {
+    return sortProperty;
   }
 }
