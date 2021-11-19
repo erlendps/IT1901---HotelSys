@@ -3,6 +3,8 @@ package gr2116.core;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -38,17 +40,6 @@ public class ReservationCalenderTest {
                 () -> calendar.addReservation(reservation));
   }
 
-  // @Test
-  // public void testRemoveReservation() {
-  //   calendar.addReservation(reservation);
-  //   assertTrue(checkReservations(calendar, Arrays.asList(reservation)));
-  //   calendar.removeReservation(reservation);
-  //   assertTrue(checkReservations(calendar, Arrays.asList()));
-
-  //   assertThrows(IllegalArgumentException.class,
-  //               () -> calendar.removeReservation(reservation));
-  // }
-
   @Test
   public void testIsAvailable() {
     assertTrue(calendar.isAvailable(today));
@@ -70,5 +61,11 @@ public class ReservationCalenderTest {
     assertFalse(calendar.isAvailable(today, tomorrow));
     assertFalse(calendar.isAvailable(today.plusDays(1), tomorrow.plusDays(1)));
     assertTrue(calendar.isAvailable(today.plusDays(2), tomorrow.plusDays(2)));
+  }
+
+  @Test
+  public void testGetReservationIds() {
+    calendar.addReservation(reservation);
+    assertTrue(calendar.getReservationIds().contains(reservation.getId()));
   }
 }

@@ -85,12 +85,6 @@ public class Hotel implements Iterable<HotelRoom> {
     if (person == null) {
       throw new IllegalArgumentException("Person cant be null.");
     }
-    /*
-    if (persons.contains(person)) {
-      System.out.println(
-          "[Warning]: Tried to add a person that was already added.");
-      return false;
-    } */
     return persons.put(person.getUsername(), person);
   }
 
