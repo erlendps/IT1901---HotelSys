@@ -45,7 +45,7 @@ public class RoomGenerator {
       int number = getNextNumber(floor);
       
       // Get a random room type
-      HotelRoomType type = getRoomType();
+      HotelRoomType type = getRandomRoomType();
 
       // Make the room object from the generated data and set the price accordingly
       HotelRoom room = new HotelRoom(type, number);
@@ -74,7 +74,7 @@ public class RoomGenerator {
    *
    * @return A hotel room type from the HotelRoomType enum.
    */
-  private static HotelRoomType getRoomType() {
+  private static HotelRoomType getRandomRoomType() {
     int num = random.nextInt(6);
     switch (num) {
       case 0:

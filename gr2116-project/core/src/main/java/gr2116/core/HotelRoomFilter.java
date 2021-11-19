@@ -34,7 +34,11 @@ public class HotelRoomFilter implements Predicate<HotelRoom> {
     this.endDate = endDate;
     this.roomType = roomType;
     this.floor = floor;
-    this.amenities = amenities;
+    if (amenities != null) {
+      this.amenities = new HashMap<>(amenities);
+    } else {
+      this.amenities = null;
+    }
   }
 
   /**
