@@ -24,8 +24,8 @@
       <Separator prefHeight="30.0" prefWidth="200.0" />
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
          <children>
-            <Button fx:id="signOutButton" mnemonicParsing="false" text="Sign out" />
-            <Button fx:id="makeDepositButton" alignment="CENTER_RIGHT" mnemonicParsing="false" text="Make deposit" />
+            <Button fx:id="signOutButton"  onAction="#signOutButtonOnAction" mnemonicParsing="false" text="Sign out" />
+            <Button fx:id="makeDepositButton" onAction="#makeDepositButtonOnAction" alignment="CENTER_RIGHT" mnemonicParsing="false" text="Make deposit" />
          </children>
       </HBox>
    </children>

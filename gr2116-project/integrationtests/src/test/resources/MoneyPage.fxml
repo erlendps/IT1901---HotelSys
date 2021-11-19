@@ -21,8 +21,10 @@
             <Separator prefHeight="30.0" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Button fx:id="moneyCancelButton" mnemonicParsing="false" text="Cancel" />
-                  <Button fx:id="addFundsButton" mnemonicParsing="false" text="Add funds" />
+                  <Button fx:id="moneyCancelButton" onAction="#moneyCancelButtonOnAction" mnemonicParsing="false" text="Cancel" />
+                  <Button fx:id="addFundsButton"
+                  onAction="#addFundsButtonOnAction" mnemonicParsing="false"
+                  text="Add funds" />
                </children>
             </HBox>
             <Label fx:id="usernameErrorLabel" />
