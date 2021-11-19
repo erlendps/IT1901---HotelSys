@@ -59,19 +59,14 @@ public class UserPanelController implements PersonListener {
     updatePanel();
   }
 
-  /**
-   * Initialize the FXML. Set the sign out button to send a 
-   * message to listeners, to sign out.
-   */
   @FXML
-  private void initialize() {
-    signOutButton.setOnAction((event) -> {
-      notifyListeners(Message.SignOut);
-    });
+  private void signOutButtonOnAction() {
+    notifyListeners(Message.SignOut);
+  }
 
-    makeDepositButton.setOnAction((event) -> {
-      notifyListeners(Message.MoneyPage);
-    });
+  @FXML
+  private void makeDepositButtonOnAction() {
+    notifyListeners(Message.MoneyPage);
   }
 
   /**

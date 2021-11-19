@@ -36,9 +36,11 @@ public class RemoteErrorPageController {
   @FXML
   public void initialize() {
     errorText.setText(DynamicText.RemoteServerError.getMessage());
-    reconnectButton.setOnAction((event) -> {
-      notifyListeners(Message.Reconnect, null);
-    });
+  }
+
+  @FXML
+  private void reconnectButtonOnAction() {
+    notifyListeners(Message.Reconnect, null);
   }
 
   /**
