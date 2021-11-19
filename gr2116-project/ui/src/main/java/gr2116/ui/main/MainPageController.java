@@ -2,7 +2,9 @@ package gr2116.ui.main;
 
 import gr2116.core.HotelRoom;
 import gr2116.core.HotelRoomFilter;
+import gr2116.core.HotelRoomSorter;
 import gr2116.core.Person;
+import gr2116.core.HotelRoomSorter.SortProperty;
 import gr2116.ui.DynamicText;
 import gr2116.ui.access.HotelAccess;
 import gr2116.ui.message.Message;
@@ -153,21 +155,45 @@ public class MainPageController implements MessageListener {
     }
   }
 
+  /**
+   * Sets the sort property to sort by price.
+   * Switches between increasing and decreasing if property is already price.
+   */
   @FXML
   private void sortByPrice() {
-    hotelRoomSorter.sortByPrice();
+    if (hotelRoomSorter.getSortProperty() != SortProperty.ByPrice) {
+      hotelRoomSorter.setSortProperty(SortProperty.ByPrice);
+    } else {
+      hotelRoomSorter.setSortProperty(SortProperty.ByPriceDecreasing);
+    }
     buildRoomList();
   }
 
+  /**
+   * Sets the sort property to sort by room number.
+   * Switches between increasing and decreasing if property is already room number.
+   */
   @FXML
   private void sortByRoomNumber() {
-    hotelRoomSorter.sortByRoomNumber();
+    if (hotelRoomSorter.getSortProperty() != SortProperty.ByRoomNumber) {
+      hotelRoomSorter.setSortProperty(SortProperty.ByRoomNumber);
+    } else {
+      hotelRoomSorter.setSortProperty(SortProperty.ByRoomNumberDecreasing);
+    }
     buildRoomList();
   }
 
+  /**
+   * Sets the sort property to sort by anemity count.
+   * Switches between increasing and decreasing if property is already amenity count.
+   */
   @FXML
   private void sortByAmenityCount() {
-    hotelRoomSorter.sortByAmenityCount();
+    if (hotelRoomSorter.getSortProperty() != SortProperty.ByAmenityCount) {
+      hotelRoomSorter.setSortProperty(SortProperty.ByAmenityCount);
+    } else {
+      hotelRoomSorter.setSortProperty(SortProperty.ByAmenityCountDecreasing);
+    }
     buildRoomList();
   }
 
