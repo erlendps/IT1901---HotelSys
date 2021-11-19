@@ -5,14 +5,13 @@ import gr2116.persistence.HotelPersistence;
 import gr2116.ui.DynamicText;
 import gr2116.ui.access.DirectHotelAccess;
 import gr2116.ui.access.HotelAccess;
+import gr2116.ui.access.RemoteHotelAccess;
+import gr2116.ui.front.FrontPageController;
 import gr2116.ui.main.MainPageController;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
 import gr2116.ui.money.MoneyPageController;
 import gr2116.ui.remoteerror.RemoteErrorPageController;
-import gr2116.ui.access.RemoteHotelAccess;
-import gr2116.ui.front.FrontPageController;
-
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -74,7 +73,7 @@ public class AppController implements MessageListener {
       RemoteHotelAccess remoteHotelAccess;
       try {
         System.out.println("Using endpoint URI @ " + endpointUri);
-        remoteHotelAccess = new RemoteHotelAccess(hotelPersistence, new URI(endpointUri));
+        remoteHotelAccess = new RemoteHotelAccess(new URI(endpointUri));
         hotelAccess = remoteHotelAccess;
         System.out.println("Using RemoteHotelAccess as access model.");
       } catch (URISyntaxException e) {
@@ -109,6 +108,7 @@ public class AppController implements MessageListener {
         return;
       }
       hotelAccess.addPerson(dataPerson);
+
       moveToMainPage(dataPerson);
     } else if (message == Message.Login && data instanceof Person) {
       Person dataPerson = (Person) data;
@@ -127,7 +127,6 @@ public class AppController implements MessageListener {
       }
       moveToMainPage(person);
     } else if (message == Message.SignOut) {
-      save();
       moveToFrontPage();
     } else if (message == Message.MoneyPage && data instanceof Person) {
       Person person = (Person) data;
@@ -238,20 +237,11 @@ public class AppController implements MessageListener {
   public void load() {
     hotelAccess.loadHotel();
   }
-  
-  /**
-   * Save data to JSON files, from memory.
-   * Files might have been modified, as users might have been created 
-   * or bookings might have been made.
-   */
-  public void save() {
-    hotelAccess.saveHotel();
-  }
 
   /**
-   * Sets hotelAcess.
+   * Sets hotelAccess.
    *
-   * @param hoteAcess the given hotelAcess
+   * @param hotelAccess the given hotelAcess
    */
   public void setHotelAccess(HotelAccess hotelAccess) {
     this.hotelAccess = hotelAccess;

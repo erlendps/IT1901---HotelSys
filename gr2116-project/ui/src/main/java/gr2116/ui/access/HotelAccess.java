@@ -7,7 +7,9 @@ import java.time.LocalDate;
 import java.util.Collection;
 
 /**
- * 
+ * Interface to access a Hotel.
+ * Implemented by DirectHotelAccess and RemoteHotelAccess.
+ * Makes switching between direct/remote easy.
 */
 public interface HotelAccess {
 
@@ -18,8 +20,6 @@ public interface HotelAccess {
   Collection<HotelRoom> getRooms(HotelRoomFilter hotelRoomFilter);
 
   void loadHotel();
-
-  void saveHotel();
 
   void makeReservation(Person person, int hotelRoomNumber, LocalDate startDate, LocalDate endDate);
 

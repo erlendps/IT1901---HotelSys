@@ -30,7 +30,7 @@ public class RoomResource {
   /**
    * Sets the HotelPersistence for this resource.
    *
-   * @param hotelPersistence
+   * @param hotelPersistence the HotelPersistance to be set
    */
   public void setHotelPersistence(HotelPersistence hotelPersistence) {
     this.hotelPersistence = hotelPersistence;
@@ -56,7 +56,7 @@ public class RoomResource {
         hotelPersistence.saveHotel(this.hotel);
         System.out.println("Saved!");
       } catch (IllegalStateException | IOException e) {
-            System.err.println("Couldn't auto-save Hotel: " + e);
+        System.err.println("Couldn't auto-save Hotel: " + e);
       }
     }
   }

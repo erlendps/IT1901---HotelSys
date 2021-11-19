@@ -17,7 +17,9 @@ import java.util.Collection;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
+/**
+ * Tests HotelPersistence, both serializing and deserializing.
+ */
 public class HotelPersistenceTest {
   private HotelPersistence hotelPersistence;
   private HotelPersistence hotelPersistenceNull;

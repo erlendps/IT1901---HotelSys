@@ -1,17 +1,19 @@
-package gr2116.ui.main;
+package gr2116.core;
 
-import gr2116.core.HotelRoom;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
 /**
- * 
+ * Sorts a collection of Hotelrooms.
  */
 public class HotelRoomSorter {
   private SortProperty sortProperty = SortProperty.ByRoomNumber;
 
-  private enum SortProperty {
+  /**
+   * Used for selecting what property to sort by when sorting rooms.
+   */
+  public enum SortProperty {
     ByPrice((HotelRoom roomA, HotelRoom roomB) -> {
       return roomA.getPrice() < roomB.getPrice() ? -1 : 1;
     }),
@@ -46,27 +48,20 @@ public class HotelRoomSorter {
     return hotelRooms.stream().sorted(sortProperty.getComparator()).toList();
   }
 
-  public void sortByPrice() {
-    if (sortProperty == SortProperty.ByPrice) {
-      sortProperty = SortProperty.ByPriceDecreasing;
-    } else {
-      sortProperty = SortProperty.ByPrice;
+  /**
+   * Returns the current sort property.
+   *
+   * @param sortProperty the current sort property
+   * @throws IllegalArgumentException if sortProperty is null
+   */
+  public void setSortProperty(SortProperty sortProperty) {
+    if (sortProperty == null) {
+      throw new IllegalArgumentException("Sort property cannot be null!");
     }
+    this.sortProperty = sortProperty;
   }
 
-  public void sortByRoomNumber() {
-    if (sortProperty == SortProperty.ByRoomNumber) {
-      sortProperty = SortProperty.ByRoomNumberDecreasing;
-    } else {
-      sortProperty = SortProperty.ByRoomNumber;
-    }
-  }
-
-  public void sortByAmenityCount() {
-    if (sortProperty == SortProperty.ByAmenityCountDecreasing) {
-      sortProperty = SortProperty.ByAmenityCount;
-    } else {
-      sortProperty = SortProperty.ByAmenityCountDecreasing;
-    }
+  public SortProperty getSortProperty() {
+    return sortProperty;
   }
 }

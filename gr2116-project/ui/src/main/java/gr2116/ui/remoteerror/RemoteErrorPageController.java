@@ -1,11 +1,10 @@
 package gr2116.ui.remoteerror;
 
-import java.util.Collection;
-import java.util.HashSet;
-
 import gr2116.ui.DynamicText;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
+import java.util.Collection;
+import java.util.HashSet;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -37,9 +36,11 @@ public class RemoteErrorPageController {
   @FXML
   public void initialize() {
     errorText.setText(DynamicText.RemoteServerError.getMessage());
-    reconnectButton.setOnAction((event) -> {
-      notifyListeners(Message.Reconnect);
-    });
+  }
+
+  @FXML
+  private void reconnectButtonOnAction() {
+    notifyListeners(Message.Reconnect, null);
   }
 
   /**
@@ -79,10 +80,10 @@ public class RemoteErrorPageController {
    * @param message The message (from Message Enum)
    * @param data The object to send with the notification
    */
-  public final void notifyListeners(final Message message) {
+  public final void notifyListeners(final Message message, final Object data) {
     System.out.println(listeners);
     for (MessageListener listener : listeners) {
-      listener.receiveMessage(this, message, null);
+      listener.receiveMessage(this, message, data);
     }
   }
 }

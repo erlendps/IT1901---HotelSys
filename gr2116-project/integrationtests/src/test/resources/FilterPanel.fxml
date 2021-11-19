@@ -18,7 +18,7 @@
       <DatePicker fx:id="endDatePicker" />
       <Separator prefHeight="30.0" prefWidth="200.0" />
       <Label text="Room type:" />
-      <ChoiceBox fx:id="roomTypeChoiceBox" prefWidth="150.0" />
+      <ChoiceBox fx:id="roomTypeChoiceBox" onAction="#roomTypeChoiceBoxOnAction" prefWidth="150.0" />
       <Label fx:id="roomTypeDescription" />
       <Separator prefHeight="30.0" prefWidth="200.0" />
       <Label text="Floor:" />
@@ -33,6 +33,6 @@
       <Label text="Amenities:" />
       <VBox fx:id="amenitiesContainer"/>
       <Separator prefHeight="30.0" prefWidth="200.0" />
-      <Button text="Clear filter" fx:id="clearFilterButton"/>
+      <Button text="Clear filter" fx:id="clearFilterButton" onAction="#clearFilterButtonOnAction"/>
    </children>
 </VBox>

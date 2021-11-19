@@ -65,6 +65,12 @@ public class Person {
     return firstName;
   }
 
+  /**
+   * Sets the first name.
+   *
+   * @param firstName the string to be set as the first name
+   * @throws IllegalArgumentException if the name is invalid
+   */
   public void setFirstName(String firstName) {
     if (!isValidName(firstName)) {
       throw new IllegalArgumentException("The name is not valid");
@@ -81,6 +87,12 @@ public class Person {
     return lastName;
   }
 
+  /**
+   * Sets the last name.
+   *
+   * @param lastName the string to be set as the last name
+   * @throws IllegalArgumentException if the name is invalid
+   */
   public void setLastName(String lastName) {
     if (!isValidName(lastName)) {
       throw new IllegalArgumentException("The name is not valid");
@@ -123,6 +135,16 @@ public class Person {
     return name.matches("([A-Za-z]+.* *)+");
   }
 
+  /**
+   * Checks if the given password is valid.
+   * A valid password
+   * - is not null
+   * - has length >= 6
+   * - returns a valid hash
+   *
+   * @param password the password to check
+   * @return whether or not the password is valid
+   */
   public static boolean isValidPassword(String password) {
     if (password == null) {
       return false;
@@ -136,6 +158,12 @@ public class Person {
     return true;
   }
 
+  /**
+   * Sets the persons password.
+   *
+   * @param password the password to set
+   * @throws IllegalArgumentException if the password is invalid - see isValidPassword method.
+   */
   public void setPassword(String password) {
     if (!isValidPassword(password)) {
       throw new IllegalArgumentException("Invalid password!");
@@ -143,6 +171,13 @@ public class Person {
     this.password = PasswordUtil.hashPassword(password);
   }
 
+  /**
+   * Sets the persons password hash directly.
+   * Used when building persons from json.
+   *
+   * @param hashed the hashed password to be set
+   * @throws IllegalStateExceptino if the password has already been set
+   */
   public void setHashedPassword(String hashed) {
     if (password != null) {
       throw new IllegalStateException("Cannot override a password with a hash.");
@@ -150,10 +185,15 @@ public class Person {
     password = hashed;
   }
 
+  /**
+   * Returns the persons hashed password.
+   * The password cannot be accessed in clear text.
+   *
+   * @return the hashed password
+   */
   public String getHashedPassword() {
     return password;
   }
-
 
   /**
    * Returns the balance of this Person object.

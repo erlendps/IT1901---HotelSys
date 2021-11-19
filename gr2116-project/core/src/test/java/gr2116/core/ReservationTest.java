@@ -14,6 +14,9 @@ import java.util.Iterator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Test class for Reservation.
+ */
 public class ReservationTest {
   private Reservation res;
   private final LocalDate startDate = LocalDate.now();

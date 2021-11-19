@@ -134,36 +134,30 @@ public class MoneyPageController {
     
   }
   
-  /**
-   * Initialize MoneyPage. Sets action for the add funds-button.
-   */
   @FXML
-  private void initialize() {
+  private void addFundsButtonOnAction() {
+    String cardNumber = cardTextField.getText();
+    String moneyAmount = moneyAmountTextField.getText();
+    try {
+      validateCardNumber(cardNumber);
+    } catch (Exception e) {
+      moneyErrorLabel.setText(e.getMessage());
+      return;
+    }
+    try {
+      validateMoneyAmount(moneyAmount);
+    } catch (Exception e) {
+      moneyErrorLabel.setText(e.getMessage());
+      return;
+    }
+    hotelAccess.addBalance(person, Double.parseDouble(moneyAmount));
+    
+    notifyListeners(Message.MainPage, person);
+  }
 
-    addFundsButton.setOnAction((event) -> {
-      String cardNumber = cardTextField.getText();
-      String moneyAmount = moneyAmountTextField.getText();
-      try {
-        validateCardNumber(cardNumber);
-      } catch (Exception e) {
-        moneyErrorLabel.setText(e.getMessage());
-        return;
-      }
-      try {
-        validateMoneyAmount(moneyAmount);
-      } catch (Exception e) {
-        moneyErrorLabel.setText(e.getMessage());
-        return;
-      }
-      hotelAccess.addBalance(person, Double.parseDouble(moneyAmount));
-      
-      notifyListeners(Message.MainPage, person);
-    });
-
-    moneyCancelButton.setOnAction((event) -> {
-      notifyListeners(Message.MainPage, person);
-    });
-
+  @FXML
+  private void moneyCancelButtonOnAction() {
+    notifyListeners(Message.MainPage, person);
   }
 
   /**

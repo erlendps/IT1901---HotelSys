@@ -12,6 +12,9 @@ import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Test class for Person.
+ */
 public class PersonTest {
   Person tom;
 

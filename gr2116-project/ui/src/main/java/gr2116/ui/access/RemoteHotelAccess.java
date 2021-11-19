@@ -22,7 +22,6 @@ import java.util.Collection;
  * RemoteHotelAccess class that gets the access the Hotel with HTTP-requests.
  */
 public class RemoteHotelAccess implements HotelAccess {
-  private final HotelPersistence hotelPersistence;
   private final URI endpointBaseUri;
   private ObjectMapper mapper;
   private Hotel hotel;
@@ -30,11 +29,9 @@ public class RemoteHotelAccess implements HotelAccess {
   /**
    * Constructor for the RemoteHotelAccess object.
    *
-   * @param hotelPersistence the hotelPersistence object that handles saving if requested
    * @param endpointBaseUri the endpoint URL, in our case this will be http://localhost:8080/rest/hotel
    */
-  public RemoteHotelAccess(HotelPersistence hotelPersistence, URI endpointBaseUri) {
-    this.hotelPersistence = hotelPersistence;
+  public RemoteHotelAccess(URI endpointBaseUri) {
     this.endpointBaseUri = endpointBaseUri;
     mapper = HotelPersistence.createObjectMapper();
   }
@@ -66,7 +63,7 @@ public class RemoteHotelAccess implements HotelAccess {
    * If this.hotel is null, the method sends a GET-request to the rest api and request the Hotel
    * object stored there. If it gets a valid response, it will set this.hotel to the hotel stored
    * in the database. Else, if this.hotel is <b>not</b> null it will return the this.hotel.
-   * 
+   *
    * @return either the hotel stored within this, or the hotel stored in the database
    *
    * @throws RunTimeException if something goes wrong with the response. Most likely since the 
@@ -84,15 +81,16 @@ public class RemoteHotelAccess implements HotelAccess {
         this.hotel = mapper.readValue(response.body(), Hotel.class);
       } catch (IOException | InterruptedException e) {
         e.printStackTrace();
-        throw new RuntimeException("Error reading from the REST API.\nPerhaps the server is offline?");
+        throw new RuntimeException(
+            "Error reading from the REST API.\nPerhaps the server is offline?");
       }
     }
     return hotel;
   }
 
   /**
-   * Updates this.hotel by sending a GET-request to the restserver. This is used to sync the the hotel
-   * across multiple users using the app at the same time.
+   * Updates this.hotel by sending a GET-request to the restserver.
+   * This is used to sync the the hotel across multiple users using the app at the same time.
    *
    * @throws RunTimeException if something goes wrong with the response. Most likely since the 
    *                          rest server is offline.
@@ -108,7 +106,8 @@ public class RemoteHotelAccess implements HotelAccess {
       this.hotel = mapper.readValue(response.body(), Hotel.class);
     } catch (IOException | InterruptedException e) {
       e.printStackTrace();
-      throw new RuntimeException("Error reading from the REST API.\nPerhaps the server is offline?");
+      throw new RuntimeException(
+          "Error reading from the REST API.\nPerhaps the server is offline?");
     }
   }
 
@@ -117,8 +116,7 @@ public class RemoteHotelAccess implements HotelAccess {
    * object to json via the objectmapper and then sends the request. The method that handles
    * PUT-requests in PersonResource returns a boolean value, if that fails it will return null
    * and we can then check if this is null in this method. If this method returns null we know our
-   * database has been altered, and if it returns false we know it has failed. 
-   * 
+   * database has been altered, and if it returns false we know it has failed.
    * Each time a Person is changed, the entire record of this person in the database is updated.
    *
    * @param person the person to be PUT
@@ -146,7 +144,8 @@ public class RemoteHotelAccess implements HotelAccess {
       return false;
     } catch (IOException | InterruptedException e) {
       e.printStackTrace();
-      throw new RuntimeException("Error reading from the REST API.\nPerhaps the server is offline?");
+      throw new RuntimeException(
+          "Error reading from the REST API.\nPerhaps the server is offline?");
     }
   }
 
@@ -189,18 +188,6 @@ public class RemoteHotelAccess implements HotelAccess {
   }
 
   /**
-   * Saves the hotel. Not really important here since the REST API takes care of saving.
-   */
-  @Override
-  public void saveHotel() {
-    try {
-      hotelPersistence.saveHotel(hotel);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
-  /**
    * Helper method that returns a URI for the room with the given number. E.g a room with number
    * 411, the method would return http://localhost:8080/rest/hotel/rooms/411.
    *
@@ -217,8 +204,7 @@ public class RemoteHotelAccess implements HotelAccess {
    * HotelRoom to json via the objectmapper and then sends the request. The method that handles
    * PUT-requests in RoomResource returns a boolean value, if that fails it will return null
    * and we can then check if this is null in this method. If this method returns null we know our
-   * database has been altered, and if it returns false we know it has failed. 
-   * 
+   * database has been altered, and if it returns false we know it has failed.
    * Each time a HotelRoom is changed, the entire record of this person in the database is updated.
    *
    * @param room the room to be PUT
@@ -246,7 +232,8 @@ public class RemoteHotelAccess implements HotelAccess {
       return false;
     } catch (IOException | InterruptedException e) {
       e.printStackTrace();
-      throw new RuntimeException("Error reading from the REST API.\nPerhaps the server is offline?");
+      throw new RuntimeException(
+          "Error reading from the REST API.\nPerhaps the server is offline?");
     }
   }
 

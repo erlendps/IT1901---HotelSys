@@ -3,11 +3,11 @@ package gr2116.RESTservice.restapi;
 import gr2116.core.Hotel;
 import gr2116.core.Person;
 import gr2116.persistence.HotelPersistence;
-import jakarta.ws.rs.PUT;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import java.io.IOException;
@@ -32,7 +32,7 @@ public class PersonResource {
   /**
    * Sets the HotelPersistence for this resource.
    *
-   * @param hotelPersistence
+   * @param hotelPersistence the HotelPersistance to be set
    */
   public void setHotelPersistence(HotelPersistence hotelPersistence) {
     this.hotelPersistence = hotelPersistence;
@@ -71,7 +71,7 @@ public class PersonResource {
   */
   @GET
   @Produces(MediaType.APPLICATION_JSON)
-  public Person getPerson(){
+  public Person getPerson() {
     LOG.debug("getPerson({})", username);
     return this.person;
   }

@@ -64,9 +64,8 @@ public class FilterPanelController {
    */
   @FXML
   private void initialize() {
-
-    // Does not sort by floor.
     roomTypeDescription.setText("Select a room type.");
+    // Does not filter by floor initially.
     floorSpinner.setDisable(true);
     floorSpinner.setValueFactory(
         new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20, 1));
@@ -103,17 +102,6 @@ public class FilterPanelController {
       }
     });
 
-    // When user presses a roomtype box the site updates.
-    // If there is not selected a roomType, give message "select a room type".
-    roomTypeChoiceBox.setOnAction((event) -> {
-      HotelRoomType roomType = roomTypeChoiceBox.getValue();
-      if (roomType == null) {
-        roomTypeDescription.setText("Select a room type.");
-      } else {
-        roomTypeDescription.setText(roomType.getDescription());
-      }
-      notifyListeners();
-    });
     floorSpinner.valueProperty().addListener((obs, oldValue, newValue) -> {
       notifyListeners();
     });
@@ -121,19 +109,33 @@ public class FilterPanelController {
       floorSpinner.setDisable(!newValue);
       notifyListeners();
     });
+  }
 
+  @FXML
+  private void roomTypeChoiceBoxOnAction() {
+    // When user presses a roomtype box the site updates.
+    // If there is not selected a roomType, give message "select a room type".
+    HotelRoomType roomType = roomTypeChoiceBox.getValue();
+    if (roomType == null) {
+      roomTypeDescription.setText("Select a room type.");
+    } else {
+      roomTypeDescription.setText(roomType.getDescription());
+    }
+    notifyListeners();
+  } 
+
+  @FXML
+  private void clearFilterButtonOnAction() {
     //When user presses clear filter button, the filters clears.
-    clearFilterButton.setOnAction((event) -> {
-      startDatePicker.setValue(null);
-      endDatePicker.setValue(null);
-      roomTypeChoiceBox.setValue(null);
-      floorCheckBox.setSelected(false);
-      for (Node child : amenitiesContainer.getChildren()) {
-        AmenityCheckBox amenityCheckBox = (AmenityCheckBox) child;
-        amenityCheckBox.setSelected(false);
-      }
-      notifyListeners();
-    });
+    startDatePicker.setValue(null);
+    endDatePicker.setValue(null);
+    roomTypeChoiceBox.setValue(null);
+    floorCheckBox.setSelected(false);
+    for (Node child : amenitiesContainer.getChildren()) {
+      AmenityCheckBox amenityCheckBox = (AmenityCheckBox) child;
+      amenityCheckBox.setSelected(false);
+    }
+    notifyListeners();
   }
 
   /**
@@ -190,11 +192,12 @@ public class FilterPanelController {
    */
   public final void notifyListeners() {
     for (MessageListener listener : listeners) {
-      HotelRoomFilter filter = new HotelRoomFilter(startDatePicker.getValue(),
-                      endDatePicker.getValue(),
-                      roomTypeChoiceBox.getValue(),
-                      floorSpinner.isDisable() ? null : floorSpinner.getValue(),
-                      amenities);
+      HotelRoomFilter filter = new HotelRoomFilter(
+          startDatePicker.getValue(),
+          endDatePicker.getValue(),
+          roomTypeChoiceBox.getValue(),
+          floorSpinner.isDisable() ? null : floorSpinner.getValue(),
+          amenities);
       listener.receiveMessage(this, Message.Filter, filter);
     }
   }

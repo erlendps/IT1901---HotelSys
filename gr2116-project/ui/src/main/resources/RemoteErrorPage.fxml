@@ -25,7 +25,7 @@
                   <Font size="24.0" />
                </font>
             </Text>
-            <Button fx:id="reconnectButton" mnemonicParsing="false" prefHeight="37.0" prefWidth="113.0" text="Reconnect">
+            <Button fx:id="reconnectButton" onAction="#reconnectButtonOnAction" mnemonicParsing="false" prefHeight="37.0" prefWidth="113.0" text="Reconnect">
                <VBox.margin>
                   <Insets top="30.0" />
                </VBox.margin>

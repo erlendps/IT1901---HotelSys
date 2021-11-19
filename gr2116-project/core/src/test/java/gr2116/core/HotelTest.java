@@ -27,6 +27,9 @@ public class HotelTest {
   HotelRoom room2 = mock(HotelRoom.class);
   Collection<HotelRoom> rooms = new ArrayList<>(Arrays.asList(room1, room2));
 
+  /**
+   * Setup for tests.
+   */
   @BeforeEach
   public void setup() {
     hotel = new Hotel();

@@ -12,6 +12,9 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Test class for HotelRoom class.
+ */
 public class HotelRoomTest {
   HotelRoom roomSingle;
   HotelRoom roomDouble;

@@ -12,7 +12,8 @@ import javafx.scene.control.TextField;
 
 
 /**
- * 
+ * Controller for the login panel.
+ * Used by FrontPageController.
  */
 public class LoginPanelController {
   private Collection<MessageListener> listeners = new HashSet<>();
