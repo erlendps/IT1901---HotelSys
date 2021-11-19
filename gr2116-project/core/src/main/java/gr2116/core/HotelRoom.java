@@ -114,7 +114,7 @@ public class HotelRoom {
   /**
    * Returns the reservations.
    *
-   * @return Iterator<Reservation>
+   * @return Iterator with type Reservation
    */
   public final Iterator<Reservation> getReservations() {
     return calendar.iterator();
