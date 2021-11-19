@@ -88,7 +88,7 @@ public class ReservationTest {
   public void testEquals() {
     assertTrue(res.equals(res));
     assertFalse(res.equals(null));
-    assertFalse(res.equals("reservation"));
+    assertFalse(res.equals(new Object()));
     when(room2.getNumber()).thenReturn(101);
     Reservation res2 = new Reservation(room2, startDate, endDate);
     assertTrue(res.equals(res2));

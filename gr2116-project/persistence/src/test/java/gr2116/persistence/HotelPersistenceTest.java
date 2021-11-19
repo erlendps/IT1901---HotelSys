@@ -109,7 +109,7 @@ public class HotelPersistenceTest {
     HotelPersistence hotelPersistence = new HotelPersistence("test");
     assertEquals("test", hotelPersistence.getPrefix());
 
-    assertThrows(IllegalArgumentException.class, () -> {HotelPersistence testPersistence = new HotelPersistence("$/");});
+    assertThrows(IllegalArgumentException.class, () -> {new HotelPersistence("$/");});
 
     Hotel hotel = new Hotel();
     assertThrows(IllegalArgumentException.class, () -> hotelPersistenceNull.saveHotel(hotel));

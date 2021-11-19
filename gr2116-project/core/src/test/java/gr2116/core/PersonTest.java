@@ -116,7 +116,7 @@ public class PersonTest {
   public void testEquals() {
     assertTrue(tom.equals(tom));
     assertFalse(tom.equals(null));
-    assertFalse(tom.equals("tom"));
+    assertFalse(tom.equals(new Object()));
     Person person = new Person("tom");
     tom.setFirstName("Thomas");
     tom.setLastName("Watford");
