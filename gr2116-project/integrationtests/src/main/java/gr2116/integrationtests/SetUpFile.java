@@ -1,34 +1,40 @@
 package gr2116.integrationtests;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import gr2116.core.Amenity;
 import gr2116.core.Hotel;
 import gr2116.core.HotelRoom;
 import gr2116.core.HotelRoomType;
 import gr2116.core.Person;
 import gr2116.persistence.HotelPersistence;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Helper class that sets up and saves the file that will be used by
  * jetty when running integration tests.
  */
 public class SetUpFile {
+
+  /**
+   * Main method of SetUpFile.
+   * Generates some persons and hotel rooms to be used in IT.
+   *
+   * @param args not currently in use
+   */
   public static void main(String[] args) {
     HotelPersistence hotelPersistence = new HotelPersistence("testIt");
     // set up data
     Person rick = new Person("rick");
-    Person kyle = new Person("kyle");
-    Person tom = new Person("tom");
     rick.setFirstName("Richard");
     rick.setLastName("Willy");
     rick.setPassword("bananas");
-
+    
+    Person kyle = new Person("kyle");
     kyle.setFirstName("Kyllard");
     kyle.setLastName("Smarting");
     kyle.setPassword("owingyou1");
-
+    
+    Person tom = new Person("tom");
     tom.setFirstName("Thomas");
     tom.setLastName("Wonka");
     tom.setPassword("blueballing");
