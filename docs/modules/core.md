@@ -66,6 +66,26 @@ class HotelRoomFilter{
     + boolean test(HotelRoom) 
 }
 
+class HotelRoomSorter {
+    - SortProperty sortProperty
+    
+    + List<HotelRoom> sortRooms(Collection<HotelRoom>)
+    + void sortByProperty(SortProperty sortProperty)
+}
+
+enum SortProperty {
+    ByPrice,
+    ByPriceDecreasing,
+    ByRoomNumber,
+    ByRoomNumberDecreasing,
+    ByAmenityCount,
+    ByAmenityCountDecreasing;
+    
+    - Comparator comparator;
+    
+    + getComparator()
+}
+
 class PasswordUtil{
     - {static} byte[] salt
 
@@ -158,7 +178,7 @@ enum HotelRoomType {
     Triple,
     Quad,
     Suite,
-    Penthouse
+    Penthouse;
 }
 
 enum Amenity {
@@ -169,7 +189,7 @@ enum Amenity {
     Dryer,
     Shower,
     Bathtub,
-    Fridge
+    Fridge;
 }
 ' defining the relations
 Hotel --> "n" HotelRoom : rooms

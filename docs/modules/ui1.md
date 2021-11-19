@@ -92,15 +92,6 @@ class MainPageController {
     + void notifyListeners(Message, Object) 
 }
 
-class HotelRoomSorter {
-    - SortProperty sortProperty
-    
-    + List<HotelRoom> sortRooms(Collection<HotelRoom>)
-    + void sortByPrice()
-    + void sortByRoomNumber()
-    + void sortByAmenityCount()
-}
-
 class MoneyPageController {
     - Collection<MessageListener> listeners
     - Person person
