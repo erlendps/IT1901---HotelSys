@@ -51,6 +51,24 @@ Skjermbilde av siden for å legge inn penger. Kortnummer må være gyldig for at
 
 Appen bygger på konseptene fra den første og den andre innleveringen. Se [release1](../release1/README.md) og [release2](../release2/README.md). Nytt i den tredje utgivelsen er at appen er rigget opp med et REST API. Når man reserverer rom eller lager brukerkonto blir dette nå lagret på en server. Dermed kan man i teorien benytte appen hvor som helst, enn om det er hjemme, fra jobb eller på hotellet. Istedenfor e-post registrerer man seg nå med et brukernavn, og man lager et passord som man senere må bruke for å kunne logge inn. Brukernavnet må oppfylle krav, som nevnt under. Passordet blir hashet; det blir aldri lagret på serveren i klartekst. Vi har også realisert funksjonalitet som tillater å sortere hotellrom etter pris, romnummer og antallet fasiliteter på et rom.
 
+## Legge til rom?
+
+Vi har dessverre ikke rukket å lage et administratorpanel for applikasjonen vår, og derfor er det ikke mulig å endre eller legge til rom i hotellet. Man kan redigere JSON-filene manuelt, da disse ligger i 'user'-mappen i hvert respektive operativsystem. Slik kan potensielle kunder (hotell) legge til hotellrommene sine manuelt. Dersom vi hadde hatt mer tid til å utvikle applikasjonen, ville vi lagt til et administratorpanel. For at det skal bli enklere å teste applikasjonen, lager den nå 30 tilfeldige rom dersom ingen rom er funnet i 'user'-mappen. Dermed er det enkelt å teste applikasjonen.
+Syntaksen for å legge til rom i JSON manuelt er som følger:
+```
+Rom:
+{
+    "number" : 101,
+    "type" : "Single",
+    "amenities" : [ "KitchenFacilities", "Dryer", "Fridge" ],
+    "price" : 250.0,
+    "reservations" : [ ]
+}
+```
+
+Merk at reservations skal være en tom liste.
+
+
 ## Brukernavn
 
 Brukernavn må utelukkende bestå av bokstaver, store eller små.
