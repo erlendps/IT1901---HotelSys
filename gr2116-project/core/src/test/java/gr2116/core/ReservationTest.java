@@ -1,12 +1,16 @@
 package gr2116.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
+import java.util.Iterator;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -51,6 +55,7 @@ public class ReservationTest {
     sb.append(startDate.toString().replace("-", ""));
     sb.append(endDate.toString().replace("-", ""));
     assertEquals(sb.toString(), res.getId());
+    assertEquals(sb.toString(), res.toString());
   }
 
   @Test
@@ -66,5 +71,39 @@ public class ReservationTest {
 
     assertThrows(IllegalArgumentException.class, () ->
         new Reservation(room, endDate, startDate));
+  }
+
+  @Test
+  public void testIterator() {
+    Iterator<LocalDate> it = res.iterator();
+    assertTrue(it.hasNext());
+    assertEquals(LocalDate.now(), it.next());
+    assertTrue(it.hasNext());
+    it.next();
+    it.next();
+    it.next();
+    assertTrue(it.hasNext());
+    assertEquals(LocalDate.now().plusDays(4), it.next());
+    assertFalse(it.hasNext());
+  }
+
+  @Test
+  public void testEquals() {
+    assertTrue(res.equals(res));
+    assertFalse(res.equals(null));
+    assertFalse(res.equals(new Object()));
+    when(room2.getNumber()).thenReturn(101);
+    Reservation res2 = new Reservation(room2, startDate, endDate);
+    assertTrue(res.equals(res2));
+  }
+
+  @Test
+  public void testHash() {
+    int hash = 7;
+    int roomNumHash = Integer.valueOf(101).hashCode();
+    int startHash = startDate.hashCode();
+    hash = hash * 31 + roomNumHash;
+    hash = hash * 31 + startHash;
+    assertEquals(hash, res.hashCode());
   }
 }

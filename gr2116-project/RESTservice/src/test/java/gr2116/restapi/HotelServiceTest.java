@@ -101,4 +101,6 @@ public class HotelServiceTest extends JerseyTest {
       fail(e.getMessage());
     }
   }
+
+
 }

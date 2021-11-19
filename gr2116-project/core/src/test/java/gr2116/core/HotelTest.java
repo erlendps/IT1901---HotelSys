@@ -33,8 +33,7 @@ public class HotelTest {
   @BeforeEach
   public void setup() {
     hotel = new Hotel();
-    tom = new Person("tomhaddleford");
-    tom.addBalance(1000);
+    tom = mock(Person.class);
   }
 
   @Test
@@ -45,6 +44,9 @@ public class HotelTest {
     when(room2.getNumber()).thenReturn(102);
     Hotel fullHotel = new Hotel(rooms);
     assertEquals(rooms, fullHotel.getRooms());
+    Hotel hotelWithPerson = new Hotel(rooms, Arrays.asList(tom));
+    assertEquals(rooms, hotelWithPerson.getRooms());
+    assertEquals(Arrays.asList(tom), hotelWithPerson.getPersons());
   }
 
   @Test
@@ -53,6 +55,45 @@ public class HotelTest {
     HotelRoom room3 = mock(HotelRoom.class);
     rooms.add(room3);
     assertNotEquals(rooms, fullHotel.getRooms((r) -> true));
+  }
+
+  @Test
+  public void testAddPerson() {
+    assertThrows(IllegalArgumentException.class, () -> {
+      hotel.addPerson(null);
+    });
+    hotel.addPerson(tom);
+    assertEquals(1, hotel.getPersons().size());
+    assertEquals(tom, hotel.getPersons().iterator().next());
+    hotel.addPerson(tom);
+    assertEquals(1, hotel.getPersons().size());
+  }
+
+  @Test
+  public void testRemovePerson() {
+    hotel.addPerson(tom);
+    assertEquals(1, hotel.getPersons().size());
+    hotel.removePerson(tom);
+    assertEquals(0, hotel.getPersons().size());
+  }
+
+  @Test
+  public void testGetPersonsPredicate() {
+    // need to create instances of Person since predicate does not work with mocks.
+    Person tomas = new Person("tomas");
+    Person rick = new Person("rick");
+    tomas.addBalance(100);
+    rick.addBalance(25);
+    tomas.setFirstName("Thomas");
+    rick.setFirstName("Richard");
+    tomas.setLastName("Sanders");
+    rick.setLastName("Sanders");
+    hotel.addPerson(tomas);
+    hotel.addPerson(rick);
+    assertEquals(Arrays.asList(tomas), hotel.getPersons((p) -> p.getBalance() > 50));
+    assertEquals(0, hotel.getPersons((p) -> p.getFirstName().equals("Bernie")).size());
+    assertTrue(hotel.getPersons((p) -> p.getLastName().equals("Sanders")).contains(tomas));
+    assertTrue(hotel.getPersons((p) -> p.getLastName().equals("Sanders")).contains(rick));
   }
 
   @Test
@@ -107,21 +148,50 @@ public class HotelTest {
     hotel.addRoom(room);
     hotel.addPerson(tom);
 
+    when(tom.getBalance()).thenReturn(1000.0);
     double balanceBefore = tom.getBalance();
     hotel.makeReservation(tom, 999, start, end);
-    assertEquals(balanceBefore - room.getPrice(), tom.getBalance(),
-        "Booking one night should cost the same as the price of the hotel room.");
-
+    when(tom.getBalance()).thenReturn(900.0);
+    assertEquals(balanceBefore - room.getPrice(), tom.getBalance());
     when(room.isAvailable(start.plusDays(2), start.plusDays(2))).thenReturn(true);
     when(room.getPrice(start.plusDays(2), start.plusDays(2))).thenReturn(0.0);
-    /*
-    tom.makeReservation(room, LocalDate.of(2021, 8, 6), LocalDate.of(2021, 8, 6));
-    assertEquals(900, tom.getBalance(), "Booking 0 days should not cost money.");
-    */
     assertThrows(IllegalArgumentException.class, () -> 
         hotel.makeReservation(tom, 215, LocalDate.of(2022, 4, 3), LocalDate.of(2022, 4, 1)),
         "Booking must conform to the linear passing of time."
     );
+  }
+
+  @Test
+  public void testBadMakeReservationParameters() {
+    when(tom.getBalance()).thenReturn(20000.0);
+    assertThrows(IllegalArgumentException.class, () -> {
+      hotel.makeReservation(null, 101, today, overmorrow);
+    });
+    assertThrows(IllegalArgumentException.class, () -> {
+      hotel.makeReservation(tom, 101, null, overmorrow);
+    });
+    assertThrows(IllegalArgumentException.class, () -> {
+      hotel.makeReservation(tom, 101, today, null);
+    });
+    assertThrows(IllegalArgumentException.class, () -> {
+      hotel.makeReservation(tom, 101, today, overmorrow);
+    });
+    hotel.addPerson(tom);
+    assertThrows(IllegalStateException.class, () -> {
+      hotel.makeReservation(tom, 101, LocalDate.now().minusDays(1), overmorrow);
+    });
+    assertThrows(IllegalArgumentException.class, () -> {
+      hotel.makeReservation(tom, 101, today, overmorrow);
+    });
+    assertThrows(IllegalArgumentException.class, () -> {
+      hotel.makeReservation(tom, 101, today, overmorrow);
+    });
+    hotel.addRoom(room1);
+    when(room1.getNumber()).thenReturn(101);
+    when(room1.isAvailable(today, overmorrow)).thenReturn(false);
+    assertThrows(IllegalStateException.class, () -> {
+      hotel.makeReservation(tom, 101, today, overmorrow);
+    });
   }
 
   @Test
@@ -131,13 +201,15 @@ public class HotelTest {
     when(deluxeRoom.getPrice(today, overmorrow)).thenReturn(900.0);
     when(deluxeRoom.getNumber()).thenReturn(105);
     hotel.addRoom(deluxeRoom);
-    hotel.addPerson(tom);
+    // need to create an instance of Person here to test consistency
+    Person rick = new Person("rick");
+    rick.addBalance(10000);
+    hotel.addPerson(rick);
 
-    hotel.makeReservation(tom, 105, today, overmorrow);
-    assertEquals(1, tom.getReservationIds().size(),
-        "User should have one reservation after booking one room.");
-    ArrayList<Reservation> reservations = new ArrayList<Reservation>();
-    tom.getReservations().forEach((r) -> reservations.add(r));
+    hotel.makeReservation(rick, 105, today, overmorrow);
+    assertEquals(1, rick.getReservationIds().size());
+    ArrayList<Reservation> reservations = new ArrayList<>();
+    rick.getReservations().forEach((r) -> reservations.add(r));
     assertEquals(deluxeRoom.getNumber(), reservations.get(0).getRoomNumber());
   }
 

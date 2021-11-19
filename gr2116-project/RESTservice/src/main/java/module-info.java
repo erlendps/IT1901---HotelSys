@@ -1,6 +1,6 @@
+@SuppressWarnings("module") // This is to suppress warnings about jersey modules being "unstable"
 module gr2116.RESTservice {
   requires jakarta.ws.rs;
-
   requires jersey.common;
   requires jersey.server;
   requires jersey.media.json.jackson;
