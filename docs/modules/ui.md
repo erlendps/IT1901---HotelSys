@@ -13,7 +13,7 @@ class DirectHotelAccess {
     + void makeReservation(Person, int, LocalDate, LocalDate)
 }
 
-class RemoteHotelAccess{
+class RemoteHotelAccess {
     - HotelPersistence hotelPersistence
     - URI endpointBaseUri
     - ObjectMapper mapper
@@ -41,7 +41,7 @@ class App {
     + {static} void main(String[])
 }
 
-class RemoteApp{
+class RemoteApp {
     + void start(Stage) 
     + void main(String[])
 }
@@ -75,7 +75,7 @@ class AppController {
     + void setHotelAccess(HotelAccess)
 }
 
-class FrontPageController{
+class FrontPageController {
     - Collection<MessageListener> listeners 
     - VBox panelContainer
     - VBox defaultPanel
@@ -97,7 +97,7 @@ class FrontPageController{
     + receiveMessage(Object, Message, Object)
 }
 
-class LoginPanelController{
+class LoginPanelController {
     - Collection<MessageListener> listeners
     - TextField usernameTextField
     - TextField passwordTextField
@@ -111,7 +111,7 @@ class LoginPanelController{
     + void notifyListeners(Message, Object)
 }
 
-class SignUpPanelController{
+class SignUpPanelController {
     - Collection<MessageListener> listeners
     - TextField usernameTextField
     - TextField passwordTextField
@@ -127,49 +127,9 @@ class SignUpPanelController{
     + void notifyListeners(Message, Object)
 }
 
-enum Message {
-    SignIn,
-    SignOut,
-    Filter
-}
-
-class FxmlUtils {
-    + {static} void loadFxml
-}
-
-class LoginPage {
-    - TextField nameTextField
-    - TextField usernameTextField
-    - Button signInButton
-    - Label usernameErrorLabel
-    - Label nameTitleLabel
-
-    + loginPage()
-    + void setLoadedPersons(Collection<Person>)
-    - void initialize()
-    - void setNameVisible(boolean)
-    + void addListener(MessageListener)
-    + void removeListener(MessageListener)
-    + void notifyListeners(Message, Object)
-
-}
-
-class MainPage {
-    - VBox roomItemContainer
-    - AnchorPane filterPane
-    - AnchorPane userPane
-    + MainPage(Person)
-    + void initialize()
-    - void buildRoomList()
-    + void addRooms(Collection<HotelRoom>)
-    + void receiveNotification(Object, Message, Object)
-    + void addListener(MessageListener)
-    + void removeListener(MessageListener)
-    + void notifyListeners(Message, Object)
-}
-
-class FilterPanel {
-    - HashMap<Amenities, Boolean> amenities
+class FilterPanelController {
+    - Collection<MessageListener> listeners
+    - HashMap<Amenity, Boolean> amenities
     - DatePicker startDatePicker
     - DatePicker endDatePicker
     - ChoiceBox<HotelRoomType> roomTypeChoiceBox
@@ -178,50 +138,157 @@ class FilterPanel {
     - Spinner<Integer> floorSpinner
     - CheckBox floorCheckBox
     - Button clearFilterButton
-    + FilterPanel()
+
+    + FilterPanelController()
     - void initialize()
+    }
+
+class AmenityCheckBox {
+    - CheckBox checkBox 
+    
+    + AmenityCheckBox(Amenity)
     + void addListener(MessageListener)
     + void removeListener(MessageListener)
-    + void notifyListeners(Message, Object)
-}
-
-class HotelRoomFilter {
-    - LocalDate startDate
-    - LocalDate endDate
-    - HashMap<Amenity, boolean> amenities
-    - Integer floor
-    + HotelRoomFilter(LocalDate, LocalDate, HotelRoomType, Integer, HashMap<Amenity, boolean>)
-    + boolean hasValidDates()
-    + Predicate<HotelRoom> getPredicate()
-    + LocalDate getStartDate()
-    + LocalDate getEndDate()
-    + HotelRoomType getRoomType()
+    + void notifyListeners()
 }
 
 class HotelRoomListItem {
+    - HotelRoom room
     - Label numberLabel
     - Label typeLabel
     - Label amenitiesLabel
+    - Label pricePerNightLabel
+    - Label totalPriceLabel
+    - Label totalPriceTextLabel
+    - Label errorLabel
     - Button makeReservationButton
+
     + HotelRoomListItem(HotelRoom)
-    - void initialize()
-    + void setOnMakeReservationButtonAction()
+    - void initialize() 
+    + void setTotalPriceLabel(String)
+    + void setErrorLabel(String)
+    + void setOnMakeReservationButtonAction(EventHandler<ActionEvent>)
 }
 
-class UserPanel {
+class HotelRoomSorter {
+    - SortProperty sortProperty
+    
+    + List<HotelRoom> sortRooms(Collection<HotelRoom>)
+    + void sortByPrice()
+    + void sortByRoomNumber()
+    + void sortByAmenityCount()
+}
+
+class MainPageController {
+    - HotelAccess hotelAccess
+    -  HotelRoomFilter hotelRoomFilter
+    - Person person
+    - Collection<MessageListener> listeners
+    - HotelRoomSorter hotelRoomSorter
+    - VBox roomItemContainer
+    - VBox filterPanelView
+    - VBox userPanelView
+    - Label errorLabel
+    - UserPanelController userPanelViewController
+    - FilterPanelController filterPanelViewController
+
+    - void initialize()
+    + void setHotelAccess(HotelAccess)
+    + void setPerson(Person)
+    - void buildRoomList()
+    - void sortByPrice()
+    - void sortByRoomNumber() 
+    - void sortByAmenityCount() 
+    + void receiveMessage(Object, Message, Object)
+    + void addListener(MessageListener)
+    + void removeListener(MessageListener)
+    + void notifyListeners(Message, Object) 
+}
+
+class UserPanelController {
+    - Collection<MessageListener> listeners
+    - Person person
     - Label nameLabel
     - Label usernameLabel
     - Label balanceLabel
     - Button signOutButton
+    - Button makeDepositButton
     - ListView<Label> reservationListView
-    + UserPanel(Person)
+
+    + UserPanelController() 
+    + void setPerson(Person)
     - void initialize()
     + void addListener(MessageListener)
     + void removeListener(MessageListener)
-    + void notifyListeners(Message, Object)
-    + void receiveNotification(Person)
-    - void updatePanel(Person)
+    + void notifyListeners(Message)
+    + void onPersonChanged(Person)
+    - void updatePanel()
+}
 
+class MoneyPageController {
+    - Collection<MessageListener> listeners
+    - Person person
+    - HotelAccess hotelAccess
+    - TextField cardTextField
+    - TextField moneyAmountTextField
+    - Button addFundsButton
+    - Button moneyCancelButton
+    - Label moneyErrorLabel
+
+    + MoneyPageController()
+    + void setPerson(Person)
+    + void setHotelAccess(HotelAccess)
+    - void validateCardNumber(String)
+    - boolean checkLuhnsAlgorithm(String)
+    - void validateMoneyAmount(String)
+    - void initialize()
+    + final void addListener(MessageListener)
+    + void removeListener(MessageListener)
+    + void notifyListeners(Message,Object)
+}
+
+class RemoteErrorPageController {
+    - Collection<MessageListener> listeners 
+    - Button reconnectButton
+    - Text errorText
+    - Label failuresLabel
+
+    + RemoteErrorPageController()
+    + void initialize()
+    + void incrementFailures()
+    + void addListener(MessageListener)
+    + void removeListener(MessageListener)
+    + void notifyListeners(Message)
+}
+
+class FxmlUtils {
+    + {static} void loadFxml(final T)
+}
+
+
+enum SortProperty {
+    - Comparator<HotelRoom> comparator
+
+    - SortProperty(Comparator<HotelRoom>)
+    + Comparator<HotelRoom> getComparator()
+}
+
+enum Message {
+    Login,
+    SignUp,
+    SignOut,
+    Filter,
+    MainPage,
+    MoneyPage,
+    Reconnect,
+    Cancel
+}
+
+enum DynamicText {
+    - String message
+
+    + DynamicText(String)
+    + String getMessage()
 }
 
 interface HotelAccess {
@@ -238,16 +305,27 @@ interface MessageListener {
     void receiveNotification(Object, Message, Object)
 }
 
-interface PersonListener
 interface Application
+interface HBox
 class Person
 class HotelRoom
 class Hotel
 class HotelPersistence
+class Amenity
+class HotelRoomFilter
 
 AppController ..|> MessageListener
 AppController --> "1" HotelPersistence : hotelPersistence
 AppController --> "1" HotelAccess : hotelAccess
+
+RemoteApp ..|> Application
+App ..|> Application
+RemoteHotelAccess ..|> HotelAccess
+RemoteHotelAccess --> "1" Hotel : hotel
+RemoteHotelAccess --> "1" HotelPersistence : hotelPersistence
+DirectHotelAccess ..|> HotelAccess
+DirectHotelAccess -> "1" Hotel : hotel
+DirectHotelAccess -> "1" HotelPersistence : hotelPersistence
 
 FrontPageController --> "1" LoginPanelController : loginPanelController
 FrontPageController --> "1" SignUpPanelController : signUpPanelController
@@ -258,28 +336,32 @@ LoginPanelController --> "n" MessageListener : listners
 
 SignUpPanelController --> "n" MessageListener : listners
 
-LoginPage --> "n" MessageListener : listeners
-LoginPage --> "n" Person : loadedPersons
-MainPage --> "1" FilterPanel : filterPanel
-MainPage --> "1" UserPanel : userPanel
-MainPage --> "1" Hotel : hotel
-MainPage --> "1" HotelRoomFilter : hotelRoomFilter
-MainPage --> "1" Person : person
-MainPage --> "n" MessageListener : listeners
-FilterPanel --> "n" MessageListener : listeners
-HotelRoomFilter --> "1" HotelRoomType : roomType
+FilterPanelController --> "n" MessageListener : listners
+FilterPanelController --> "n" Amenity : amenities
+
+AmenityCheckBox --+ FilterPanelController
+AmenityCheckBox ..|> HBox
+
 HotelRoomListItem --> "1" HotelRoom : room
-UserPanel --> "n" MessageListener : listeners
-UserPanel --> "1" Person : person
-UserPanel ..|> PersonListener
-RemoteApp ..|> Application
-App ..|> Application
-RemoteHotelAccess ..|> HotelAccess
-RemoteHotelAccess --> "1" Hotel : hotel
-RemoteHotelAccess --> "1" HotelPersistence : hotelPersistence
-DirectHotelAccess ..|> HotelAccess
-DirectHotelAccess -> "1" Hotel : hotel
-DirectHotelAccess -> "1" HotelPersistence : hotelPersistence
+HotelRoomListItem ..|> HBox
+
+SortProperty --+ HotelRoomSorter
+
+MainPageController --> "1" HotelAccess : hotelAcces
+MainPageController --> "1" HotelRoomFilter : hotelRoomFilter
+MainPageController --> "1" Person : person
+MainPageController --> "n" MessageListener : listners
+MainPageController --> "1" HotelRoomSorter : hotelRoomSorter
+
+UserPanelController  --> "n" MessageListener : listners
+UserPanelController --> "1" Person : person
+UserPanelController ..|> MessageListener
+
+MoneyPageController --> "n" MessageListener : listners
+MoneyPageController --> "1" Person : person
+MoneyPageController --> "1" HotelAccess : hotelAcces
+
+RemoteErrorPageController --> "n" MessageListener : listners
 
 @enduml
 ```
