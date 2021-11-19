@@ -1,0 +1,228 @@
+
+[ERROR] Medium: gr2116.core.HotelRoom.getCalendar() may expose internal representation by returning HotelRoom.calendar [gr2116.core.HotelRoom] At HotelRoom.java:[line 119] EI_EXPOSE_REP
+
+[ERROR] Medium: gr2116.persistence.HotelPersistence.loadHotel() may fail to clean up java.io.Reader on checked exception [gr2116.persistence.HotelPersistence, gr2116.persistence.HotelPersistence, gr2116.persistence.HotelPersistence, gr2116.persistence.HotelPersistence, gr2116.persistence.HotelPersistence] Obligation to clean up resource created at HotelPersistence.java:[line 106] is not dischargedPath continues at HotelPersistence.java:[line 109]Path continues at HotelPersistence.java:[line 112]Path continues at HotelPersistence.java:[line 113]Path continues at HotelPersistence.java:[line 114] OBL_UNSATISFIED_OBLIGATION_EXCEPTION_EDGE
+[ERROR] High: Random object created and used only once in gr2116.persistence.RoomGenerator.generateRooms(int) [gr2116.persistence.RoomGenerator] At RoomGenerator.java:[line 55] DMI_RANDOM_USED_ONLY_ONCE
+[ERROR] High: Random object created and used only once in gr2116.persistence.RoomGenerator.generateRooms(int) [gr2116.persistence.RoomGenerator, gr2116.persistence.RoomGenerator] At RoomGenerator.java:[line 44]Another occurrence at RoomGenerator.java:[line 58] DMI_RANDOM_USED_ONLY_ONCE
+[ERROR] High: Random object created and used only once in gr2116.persistence.RoomGenerator.getRandomNumber(int, int) [gr2116.persistence.RoomGenerator] At RoomGenerator.java:[line 138] DMI_RANDOM_USED_ONLY_ONCE
+[ERROR] High: Random object created and used only once in gr2116.persistence.RoomGenerator.getRandomRoomType() [gr2116.persistence.RoomGenerator] At RoomGenerator.java:[line 78] DMI_RANDOM_USED_ONLY_ONCE
+[ERROR] High: Self comparison of jsonNode with itself gr2116.persistence.internal.HotelDeserializer.deserialize(JsonNode) [gr2116.persistence.internal.HotelDeserializer] At HotelDeserializer.java:[line 36] SA_LOCAL_SELF_COMPARISON
+[ERROR] High: Self comparison of jsonNode with itself gr2116.persistence.internal.PersonDeserializer.deserialize(JsonNode) [gr2116.persistence.internal.PersonDeserializer] At PersonDeserializer.java:[line 39] SA_LOCAL_SELF_COMPARISON
+[ERROR] High: Self comparison of jsonNode with itself gr2116.persistence.internal.ReservationDeserializer.deserialize(JsonNode) [gr2116.persistence.internal.ReservationDeserializer] At ReservationDeserializer.java:[line 42] SA_LOCAL_SELF_COMPARISON
+[ERROR] High: Self comparison of jsonNode with itself gr2116.persistence.internal.RoomDeserializer.deserialize(JsonNode) [gr2116.persistence.internal.RoomDeserializer] At RoomDeserializer.java:[line 47] SA_LOCAL_SELF_COMPARISON
+
+[ERROR] Medium: new gr2116.ui.access.DirectHotelAccess(HotelPersistence) may expose internal representation by storing an externally mutable object into DirectHotelAccess.hotelPersistence [gr2116.ui.access.DirectHotelAccess] At DirectHotelAccess.java:[line 21] EI_EXPOSE_REP2
+[ERROR] Medium: gr2116.ui.controller.AppController.getHotelAccess() may expose internal representation by returning AppController.hotelAccess [gr2116.ui.controller.AppController] At AppController.java:[line 221] EI_EXPOSE_REP
+[ERROR] Medium: gr2116.ui.controller.AppController.getHotelPersistence() may expose internal representation by returning AppController.hotelPersistence [gr2116.ui.controller.AppController] At AppController.java:[line 230] EI_EXPOSE_REP
+[ERROR] Medium: gr2116.ui.controller.AppController.setHotelAccess(HotelAccess) may expose internal representation by storing an externally mutable object into AppController.hotelAccess [gr2116.ui.controller.AppController] At AppController.java:[line 247] EI_EXPOSE_REP2
+[ERROR] Medium: gr2116.ui.front.FrontPageController.getLoginPanelViewController() may expose internal representation by returning FrontPageController.loginPanelViewController [gr2116.ui.front.FrontPageController] At FrontPageController.java:[line 65] EI_EXPOSE_REP
+[ERROR] Medium: gr2116.ui.front.FrontPageController.getSignUpPanelViewController() may expose internal representation by returning FrontPageController.signUpPanelViewController [gr2116.ui.front.FrontPageController] At FrontPageController.java:[line 69] EI_EXPOSE_REP
+[ERROR] Medium: new gr2116.ui.main.HotelRoomListItem(HotelRoom) may expose internal representation by storing an externally mutable object into HotelRoomListItem.room [gr2116.ui.main.HotelRoomListItem] At HotelRoomListItem.java:[line 52] EI_EXPOSE_REP2
+[ERROR] Medium: gr2116.ui.main.MainPageController.setHotelAccess(HotelAccess) may expose internal representation by storing an externally mutable object into MainPageController.hotelAccess [gr2116.ui.main.MainPageController] At MainPageController.java:[line 71] EI_EXPOSE_REP2
+[ERROR] Medium: gr2116.ui.main.MainPageController.setPerson(Person) may expose internal representation by storing an externally mutable object into MainPageController.person [gr2116.ui.main.MainPageController] At MainPageController.java:[line 88] EI_EXPOSE_REP2
+[ERROR] Medium: gr2116.ui.main.UserPanelController.setPerson(Person) may expose internal representation by storing an externally mutable object into UserPanelController.person [gr2116.ui.main.UserPanelController] At UserPanelController.java:[line 57] EI_EXPOSE_REP2
+[ERROR] Medium: gr2116.ui.money.MoneyPageController.setHotelAccess(HotelAccess) may expose internal representation by storing an externally mutable object into MoneyPageController.hotelAccess [gr2116.ui.money.MoneyPageController] At MoneyPageController.java:[line 56] EI_EXPOSE_REP2
+[ERROR] Medium: gr2116.ui.money.MoneyPageController.setPerson(Person) may expose internal representation by storing an externally mutable object into MoneyPageController.person [gr2116.ui.money.MoneyPageController] At MoneyPageController.java:[line 42] EI_EXPOSE_REP2
+
+[ERROR] Medium: gr2116.RESTservice.restapi.HotelService.getHotel() may expose internal representation by returning HotelService.hotel [gr2116.RESTservice.restapi.HotelService] At HotelService.java:[line 40] EI_EXPOSE_REP
+[ERROR] Medium: gr2116.RESTservice.restapi.PersonResource.getPerson() may expose internal representation by returning PersonResource.person [gr2116.RESTservice.restapi.PersonResource] At PersonResource.java:[line 76] EI_EXPOSE_REP
+[ERROR] Medium: new gr2116.RESTservice.restapi.PersonResource(String, Person, Hotel) may expose internal representation by storing an externally mutable object into PersonResource.hotel [gr2116.RESTservice.restapi.PersonResource] At PersonResource.java:[line 51] EI_EXPOSE_REP2
+[ERROR] Medium: new gr2116.RESTservice.restapi.PersonResource(String, Person, Hotel) may expose internal representation by storing an externally mutable object into PersonResource.person [gr2116.RESTservice.restapi.PersonResource] At PersonResource.java:[line 49] EI_EXPOSE_REP2
+[ERROR] Medium: gr2116.RESTservice.restapi.PersonResource.setHotelPersistence(HotelPersistence) may expose internal representation by storing an externally mutable object into PersonResource.hotelPersistence [gr2116.RESTservice.restapi.PersonResource] At PersonResource.java:[line 38] EI_EXPOSE_REP2
+[ERROR] Medium: gr2116.RESTservice.restapi.RoomResource.getHotelRoom() may expose internal representation by returning RoomResource.room [gr2116.RESTservice.restapi.RoomResource] At RoomResource.java:[line 74] EI_EXPOSE_REP
+[ERROR] Medium: new gr2116.RESTservice.restapi.RoomResource(HotelRoom, Hotel) may expose internal representation by storing an externally mutable object into RoomResource.hotel [gr2116.RESTservice.restapi.RoomResource] At RoomResource.java:[line 47] EI_EXPOSE_REP2
+[ERROR] Medium: new gr2116.RESTservice.restapi.RoomResource(HotelRoom, Hotel) may expose internal representation by storing an externally mutable object into RoomResource.room [gr2116.RESTservice.restapi.RoomResource] At RoomResource.java:[line 46] EI_EXPOSE_REP2
+[ERROR] Medium: gr2116.RESTservice.restapi.RoomResource.setHotelPersistence(HotelPersistence) may expose internal representation by storing an externally mutable object into RoomResource.hotelPersistence [gr2116.RESTservice.restapi.RoomResource] At RoomResource.java:[line 36] EI_EXPOSE_REP2
+[ERROR] Medium: gr2116.RESTservice.restserver.HotelConfig.getHotel() may expose internal representation by returning HotelConfig.hotel [gr2116.RESTservice.restserver.HotelConfig] At HotelConfig.java:[line 63] EI_EXPOSE_REP
+[ERROR] Medium: gr2116.RESTservice.restserver.HotelConfig.setHotel(Hotel) may expose internal representation by storing an externally mutable object into HotelConfig.hotel [gr2116.RESTservice.restserver.HotelConfig] At HotelConfig.java:[line 54] EI_EXPOSE_REP2
+[ERROR] Medium: gr2116.RESTservice.restserver.HotelITConfig.getHotel() may expose internal representation by returning HotelITConfig.hotel [gr2116.RESTservice.restserver.HotelITConfig] At HotelITConfig.java:[line 63] EI_EXPOSE_REP
+[ERROR] Medium: gr2116.RESTservice.restserver.HotelITConfig.setHotel(Hotel) may expose internal representation by storing an externally mutable object into HotelITConfig.hotel [gr2116.RESTservice.restserver.HotelITConfig] At HotelITConfig.java:[line 54] EI_EXPOSE_REP2
+[ERROR] Medium: gr2116.RESTservice.restserver.HotelModuleObjectMapperProvider.getContext(Class) may expose internal representation by returning HotelModuleObjectMapperProvider.objectMapper [gr2116.RESTservice.restserver.HotelModuleObjectMapperProvider] At HotelModuleObjectMapperProvider.java:[line 26] EI_EXPOSE_REP
+[INFO] 
+
+
+To see bug detail using the Spotbugs GUI, use the following command "mvn spotbugs:gui"
+
+
+
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.8.7:report (jacoco-report) @ RESTservice ---
+[INFO] Loading execution data file /Users/computerman/Documents/NTNU/ITProsjekt/gr2116/gr2116-project/RESTservice/target/jacoco.exec
+[INFO] Analyzed bundle 'RESTservice' with 8 classes
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ RESTservice ---
+[INFO] Installing /Users/computerman/Documents/NTNU/ITProsjekt/gr2116/gr2116-project/RESTservice/target/RESTservice-0.0.1-SNAPSHOT.jar to /Users/computerman/.m2/repository/gr2116/RESTservice/0.0.1-SNAPSHOT/RESTservice-0.0.1-SNAPSHOT.jar
+[INFO] Installing /Users/computerman/Documents/NTNU/ITProsjekt/gr2116/gr2116-project/RESTservice/pom.xml to /Users/computerman/.m2/repository/gr2116/RESTservice/0.0.1-SNAPSHOT/RESTservice-0.0.1-SNAPSHOT.pom
+[INFO] 
+[INFO] ---------------------------< gr2116:webapp >----------------------------
+[INFO] Building webapp 0.0.1-SNAPSHOT                                     [6/7]
+[INFO] --------------------------------[ war ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ webapp ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ webapp ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ webapp ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /Users/computerman/Documents/NTNU/ITProsjekt/gr2116/gr2116-project/webapp/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.1:testCompile (default-testCompile) @ webapp ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-surefire-plugin:3.0.0-M5:test (default-test) @ webapp ---
+[INFO] 
+[INFO] --- maven-war-plugin:3.3.1:war (default-war) @ webapp ---
+[INFO] Packaging webapp
+[INFO] Assembling webapp [webapp] in [/Users/computerman/Documents/NTNU/ITProsjekt/gr2116/gr2116-project/webapp/target/webapp-0.0.1-SNAPSHOT]
+[INFO] Processing war project
+[INFO] Copying webapp resources [/Users/computerman/Documents/NTNU/ITProsjekt/gr2116/gr2116-project/webapp/src/main/webapp]
+[INFO] Building war: /Users/computerman/Documents/NTNU/ITProsjekt/gr2116/gr2116-project/webapp/target/webapp-0.0.1-SNAPSHOT.war
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ webapp ---
+[INFO] Installing /Users/computerman/Documents/NTNU/ITProsjekt/gr2116/gr2116-project/webapp/target/webapp-0.0.1-SNAPSHOT.war to /Users/computerman/.m2/repository/gr2116/webapp/0.0.1-SNAPSHOT/webapp-0.0.1-SNAPSHOT.war
+[INFO] Installing /Users/computerman/Documents/NTNU/ITProsjekt/gr2116/gr2116-project/webapp/pom.xml to /Users/computerman/.m2/repository/gr2116/webapp/0.0.1-SNAPSHOT/webapp-0.0.1-SNAPSHOT.pom
+[INFO] 
+[INFO] ----------------------< gr2116:integrationtests >-----------------------
+[INFO] Building integrationtests 0.0.1-SNAPSHOT                           [7/7]
+[INFO] --------------------------------[ war ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ integrationtests ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ integrationtests ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ integrationtests ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 10 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.1:testCompile (default-testCompile) @ integrationtests ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:3.0.0-M5:test (default-test) @ integrationtests ---
+[INFO] 
+[INFO] --- maven-war-plugin:3.3.1:war (default-war) @ integrationtests ---
+[INFO] Packaging webapp
+[INFO] Assembling webapp [integrationtests] in [/Users/computerman/Documents/NTNU/ITProsjekt/gr2116/gr2116-project/integrationtests/target/integrationtests-0.0.1-SNAPSHOT]
+[INFO] Processing war project
+[INFO] Copying webapp resources [/Users/computerman/Documents/NTNU/ITProsjekt/gr2116/gr2116-project/integrationtests/src/main/webapp]
+[INFO] Building war: /Users/computerman/Documents/NTNU/ITProsjekt/gr2116/gr2116-project/integrationtests/target/integrationtests-0.0.1-SNAPSHOT.war
+[INFO] 
+[INFO] >>> jetty-maven-plugin:11.0.2:start (start-jetty) > validate @ integrationtests >>>
+[INFO] 
+[INFO] <<< jetty-maven-plugin:11.0.2:start (start-jetty) < validate @ integrationtests <<<
+[INFO] 
+[INFO] 
+[INFO] --- jetty-maven-plugin:11.0.2:start (start-jetty) @ integrationtests ---
+[INFO] Configuring Jetty for project: integrationtests
+[INFO] Classes = /Users/computerman/Documents/NTNU/ITProsjekt/gr2116/gr2116-project/integrationtests/target/classes
+[INFO] Context path = /
+[INFO] Tmp directory = /Users/computerman/Documents/NTNU/ITProsjekt/gr2116/gr2116-project/integrationtests/target/tmp
+[INFO] web.xml file = file:///Users/computerman/Documents/NTNU/ITProsjekt/gr2116/gr2116-project/integrationtests/src/main/webapp/WEB-INF/web.xml
+[INFO] Webapp directory = /Users/computerman/Documents/NTNU/ITProsjekt/gr2116/gr2116-project/integrationtests/src/main/webapp
+[INFO] Web defaults = org/eclipse/jetty/webapp/webdefault.xml
+[INFO] Web overrides =  none
+[INFO] jetty-11.0.2; built: 2021-03-26T06:42:38.152Z; git: 14ed9a526425785884b34f59e1153fede0ae3552; jvm 16.0.2+7
+[WARNING] javax.activation.ActivationDataFlavor scanned from multiple locations: jar:file:///Users/computerman/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar!/javax/activation/ActivationDataFlavor.class, jar:file:///Users/computerman/.m2/repository/javax/activation/activation/1.1.1/activation-1.1.1.jar!/javax/activation/ActivationDataFlavor.class
+[WARNING] javax.activation.CommandInfo scanned from multiple locations: jar:file:///Users/computerman/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar!/javax/activation/CommandInfo.class, jar:file:///Users/computerman/.m2/repository/javax/activation/activation/1.1.1/activation-1.1.1.jar!/javax/activation/CommandInfo.class
+[WARNING] javax.activation.CommandMap scanned from multiple locations: jar:file:///Users/computerman/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar!/javax/activation/CommandMap.class, jar:file:///Users/computerman/.m2/repository/javax/activation/activation/1.1.1/activation-1.1.1.jar!/javax/activation/CommandMap.class
+[WARNING] javax.activation.CommandObject scanned from multiple locations: jar:file:///Users/computerman/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar!/javax/activation/CommandObject.class, jar:file:///Users/computerman/.m2/repository/javax/activation/activation/1.1.1/activation-1.1.1.jar!/javax/activation/CommandObject.class
+[WARNING] javax.activation.DataContentHandler scanned from multiple locations: jar:file:///Users/computerman/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar!/javax/activation/DataContentHandler.class, jar:file:///Users/computerman/.m2/repository/javax/activation/activation/1.1.1/activation-1.1.1.jar!/javax/activation/DataContentHandler.class
+[WARNING] javax.activation.DataContentHandlerFactory scanned from multiple locations: jar:file:///Users/computerman/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar!/javax/activation/DataContentHandlerFactory.class, jar:file:///Users/computerman/.m2/repository/javax/activation/activation/1.1.1/activation-1.1.1.jar!/javax/activation/DataContentHandlerFactory.class
+[WARNING] javax.activation.DataHandler$1 scanned from multiple locations: jar:file:///Users/computerman/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar!/javax/activation/DataHandler$1.class, jar:file:///Users/computerman/.m2/repository/javax/activation/activation/1.1.1/activation-1.1.1.jar!/javax/activation/DataHandler$1.class
+[WARNING] javax.activation.DataHandler scanned from multiple locations: jar:file:///Users/computerman/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar!/javax/activation/DataHandler.class, jar:file:///Users/computerman/.m2/repository/javax/activation/activation/1.1.1/activation-1.1.1.jar!/javax/activation/DataHandler.class
+[WARNING] javax.activation.DataHandlerDataSource scanned from multiple locations: jar:file:///Users/computerman/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar!/javax/activation/DataHandlerDataSource.class, jar:file:///Users/computerman/.m2/repository/javax/activation/activation/1.1.1/activation-1.1.1.jar!/javax/activation/DataHandlerDataSource.class
+[WARNING] javax.activation.DataSource scanned from multiple locations: jar:file:///Users/computerman/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar!/javax/activation/DataSource.class, jar:file:///Users/computerman/.m2/repository/javax/activation/activation/1.1.1/activation-1.1.1.jar!/javax/activation/DataSource.class
+[WARNING] javax.activation.DataSourceDataContentHandler scanned from multiple locations: jar:file:///Users/computerman/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar!/javax/activation/DataSourceDataContentHandler.class, jar:file:///Users/computerman/.m2/repository/javax/activation/activation/1.1.1/activation-1.1.1.jar!/javax/activation/DataSourceDataContentHandler.class
+[WARNING] javax.activation.FileDataSource scanned from multiple locations: jar:file:///Users/computerman/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar!/javax/activation/FileDataSource.class, jar:file:///Users/computerman/.m2/repository/javax/activation/activation/1.1.1/activation-1.1.1.jar!/javax/activation/FileDataSource.class
+[WARNING] javax.activation.FileTypeMap scanned from multiple locations: jar:file:///Users/computerman/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar!/javax/activation/FileTypeMap.class, jar:file:///Users/computerman/.m2/repository/javax/activation/activation/1.1.1/activation-1.1.1.jar!/javax/activation/FileTypeMap.class
+[WARNING] javax.activation.MailcapCommandMap scanned from multiple locations: jar:file:///Users/computerman/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar!/javax/activation/MailcapCommandMap.class, jar:file:///Users/computerman/.m2/repository/javax/activation/activation/1.1.1/activation-1.1.1.jar!/javax/activation/MailcapCommandMap.class
+[WARNING] javax.activation.MimeType scanned from multiple locations: jar:file:///Users/computerman/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar!/javax/activation/MimeType.class, jar:file:///Users/computerman/.m2/repository/javax/activation/activation/1.1.1/activation-1.1.1.jar!/javax/activation/MimeType.class
+[WARNING] javax.activation.MimeTypeParameterList scanned from multiple locations: jar:file:///Users/computerman/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar!/javax/activation/MimeTypeParameterList.class, jar:file:///Users/computerman/.m2/repository/javax/activation/activation/1.1.1/activation-1.1.1.jar!/javax/activation/MimeTypeParameterList.class
+[WARNING] javax.activation.MimeTypeParseException scanned from multiple locations: jar:file:///Users/computerman/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar!/javax/activation/MimeTypeParseException.class, jar:file:///Users/computerman/.m2/repository/javax/activation/activation/1.1.1/activation-1.1.1.jar!/javax/activation/MimeTypeParseException.class
+[WARNING] javax.activation.MimetypesFileTypeMap scanned from multiple locations: jar:file:///Users/computerman/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar!/javax/activation/MimetypesFileTypeMap.class, jar:file:///Users/computerman/.m2/repository/javax/activation/activation/1.1.1/activation-1.1.1.jar!/javax/activation/MimetypesFileTypeMap.class
+[WARNING] javax.activation.ObjectDataContentHandler scanned from multiple locations: jar:file:///Users/computerman/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar!/javax/activation/ObjectDataContentHandler.class, jar:file:///Users/computerman/.m2/repository/javax/activation/activation/1.1.1/activation-1.1.1.jar!/javax/activation/ObjectDataContentHandler.class
+[WARNING] javax.activation.SecuritySupport$1 scanned from multiple locations: jar:file:///Users/computerman/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar!/javax/activation/SecuritySupport$1.class, jar:file:///Users/computerman/.m2/repository/javax/activation/activation/1.1.1/activation-1.1.1.jar!/javax/activation/SecuritySupport$1.class
+[WARNING] javax.activation.SecuritySupport$2 scanned from multiple locations: jar:file:///Users/computerman/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar!/javax/activation/SecuritySupport$2.class, jar:file:///Users/computerman/.m2/repository/javax/activation/activation/1.1.1/activation-1.1.1.jar!/javax/activation/SecuritySupport$2.class
+[WARNING] javax.activation.SecuritySupport$3 scanned from multiple locations: jar:file:///Users/computerman/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar!/javax/activation/SecuritySupport$3.class, jar:file:///Users/computerman/.m2/repository/javax/activation/activation/1.1.1/activation-1.1.1.jar!/javax/activation/SecuritySupport$3.class
+[WARNING] javax.activation.SecuritySupport$4 scanned from multiple locations: jar:file:///Users/computerman/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar!/javax/activation/SecuritySupport$4.class, jar:file:///Users/computerman/.m2/repository/javax/activation/activation/1.1.1/activation-1.1.1.jar!/javax/activation/SecuritySupport$4.class
+[WARNING] javax.activation.SecuritySupport$5 scanned from multiple locations: jar:file:///Users/computerman/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar!/javax/activation/SecuritySupport$5.class, jar:file:///Users/computerman/.m2/repository/javax/activation/activation/1.1.1/activation-1.1.1.jar!/javax/activation/SecuritySupport$5.class
+[WARNING] javax.activation.SecuritySupport scanned from multiple locations: jar:file:///Users/computerman/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar!/javax/activation/SecuritySupport.class, jar:file:///Users/computerman/.m2/repository/javax/activation/activation/1.1.1/activation-1.1.1.jar!/javax/activation/SecuritySupport.class
+[WARNING] javax.activation.URLDataSource scanned from multiple locations: jar:file:///Users/computerman/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar!/javax/activation/URLDataSource.class, jar:file:///Users/computerman/.m2/repository/javax/activation/activation/1.1.1/activation-1.1.1.jar!/javax/activation/URLDataSource.class
+[WARNING] javax.activation.UnsupportedDataTypeException scanned from multiple locations: jar:file:///Users/computerman/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar!/javax/activation/UnsupportedDataTypeException.class, jar:file:///Users/computerman/.m2/repository/javax/activation/activation/1.1.1/activation-1.1.1.jar!/javax/activation/UnsupportedDataTypeException.class
+[INFO] Session workerName=node0
+[INFO] Started o.e.j.m.p.MavenWebAppContext@6edd2ef4{/,[file:///Users/computerman/Documents/NTNU/ITProsjekt/gr2116/gr2116-project/integrationtests/src/main/webapp/],AVAILABLE}{file:///Users/computerman/Documents/NTNU/ITProsjekt/gr2116/gr2116-project/integrationtests/src/main/webapp/}
+[INFO] Started ServerConnector@3afc5e83{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
+[INFO] Started Server@43fe629a{STARTING}[11.0.2,sto=0] @132914ms
+[INFO] 
+[INFO] --- exec-maven-plugin:1.6.0:java (Set-up-file) @ integrationtests ---
+[INFO] 
+[INFO] --- maven-failsafe-plugin:3.0.0-M1:integration-test (default) @ integrationtests ---
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running gr2116.ui.HotelIT
+Using endpoint URI @ http://localhost:8080/rest/hotel/
+Using RemoteHotelAccess as access model.
+Base Hotel URI: http://localhost:8080/rest/hotel/
+Saved!
+Using endpoint URI @ http://localhost:8080/rest/hotel/
+Using RemoteHotelAccess as access model.
+Base Hotel URI: http://localhost:8080/rest/hotel/
+Using endpoint URI @ http://localhost:8080/rest/hotel/
+Using RemoteHotelAccess as access model.
+Base Hotel URI: http://localhost:8080/rest/hotel/
+Using endpoint URI @ http://localhost:8080/rest/hotel/
+Using RemoteHotelAccess as access model.
+Base Hotel URI: http://localhost:8080/rest/hotel/
+Saved!
+Using endpoint URI @ http://localhost:8080/rest/hotel/
+Using RemoteHotelAccess as access model.
+Base Hotel URI: http://localhost:8080/rest/hotel/
+Saved!
+Using endpoint URI @ http://localhost:8080/rest/hotel/
+Using RemoteHotelAccess as access model.
+Base Hotel URI: http://localhost:8080/rest/hotel/
+Using endpoint URI @ http://localhost:8080/rest/hotel/
+Using RemoteHotelAccess as access model.
+Base Hotel URI: http://localhost:8080/rest/hotel/
+Using endpoint URI @ http://localhost:8080/rest/hotel/
+Using RemoteHotelAccess as access model.
+Base Hotel URI: http://localhost:8080/rest/hotel/
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 75.124 s - in gr2116.ui.HotelIT
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jetty-maven-plugin:11.0.2:stop (stop-jetty) @ integrationtests ---
+[INFO] 
+[INFO] --- maven-failsafe-plugin:3.0.0-M1:verify (default) @ integrationtests ---
+[INFO] Stopped Server@43fe629a{STOPPING}[11.0.2,sto=0]
+[INFO] Stopped ServerConnector@3afc5e83{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ integrationtests ---
+[INFO] Installing /Users/computerman/Documents/NTNU/ITProsjekt/gr2116/gr2116-project/integrationtests/target/integrationtests-0.0.1-SNAPSHOT.war to /Users/computerman/.m2/repository/gr2116/integrationtests/0.0.1-SNAPSHOT/integrationtests-0.0.1-SNAPSHOT.war
+[INFO] Installing /Users/computerman/Documents/NTNU/ITProsjekt/gr2116/gr2116-project/integrationtests/pom.xml to /Users/computerman/.m2/repository/gr2116/integrationtests/0.0.1-SNAPSHOT/integrationtests-0.0.1-SNAPSHOT.pom
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for gr2116-project 0.0.1-SNAPSHOT:
+[INFO] 
+[INFO] gr2116-project ..................................... SUCCESS [  0.476 s]
+[INFO] core ............................................... SUCCESS [ 23.848 s]
+[INFO] persistence ........................................ SUCCESS [ 10.058 s]
+[INFO] ui ................................................. SUCCESS [01:20 min]
+[INFO] RESTservice ........................................ SUCCESS [ 12.790 s]
+[INFO] webapp ............................................. SUCCESS [  0.850 s]
+[INFO] integrationtests ................................... SUCCESS [01:20 min]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  03:29 min
+[INFO] Finished at: 2021-11-19T15:54:05+01:00
+[INFO] ------------------------------------------------------------------------
