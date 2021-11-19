@@ -92,4 +92,26 @@ Under følger noen fungerende (men falske) kortnummer for testing:
 * 4106 5778 3149 6288
 * 5172 3119 4781 6718
 
+## Diagrammer
+
+Pakkediagram, klassediagrammer og sekvensdiagrammer ligger alle i mappen [images](../images). I tillegg kan man finne mer informasjon om hver enkelt diagram i egne mapper. 
+
+### Pakkediagram
+
+En markdown-filer med kode for å
+generere pakkesiagram med PlantUML kan finnes i mappen [packagediagram](../packagediagram). 
+For mer informasjon se [README filen](../packagediagram/README.md).
+
+
+### Klassediagam
+
+Markdown-filer med kode for å
+generere klassediagrammer for alle modulene kan finnes i mappen [modules](../modules). 
+For mer informasjon se [README filen](../modules/README.md).
+
+### Sekvensdiagram
+
+To Markdown-filer som generer to sekvensdiagram for når en bruker trykker på knappen "make reservation", kan finnes i mappen [modules](../sequenceDiagrams).
+For mer informasjon se [README filen](../sequenceDiagrams/README.md).
+
 
