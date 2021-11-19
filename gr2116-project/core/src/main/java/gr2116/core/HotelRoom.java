@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.EnumSet;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -111,12 +112,12 @@ public class HotelRoom {
   }
 
   /**
-   * Returns the reservation calendar.
+   * Returns the reservations.
    *
-   * @return ReservationCalendar
+   * @return Iterator<Reservation>
    */
-  public final ReservationCalendar getCalendar() {
-    return calendar;
+  public final Iterator<Reservation> getReservations() {
+    return calendar.iterator();
   }
   
   /**

@@ -34,7 +34,7 @@ public class RoomSerializer extends JsonSerializer<HotelRoom> {
     gen.writeEndArray();
     gen.writeNumberField("price", room.getPrice());
     gen.writeArrayFieldStart("reservations");
-    Iterator<Reservation> it = room.getCalendar().iterator();
+    Iterator<Reservation> it = room.getReservations();
     while (it.hasNext()) {
       gen.writeObject(it.next());
     }
