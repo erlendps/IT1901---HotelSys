@@ -33,17 +33,17 @@ public class HotelDeserializer extends JsonDeserializer<Hotel> {
   }
 
   private Hotel deserialize(JsonNode jsonNode) {
-    if (jsonNode instanceof ObjectNode objectNode) {
+    if (jsonNode instanceof ObjectNode) {
       Collection<HotelRoom> rooms = new ArrayList<>();
       Collection<Person> persons = new ArrayList<>();
-      JsonNode roomNodes = objectNode.get("rooms");
+      JsonNode roomNodes = jsonNode.get("rooms");
       if (roomNodes instanceof ArrayNode) {
         for (JsonNode roomNode : (ArrayNode) roomNodes) {
           HotelRoom room = roomDeserializer.deserialize(roomNode);
           rooms.add(room);
         }
       }
-      JsonNode personNodes = objectNode.get("persons");
+      JsonNode personNodes = jsonNode.get("persons");
       if (personNodes instanceof ArrayNode) {
         for (JsonNode personNode : (ArrayNode) personNodes) {
           Person person = personDeserializer.deserialize(personNode);

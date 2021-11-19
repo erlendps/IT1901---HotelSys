@@ -108,7 +108,7 @@ public class HotelRoomTest {
     when(res.getStartDate()).thenReturn(LocalDate.now());
     when(res.getEndDate()).thenReturn(LocalDate.now().plusDays(2));
     assertDoesNotThrow(() -> roomDouble.addReservation(res));
-    assertEquals(res, roomDouble.getCalendar().iterator().next());
+    assertEquals(res, roomDouble.getReservations().next());
     when(res.getId()).thenReturn("404");
     assertEquals("404", roomDouble.getReservationIds().iterator().next());
   }
