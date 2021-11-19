@@ -10,7 +10,8 @@ import java.time.LocalDate;
 import java.util.Collection;
 
 /**
- * 
+ * An implementation of HotelAccess which uses accesses a Hotel directly,
+ * and stores data locally. 
  */
 public class DirectHotelAccess implements HotelAccess {
   private final HotelPersistence hotelPersistence;

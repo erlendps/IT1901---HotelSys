@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import org.junit.jupiter.api.Test;
 
 /**
- * Test class for PasswordUtil
+ * Test class for PasswordUtil.
  */
 public class PasswordUtilTest {
   

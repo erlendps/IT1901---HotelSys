@@ -1,35 +1,38 @@
 package gr2116.ui;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import gr2116.ui.controller.AppController;
 import java.io.File;
 import java.io.IOException;
-
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Test;
-import org.testfx.framework.junit5.ApplicationTest;
-import org.testfx.framework.junit5.Start;
-import org.testfx.matcher.base.NodeMatchers;
-import org.testfx.matcher.control.LabeledMatchers;
-import org.junit.jupiter.api.BeforeEach;
-import org.testfx.api.FxAssert;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.DatePicker;
-import javafx.stage.Stage;
-import gr2116.ui.controller.AppController;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
+import javafx.stage.Stage;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.testfx.api.FxAssert;
+import org.testfx.framework.junit5.ApplicationTest;
+import org.testfx.framework.junit5.Start;
+import org.testfx.matcher.base.NodeMatchers;
+import org.testfx.matcher.control.LabeledMatchers;
 
-
+/**
+ * Integration test class for the program as a whole.
+ */
 public class HotelIT extends ApplicationTest {
-
   AppController appController;
 
+  /**
+   * Initializes the app, to be tested.
+   */
   @Start
   public void start(Stage stage) throws IOException {
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("AppIT.fxml"));
@@ -42,7 +45,7 @@ public class HotelIT extends ApplicationTest {
 
   @BeforeEach
   public void setUp() throws URISyntaxException {
-    System.out.println("Base Hotel URI: http://localhost:8080/rest/hotel/" );
+    System.out.println("Base Hotel URI: http://localhost:8080/rest/hotel/");
   }
 
 
@@ -58,11 +61,13 @@ public class HotelIT extends ApplicationTest {
     clickOn("#usernameTextField").write("hahahaha");
     clickOn("#passwordTextField").write("blueball");
     clickOn("#loginButton");
-    FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText(DynamicText.UsernameHasNoMatches.getMessage()));
+    FxAssert.verifyThat("#errorLabel",
+        LabeledMatchers.hasText(DynamicText.UsernameHasNoMatches.getMessage()));
     clickOn("#usernameTextField").eraseText(8);
     clickOn("#usernameTextField").write("tom");
     clickOn("#loginButton");
-    FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText(DynamicText.WrongPassword.getMessage()));
+    FxAssert.verifyThat("#errorLabel",
+        LabeledMatchers.hasText(DynamicText.WrongPassword.getMessage()));
     clickOn("#passwordTextField").write("ing");
     clickOn("#loginButton");
     FxAssert.verifyThat("#usernameLabel", LabeledMatchers.hasText("tom"));
@@ -77,14 +82,17 @@ public class HotelIT extends ApplicationTest {
     clickOn("#firstNameTextField").write("Thomas");
     clickOn("#passwordTextField").write("bananana");
     clickOn("#signUpButton");
-    FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText(DynamicText.InvalidLastName.getMessage()));
+    FxAssert.verifyThat("#errorLabel",
+        LabeledMatchers.hasText(DynamicText.InvalidLastName.getMessage()));
     clickOn("#firstNameTextField").eraseText(6);
     clickOn("#lastNameTextField").write("Bruhman");
     clickOn("#signUpButton");
-    FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText(DynamicText.InvalidFirstName.getMessage()));
+    FxAssert.verifyThat("#errorLabel",
+        LabeledMatchers.hasText(DynamicText.InvalidFirstName.getMessage()));
     clickOn("#firstNameTextField").write("Thomas");
     clickOn("#signUpButton");
-    FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText(DynamicText.UsernameTaken.getMessage()));
+    FxAssert.verifyThat("#errorLabel",
+        LabeledMatchers.hasText(DynamicText.UsernameTaken.getMessage()));
     clickOn("#usernameTextField").eraseText(3);
     clickOn("#usernameTextField").write("tomas");
     clickOn("#signUpButton");
@@ -99,11 +107,13 @@ public class HotelIT extends ApplicationTest {
     clickOn("#lastNameTextField").write("DaBaby");
     clickOn("#passwordTextField").write("bananana");
     clickOn("#signUpButton");
-    FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText(DynamicText.InvalidUsername.getMessage()));
+    FxAssert.verifyThat("#errorLabel",
+        LabeledMatchers.hasText(DynamicText.InvalidUsername.getMessage()));
     clickOn("#usernameTextField").eraseText(2);
     clickOn("#passwordTextField").eraseText(6);
     clickOn("#signUpButton");
-    FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText(DynamicText.InvalidPassword.getMessage()));
+    FxAssert.verifyThat("#errorLabel",
+        LabeledMatchers.hasText(DynamicText.InvalidPassword.getMessage()));
     clickOn("#passwordTextField").write("nana");
     clickOn("#signUpButton");
     FxAssert.verifyThat("#nameLabel", LabeledMatchers.hasText("Thomas DaBaby"));
@@ -123,17 +133,20 @@ public class HotelIT extends ApplicationTest {
     clickOn("#cardTextField").write("4106 5778 3149 6288");
     clickOn("#moneyAmountTextField").write("-100");
     clickOn("#addFundsButton");
-    FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText(DynamicText.NonIntegerError.getMessage()));
+    FxAssert.verifyThat("#moneyErrorLabel",
+        LabeledMatchers.hasText(DynamicText.NonIntegerError.getMessage()));
     
     clickOn("#moneyAmountTextField").eraseText(4);
     clickOn("#moneyAmountTextField").write("100000000");
     clickOn("#addFundsButton");
-    FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText(DynamicText.TooLargeBalanceError.getMessage()));
+    FxAssert.verifyThat("#moneyErrorLabel",
+        LabeledMatchers.hasText(DynamicText.TooLargeBalanceError.getMessage()));
 
     clickOn("#moneyAmountTextField").eraseText(9);
     clickOn("#moneyAmountTextField").write("0");
     clickOn("#addFundsButton");
-    FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText(DynamicText.ZeroBalanceError.getMessage()));
+    FxAssert.verifyThat("#moneyErrorLabel",
+        LabeledMatchers.hasText(DynamicText.ZeroBalanceError.getMessage()));
     
     clickOn("#moneyAmountTextField").eraseText(1);
     clickOn("#moneyAmountTextField").write("200");
@@ -152,7 +165,8 @@ public class HotelIT extends ApplicationTest {
     String dateFrom = systemFormat.format(LocalDate.now());
     String dateTo = systemFormat.format(LocalDate.now().plusDays(3));
     
-    clickOn((lookup("#startDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateFrom + '\n');
+    clickOn((lookup("#startDatePicker").queryAs(DatePicker.class))
+        .getEditor()).write(dateFrom + '\n');
     clickOn((lookup("#endDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateTo + '\n');
     clickOn("#amenityTelevision");
 
@@ -178,8 +192,10 @@ public class HotelIT extends ApplicationTest {
     String dateFrom = systemFormat.format(LocalDate.now());
     String dateTo = systemFormat.format(LocalDate.now().plusDays(3));
 
-    clickOn((lookup("#startDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateFrom + '\n');
-    clickOn((lookup("#endDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateTo + '\n');
+    clickOn((lookup("#startDatePicker").queryAs(DatePicker.class))
+        .getEditor()).write(dateFrom + '\n');
+    clickOn((lookup("#endDatePicker").queryAs(DatePicker.class))
+        .getEditor()).write(dateTo + '\n');
 
     clickOn("#amenityInternet");
     FxAssert.verifyThat("#roomItemContainer", NodeMatchers.hasChild("#hotelRoom102ListItem"));
@@ -213,12 +229,15 @@ public class HotelIT extends ApplicationTest {
     String dateFrom = systemFormat.format(LocalDate.now().plusDays(5));
     String dateTo = systemFormat.format(LocalDate.now().plusDays(8));
 
-    clickOn((lookup("#startDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateFrom + '\n');
-    clickOn((lookup("#endDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateTo + '\n');
+    clickOn((lookup("#startDatePicker").queryAs(DatePicker.class))
+        .getEditor()).write(dateFrom + '\n');
+    clickOn((lookup("#endDatePicker").queryAs(DatePicker.class))
+        .getEditor()).write(dateTo + '\n');
     clickOn("#amenityTelevision");
     clickOn("#amenityShower");
     FxAssert.verifyThat("#roomItemContainer", NodeMatchers.hasChild("#hotelRoom714ListItem"));
-    FxAssert.verifyThat("#hotelRoom714ErrorLabel", LabeledMatchers.hasText(DynamicText.NotEnoughMoneyError.getMessage()));
+    FxAssert.verifyThat("#hotelRoom714ErrorLabel",
+        LabeledMatchers.hasText(DynamicText.NotEnoughMoneyError.getMessage()));
 
     clickOn("#makeDepositButton");
     clickOn("#cardTextField").write("4106 5778 3149 6288");

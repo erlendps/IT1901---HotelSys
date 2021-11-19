@@ -10,14 +10,15 @@ import java.util.Arrays;
 import java.util.Collection;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Test class for ReservationCalendar.
+ */
 public class ReservationCalenderTest {
   private ReservationCalendar calendar = new ReservationCalendar();
   private LocalDate today = LocalDate.now();
   private LocalDate tomorrow = today.plusDays(1);
-  private Reservation reservation = new Reservation(
-                                  new HotelRoom(HotelRoomType.Single, 1),
-                                  today,
-                                  tomorrow);
+  private Reservation reservation =
+      new Reservation(new HotelRoom(HotelRoomType.Single, 1), today, tomorrow);
 
   private boolean checkReservations(final ReservationCalendar calendar,
                                   final Collection<Reservation> reservations) {

@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * 
+ * Sorts a collection of Hotelrooms.
  */
 public class HotelRoomSorter {
   private SortProperty sortProperty = SortProperty.ByRoomNumber;
@@ -46,6 +46,10 @@ public class HotelRoomSorter {
     return hotelRooms.stream().sorted(sortProperty.getComparator()).toList();
   }
 
+  /**
+   * Sets the sort property to sort by price.
+   * Switches between increasing and decreasing if property is already price.
+   */
   public void sortByPrice() {
     if (sortProperty == SortProperty.ByPrice) {
       sortProperty = SortProperty.ByPriceDecreasing;
@@ -54,6 +58,10 @@ public class HotelRoomSorter {
     }
   }
 
+  /**
+   * Sets the sort property to sort by room number.
+   * Switches between increasing and decreasing if property is already room number.
+   */
   public void sortByRoomNumber() {
     if (sortProperty == SortProperty.ByRoomNumber) {
       sortProperty = SortProperty.ByRoomNumberDecreasing;
@@ -61,7 +69,11 @@ public class HotelRoomSorter {
       sortProperty = SortProperty.ByRoomNumber;
     }
   }
-
+  
+  /**
+   * Sets the sort property to sort by anemity count.
+   * Switches between increasing and decreasing if property is already amenity count.
+   */
   public void sortByAmenityCount() {
     if (sortProperty == SortProperty.ByAmenityCountDecreasing) {
       sortProperty = SortProperty.ByAmenityCount;

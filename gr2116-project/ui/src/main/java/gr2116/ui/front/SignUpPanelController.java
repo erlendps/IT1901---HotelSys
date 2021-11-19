@@ -12,7 +12,8 @@ import javafx.scene.control.TextField;
 
 
 /**
- * 
+ * Controller for the sign up panel.
+ * Used by FrontPageController.
  */
 public class SignUpPanelController {
   private Collection<MessageListener> listeners = new HashSet<>();

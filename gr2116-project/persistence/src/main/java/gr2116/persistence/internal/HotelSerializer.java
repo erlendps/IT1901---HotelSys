@@ -8,6 +8,9 @@ import gr2116.core.HotelRoom;
 import gr2116.core.Person;
 import java.io.IOException;
 
+/**
+ * Serializes Hotel to json.
+ */
 public class HotelSerializer extends JsonSerializer<Hotel> {
 
   /*

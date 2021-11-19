@@ -5,14 +5,13 @@ import gr2116.persistence.HotelPersistence;
 import gr2116.ui.DynamicText;
 import gr2116.ui.access.DirectHotelAccess;
 import gr2116.ui.access.HotelAccess;
+import gr2116.ui.access.RemoteHotelAccess;
+import gr2116.ui.front.FrontPageController;
 import gr2116.ui.main.MainPageController;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
 import gr2116.ui.money.MoneyPageController;
 import gr2116.ui.remoteerror.RemoteErrorPageController;
-import gr2116.ui.access.RemoteHotelAccess;
-import gr2116.ui.front.FrontPageController;
-
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -249,9 +248,9 @@ public class AppController implements MessageListener {
   }
 
   /**
-   * Sets hotelAcess.
+   * Sets hotelAccess.
    *
-   * @param hoteAcess the given hotelAcess
+   * @param hotelAccess the given hotelAcess
    */
   public void setHotelAccess(HotelAccess hotelAccess) {
     this.hotelAccess = hotelAccess;
