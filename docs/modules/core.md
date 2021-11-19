@@ -153,23 +153,23 @@ interface "Predicate<HotelRoom>"{
 }
 
 enum HotelRoomType {
-    - String name
-    - String description
-
-    ~ HotelRoomType(String, String)
-    + String getName()
-    + String getDescription()
-    + String toString() 
+    Single,
+    Double,
+    Triple,
+    Quad,
+    Suite,
+    Penthouse
 }
 
 enum Amenity {
-    - String name
-    - String description
-
-    ~ Amenity(String, String)
-    + String getName()
-    + String getDescription()
-    + String toString()
+    KitchenFacilities,
+    Television,
+    Internet,
+    WashingMachine,
+    Dryer,
+    Shower,
+    Bathtub,
+    Fridge
 }
 ' defining the relations
 Hotel --> "n" HotelRoom : rooms
