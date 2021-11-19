@@ -15,12 +15,11 @@ class DirectHotelAccess {
 }
 
 class RemoteHotelAccess {
-    - HotelPersistence hotelPersistence
     - URI endpointBaseUri
     - ObjectMapper mapper
     - Hotel hotel
 
-    + RemoteHotelAccess(HotelPersistence, URI)
+    + RemoteHotelAccess(URI)
     - String uriParam(String)
     - URI personUri(String)
     - Hotel getHotel()
