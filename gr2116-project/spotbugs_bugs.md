@@ -3,21 +3,6 @@
 [ERROR] Medium: gr2116.persistence.HotelPersistence.loadHotel() may fail to clean up java.io.Reader on checked exception [gr2116.persistence.HotelPersistence, gr2116.persistence.HotelPersistence, gr2116.persistence.HotelPersistence, gr2116.persistence.HotelPersistence, gr2116.persistence.HotelPersistence] Obligation to clean up resource created at HotelPersistence.java:[line 106] is not dischargedPath continues at HotelPersistence.java:[line 109]Path continues at HotelPersistence.java:[line 112]Path continues at HotelPersistence.java:[line 113]Path continues at HotelPersistence.java:[line 114] OBL_UNSATISFIED_OBLIGATION_EXCEPTION_EDGE
 *****************
 
-Suppress:
-*****************
-[ERROR] High: Random object created and used only once in gr2116.persistence.RoomGenerator.generateRooms(int) [gr2116.persistence.RoomGenerator] At RoomGenerator.java:[line 55] DMI_RANDOM_USED_ONLY_ONCE
-[ERROR] High: Random object created and used only once in gr2116.persistence.RoomGenerator.generateRooms(int) [gr2116.persistence.RoomGenerator, gr2116.persistence.RoomGenerator] At RoomGenerator.java:[line 44]Another occurrence at RoomGenerator.java:[line 58] DMI_RANDOM_USED_ONLY_ONCE
-[ERROR] High: Random object created and used only once in gr2116.persistence.RoomGenerator.getRandomNumber(int, int) [gr2116.persistence.RoomGenerator] At RoomGenerator.java:[line 138] DMI_RANDOM_USED_ONLY_ONCE
-[ERROR] High: Random object created and used only once in gr2116.persistence.RoomGenerator.getRandomRoomType() [gr2116.persistence.RoomGenerator] At RoomGenerator.java:[line 78] DMI_RANDOM_USED_ONLY_ONCE
-*****************
-
-Fixed?:
-*****************
-[ERROR] High: Self comparison of jsonNode with itself gr2116.persistence.internal.HotelDeserializer.deserialize(JsonNode) [gr2116.persistence.internal.HotelDeserializer] At HotelDeserializer.java:[line 36] SA_LOCAL_SELF_COMPARISON
-[ERROR] High: Self comparison of jsonNode with itself gr2116.persistence.internal.PersonDeserializer.deserialize(JsonNode) [gr2116.persistence.internal.PersonDeserializer] At PersonDeserializer.java:[line 39] SA_LOCAL_SELF_COMPARISON
-[ERROR] High: Self comparison of jsonNode with itself gr2116.persistence.internal.ReservationDeserializer.deserialize(JsonNode) [gr2116.persistence.internal.ReservationDeserializer] At ReservationDeserializer.java:[line 42] SA_LOCAL_SELF_COMPARISON
-[ERROR] High: Self comparison of jsonNode with itself gr2116.persistence.internal.RoomDeserializer.deserialize(JsonNode) [gr2116.persistence.internal.RoomDeserializer] At RoomDeserializer.java:[line 47] SA_LOCAL_SELF_COMPARISON
-******************
 
 Suppress (They must?):
 *****************
