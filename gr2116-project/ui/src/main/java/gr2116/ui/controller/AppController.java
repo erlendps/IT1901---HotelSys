@@ -73,7 +73,7 @@ public class AppController implements MessageListener {
       RemoteHotelAccess remoteHotelAccess;
       try {
         System.out.println("Using endpoint URI @ " + endpointUri);
-        remoteHotelAccess = new RemoteHotelAccess(hotelPersistence, new URI(endpointUri));
+        remoteHotelAccess = new RemoteHotelAccess(new URI(endpointUri));
         hotelAccess = remoteHotelAccess;
         System.out.println("Using RemoteHotelAccess as access model.");
       } catch (URISyntaxException e) {

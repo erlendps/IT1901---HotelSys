@@ -22,7 +22,6 @@ import java.util.Collection;
  * RemoteHotelAccess class that gets the access the Hotel with HTTP-requests.
  */
 public class RemoteHotelAccess implements HotelAccess {
-  private final HotelPersistence hotelPersistence;
   private final URI endpointBaseUri;
   private ObjectMapper mapper;
   private Hotel hotel;
@@ -30,11 +29,9 @@ public class RemoteHotelAccess implements HotelAccess {
   /**
    * Constructor for the RemoteHotelAccess object.
    *
-   * @param hotelPersistence the hotelPersistence object that handles saving if requested
    * @param endpointBaseUri the endpoint URL, in our case this will be http://localhost:8080/rest/hotel
    */
-  public RemoteHotelAccess(HotelPersistence hotelPersistence, URI endpointBaseUri) {
-    this.hotelPersistence = hotelPersistence;
+  public RemoteHotelAccess(URI endpointBaseUri) {
     this.endpointBaseUri = endpointBaseUri;
     mapper = HotelPersistence.createObjectMapper();
   }
