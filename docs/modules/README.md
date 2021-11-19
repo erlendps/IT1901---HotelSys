@@ -15,7 +15,7 @@ generere klassediagrammer med PlantUML. Disse kan man også se under [images](..
 
 ## ui
 
-![klassediagram ui](../images/ui.png "Klassediagram ui")
+![klassediagram ui](../images/ui1.PNG "Klassediagram ui")
 
 ## persistence
 
