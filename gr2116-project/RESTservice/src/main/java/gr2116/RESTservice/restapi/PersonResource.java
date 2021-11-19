@@ -71,7 +71,7 @@ public class PersonResource {
   */
   @GET
   @Produces(MediaType.APPLICATION_JSON)
-  public Person getPerson(){
+  public Person getPerson() {
     LOG.debug("getPerson({})", username);
     return this.person;
   }

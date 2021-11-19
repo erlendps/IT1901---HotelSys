@@ -84,15 +84,16 @@ public class RemoteHotelAccess implements HotelAccess {
         this.hotel = mapper.readValue(response.body(), Hotel.class);
       } catch (IOException | InterruptedException e) {
         e.printStackTrace();
-        throw new RuntimeException("Error reading from the REST API.\nPerhaps the server is offline?");
+        throw new RuntimeException(
+            "Error reading from the REST API.\nPerhaps the server is offline?");
       }
     }
     return hotel;
   }
 
   /**
-   * Updates this.hotel by sending a GET-request to the restserver. This is used to sync the the hotel
-   * across multiple users using the app at the same time.
+   * Updates this.hotel by sending a GET-request to the restserver.
+   * This is used to sync the the hotel across multiple users using the app at the same time.
    *
    * @throws RunTimeException if something goes wrong with the response. Most likely since the 
    *                          rest server is offline.
@@ -108,7 +109,8 @@ public class RemoteHotelAccess implements HotelAccess {
       this.hotel = mapper.readValue(response.body(), Hotel.class);
     } catch (IOException | InterruptedException e) {
       e.printStackTrace();
-      throw new RuntimeException("Error reading from the REST API.\nPerhaps the server is offline?");
+      throw new RuntimeException(
+          "Error reading from the REST API.\nPerhaps the server is offline?");
     }
   }
 
@@ -117,8 +119,7 @@ public class RemoteHotelAccess implements HotelAccess {
    * object to json via the objectmapper and then sends the request. The method that handles
    * PUT-requests in PersonResource returns a boolean value, if that fails it will return null
    * and we can then check if this is null in this method. If this method returns null we know our
-   * database has been altered, and if it returns false we know it has failed. 
-   * 
+   * database has been altered, and if it returns false we know it has failed.
    * Each time a Person is changed, the entire record of this person in the database is updated.
    *
    * @param person the person to be PUT
@@ -146,7 +147,8 @@ public class RemoteHotelAccess implements HotelAccess {
       return false;
     } catch (IOException | InterruptedException e) {
       e.printStackTrace();
-      throw new RuntimeException("Error reading from the REST API.\nPerhaps the server is offline?");
+      throw new RuntimeException(
+          "Error reading from the REST API.\nPerhaps the server is offline?");
     }
   }
 
@@ -217,8 +219,7 @@ public class RemoteHotelAccess implements HotelAccess {
    * HotelRoom to json via the objectmapper and then sends the request. The method that handles
    * PUT-requests in RoomResource returns a boolean value, if that fails it will return null
    * and we can then check if this is null in this method. If this method returns null we know our
-   * database has been altered, and if it returns false we know it has failed. 
-   * 
+   * database has been altered, and if it returns false we know it has failed.
    * Each time a HotelRoom is changed, the entire record of this person in the database is updated.
    *
    * @param room the room to be PUT
@@ -246,7 +247,8 @@ public class RemoteHotelAccess implements HotelAccess {
       return false;
     } catch (IOException | InterruptedException e) {
       e.printStackTrace();
-      throw new RuntimeException("Error reading from the REST API.\nPerhaps the server is offline?");
+      throw new RuntimeException(
+          "Error reading from the REST API.\nPerhaps the server is offline?");
     }
   }
 

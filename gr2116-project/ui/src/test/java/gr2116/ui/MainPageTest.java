@@ -21,7 +21,7 @@ import org.testfx.matcher.control.LabeledMatchers;
 /**
  * 
  */
-public class MainPageTest extends ApplicationTest{
+public class MainPageTest extends ApplicationTest {
   AppController appController;
   
   /**
@@ -33,7 +33,7 @@ public class MainPageTest extends ApplicationTest{
     
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("App.fxml"));
   
-    Parent parent = fxmlLoader.load();
+    final Parent parent = fxmlLoader.load();
     appController = (AppController) fxmlLoader.getController();
     appController.setPrefix("test");
     appController.load();
@@ -62,8 +62,10 @@ public class MainPageTest extends ApplicationTest{
     String dateFrom = systemFormat.format(LocalDate.now());
     String dateTo = systemFormat.format(LocalDate.now().plusDays(3));
     
-    clickOn((lookup("#startDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateFrom + '\n');
-    clickOn((lookup("#endDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateTo + '\n');
+    clickOn((lookup("#startDatePicker").queryAs(DatePicker.class))
+        .getEditor()).write(dateFrom + '\n');
+    clickOn((lookup("#endDatePicker").queryAs(DatePicker.class))
+        .getEditor()).write(dateTo + '\n');
     clickOn("#amenityTelevision");
 
     FxAssert.verifyThat("#roomItemContainer", NodeMatchers.hasChild("#hotelRoom101ListItem"));
@@ -94,18 +96,23 @@ public class MainPageTest extends ApplicationTest{
     String dateFrom = systemFormat.format(LocalDate.now().plusDays(20));
     String dateTo = systemFormat.format(LocalDate.now().plusDays(18));
     
-    clickOn((lookup("#startDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateFrom + '\n');
-    clickOn((lookup("#endDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateTo + '\n');
-    FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText(DynamicText.TimeOrderError.getMessage()));
+    clickOn((lookup("#startDatePicker").queryAs(DatePicker.class))
+        .getEditor()).write(dateFrom + '\n');
+    clickOn((lookup("#endDatePicker").queryAs(DatePicker.class))
+        .getEditor()).write(dateTo + '\n');
+    FxAssert.verifyThat("#errorLabel",
+        LabeledMatchers.hasText(DynamicText.TimeOrderError.getMessage()));
 
     dateFrom = systemFormat.format(LocalDate.now().minusDays(2));
     dateTo = systemFormat.format(LocalDate.now().plusDays(1));  
     
     clickOn((lookup("#startDatePicker").queryAs(DatePicker.class)).getEditor()).eraseText(10);
     clickOn((lookup("#endDatePicker").queryAs(DatePicker.class)).getEditor()).eraseText(10);
-    clickOn((lookup("#startDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateFrom + '\n');
+    clickOn((lookup("#startDatePicker").queryAs(DatePicker.class))
+        .getEditor()).write(dateFrom + '\n');
     clickOn((lookup("#endDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateTo + '\n');
-    FxAssert.verifyThat("#errorLabel", LabeledMatchers.hasText(DynamicText.BeforeNowError.getMessage()));
+    FxAssert.verifyThat("#errorLabel",
+        LabeledMatchers.hasText(DynamicText.BeforeNowError.getMessage()));
   }
 
   @Test
@@ -118,11 +125,15 @@ public class MainPageTest extends ApplicationTest{
     String dateFrom = systemFormat.format(LocalDate.now());
     String dateTo = systemFormat.format(LocalDate.now().plusDays(3));
 
-    clickOn((lookup("#startDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateFrom + '\n');
-    clickOn((lookup("#endDatePicker").queryAs(DatePicker.class)).getEditor()).write(dateTo + '\n');
+    clickOn((lookup("#startDatePicker").queryAs(DatePicker.class))
+        .getEditor()).write(dateFrom + '\n');
+    clickOn((lookup("#endDatePicker").queryAs(DatePicker.class))
+        .getEditor()).write(dateTo + '\n');
 
-    FxAssert.verifyThat("#hotelRoom102TotalPriceLabel", LabeledMatchers.hasText("60.0"));
-    FxAssert.verifyThat("#hotelRoom714ErrorLabel", LabeledMatchers.hasText(DynamicText.NotEnoughMoneyError.getMessage()));
+    FxAssert.verifyThat("#hotelRoom102TotalPriceLabel",
+        LabeledMatchers.hasText("60.0"));
+    FxAssert.verifyThat("#hotelRoom714ErrorLabel",
+        LabeledMatchers.hasText(DynamicText.NotEnoughMoneyError.getMessage()));
   }
 
   @Test
@@ -132,18 +143,21 @@ public class MainPageTest extends ApplicationTest{
     clickOn("#cardTextField").write("1234 5678 1234 5678");
     clickOn("#moneyAmountTextField").write("100");
     clickOn("#addFundsButton");
-    FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText(DynamicText.InvalidCardIdentifierError.getMessage()));
+    FxAssert.verifyThat("#moneyErrorLabel",
+        LabeledMatchers.hasText(DynamicText.InvalidCardIdentifierError.getMessage()));
     clickOn("#cardTextField").eraseText(19);
 
     clickOn("#cardTextField").write("4106 5778 3149 6289");
     clickOn("#moneyAmountTextField").write("100");
     clickOn("#addFundsButton");
-    FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText(DynamicText.InvalidCardControlDigitError.getMessage()));
+    FxAssert.verifyThat("#moneyErrorLabel",
+        LabeledMatchers.hasText(DynamicText.InvalidCardControlDigitError.getMessage()));
     clickOn("#cardTextField").eraseText(19);
     
     clickOn("#cardTextField").write("1");
     clickOn("#addFundsButton");
-    FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText(DynamicText.WrongLengthCardNumberError.getMessage()));
+    FxAssert.verifyThat("#moneyErrorLabel",
+        LabeledMatchers.hasText(DynamicText.WrongLengthCardNumberError.getMessage()));
     clickOn("#cardTextField").eraseText(1);
   }
 
@@ -154,17 +168,20 @@ public class MainPageTest extends ApplicationTest{
     clickOn("#cardTextField").write("4106 5778 3149 6288");
     clickOn("#moneyAmountTextField").write("-100");
     clickOn("#addFundsButton");
-    FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText(DynamicText.NonIntegerError.getMessage()));
+    FxAssert.verifyThat("#moneyErrorLabel",
+        LabeledMatchers.hasText(DynamicText.NonIntegerError.getMessage()));
     
     clickOn("#moneyAmountTextField").eraseText(4);
     clickOn("#moneyAmountTextField").write("100000000");
     clickOn("#addFundsButton");
-    FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText(DynamicText.TooLargeBalanceError.getMessage()));
+    FxAssert.verifyThat("#moneyErrorLabel",
+        LabeledMatchers.hasText(DynamicText.TooLargeBalanceError.getMessage()));
 
     clickOn("#moneyAmountTextField").eraseText(9);
     clickOn("#moneyAmountTextField").write("0");
     clickOn("#addFundsButton");
-    FxAssert.verifyThat("#moneyErrorLabel", LabeledMatchers.hasText(DynamicText.ZeroBalanceError.getMessage()));
+    FxAssert.verifyThat("#moneyErrorLabel",
+        LabeledMatchers.hasText(DynamicText.ZeroBalanceError.getMessage()));
   }
 
   @Test
@@ -181,6 +198,7 @@ public class MainPageTest extends ApplicationTest{
   public void cancelMoney() {
     clickOn("#makeDepositButton");
     clickOn("#moneyCancelButton");
-    FxAssert.verifyThat("#makeDepositButton", LabeledMatchers.hasText("Make deposit")); // Test fails if page was not switched
+    FxAssert.verifyThat("#makeDepositButton", LabeledMatchers.hasText("Make deposit"));
+    // Test fails if page was not switched
   }
 }

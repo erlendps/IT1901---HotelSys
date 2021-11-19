@@ -33,12 +33,13 @@ public class RoomGenerator {
     Collection<HotelRoom> rooms = new ArrayList<>();
     // Set room numbers to start at 100, 200, 300..
     for (int i = 0; i < 7; i++) {
-      roomNumbers[i] = (i+1)*100;
+      roomNumbers[i] = (i + 1) * 100;
     }
 
     for (int i = 0; i < amount; i++) {
 
-      // Put room on a random floor (1 <= x <= 7) and get the next available room number on this floor
+      // Put room on a random floor (1 <= x <= 7)
+      // and get the next available room number on this floor
       int floor = random.nextInt(7) + 1;
       int number = getNextNumber(floor);
       
@@ -55,9 +56,11 @@ public class RoomGenerator {
       for (int j = maxNumOfAmenities; j > 0; j--) {
         int index = random.nextInt(8);
 
-        // The maxNumOfAmenities only puts an upper bound on the number, as some might be added multiple times.
+        // The maxNumOfAmenities only puts an upper bound on the number,
+        // as some might be added multiple times.
         // This behaviour is okay, as it does not really matter what number of amenities a room has.
-        // In that case, the amenity will still only be listed once - see implementation of addAmenity.
+        // In that case, the amenity will still only be listed once
+        // - see implementation of addAmenity.
         room.addAmenity(amenities.get(index));
       }
       rooms.add(room);
@@ -86,7 +89,8 @@ public class RoomGenerator {
         return HotelRoomType.Penthouse;
       default:
         // This should of course never happen
-        throw new IllegalStateException("Implementation of random is broken - room type was set to a number x: x < 0 or x > 5");
+        throw new IllegalStateException(
+            "Implementation of random is broken - room type was set to a number x: x < 0 or x > 5");
     }
   }
 
@@ -97,31 +101,32 @@ public class RoomGenerator {
    */
   private static void setPrice(HotelRoom room) {
     switch (room.getRoomType()) {
-    case Double:
-      room.setPrice(roundUp50(getRandomNumber(200, 500)));
-      break;
-    case Penthouse:
-      room.setPrice(roundUp50(getRandomNumber(1300, 2000)));
-      break;
-    case Quad:
-      room.setPrice(roundUp50(getRandomNumber(600, 1000)));
-      break;
-    case Single:
-      room.setPrice(roundUp50(getRandomNumber(100, 300)));
-      break;
-    case Suite:
-      room.setPrice(roundUp50(getRandomNumber(900, 1400)));
-      break;
-    case Triple:
-      room.setPrice(roundUp50(getRandomNumber(400, 700)));
-      break;
-    default:
-      throw new IllegalArgumentException("Room did not have a valid room type.");
+      case Double:
+        room.setPrice(roundUp50(getRandomNumber(200, 500)));
+        break;
+      case Penthouse:
+        room.setPrice(roundUp50(getRandomNumber(1300, 2000)));
+        break;
+      case Quad:
+        room.setPrice(roundUp50(getRandomNumber(600, 1000)));
+        break;
+      case Single:
+        room.setPrice(roundUp50(getRandomNumber(100, 300)));
+        break;
+      case Suite:
+        room.setPrice(roundUp50(getRandomNumber(900, 1400)));
+        break;
+      case Triple:
+        room.setPrice(roundUp50(getRandomNumber(400, 700)));
+        break;
+      default:
+        throw new IllegalArgumentException("Room did not have a valid room type.");
     }
   }
 
   /**
-   * Get a random integer between min and max
+   * Get a random integer between min and max.
+   *
    * @param min Lower bound for random number
    * @param max 
    * @return
@@ -131,16 +136,16 @@ public class RoomGenerator {
   }
 
   /**
-   * Round to 'nearest' ceiling 50
+   * Round to 'nearest' ceiling 50.
+   *
    * @param x Number to round
    * @return Rounded number
    */
   private static double roundUp50(int x) {
-    if (x%50 < 25) {
-      return x - (x%50); 
-    } 
-    else if (x%50 > 25) {
-      return x + (50 - (x%50)); 
+    if (x % 50 < 25) {
+      return x - (x % 50); 
+    } else if (x % 50 > 25) {
+      return x + (50 - (x % 50)); 
     } 
     return x + 25;
   }
@@ -153,8 +158,8 @@ public class RoomGenerator {
    */
   private static int getNextNumber(int floor) {
     if (1 <= floor && floor <= 7) {
-      roomNumbers[floor-1]++;
-      return roomNumbers[floor-1];
+      roomNumbers[floor - 1]++;
+      return roomNumbers[floor - 1];
     } else {
       throw new IllegalArgumentException("Floor must satisfy x: 1 ≤ x ≤ 7");
     }

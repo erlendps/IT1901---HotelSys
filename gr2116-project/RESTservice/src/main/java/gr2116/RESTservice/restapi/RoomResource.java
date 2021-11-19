@@ -56,7 +56,7 @@ public class RoomResource {
         hotelPersistence.saveHotel(this.hotel);
         System.out.println("Saved!");
       } catch (IllegalStateException | IOException e) {
-            System.err.println("Couldn't auto-save Hotel: " + e);
+        System.err.println("Couldn't auto-save Hotel: " + e);
       }
     }
   }

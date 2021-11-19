@@ -53,8 +53,8 @@ public class HotelServiceTest extends JerseyTest {
   @Test
   public void testGetHotel() {
     Response response = target(HotelService.HOTEL_SERVICE_PATH)
-    .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8")
-    .get();
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8")
+        .get();
     assertEquals(200, response.getStatus());
     try {
       // Simple methods to check if the hotel contains some correct data.
@@ -72,23 +72,25 @@ public class HotelServiceTest extends JerseyTest {
   @Test
   public void testGetRoom() {
     Response hotelResponse = target(HotelService.HOTEL_SERVICE_PATH)
-    .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8")
-    .get();
+        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8")
+        .get();
     assertEquals(200, hotelResponse.getStatus());
     try {
       Hotel hotel = mapper.readValue(hotelResponse.readEntity(String.class), Hotel.class);
 
       HotelRoom someRoom = hotel.getRooms().iterator().next();
 
-      int someRoomNumber = someRoom.getNumber();
-      double someRoomPrice = someRoom.getPrice();
-      HotelRoomType someRoomType = someRoom.getRoomType();
-      Collection<String> someRoomAmenities = someRoom.getAmenities();
+      final int someRoomNumber = someRoom.getNumber();
+      final double someRoomPrice = someRoom.getPrice();
+      final HotelRoomType someRoomType = someRoom.getRoomType();
+      final Collection<String> someRoomAmenities = someRoom.getAmenities();
 
-      Response roomResponse = target(HotelService.HOTEL_SERVICE_PATH + "/rooms/" + Integer.toString(someRoomNumber))
-        .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8")
-        .get();
-      HotelRoom receivedRoom = mapper.readValue(roomResponse.readEntity(String.class), HotelRoom.class);
+      Response roomResponse =
+          target(HotelService.HOTEL_SERVICE_PATH + "/rooms/" + Integer.toString(someRoomNumber))
+          .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8")
+          .get();
+      HotelRoom receivedRoom = mapper.readValue(
+          roomResponse.readEntity(String.class), HotelRoom.class);
 
       assertEquals(someRoomNumber, receivedRoom.getNumber());
       assertEquals(someRoomPrice, receivedRoom.getPrice());
