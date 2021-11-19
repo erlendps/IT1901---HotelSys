@@ -102,18 +102,14 @@ public class HotelPersistence {
     if (prefix == null) {
       throw new IllegalArgumentException("Prefix is null.");
     }
-    try { 
-      Reader reader = new FileReader(
-          Paths.get(dataFolder, prefix + "Hotel.json").toFile(),
-          StandardCharsets.UTF_8);
-      Hotel hotel = readHotel(reader);
-      reader.close();
-      return hotel;
+    try (Reader reader = new FileReader(
+        Paths.get(dataFolder, prefix + "Hotel.json").toFile(),
+        StandardCharsets.UTF_8)) {
+      return readHotel(reader);
     } catch (IOException e) {
       System.err.println("Could not find " + dataFolder + "/" + prefix + "Hotel.json");
       return new Hotel(RoomGenerator.generateRooms(30)); // Generate 30 rooms, can be changed
     }
-      
   }
 
   /**
