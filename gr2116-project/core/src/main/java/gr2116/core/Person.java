@@ -275,7 +275,7 @@ public class Person {
     if (this == o) {
       return true;
     }
-    if (o.getClass() != this.getClass() || o == null) {
+    if (o == null || o.getClass() != this.getClass()) {
       return false;
     }
     Person p = (Person) o;
