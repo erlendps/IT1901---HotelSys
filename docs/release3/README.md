@@ -56,7 +56,6 @@ Appen bygger på konseptene fra den første og den andre innleveringen. Se [rele
 Vi har dessverre ikke rukket å lage et administratorpanel for applikasjonen vår, og derfor er det ikke mulig å endre eller legge til rom i hotellet. Man kan redigere JSON-filene manuelt, da disse ligger i 'user'-mappen i hvert respektive operativsystem. Slik kan potensielle kunder (hotell) legge til hotellrommene sine manuelt. Dersom vi hadde hatt mer tid til å utvikle applikasjonen, ville vi lagt til et administratorpanel. For at det skal bli enklere å teste applikasjonen, lager den nå 30 tilfeldige rom dersom ingen rom er funnet i 'user'-mappen. Dermed er det enkelt å teste applikasjonen.
 Syntaksen for å legge til rom i JSON manuelt er som følger:
 ```
-Rom:
 {
     "number" : 101,
     "type" : "Single",
