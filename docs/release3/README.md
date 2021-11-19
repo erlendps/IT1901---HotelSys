@@ -53,8 +53,12 @@ Appen bygger på konseptene fra den første og den andre innleveringen. Se [rele
 
 ## Legge til rom?
 
-Vi har dessverre ikke rukket å lage et administratorpanel for applikasjonen vår, og derfor er det ikke mulig å endre eller legge til rom i hotellet. Man kan redigere JSON-filene manuelt, da disse ligger i 'user'-mappen i hvert respektive operativsystem. Slik kan potensielle kunder (hotell) legge til hotellrommene sine manuelt. Dersom vi hadde hatt mer tid til å utvikle applikasjonen, ville vi lagt til et administratorpanel. For at det skal bli enklere å teste applikasjonen, lager den nå 30 tilfeldige rom dersom ingen rom er funnet i 'user'-mappen. Dermed er det enkelt å teste applikasjonen.
-Syntaksen for å legge til rom i JSON manuelt er som følger:
+Vi har dessverre ikke rukket å lage et administratorpanel for applikasjonen vår, og derfor er det ikke mulig å endre eller legge til rom i hotellet. Man kan redigere JSON-filene manuelt, da disse ligger i 'user'-mappen i hvert respektive operativsystem, mer generelt:
+
+> ~/HotelSys/dataHotel.json
+
+Slik kan potensielle kunder (hotell) legge til hotellrommene sine manuelt. Dersom vi hadde hatt mer tid til å utvikle applikasjonen, ville vi lagt til et administratorpanel. For at det skal bli enklere å teste applikasjonen, lager den nå 30 tilfeldige rom dersom ingen rom er funnet i 'user'-mappen. Dermed er det enkelt å teste applikasjonen.
+Syntaksen for å legge til rom i JSON-filen manuelt er som følger:
 ```
 {
     "number" : 101,
@@ -65,8 +69,35 @@ Syntaksen for å legge til rom i JSON manuelt er som følger:
 }
 ```
 
-Merk at reservations skal være en tom liste.
+Merk at reservations skal være en tom JSON-array.
 
+En annen mulighet for å legge til rom/personer eller slette rom/personer er å bruke [cURL](https://curl.se/). Dette forutsetter at man starter opp webserveren (se dokumentasjon på det [her](/README.md)) og har en terminal eller kommandolinje. Under følger noen eksempler på hvordan man kan legge til og fjerne personer:
+
+For å legge til et rom med romnummer 821, type trippel rom, fasiliteter TV og dusj og pris 600:
+
+```shell
+curl -H "Content-Type: application/json" -d '{"number":821, "type":"Triple", "amenities":["Television", "Shower"], "price":600.0,"reservations":[]}' -X PUT http://localhost:8080/rest/hotel/rooms/821
+```
+
+For å legge til en person med navn brukernavn johnd, fornavn John, etternavn Doe, et hashet passord (se [PasswordUtil](/gr2116-project/core/src/main/java/gr2116/core/PasswordUtil.java), det hashede passordet tilsvarer: bigboy), balanse 400.0 og ingen reservasjoner:
+
+```shell
+curl -H "Content-Type: application/json" -d '{"username":"johnd", "firstName":"John", "lastName":"Doe", "password":"cd/wyrJsGBeH9Ll94NOeRQ==", "balance":400.0, "reservations": []}' -X PUT http://localhost:8080/rest/hotel/person/johnd
+```
+
+For å slette personen med brukernavn johnd:
+
+```shell
+curl -X DELETE http://localhost:8080/rest/hotel/person/johnd
+```
+
+For å slette rommet med romnummber 821:
+
+```shell
+curl -X DELETE http://localhost:8080/rest/hotel/rooms/821
+```
+
+For å se en komplett liste av mulige romtyper og fasiliteter, se i core sin [README](/gr2116-project/core/README.md).
 
 ## Brukernavn
 
