@@ -36,32 +36,32 @@ public class PersonDeserializer extends JsonDeserializer<Person> {
    * @return Person if everything checks out, null otherwise.
    */
   protected Person deserialize(JsonNode jsonNode) {
-    if (jsonNode instanceof ObjectNode objectNode) {
+    if (jsonNode instanceof ObjectNode) {
       Person person;
-      JsonNode usernameNode = objectNode.get("username");
+      JsonNode usernameNode = jsonNode.get("username");
       if (!(usernameNode instanceof TextNode)) {
         return null;
       }
       person = new Person(usernameNode.asText());
-      JsonNode passwordNode = objectNode.get("password");
+      JsonNode passwordNode = jsonNode.get("password");
       if (passwordNode instanceof TextNode) {
         person.setHashedPassword(passwordNode.asText());
       }
-      JsonNode firstNameNode = objectNode.get("firstName");
+      JsonNode firstNameNode = jsonNode.get("firstName");
       if (firstNameNode instanceof TextNode) {
         person.setFirstName(firstNameNode.asText());
       }
-      JsonNode lastNameNode = objectNode.get("lastName");
+      JsonNode lastNameNode = jsonNode.get("lastName");
       if (lastNameNode instanceof TextNode) {
         person.setLastName(lastNameNode.asText());
       }
-      JsonNode balanceNode = objectNode.get("balance");
+      JsonNode balanceNode = jsonNode.get("balance");
       if (balanceNode instanceof NumericNode) {
         person.addBalance(balanceNode.asDouble());
       } else {
         return null;
       }
-      JsonNode reservationNode = objectNode.get("reservations");
+      JsonNode reservationNode = jsonNode.get("reservations");
       if (reservationNode instanceof ArrayNode) {
         for (JsonNode reservation : (ArrayNode) reservationNode) {
           Reservation res = reservationDeserializer.deserialize(reservation);

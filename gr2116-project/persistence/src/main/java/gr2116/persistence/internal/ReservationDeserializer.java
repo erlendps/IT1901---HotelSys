@@ -39,16 +39,16 @@ public class ReservationDeserializer extends JsonDeserializer<Reservation> {
    * @return Reservation if everything checks out, null otherwise.
    */
   protected Reservation deserialize(JsonNode jsonNode) {
-    if (jsonNode instanceof ObjectNode objectNode) {
-      JsonNode roomNode = objectNode.get("room");
+    if (jsonNode instanceof ObjectNode) {
+      JsonNode roomNode = jsonNode.get("room");
       if (!(roomNode instanceof NumericNode)) {
         return null;
       }
-      JsonNode startNode = objectNode.get("startDate");
+      JsonNode startNode = jsonNode.get("startDate");
       if (!(startNode instanceof TextNode)) {
         return null;
       }
-      JsonNode endNode = objectNode.get("endDate");
+      JsonNode endNode = jsonNode.get("endDate");
       if (!(endNode instanceof TextNode)) {
         return null;
       }
@@ -62,7 +62,7 @@ public class ReservationDeserializer extends JsonDeserializer<Reservation> {
           new HotelRoom(roomNode.asInt()), LocalDate.parse(startNode.asText()),
           LocalDate.parse(endNode.asText())
       );
-      JsonNode idNode = objectNode.get("id");
+      JsonNode idNode = jsonNode.get("id");
       if (reservation.getId().equals(idNode.asText())) {
         return reservation;
       }

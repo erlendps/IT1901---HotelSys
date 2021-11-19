@@ -44,18 +44,18 @@ public class RoomDeserializer extends JsonDeserializer<HotelRoom> {
    * @return HotelRoom if everything checks out, null otherwise
    */
   protected HotelRoom deserialize(JsonNode jsonNode) {
-    if (jsonNode instanceof ObjectNode objectNode) {
+    if (jsonNode instanceof ObjectNode) {
       HotelRoom room;
-      JsonNode numberNode = objectNode.get("number");
+      JsonNode numberNode = jsonNode.get("number");
       if (!(numberNode instanceof NumericNode) || numberNode.asInt() <= 0) {
         return null;
       }
-      JsonNode typeNode = objectNode.get("type");
+      JsonNode typeNode = jsonNode.get("type");
       if (!(typeNode instanceof TextNode)) {
         return null;
       }
       room = new HotelRoom(HotelRoomType.valueOf(typeNode.asText()), numberNode.asInt());
-      JsonNode amenityNode = objectNode.get("amenities");
+      JsonNode amenityNode = jsonNode.get("amenities");
       if (amenityNode instanceof ArrayNode) {
         for (JsonNode amenity : (ArrayNode) amenityNode) {
           room.addAmenity(Amenity.valueOf(amenity.asText()));
@@ -63,13 +63,13 @@ public class RoomDeserializer extends JsonDeserializer<HotelRoom> {
       } else {
         return null;
       }
-      JsonNode priceNode = objectNode.get("price");
+      JsonNode priceNode = jsonNode.get("price");
       if (priceNode instanceof NumericNode && priceNode.asDouble() >= 0) {
         room.setPrice(priceNode.asDouble());
       } else {
         return null;
       }
-      JsonNode reservationNode = objectNode.get("reservations");
+      JsonNode reservationNode = jsonNode.get("reservations");
       if (reservationNode instanceof ArrayNode) {
         for (JsonNode res : (ArrayNode) reservationNode) {
           Reservation reservation = reservationDeserializer.deserialize(res);
