@@ -3,12 +3,17 @@ package gr2116.restapi;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.util.Collection;
-
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import gr2116.RESTservice.restapi.HotelService;
+import gr2116.RESTservice.restserver.HotelConfig;
+import gr2116.RESTservice.restserver.HotelModuleObjectMapperProvider;
+import gr2116.core.Hotel;
+import gr2116.core.HotelRoom;
+import gr2116.core.HotelRoomType;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import java.util.Collection;
 import org.glassfish.jersey.logging.LoggingFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
@@ -17,15 +22,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import gr2116.RESTservice.restapi.HotelService;
-import gr2116.RESTservice.restserver.HotelConfig;
-import gr2116.RESTservice.restserver.HotelModuleObjectMapperProvider;
-import gr2116.core.Hotel;
-import gr2116.core.HotelRoom;
-import gr2116.core.HotelRoomType;
-
+/**
+ * 
+ */
 public class HotelServiceTest extends JerseyTest {
-
   private ObjectMapper mapper;
 
   @Override

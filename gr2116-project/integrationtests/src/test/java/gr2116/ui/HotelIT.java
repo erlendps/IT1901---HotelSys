@@ -1,33 +1,33 @@
 package gr2116.ui;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import gr2116.ui.controller.AppController;
 import java.io.File;
 import java.io.IOException;
-
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Test;
-import org.testfx.framework.junit5.ApplicationTest;
-import org.testfx.framework.junit5.Start;
-import org.testfx.matcher.base.NodeMatchers;
-import org.testfx.matcher.control.LabeledMatchers;
-import org.junit.jupiter.api.BeforeEach;
-import org.testfx.api.FxAssert;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.DatePicker;
-import javafx.stage.Stage;
-import gr2116.ui.controller.AppController;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
+import javafx.stage.Stage;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.testfx.api.FxAssert;
+import org.testfx.framework.junit5.ApplicationTest;
+import org.testfx.framework.junit5.Start;
+import org.testfx.matcher.base.NodeMatchers;
+import org.testfx.matcher.control.LabeledMatchers;
 
-
+/**
+ * 
+ */
 public class HotelIT extends ApplicationTest {
-
   AppController appController;
 
   @Start

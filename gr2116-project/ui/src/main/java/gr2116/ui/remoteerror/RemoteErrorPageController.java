@@ -1,11 +1,10 @@
 package gr2116.ui.remoteerror;
 
-import java.util.Collection;
-import java.util.HashSet;
-
 import gr2116.ui.DynamicText;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
+import java.util.Collection;
+import java.util.HashSet;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
