@@ -60,7 +60,7 @@ public class Reservation implements Iterable<LocalDate> {
   /**
    * Returns the reservation's room.
    *
-   * @return room.
+   * @return room
    */
   public final int getRoomNumber() {
     return roomNumber;
@@ -69,7 +69,7 @@ public class Reservation implements Iterable<LocalDate> {
   /**
    * Returns reservation's start date.
    *
-   * @return start date.
+   * @return start date
    */
   public final LocalDate getStartDate() {
     return startDate;
@@ -78,7 +78,7 @@ public class Reservation implements Iterable<LocalDate> {
   /**
    * Returns reservation's end date.
    *
-   * @return end date.
+   * @return end date
    */
   public final LocalDate getEndDate() {
     return endDate;
@@ -87,7 +87,7 @@ public class Reservation implements Iterable<LocalDate> {
   /**
    * Returns reservation's id.
    *
-   * @return id.
+   * @return id
    */
   public final String getId() {
     return id;
