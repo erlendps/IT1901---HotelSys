@@ -105,10 +105,25 @@ public class HotelPersistenceTest {
   }
 
   @Test
-  public void testPrefixIsNull() {
+  public void testPrefix() {
+    HotelPersistence hotelPersistence = new HotelPersistence("test");
+    assertEquals("test", hotelPersistence.getPrefix());
+
+    assertThrows(IllegalArgumentException.class, () -> {HotelPersistence testPersistence = new HotelPersistence("$/");});
+
     Hotel hotel = new Hotel();
     assertThrows(IllegalArgumentException.class, () -> hotelPersistenceNull.saveHotel(hotel));
     assertThrows(IllegalArgumentException.class, () -> hotelPersistenceNull.loadHotel());
     assertThrows(IllegalArgumentException.class, () -> hotelPersistence.saveHotel(null));
+  }
+  
+  @Test
+  public void testLoadNotFound() {
+    HotelPersistence hotelPersistence = new HotelPersistence("notPrefix");
+    try {
+      assertEquals(30, hotelPersistence.loadHotel().getRooms().size());
+    } catch (IOException e) {
+      fail(e.getMessage());
+    }
   }
 }

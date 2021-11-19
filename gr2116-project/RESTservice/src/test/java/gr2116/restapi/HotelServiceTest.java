@@ -88,6 +88,7 @@ public class HotelServiceTest extends JerseyTest {
       Response roomResponse = target(HotelService.HOTEL_SERVICE_PATH + "/rooms/" + Integer.toString(someRoomNumber))
         .request(MediaType.APPLICATION_JSON + ";" + MediaType.CHARSET_PARAMETER + "=UTF-8")
         .get();
+
       HotelRoom receivedRoom = mapper.readValue(roomResponse.readEntity(String.class), HotelRoom.class);
 
       assertEquals(someRoomNumber, receivedRoom.getNumber());
@@ -99,4 +100,6 @@ public class HotelServiceTest extends JerseyTest {
       fail(e.getMessage());
     }
   }
+
+
 }
