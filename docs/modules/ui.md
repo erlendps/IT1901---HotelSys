@@ -11,6 +11,7 @@ class DirectHotelAccess {
     + void loadHotel()
     + void saveHotel()
     + void makeReservation(Person, int, LocalDate, LocalDate)
+    + void addBalance(Person, double)
 }
 
 class RemoteHotelAccess {
@@ -61,7 +62,7 @@ class AppController {
     - StackPane root
 
     - void initialize()
-    + void receiveMessage(Object, Message message,Object)
+    + void receiveMessage(Object, Message,Object)
     + void setPrefix(String)
     + void moveToFrontPage()
     + void moveToMainPage(Person)
@@ -141,15 +142,16 @@ class FilterPanelController {
 
     + FilterPanelController()
     - void initialize()
+    + void addListener(MessageListener)
+    + void removeListener(MessageListener)
+    + void notifyListeners()
     }
 
 class AmenityCheckBox {
     - CheckBox checkBox 
     
     + AmenityCheckBox(Amenity)
-    + void addListener(MessageListener)
-    + void removeListener(MessageListener)
-    + void notifyListeners()
+    + void setSelected(boolean)
 }
 
 class HotelRoomListItem {
@@ -181,7 +183,7 @@ class HotelRoomSorter {
 
 class MainPageController {
     - HotelAccess hotelAccess
-    -  HotelRoomFilter hotelRoomFilter
+    - HotelRoomFilter hotelRoomFilter
     - Person person
     - Collection<MessageListener> listeners
     - HotelRoomSorter hotelRoomSorter
@@ -262,7 +264,7 @@ class RemoteErrorPageController {
 }
 
 class FxmlUtils {
-    + {static} void loadFxml(final T)
+    + {static} void loadFxml(T)
 }
 
 
