@@ -269,10 +269,12 @@ class FxmlUtils {
 
 
 enum SortProperty {
-    - Comparator<HotelRoom> comparator
-
-    - SortProperty(Comparator<HotelRoom>)
-    + Comparator<HotelRoom> getComparator()
+    ByPrice,
+    ByPriceDecreasing,
+    ByRoomNumber,
+    ByRoomNumberDecreasing,
+    ByAmenityCount,
+    ByAmenityCountDecreasing
 }
 
 enum Message {
@@ -287,10 +289,23 @@ enum Message {
 }
 
 enum DynamicText {
-    - String message
-
-    + DynamicText(String)
-    + String getMessage()
+    StartAndEndError,
+    BeforeNowError,
+    TimeOrderError,
+    NotEnoughMoneyError,
+    NonNumericCardNumberError,
+    WrongLengthCardNumberError,InvalidCardIdentifierError,InvalidCardControlDigitError,
+    NonIntegerError,
+    TooLargeBalanceError,
+    ZeroBalanceError,
+    RemoteServerError,
+    InvalidUsername,
+    InvalidFirstName,
+    InvalidLastName,
+    InvalidPassword,
+    UsernameTaken,
+    UsernameHasNoMatches,
+    WrongPassword
 }
 
 interface HotelAccess {
