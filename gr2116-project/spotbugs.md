@@ -1,5 +1,8 @@
-Suppress (They must?):
-*****************
+
+[INFO] --- spotbugs-maven-plugin:4.4.1:check (spotbugs-check) @ ui ---
+[INFO] BugInstance size is 13
+[INFO] Error size is 0
+[INFO] Total bugs: 13
 [ERROR] Medium: new gr2116.ui.access.DirectHotelAccess(HotelPersistence) may expose internal representation by storing an externally mutable object into DirectHotelAccess.hotelPersistence [gr2116.ui.access.DirectHotelAccess] At DirectHotelAccess.java:[line 21] EI_EXPOSE_REP2
 [ERROR] Medium: gr2116.ui.controller.AppController.getHotelAccess() may expose internal representation by returning AppController.hotelAccess [gr2116.ui.controller.AppController] At AppController.java:[line 221] EI_EXPOSE_REP
 [ERROR] Medium: gr2116.ui.controller.AppController.getHotelPersistence() may expose internal representation by returning AppController.hotelPersistence [gr2116.ui.controller.AppController] At AppController.java:[line 230] EI_EXPOSE_REP
@@ -7,11 +10,17 @@ Suppress (They must?):
 [ERROR] Medium: gr2116.ui.front.FrontPageController.getLoginPanelViewController() may expose internal representation by returning FrontPageController.loginPanelViewController [gr2116.ui.front.FrontPageController] At FrontPageController.java:[line 65] EI_EXPOSE_REP
 [ERROR] Medium: gr2116.ui.front.FrontPageController.getSignUpPanelViewController() may expose internal representation by returning FrontPageController.signUpPanelViewController [gr2116.ui.front.FrontPageController] At FrontPageController.java:[line 69] EI_EXPOSE_REP
 [ERROR] Medium: new gr2116.ui.main.HotelRoomListItem(HotelRoom) may expose internal representation by storing an externally mutable object into HotelRoomListItem.room [gr2116.ui.main.HotelRoomListItem] At HotelRoomListItem.java:[line 52] EI_EXPOSE_REP2
+[ERROR] Medium: gr2116.ui.main.HotelRoomListItem.initialize() concatenates strings using + in a loop [gr2116.ui.main.HotelRoomListItem] At HotelRoomListItem.java:[line 85] SBSC_USE_STRINGBUFFER_CONCATENATION
 [ERROR] Medium: gr2116.ui.main.MainPageController.setHotelAccess(HotelAccess) may expose internal representation by storing an externally mutable object into MainPageController.hotelAccess [gr2116.ui.main.MainPageController] At MainPageController.java:[line 71] EI_EXPOSE_REP2
 [ERROR] Medium: gr2116.ui.main.MainPageController.setPerson(Person) may expose internal representation by storing an externally mutable object into MainPageController.person [gr2116.ui.main.MainPageController] At MainPageController.java:[line 88] EI_EXPOSE_REP2
 [ERROR] Medium: gr2116.ui.main.UserPanelController.setPerson(Person) may expose internal representation by storing an externally mutable object into UserPanelController.person [gr2116.ui.main.UserPanelController] At UserPanelController.java:[line 57] EI_EXPOSE_REP2
 [ERROR] Medium: gr2116.ui.money.MoneyPageController.setHotelAccess(HotelAccess) may expose internal representation by storing an externally mutable object into MoneyPageController.hotelAccess [gr2116.ui.money.MoneyPageController] At MoneyPageController.java:[line 56] EI_EXPOSE_REP2
 [ERROR] Medium: gr2116.ui.money.MoneyPageController.setPerson(Person) may expose internal representation by storing an externally mutable object into MoneyPageController.person [gr2116.ui.money.MoneyPageController] At MoneyPageController.java:[line 42] EI_EXPOSE_REP2
+
+[INFO] --- spotbugs-maven-plugin:4.4.1:check (spotbugs-check) @ RESTservice ---
+[INFO] BugInstance size is 14
+[INFO] Error size is 0
+[INFO] Total bugs: 14
 [ERROR] Medium: gr2116.RESTservice.restapi.HotelService.getHotel() may expose internal representation by returning HotelService.hotel [gr2116.RESTservice.restapi.HotelService] At HotelService.java:[line 40] EI_EXPOSE_REP
 [ERROR] Medium: gr2116.RESTservice.restapi.PersonResource.getPerson() may expose internal representation by returning PersonResource.person [gr2116.RESTservice.restapi.PersonResource] At PersonResource.java:[line 76] EI_EXPOSE_REP
 [ERROR] Medium: new gr2116.RESTservice.restapi.PersonResource(String, Person, Hotel) may expose internal representation by storing an externally mutable object into PersonResource.hotel [gr2116.RESTservice.restapi.PersonResource] At PersonResource.java:[line 51] EI_EXPOSE_REP2
@@ -26,9 +35,4 @@ Suppress (They must?):
 [ERROR] Medium: gr2116.RESTservice.restserver.HotelITConfig.getHotel() may expose internal representation by returning HotelITConfig.hotel [gr2116.RESTservice.restserver.HotelITConfig] At HotelITConfig.java:[line 63] EI_EXPOSE_REP
 [ERROR] Medium: gr2116.RESTservice.restserver.HotelITConfig.setHotel(Hotel) may expose internal representation by storing an externally mutable object into HotelITConfig.hotel [gr2116.RESTservice.restserver.HotelITConfig] At HotelITConfig.java:[line 54] EI_EXPOSE_REP2
 [ERROR] Medium: gr2116.RESTservice.restserver.HotelModuleObjectMapperProvider.getContext(Class) may expose internal representation by returning HotelModuleObjectMapperProvider.objectMapper [gr2116.RESTservice.restserver.HotelModuleObjectMapperProvider] At HotelModuleObjectMapperProvider.java:[line 26] EI_EXPOSE_REP
-*****************
-
-
-
-
 
