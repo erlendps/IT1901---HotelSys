@@ -213,15 +213,6 @@ public class AppController implements MessageListener {
   }
 
   /**
-   * Returns the hotelAccess model.
-   *
-   * @return HotelAccess that this controller uses
-   */
-  public HotelAccess getHotelAccess() {
-    return hotelAccess;
-  }
-
-  /**
    * Returns this controllers HotelPersistence.
    *
    * @return HotelPersistence

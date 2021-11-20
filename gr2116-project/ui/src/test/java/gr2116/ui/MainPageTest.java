@@ -2,6 +2,8 @@ package gr2116.ui;
 
 import gr2116.core.Person;
 import gr2116.ui.controller.AppController;
+import gr2116.ui.message.Message;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -43,9 +45,7 @@ public class MainPageTest extends ApplicationTest {
     person.setFirstName("Richard");
     person.setLastName("Wilkens");
     person.addBalance(100.0);
-    appController.getHotelAccess().addPerson(person);
-    appController.moveToMainPage(person);
-    
+    appController.receiveMessage(this, Message.SignUp, person);    
     stage.setScene(new Scene(parent));
     stage.show();
   }

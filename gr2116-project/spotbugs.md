@@ -4,7 +4,6 @@
 [INFO] Error size is 0
 [INFO] Total bugs: 13
 [ERROR] Medium: new gr2116.ui.access.DirectHotelAccess(HotelPersistence) may expose internal representation by storing an externally mutable object into DirectHotelAccess.hotelPersistence [gr2116.ui.access.DirectHotelAccess] At DirectHotelAccess.java:[line 21] EI_EXPOSE_REP2
-[ERROR] Medium: gr2116.ui.controller.AppController.getHotelAccess() may expose internal representation by returning AppController.hotelAccess [gr2116.ui.controller.AppController] At AppController.java:[line 221] EI_EXPOSE_REP
 [ERROR] Medium: gr2116.ui.controller.AppController.getHotelPersistence() may expose internal representation by returning AppController.hotelPersistence [gr2116.ui.controller.AppController] At AppController.java:[line 230] EI_EXPOSE_REP
 [ERROR] Medium: gr2116.ui.controller.AppController.setHotelAccess(HotelAccess) may expose internal representation by storing an externally mutable object into AppController.hotelAccess [gr2116.ui.controller.AppController] At AppController.java:[line 247] EI_EXPOSE_REP2
 [ERROR] Medium: gr2116.ui.front.FrontPageController.getLoginPanelViewController() may expose internal representation by returning FrontPageController.loginPanelViewController [gr2116.ui.front.FrontPageController] At FrontPageController.java:[line 65] EI_EXPOSE_REP
