@@ -269,4 +269,12 @@ public class RemoteHotelAccess implements HotelAccess {
     person.addBalance(amount);
     putPerson(person);
   }
+
+  /**
+   * This does not need to be implemented in RemoteHotelAccess.
+   */
+  @Override
+  public void setPrefix(String prefix) {
+    
+  }
 }

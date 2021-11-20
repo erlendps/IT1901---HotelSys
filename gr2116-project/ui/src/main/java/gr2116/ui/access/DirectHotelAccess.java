@@ -17,8 +17,8 @@ public class DirectHotelAccess implements HotelAccess {
   private final HotelPersistence hotelPersistence;
   private Hotel hotel;
   
-  public DirectHotelAccess(HotelPersistence hotelPersistence) {
-    this.hotelPersistence = hotelPersistence;
+  public DirectHotelAccess(String prefix) {
+    hotelPersistence = new HotelPersistence(prefix);
     loadHotel();
   }
 
@@ -69,5 +69,10 @@ public class DirectHotelAccess implements HotelAccess {
   public void addBalance(Person person, double amount) {
     person.addBalance(amount);
     saveHotel();
+  }
+
+  @Override
+  public void setPrefix(String prefix) {
+    hotelPersistence.setPrefix(prefix);
   }
 }

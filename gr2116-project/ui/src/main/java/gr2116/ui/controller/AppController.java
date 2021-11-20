@@ -1,7 +1,6 @@
 package gr2116.ui.controller;
 
 import gr2116.core.Person;
-import gr2116.persistence.HotelPersistence;
 import gr2116.ui.DynamicText;
 import gr2116.ui.access.DirectHotelAccess;
 import gr2116.ui.access.HotelAccess;
@@ -26,7 +25,6 @@ import javafx.scene.layout.StackPane;
  * as it receives notifications from various parts of the program.
  */
 public class AppController implements MessageListener {
-  private HotelPersistence hotelPersistence = new HotelPersistence("data");
   private HotelAccess hotelAccess;
 
   @FXML
@@ -82,7 +80,7 @@ public class AppController implements MessageListener {
       }
     }
     if (hotelAccess == null) {
-      DirectHotelAccess directHotelAccess = new DirectHotelAccess(hotelPersistence);
+      DirectHotelAccess directHotelAccess = new DirectHotelAccess("data");
       hotelAccess = directHotelAccess;
       System.out.println("Using DirectHotelAccess as access model.");
     }
@@ -103,12 +101,11 @@ public class AppController implements MessageListener {
             (Person p) -> p.getUsername().equals(dataPerson.getUsername())
           ).findAny().orElse(null);
       if (person != null) {
-        frontPageViewController.getSignUpPanelViewController()
-            .setErrorLabel(DynamicText.UsernameTaken.getMessage());
+        frontPageViewController.setSignUpPanelViewErrorLabel(
+            DynamicText.UsernameTaken.getMessage());
         return;
       }
       hotelAccess.addPerson(dataPerson);
-
       moveToMainPage(dataPerson);
     } else if (message == Message.Login && data instanceof Person) {
       Person dataPerson = (Person) data;
@@ -116,13 +113,16 @@ public class AppController implements MessageListener {
             (Person p) -> p.getUsername().equals(dataPerson.getUsername())
           ).findAny().orElse(null);
       if (person == null) {
-        frontPageViewController.getLoginPanelViewController()
-            .setErrorLabel(DynamicText.UsernameHasNoMatches.getMessage());
+        frontPageViewController.setLoginPanelViewErrorLabel(
+            DynamicText.UsernameHasNoMatches.getMessage());
         return;
       }
+      if (person.getHashedPassword() == null) {
+        throw new IllegalArgumentException(
+          "Tried to sign up a person without a password!");
+      }
       if (!person.getHashedPassword().equals(dataPerson.getHashedPassword())) {
-        frontPageViewController.getLoginPanelViewController()
-            .setErrorLabel(DynamicText.WrongPassword.getMessage());
+        frontPageViewController.setLoginPanelViewErrorLabel(DynamicText.WrongPassword.getMessage());
         return;
       }
       moveToMainPage(person);
@@ -150,7 +150,7 @@ public class AppController implements MessageListener {
    * @param prefix The prefix the be set
    */
   public void setPrefix(String prefix) {
-    hotelPersistence.setPrefix(prefix);
+    hotelAccess.setPrefix(prefix);
   }
 
   /**
@@ -218,15 +218,6 @@ public class AppController implements MessageListener {
    */
   public void load() {
     hotelAccess.loadHotel();
-  }
-
-  /**
-   * Sets hotelAccess.
-   *
-   * @param hotelAccess the given hotelAcess
-   */
-  public void setHotelAccess(HotelAccess hotelAccess) {
-    this.hotelAccess = hotelAccess;
   }
 }
 

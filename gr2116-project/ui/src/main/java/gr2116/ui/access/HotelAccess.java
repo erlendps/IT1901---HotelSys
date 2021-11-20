@@ -24,4 +24,6 @@ public interface HotelAccess {
   void makeReservation(Person person, int hotelRoomNumber, LocalDate startDate, LocalDate endDate);
 
   void addBalance(Person person, double amount);
+
+  void setPrefix(String prefix);
 }
