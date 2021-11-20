@@ -1,9 +1,3 @@
-??:
-*****************
-[ERROR] Medium: gr2116.persistence.HotelPersistence.loadHotel() may fail to clean up java.io.Reader on checked exception [gr2116.persistence.HotelPersistence, gr2116.persistence.HotelPersistence, gr2116.persistence.HotelPersistence, gr2116.persistence.HotelPersistence, gr2116.persistence.HotelPersistence] Obligation to clean up resource created at HotelPersistence.java:[line 106] is not dischargedPath continues at HotelPersistence.java:[line 109]Path continues at HotelPersistence.java:[line 112]Path continues at HotelPersistence.java:[line 113]Path continues at HotelPersistence.java:[line 114] OBL_UNSATISFIED_OBLIGATION_EXCEPTION_EDGE
-*****************
-
-
 Suppress (They must?):
 *****************
 [ERROR] Medium: new gr2116.ui.access.DirectHotelAccess(HotelPersistence) may expose internal representation by storing an externally mutable object into DirectHotelAccess.hotelPersistence [gr2116.ui.access.DirectHotelAccess] At DirectHotelAccess.java:[line 21] EI_EXPOSE_REP2
