@@ -1,5 +1,5 @@
 {
     "java.configuration.updateBuildConfiguration": "automatic",
     "java.checkstyle.version": "9.0.1",
-    "java.checkstyle.configuration": "${workspaceFolder}\\gr2116-project\\custom_google_checks.xml"
+    "java.checkstyle.configuration": "${workspaceFolder}\\gr2116-project\\config\\custom_google_checks.xml"
 }
