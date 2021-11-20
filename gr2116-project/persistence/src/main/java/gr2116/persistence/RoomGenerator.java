@@ -52,7 +52,7 @@ public class RoomGenerator {
       setPrice(room);
       
       // Add a random number of amenities
-      int maxNumOfAmenities = Math.abs(random.nextInt() % 8);
+      int maxNumOfAmenities = Math.abs(random.nextInt() % 7) + 1;
       List<Amenity> amenities = new ArrayList<>(Arrays.asList(Amenity.values()));
       for (int j = maxNumOfAmenities; j > 0; j--) {
         int index = random.nextInt(8);
