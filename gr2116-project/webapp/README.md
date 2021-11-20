@@ -4,7 +4,7 @@ Denne mappen inneholder filer for kjøring av webapp, som brukes til å servere 
 
 Serveren bruker [HotelConfig](../RESTservice/src/main/java/gr2116/RESTservice/restserver/HotelConfig.java) for å ta imot body-en til forespørslene og gjøre om til objekter vi kan bruke. Serveren vil prøve å mappe alt som blir sendt til **baseURL/rest**.
 
-For å starte serveren lokalt, kan man fra [gr2116-project](../) skrive inn kommandoen:
+For å starte serveren lokalt, kan man fra [gr2116-project](/gr2116-project) skrive inn kommandoen:
 
 ```shell
 mvn -pl webapp jetty:run
