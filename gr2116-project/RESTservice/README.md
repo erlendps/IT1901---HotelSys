@@ -4,7 +4,7 @@ Denne modulen inneholder kode for REST-api og kode for REST-server. Modulen best
 
 ## Database
 
-I dokumentasjonen her skriver vi database, dette stemmer delvis, men vår service ([HotelService](src/main/java/gr2116/RESTservice/restapi/HotelService.java)) skriver og leser direkte fra en fil som vil ligge lagret på brukerens maskin. Dette fordi den bruker [HotelPersistence](/gr2116-project/persistence/src/main/java/gr2116/persistence/HotelPersistence.java) som lagrer direkte til:
+I dokumentasjonen her skriver vi database, dette stemmer delvis, men vår service ([`HotelService.java`](src/main/java/gr2116/RESTservice/restapi/HotelService.java)) skriver og leser direkte fra en fil som vil ligge lagret på brukerens maskin. Dette fordi den bruker [`HotelPersistence.java`](/gr2116-project/persistence/src/main/java/gr2116/persistence/HotelPersistence.java) som lagrer direkte til:
 
 > ~/HotelSys/dataHotel.json
 
@@ -26,17 +26,19 @@ DELETE-metodene brukes ikke i applikasjonen. Som nevnt i [release 3](../../docs/
 
 RESTservice består av to pakker (gr2116.RESTservice):
 
-* [restapi](src/main/java/gr2116/RESTservice/restapi)
-* [restserver](src/main/java/gr2116/RESTservice/restserver)
+* [`restapi`](src/main/java/gr2116/RESTservice/restapi)
+* [`restserver`](src/main/java/gr2116/RESTservice/restserver)
 
 Restserver inneholder konfigurasjon for hvordan json som blir sendt med HTTP-requester skal bli mappet til objekter, og inneholder Hotel-objektet.
 
-Restapi får Hotel-objektet fra restserver gjennom Context-tag. [HotelService](src/main/java/gr2116/RESTservice/restapi/HotelService.java) tar imot forespørsler til baseURL/rest/hotel/*, og avhengig av hva resten av URL er, vil den delegere videre til enten [RoomResource](src/main/java/gr2116/RESTservice/restapi/RoomResource.java) eller [PersonResource](src/main/java/gr2116/RESTservice/restapi/PersonResource.java).
+Restapi får Hotel-objektet fra restserver gjennom Context-tag. [`HotelService.java`](src/main/java/gr2116/RESTservice/restapi/HotelService.java) tar imot forespørsler til baseURL/rest/hotel/*, og avhengig av hva resten av URL er, vil den delegere videre til enten [`RoomResource.java`](src/main/java/gr2116/RESTservice/restapi/RoomResource.java) eller [`PersonResource.java`](src/main/java/gr2116/RESTservice/restapi/PersonResource.java).
 
 ## Testdekning
 
 Testdekningen for RESTservice-modulen er noe lavere enn for de andre modulene. Dette skyldes at funksjonaliteten testes i integrationtests. Vi anser det ikke som nyttig å teste samme funksjonalitet to ganger.
 
 ## Klassediagram
+
+Under følger klassediagrammet for `RESTservice`-modulen.
 
 ![klassediagram RESTservice](../../docs/images/RESTserver.PNG "Klassediagram RESTserver")
