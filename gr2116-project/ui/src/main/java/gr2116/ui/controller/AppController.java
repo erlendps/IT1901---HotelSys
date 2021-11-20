@@ -213,15 +213,6 @@ public class AppController implements MessageListener {
   }
 
   /**
-   * Returns this controllers HotelPersistence.
-   *
-   * @return HotelPersistence
-   */
-  public HotelPersistence getHotelPersistence() {
-    return hotelPersistence;
-  }
-
-  /**
    * Load data from JSON files. Creates a hotel object,
    * which is used to create pages with correct data in them.
    */
