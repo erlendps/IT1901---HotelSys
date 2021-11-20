@@ -18,3 +18,7 @@ DELETE-metodene brukes ikke i applikasjonen. Som nevnt i [release 3](../../docs/
 ## Testdekning
 
 Testdekningen for RESTservice-modulen er noe lavere enn for de andre modulene. Dette skyldes at funksjonaliteten testes i integrationtests. Vi anser det ikke som nyttig å teste samme funksjonalitet to ganger.
+
+## Klassediagram
+
+![klassediagram RESTservice](../../docs/images/RESTserver.PNG "Klassediagram RESTserver")
