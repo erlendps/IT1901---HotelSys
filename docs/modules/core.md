@@ -35,7 +35,7 @@ class HotelRoom {
     + int getNumber()
     + double getPrice()
     + double getPrice(LocalDate, LocalDate)
-    + ReservationCalendar getCalendar()
+    + Iterator<Reservation> getReservations()
     + void setPrice(double)
     + void addAmenity(Amenity)
     + Collection<String> getAmenities()
