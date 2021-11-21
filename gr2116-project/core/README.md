@@ -7,7 +7,7 @@ Klassene i Core-modulen er `Person`, `HotelRoom`, `Hotel`, `HotelRoomFilter`, `H
 
 ## Oppbygging
 
-Et `Hotel`-objekt inneholder en tabell med personer og en tabell med rom. `Person`-objektet har metoder og felt som brukes for innlogging og romreservasjon. `HotelRoom`-objekter har metoder og felt som beskriver rommets fasiliteter og type, og som lagrer reservasjonene tilhørende rommet. Core-modulen tilbyr et API for å sjekke om rom er ledige, for å lage nye brukere, for å opprette og administrere romreservasjoner, sortere og filtrere rom og sette inn/bruke penger. De ulike fasilitetene og romtypene er beskrevet under.
+Et `Hotel`-objekt inneholder en tabell med personer og en tabell med rom. `Person`-objektet har metoder og felt som brukes for innlogging og romreservasjon. `HotelRoom`-objekter har metoder og felt som beskriver rommets fasiliteter og type, og som lagrer reservasjonene tilhørende rommet. `core`-modulen tilbyr et API for å sjekke om rom er ledige, for å lage nye brukere, for å opprette og administrere romreservasjoner, sortere og filtrere rom og sette inn/bruke penger. De ulike fasilitetene og romtypene er beskrevet under.
 
 ## Amenity
 
