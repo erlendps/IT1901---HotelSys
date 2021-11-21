@@ -71,6 +71,8 @@ public class HotelITConfig extends ResourceConfig {
    * return a default (random) empty hotel initiated with 30 or so rooms.
    *
    * @return hotel
+   * Note: Exception will never happen, because hotelPersistence.loadHotel() catches IOException 
+   * and then returns randomly generated hotel
    */
   public static Hotel createHotel() {
     HotelPersistence hotelPersistence = new HotelPersistence("testIt");

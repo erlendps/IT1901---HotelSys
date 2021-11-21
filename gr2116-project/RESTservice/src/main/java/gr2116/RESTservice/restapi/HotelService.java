@@ -43,12 +43,12 @@ public class HotelService {
   /**
    * Returns a PersonResource for the given person. If the given person does not exist in the
    * hotel, it will create a PersonResource where the person is null. It checks if the person
-   * already exists, and if it does, the PersonResource will be iniated with that person object.
+   * already exists, and if it does, the PersonResource will be initiated with that person object.
    * The PersonResource is responsible for handling request from baseURI/person/{username}
    *
    * @param username the Persons username
    *
-   * @return PersonResource iniated with null if the person does not exist, or initiated with 
+   * @return PersonResource initiated with null if the person does not exist, or initiated with 
    *         the person that matches the username if it exists.
    */
   @Path("/person/{username}")
@@ -72,12 +72,12 @@ public class HotelService {
   /**
    * Returns a RoomResource for the given room. If the given room does not exist in the
    * hotel, it will create a RoomResource where the room is null. It checks if the room
-   * already exists, and if it does, the RoomResource will be iniated with that HotelRoom object.
+   * already exists, and if it does, the RoomResource will be initiated with that HotelRoom object.
    * The RoomResource is responsible for handling request from baseURI/rooms/{roomNumber}.
    *
    * @param roomNumber the roomNumber of the room
    *
-   * @return RoomResource iniated with null if the room does not exist, or initiated with 
+   * @return RoomResource initiated with null if the room does not exist, or initiated with 
    *         the room that matches the roomNumber if it exists.
    */
   @Path("/rooms/{roomNumber}")
