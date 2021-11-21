@@ -38,12 +38,6 @@ public class UserPanelController implements PersonListener {
   private ListView<Label> reservationListView;
 
   /**
-   * Initialize the user panel.
-   *
-   */
-  public UserPanelController() { }
-
-  /**
    * Initialize the user panel with a person. This persons' attributes will be displayed.
    *
    * @param person the person we want to initialize for
@@ -61,12 +55,12 @@ public class UserPanelController implements PersonListener {
 
   @FXML
   private void signOutButtonOnAction() {
-    notifyListeners(Message.SignOut);
+    notifyListeners(Message.SignOut, null);
   }
 
   @FXML
   private void makeDepositButtonOnAction() {
-    notifyListeners(Message.MoneyPage);
+    notifyListeners(Message.ShowMoneyPage, null);
   }
 
   /**
@@ -92,9 +86,9 @@ public class UserPanelController implements PersonListener {
    *
    * @param message the message to notify
    */
-  public final void notifyListeners(final Message message) {
+  public final void notifyListeners(final Message message, final Object data) {
     for (MessageListener listener : listeners) {
-      listener.receiveMessage(this, message, null);
+      listener.receiveMessage(this, message, data);
     }
   }
 

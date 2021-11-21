@@ -1,14 +1,12 @@
 
-[INFO] BugInstance size is 5
+[INFO] --- spotbugs-maven-plugin:4.4.1:check (spotbugs-check) @ ui ---
+[INFO] BugInstance size is 3
 [INFO] Error size is 0
-[INFO] Total bugs: 5
+[INFO] Total bugs: 3
 [ERROR] Medium: gr2116.ui.main.MainPageController.setHotelAccess(HotelAccess) may expose internal representation by storing an externally mutable object into MainPageController.hotelAccess [gr2116.ui.main.MainPageController] At MainPageController.java:[line 71] EI_EXPOSE_REP2
 [ERROR] Medium: gr2116.ui.main.MainPageController.setPerson(Person) may expose internal representation by storing an externally mutable object into MainPageController.person [gr2116.ui.main.MainPageController] At MainPageController.java:[line 88] EI_EXPOSE_REP2
 [ERROR] Medium: gr2116.ui.main.UserPanelController.setPerson(Person) may expose internal representation by storing an externally mutable object into UserPanelController.person [gr2116.ui.main.UserPanelController] At UserPanelController.java:[line 57] EI_EXPOSE_REP2
-[ERROR] Medium: gr2116.ui.money.MoneyPageController.setHotelAccess(HotelAccess) may expose internal representation by storing an externally mutable object into MoneyPageController.hotelAccess [gr2116.ui.money.MoneyPageController] At MoneyPageController.java:[line 56] EI_EXPOSE_REP2
-[ERROR] Medium: gr2116.ui.money.MoneyPageController.setPerson(Person) may expose internal representation by storing an externally mutable object into MoneyPageController.person [gr2116.ui.money.MoneyPageController] At MoneyPageController.java:[line 42] EI_EXPOSE_REP2
 [INFO] 
-
 
 [INFO] --- spotbugs-maven-plugin:4.4.1:check (spotbugs-check) @ RESTservice ---
 [INFO] BugInstance size is 14

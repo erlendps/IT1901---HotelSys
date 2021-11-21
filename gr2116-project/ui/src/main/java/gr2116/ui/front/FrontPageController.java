@@ -116,6 +116,7 @@ public class FrontPageController implements MessageListener {
         && message == Message.SignUp
         && data instanceof Person) {
       notifyListeners(Message.SignUp, data);
+      notifyListeners(Message.Login, data);
     }
   }
 }

@@ -211,11 +211,10 @@ public class MainPageController implements MessageListener {
       buildRoomList();
     }
     if (message == Message.SignOut) {
-      notifyListeners(Message.SignOut, person);
+      notifyListeners(Message.SignOut, null);
     }
-
-    if (message == Message.MoneyPage) {
-      notifyListeners(Message.MoneyPage, person);
+    if (message == Message.ShowMoneyPage) {
+      notifyListeners(Message.ShowMoneyPage, null);
     }
   }
 

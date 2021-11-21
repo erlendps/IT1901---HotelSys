@@ -26,6 +26,7 @@ import javafx.scene.layout.StackPane;
  */
 public class AppController implements MessageListener {
   private HotelAccess hotelAccess;
+  private Person currentPerson;
 
   @FXML
   private String endpointUri;
@@ -63,10 +64,6 @@ public class AppController implements MessageListener {
    */
   @FXML
   private void initialize() {
-    frontPageViewController.addListener(this);
-    mainPageViewController.addListener(this);
-    moneyPageViewController.addListener(this);
-    remoteErrorPageViewController.addListener(this);
     if (endpointUri != null) {
       RemoteHotelAccess remoteHotelAccess;
       try {
@@ -90,6 +87,11 @@ public class AppController implements MessageListener {
     } catch (RuntimeException e) {
       moveToRemoteErrorPage();
     }
+    frontPageViewController.addListener(this);
+    mainPageViewController.addListener(this);
+    moneyPageViewController.addListener(this);
+    remoteErrorPageViewController.addListener(this);
+    mainPageViewController.setHotelAccess(hotelAccess);
   }
 
   @Override
@@ -106,7 +108,6 @@ public class AppController implements MessageListener {
         return;
       }
       hotelAccess.addPerson(dataPerson);
-      moveToMainPage(dataPerson);
     } else if (message == Message.Login && data instanceof Person) {
       Person dataPerson = (Person) data;
       Person person = hotelAccess.getPersons().stream().filter(
@@ -125,15 +126,15 @@ public class AppController implements MessageListener {
         frontPageViewController.setLoginPanelViewErrorLabel(DynamicText.WrongPassword.getMessage());
         return;
       }
-      moveToMainPage(person);
+      currentPerson = person;
+      moveToMainPage();
     } else if (message == Message.SignOut) {
+      currentPerson = null;
       moveToFrontPage();
-    } else if (message == Message.MoneyPage && data instanceof Person) {
-      Person person = (Person) data;
-      moveToMoneyPage(person);
-    } else if (message == Message.MainPage && data instanceof Person) {
-      Person person = (Person) data;
-      moveToMainPage(person);
+    } else if (message == Message.ShowMoneyPage) {
+      moveToMoneyPage();
+    } else if (message == Message.ShowMainPage) {
+      moveToMainPage();
     } else if (message == Message.Reconnect) {
       try {
         load();
@@ -141,6 +142,11 @@ public class AppController implements MessageListener {
       } catch (RuntimeException e) {
         remoteErrorPageViewController.incrementFailures();
       }
+    } else if (message == Message.AddBalance && data instanceof Double) {
+      if (currentPerson == null) {
+        throw new IllegalStateException("Cannot add balance when current person is null!");
+      } 
+      hotelAccess.addBalance(currentPerson, (double) data);
     }
   }
 
@@ -174,24 +180,22 @@ public class AppController implements MessageListener {
    * The MainPage is created with the selected person (which is usually selected from FrontPage).
    * Finally adds MainPage as a child of itself.
    *
-   * @param person The person to be logged in as
+   * @throws IllegalStateException if currentPerson is null
    */
-  public void moveToMainPage(final Person person) {
-    mainPageViewController.setPerson(person);
-    mainPageViewController.setHotelAccess(hotelAccess);
+  public void moveToMainPage() {
+    if (currentPerson == null) {
+      throw new IllegalStateException("Cannot move to main page without a person!");
+    }
+    mainPageViewController.setPerson(currentPerson);
     root.getChildren().clear();
     root.getChildren().add(mainPageView);
   }
 
   /**
    * Moves to money page.
-   *
-   * @param person The person to make the money page for
    */
-  public void moveToMoneyPage(final Person person) {
+  public void moveToMoneyPage() {
     root.getChildren().clear();
-    moneyPageViewController.setPerson(person);
-    moneyPageViewController.setHotelAccess(hotelAccess);
     root.getChildren().add(moneyPageView);
   }
 
