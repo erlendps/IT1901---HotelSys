@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -20,6 +21,7 @@ public class RemoteApp extends Application {
     Parent parent = FXMLLoader.load(
         getClass().getClassLoader().getResource("RemoteApp.fxml"));
     stage.setScene(new Scene(parent));
+    stage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("icon.png")));
     stage.show();
   }
 
