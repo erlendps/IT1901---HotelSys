@@ -94,7 +94,7 @@ mvn verify
 ```
 ### Spotbugs
 
-Et verktøy som analyserer koden og gir tilbakemelding på generell kodekvalitet. Den kan oppdage eventuelle bugs også. Vi har valgt å eksludere noen bugs. Begrunnelsen for det ligger i de modulene det er aktuelt for ([`ui`](gr2116-project/ui) og [`RESTservice`](gr2116-project/RESTservice)). Man kan se hva som blir eksludert i [`excludeFilter.xml`](gr2116-project/config/excludeFilter.xml)
+Et verktøy som analyserer koden og gir tilbakemelding på generell kodekvalitet. Den kan oppdage eventuelle bugs også. Vi har valgt å eksludere noen bugs. Begrunnelsen for det ligger i de modulene det er aktuelt for ([`ui`](gr2116-project/ui) og [`RESTservice`](gr2116-project/RESTservice)). Man kan se hva som blir eksludert i [`excludeFilter.xml`](gr2116-project/config/excludeFilter.xml).
 
 ### Checkstyle
 
