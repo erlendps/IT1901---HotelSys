@@ -14,9 +14,9 @@ import java.io.IOException;
 public class HotelSerializer extends JsonSerializer<Hotel> {
 
   /*
+   * Serializes a Hotel object to the following
    * format: { "rooms": [ ... ], "persons": [ ... ] }
    */
-
   @Override
   public void serialize(Hotel hotel, JsonGenerator gen,
       SerializerProvider serializers) throws IOException {

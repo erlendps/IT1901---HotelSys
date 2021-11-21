@@ -14,6 +14,7 @@ import java.util.Iterator;
 public class RoomSerializer extends JsonSerializer<HotelRoom> {
 
   /*
+   * Serializes a HotelRoom object with the following 
    * format: { "number": ... , "type": "...", "amenities": [ ... ], "price": ... ,
    * "reservations": [ ... ] }
    */

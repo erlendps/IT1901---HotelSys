@@ -13,6 +13,7 @@ import java.io.IOException;
 public class PersonSerializer extends JsonSerializer<Person> {
 
   /*
+   * Serializes a Person object with the following
    * format: { "name": "...", "username": "...", "balance": ... , "reservations": [
    * ... ] }
    */
