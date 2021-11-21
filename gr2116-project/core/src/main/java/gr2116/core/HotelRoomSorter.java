@@ -70,7 +70,8 @@ public class HotelRoomSorter {
   }
 
   /**
-   * Returns the sort property
+   * Returns the sort property.
+   *
    * @return this.sortProperty
    */
   public SortProperty getSortProperty() {

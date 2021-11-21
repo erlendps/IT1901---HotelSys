@@ -39,7 +39,7 @@ public class RemoteErrorPageController {
   }
 
   /**
-   * Sends a messeage to appController telling it to try to reconnect
+   * Sends a messeage to appController telling it to try to reconnect.
    */
   @FXML
   private void reconnectButtonOnAction() {

@@ -24,7 +24,7 @@ public class HotelDeserializer extends JsonDeserializer<Hotel> {
 
   /*
    * Deseralizes a Hotel object with the following
-   * format: { "rooms": [ ... ], "persons": [ ... ] }
+   * format: { "rooms": [ ... ], "persons": [ ... ] }.
    */
   @Override
   public Hotel deserialize(JsonParser p, DeserializationContext ctxt)
@@ -32,8 +32,10 @@ public class HotelDeserializer extends JsonDeserializer<Hotel> {
     TreeNode treeNode = p.getCodec().readTree(p);
     return deserialize((JsonNode) treeNode);
   }
+  
   /**
-   * Deserializes a Hotel object
+   * Deserializes a Hotel object.
+   *
    * @param jsonNode The JSON node which should be formatted as a serialized Hotel object.
    * @return The Hotel object
    */
