@@ -134,12 +134,12 @@ Pakkediagram, klassediagrammer og sekvensdiagrammer ligger alle i mappen [images
 
 ### Pakkediagram
 
-En markdown-filer med kode for å
-generere pakkesiagram med PlantUML kan finnes i mappen [packagediagram](../packagediagram). 
+Markdown-filer med kode for å
+generere pakkediagram med PlantUML kan finnes i mappen [packagediagram](../packagediagram). 
 For mer informasjon se [README filen](../packagediagram/README.md).
 
 
-### Klassediagam
+### Klassediagram
 
 Markdown-filer med kode for å
 generere klassediagrammer for alle modulene kan finnes i mappen [modules](../modules). 
