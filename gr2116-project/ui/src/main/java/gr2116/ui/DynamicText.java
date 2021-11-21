@@ -13,7 +13,7 @@ public enum DynamicText {
   NotEnoughMoneyError("You don't have enough money to make this reservation."),
   NonNumericCardNumberError("Card number must contain numbers only."),
   WrongLengthCardNumberError("Card numbers must be exactly 16 characters long."),
-  InvalidCardIdentifierError("Invalid card issuer - Only Visa and Mastercard is supported."),
+  InvalidCardIdentifierError("Invalid card issuer - Only Visa and Mastercard are supported."),
   InvalidCardControlDigitError(
     "The card number has invalid format."),
   NonIntegerError("Balance must be a positive integer."),
