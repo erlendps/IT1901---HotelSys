@@ -1,3 +1,4 @@
+```plantuml
 @startuml
 
     actor user
@@ -15,3 +16,4 @@
     user <-- ui: Room added
 
 @enduml
+```
