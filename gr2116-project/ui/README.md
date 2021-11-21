@@ -5,14 +5,14 @@ Denne modulen inneholder kode for det grafiske brukergrensesnittet i applikasjon
 ## Oppbygging
 UI består av 9 pakker.
 * [`access`](src/main/java/gr2116/ui/access)
-* [`app`](src/main/java/gr2116/RESTservice/app)
-* [`controller`](src/main/java/gr2116/RESTservice/controller)
-* [`front`](src/main/java/gr2116/RESTservice/front)
-* [`main`](src/main/java/gr2116/RESTservice/main)
-* [`message`](src/main/java/gr2116/RESTservice/message)
-* [`money`](src/main/java/gr2116/RESTservice/money)
-* [`remoteerror`](src/main/java/gr2116/RESTservice/remoteerror)
-* [`utils`](src/main/java/gr2116/RESTservice/utils)
+* [`app`](src/main/java/gr2116/ui/app)
+* [`controller`](src/main/java/gr2116/ui/controller)
+* [`front`](src/main/java/gr2116/ui/front)
+* [`main`](src/main/java/gr2116/ui/main)
+* [`message`](src/main/java/gr2116/ui/message)
+* [`money`](src/main/java/gr2116/ui/money)
+* [`remoteerror`](src/main/java/gr2116/ui/remoteerror)
+* [`utils`](src/main/java/gr2116/ui/utils)
 
 Årsaken til at denne modulen er mer oppdelt enn andre, er at vi åpner noen av pakkene til `javafx.graphics` og `javafx.fxml` i `module-info.java`. `app` og `controller` inneholder henholdsvis de overordnede `App`, `RemoteApp` og `AppController` klassene. `front` inneholder kontrollere for applikasjonens forside (for å registrere seg og logge inn). `main` inneholder kontrollere for hovedsiden (der man reserverer hotellrom), samt `HotelRoomListItem`, en komponent for å vise informasjonen til et hotellrom med knapp for å reservere det. `message` inneholder `MessageListener`, et grensesnitt for å høre på meldinger, og `Message`, en enum som representerer ulike meldinger. Disse brukes til å sende informasjon oppover i hierarkiet, oftest til `AppController`, slik at underordnede klasser ikke trenger å ha tilgang til `hotelAccess` og `person`, for å sikre god innkapsling. `money` inneholder kontrolleren for siden der man setter inn penger. `remoteerror` inneholder kontrolleren for siden som vises dersom man ikke får kontakt med serveren. `utils` inneholder `FXMLUtils`, en klasse for å laste inn fxml til komponenter. Tidligere brukte vi denne i større grad, men for å sikre god model-view-controller-struktur, brukes den nå kun til å laste inn fxml for `HotelRoomListItem`.
 
