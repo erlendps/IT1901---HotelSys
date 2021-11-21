@@ -121,15 +121,6 @@ class RemoteErrorPageController {
     + void notifyListeners(Message)
 }
 
-enum SortProperty {
-    ByPrice,
-    ByPriceDecreasing,
-    ByRoomNumber,
-    ByRoomNumberDecreasing,
-    ByAmenityCount,
-    ByAmenityCountDecreasing;
-}
-
 interface HotelAccess {
     + void addPerson(Person person)
     + Collection<Person> getPersons()
