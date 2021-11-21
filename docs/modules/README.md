@@ -11,12 +11,19 @@ generere klassediagrammer med PlantUML. Disse kan man også se under [images](..
 
 ## core
 
-![klassediagram core](../images/core.png "Klassediagram core")
+![klassediagram core](../images/core.PNG "Klassediagram core")
 
 ## ui
 
-![klassediagram ui](../images/ui.png "Klassediagram ui")
+Klassediagrammet for UI er delt i to, for at det skal være mer oversiktlig.
+
+![klassediagram ui](../images/ui1.PNG "Klassediagram ui")
+![klassediagram ui](../images/ui2.PNG "Klassediagram ui")
 
 ## persistence
 
-![klassediagram persistence](../images/persistence.png "Klassediagram persistence")
+![klassediagram persistence](../images/persistence.PNG "Klassediagram persistence")
+
+## RESTserver
+
+![klassediagram RESTserver](../images/RESTserver.PNG "Klassediagram RESTserver")
