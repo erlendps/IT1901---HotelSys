@@ -38,6 +38,9 @@ public class RemoteErrorPageController {
     errorText.setText(DynamicText.RemoteServerError.getMessage());
   }
 
+  /**
+   * Sends a messeage to appController telling it to try to reconnect
+   */
   @FXML
   private void reconnectButtonOnAction() {
     notifyListeners(Message.Reconnect, null);
