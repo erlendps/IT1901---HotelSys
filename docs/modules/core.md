@@ -207,7 +207,7 @@ Reservation ..|> "Iterable<LocalDate>"
 Reservation --> "1" HotelRoom : room
 Person --> "n" PersonListener : listeners
 Person --> "n" Reservation : reservations
-
+SortProperty --+ HotelRoomSorter
 
 @enduml
 ```

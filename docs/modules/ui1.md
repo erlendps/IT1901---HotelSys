@@ -4,7 +4,7 @@ class DirectHotelAccess {
     - HotelPersistence hotelPersistence
     - Hotel hotel
 
-    + DirectHotelAccess(HotelPersistence hotelPersistence)
+    + DirectHotelAccess(String prefix)
     + void addPerson(Person person)
     + Collection<Person> getPersons()
     + Collection<HotelRoom> getRoom  (HotelRoomFilter)
@@ -150,27 +150,21 @@ class Person
 class HotelRoomFilter
 
 AppController ..|> MessageListener
-AppController --> "1" HotelPersistence : hotelPersistence
 AppController --> "1" HotelAccess : hotelAccess
 
 RemoteHotelAccess ..|> HotelAccess
 RemoteHotelAccess --> "1" Hotel : hotel
-RemoteHotelAccess --> "1" HotelPersistence : hotelPersistence
 DirectHotelAccess ..|> HotelAccess
 DirectHotelAccess -> "1" Hotel : hotel
 DirectHotelAccess -> "1" HotelPersistence : hotelPersistence
 
-MainPageController --> "1" HotelAccess : hotelAcces
+MainPageController --> "1" HotelAccess : hotelAccess
 MainPageController --> "1" HotelRoomFilter : hotelRoomFilter
 MainPageController --> "1" Person : person
 MainPageController --> "n" MessageListener : listeners
 MainPageController --> "1" HotelRoomSorter : hotelRoomSorter
 
 MoneyPageController --> "n" MessageListener : listeners
-MoneyPageController --> "1" Person : person
-MoneyPageController --> "1" HotelAccess : hotelAccess
-
-SortProperty --+ HotelRoomSorter
 
 RemoteErrorPageController --> "n" MessageListener : listeners
 
