@@ -97,7 +97,6 @@ class MoneyPageController {
     - Button moneyCancelButton
     - Label moneyErrorLabel
 
-    + MoneyPageController()
     - void validateCardNumber(String)
     - boolean checkLuhnsAlgorithm(String)
     - void validateMoneyAmount(String)
