@@ -57,7 +57,7 @@ Vi har dessverre ikke rukket å lage et administratorpanel for applikasjonen vå
 
 > ~/HotelSys/dataHotel.json
 
-Slik kan potensielle kunder (hotell) legge til hotellrommene sine manuelt. Dersom vi hadde hatt mer tid til å utvikle applikasjonen, ville vi lagt til et administratorpanel. For at det skal bli enklere å teste applikasjonen, lager den nå 30 tilfeldige rom dersom ingen rom er funnet i 'user'-mappen. Dermed er det enkelt å teste applikasjonen.
+Slik kan potensielle kunder (hotell) legge til hotellrommene sine manuelt. Dersom vi hadde hatt mer tid til å utvikle applikasjonen, ville vi lagt til et administratorpanel. For at det skal bli enklere å teste applikasjonen, lager den nå 30 tilfeldige rom dersom ingen rom er funnet i 'user'-mappen.
 Syntaksen for å legge til rom i JSON-filen manuelt er som følger:
 ```
 {
