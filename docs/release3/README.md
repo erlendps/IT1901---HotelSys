@@ -26,25 +26,25 @@ Siden for å logge inn:
 
 <img src="../images/start_page_login.png"
      alt="Skjermbilde av hovedsiden."
-     style="float: left; margin-right: 10px; width: 100%" />
+     style="float: left; margin-right: 10px; width: 60%" />
 
 Siden for å registrere seg:
 
 <img src="../images/start_page_register.png"
      alt="Skjermbilde av hovedsiden."
-     style="float: left; margin-right: 10px; width: 100%" />
+     style="float: left; margin-right: 10px; width: 60%" />
 
 Så, et bilde av hvordan hovedsiden ser ut.
 
 <img src="../images/main_page_release_3.png"
      alt="Skjermbilde av hovedsiden."
-     style="float: left; margin-right: 10px; width: 100%" />
+     style="float: left; margin-right: 10px; width: 60%" />
 
 Skjermbilde av siden for å legge inn penger. Kortnummer må være gyldig for at penger skal kunne settes inn, se eget avsnitt.
 
 <img src="../images/deposit_page_release_2.png"
      alt="Skjermbilde av pengesiden."
-     style="float: left; margin-right: 10px; width: 100%" />
+     style="float: left; margin-right: 10px; width: 60%" />
 
 
 ## Realisert
