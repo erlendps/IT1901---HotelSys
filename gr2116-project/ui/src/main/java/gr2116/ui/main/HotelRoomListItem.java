@@ -1,7 +1,9 @@
 package gr2116.ui.main;
 
 import gr2116.core.HotelRoom;
+import gr2116.core.HotelRoomType;
 import gr2116.ui.utils.FxmlUtils;
+import java.util.Collection;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,7 +16,10 @@ import javafx.scene.layout.Region;
  * A gui element for displaying hotel rooms in a list.
  */
 public class HotelRoomListItem extends HBox {
-  private HotelRoom room;
+  private final int roomNumber;
+  private final double price;
+  private final HotelRoomType roomType;
+  private final Collection<String> amenities;
 
   @FXML
   private Label numberLabel;
@@ -49,7 +54,11 @@ public class HotelRoomListItem extends HBox {
     if (room == null) {
       throw new IllegalArgumentException("Error initializing HotelRoomListItem: room is null.");
     }
-    this.room = room;
+    roomNumber = room.getNumber();
+    price = room.getPrice();
+    amenities = room.getAmenities();
+    roomType = room.getRoomType();
+
     FxmlUtils.loadFxml(this);
   }
 
@@ -58,19 +67,18 @@ public class HotelRoomListItem extends HBox {
    */
   @FXML
   private void initialize() {
-    numberLabel.setText("Hotel room " + room.getNumber());
-    typeLabel.setText(room.getRoomType().getDescription());
+    numberLabel.setText("Hotel room " + roomNumber);
+    typeLabel.setText(roomType.getDescription());
     // MakeReservationButton can be pressed.
     makeReservationButton.setText("Make reservation.");
     makeReservationButton.setDisable(true); 
-    pricePerNightLabel.setText(Double.toString(room.getPrice()));
+    pricePerNightLabel.setText(Double.toString(price));
     totalPriceLabel.setText("");
     // No error messeage.
     errorLabel.setText("");
     errorLabel.setMinHeight(Region.USE_PREF_SIZE);
 
     // Sets id used in the tests.
-    int roomNumber = room.getNumber();
     this.setId("hotelRoom" + Integer.toString(roomNumber) + "ListItem");
     numberLabel.setId("hotelRoom" + Integer.toString(roomNumber) + "NumberLabel");
     typeLabel.setId("hotelRoom" + Integer.toString(roomNumber) + "TypeLabel");
@@ -80,11 +88,11 @@ public class HotelRoomListItem extends HBox {
     makeReservationButton.setId("hotelRoom" + Integer.toString(roomNumber) + "Button");
 
     // Adds the rooms amenities.
-    String amenitiesText = "";
-    for (String amenity : room.getAmenities()) {
-      amenitiesText += amenity + ", ";
+    StringBuilder amenitiesText = new StringBuilder();
+    for (String amenity : amenities) {
+      amenitiesText.append(amenity + ", ");
     }
-    amenitiesLabel.setText(amenitiesText);
+    amenitiesLabel.setText(amenitiesText.toString());
     amenitiesLabel.setMinHeight(Region.USE_PREF_SIZE);
   }
 

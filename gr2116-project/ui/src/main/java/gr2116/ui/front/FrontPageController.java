@@ -61,14 +61,14 @@ public class FrontPageController implements MessageListener {
     panelContainer.getChildren().add(defaultPanel);
   }
 
-  public LoginPanelController getLoginPanelViewController() {
-    return loginPanelViewController;
+  public void setLoginPanelViewErrorLabel(String text) {
+    loginPanelViewController.setErrorLabel(text);
   }
 
-  public SignUpPanelController getSignUpPanelViewController() {
-    return signUpPanelViewController;
+  public void setSignUpPanelViewErrorLabel(String text) {
+    signUpPanelViewController.setErrorLabel(text);
   }
-
+  
   /**
    * Add a listener to the login page.
    *
@@ -116,6 +116,7 @@ public class FrontPageController implements MessageListener {
         && message == Message.SignUp
         && data instanceof Person) {
       notifyListeners(Message.SignUp, data);
+      notifyListeners(Message.Login, data);
     }
   }
 }

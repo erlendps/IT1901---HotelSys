@@ -1,7 +1,6 @@
 package gr2116.ui.controller;
 
 import gr2116.core.Person;
-import gr2116.persistence.HotelPersistence;
 import gr2116.ui.DynamicText;
 import gr2116.ui.access.DirectHotelAccess;
 import gr2116.ui.access.HotelAccess;
@@ -26,8 +25,8 @@ import javafx.scene.layout.StackPane;
  * as it receives notifications from various parts of the program.
  */
 public class AppController implements MessageListener {
-  private HotelPersistence hotelPersistence = new HotelPersistence("data");
   private HotelAccess hotelAccess;
+  private Person currentPerson;
 
   @FXML
   private String endpointUri;
@@ -65,10 +64,6 @@ public class AppController implements MessageListener {
    */
   @FXML
   private void initialize() {
-    frontPageViewController.addListener(this);
-    mainPageViewController.addListener(this);
-    moneyPageViewController.addListener(this);
-    remoteErrorPageViewController.addListener(this);
     if (endpointUri != null) {
       RemoteHotelAccess remoteHotelAccess;
       try {
@@ -82,7 +77,7 @@ public class AppController implements MessageListener {
       }
     }
     if (hotelAccess == null) {
-      DirectHotelAccess directHotelAccess = new DirectHotelAccess(hotelPersistence);
+      DirectHotelAccess directHotelAccess = new DirectHotelAccess("data");
       hotelAccess = directHotelAccess;
       System.out.println("Using DirectHotelAccess as access model.");
     }
@@ -92,6 +87,11 @@ public class AppController implements MessageListener {
     } catch (RuntimeException e) {
       moveToRemoteErrorPage();
     }
+    frontPageViewController.addListener(this);
+    mainPageViewController.addListener(this);
+    moneyPageViewController.addListener(this);
+    remoteErrorPageViewController.addListener(this);
+    mainPageViewController.setHotelAccess(hotelAccess);
   }
 
   @Override
@@ -103,37 +103,38 @@ public class AppController implements MessageListener {
             (Person p) -> p.getUsername().equals(dataPerson.getUsername())
           ).findAny().orElse(null);
       if (person != null) {
-        frontPageViewController.getSignUpPanelViewController()
-            .setErrorLabel(DynamicText.UsernameTaken.getMessage());
+        frontPageViewController.setSignUpPanelViewErrorLabel(
+            DynamicText.UsernameTaken.getMessage());
         return;
       }
       hotelAccess.addPerson(dataPerson);
-
-      moveToMainPage(dataPerson);
     } else if (message == Message.Login && data instanceof Person) {
       Person dataPerson = (Person) data;
       Person person = hotelAccess.getPersons().stream().filter(
             (Person p) -> p.getUsername().equals(dataPerson.getUsername())
           ).findAny().orElse(null);
       if (person == null) {
-        frontPageViewController.getLoginPanelViewController()
-            .setErrorLabel(DynamicText.UsernameHasNoMatches.getMessage());
+        frontPageViewController.setLoginPanelViewErrorLabel(
+            DynamicText.UsernameHasNoMatches.getMessage());
         return;
+      }
+      if (person.getHashedPassword() == null) {
+        throw new IllegalArgumentException(
+          "Tried to sign up a person without a password!");
       }
       if (!person.getHashedPassword().equals(dataPerson.getHashedPassword())) {
-        frontPageViewController.getLoginPanelViewController()
-            .setErrorLabel(DynamicText.WrongPassword.getMessage());
+        frontPageViewController.setLoginPanelViewErrorLabel(DynamicText.WrongPassword.getMessage());
         return;
       }
-      moveToMainPage(person);
+      currentPerson = person;
+      moveToMainPage();
     } else if (message == Message.SignOut) {
+      currentPerson = null;
       moveToFrontPage();
-    } else if (message == Message.MoneyPage && data instanceof Person) {
-      Person person = (Person) data;
-      moveToMoneyPage(person);
-    } else if (message == Message.MainPage && data instanceof Person) {
-      Person person = (Person) data;
-      moveToMainPage(person);
+    } else if (message == Message.ShowMoneyPage) {
+      moveToMoneyPage();
+    } else if (message == Message.ShowMainPage) {
+      moveToMainPage();
     } else if (message == Message.Reconnect) {
       try {
         load();
@@ -141,6 +142,11 @@ public class AppController implements MessageListener {
       } catch (RuntimeException e) {
         remoteErrorPageViewController.incrementFailures();
       }
+    } else if (message == Message.AddBalance && data instanceof Double) {
+      if (currentPerson == null) {
+        throw new IllegalStateException("Cannot add balance when current person is null!");
+      } 
+      hotelAccess.addBalance(currentPerson, (double) data);
     }
   }
 
@@ -150,7 +156,7 @@ public class AppController implements MessageListener {
    * @param prefix The prefix the be set
    */
   public void setPrefix(String prefix) {
-    hotelPersistence.setPrefix(prefix);
+    hotelAccess.setPrefix(prefix);
   }
 
   /**
@@ -174,24 +180,22 @@ public class AppController implements MessageListener {
    * The MainPage is created with the selected person (which is usually selected from FrontPage).
    * Finally adds MainPage as a child of itself.
    *
-   * @param person The person to be logged in as
+   * @throws IllegalStateException if currentPerson is null
    */
-  public void moveToMainPage(final Person person) {
-    mainPageViewController.setPerson(person);
-    mainPageViewController.setHotelAccess(hotelAccess);
+  public void moveToMainPage() {
+    if (currentPerson == null) {
+      throw new IllegalStateException("Cannot move to main page without a person!");
+    }
+    mainPageViewController.setPerson(currentPerson);
     root.getChildren().clear();
     root.getChildren().add(mainPageView);
   }
 
   /**
    * Moves to money page.
-   *
-   * @param person The person to make the money page for
    */
-  public void moveToMoneyPage(final Person person) {
+  public void moveToMoneyPage() {
     root.getChildren().clear();
-    moneyPageViewController.setPerson(person);
-    moneyPageViewController.setHotelAccess(hotelAccess);
     root.getChildren().add(moneyPageView);
   }
 
@@ -213,38 +217,11 @@ public class AppController implements MessageListener {
   }
 
   /**
-   * Returns the hotelAccess model.
-   *
-   * @return HotelAccess that this controller uses
-   */
-  public HotelAccess getHotelAccess() {
-    return hotelAccess;
-  }
-
-  /**
-   * Returns this controllers HotelPersistence.
-   *
-   * @return HotelPersistence
-   */
-  public HotelPersistence getHotelPersistence() {
-    return hotelPersistence;
-  }
-
-  /**
    * Load data from JSON files. Creates a hotel object,
    * which is used to create pages with correct data in them.
    */
   public void load() {
     hotelAccess.loadHotel();
-  }
-
-  /**
-   * Sets hotelAccess.
-   *
-   * @param hotelAccess the given hotelAcess
-   */
-  public void setHotelAccess(HotelAccess hotelAccess) {
-    this.hotelAccess = hotelAccess;
   }
 }
 

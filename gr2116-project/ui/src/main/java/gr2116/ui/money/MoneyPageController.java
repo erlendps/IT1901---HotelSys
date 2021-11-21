@@ -1,8 +1,6 @@
 package gr2116.ui.money;
 
-import gr2116.core.Person;
 import gr2116.ui.DynamicText;
-import gr2116.ui.access.HotelAccess;
 import gr2116.ui.message.Message;
 import gr2116.ui.message.MessageListener;
 import java.util.Collection;
@@ -17,8 +15,6 @@ import javafx.scene.control.TextField;
  */
 public class MoneyPageController {
   private Collection<MessageListener> listeners = new HashSet<>();
-  private Person person;
-  private HotelAccess hotelAccess;
 
   @FXML
   private TextField cardTextField;
@@ -32,29 +28,6 @@ public class MoneyPageController {
   
   @FXML
   private Label moneyErrorLabel;
-
-  /**
-   * Load FXML for money page. Takes in the person to add money to.
-   */
-  public MoneyPageController() { }
-
-  public void setPerson(Person person) {
-    this.person = person;
-  }
-
-  /**
-   * Sets the hotelAccess.
-   *
-   * @param hotelAccess the hotelAccess
-   *
-   * @throws IllegalArgumentException throws if hotel is null.
-   */
-  public void setHotelAccess(HotelAccess hotelAccess) {
-    if (hotelAccess == null) {
-      throw new IllegalArgumentException("Hotel is null.");
-    }
-    this.hotelAccess = hotelAccess;
-  }
 
   /**
    * Validates the given card number.
@@ -131,7 +104,6 @@ public class MoneyPageController {
     if (money == 0) {
       throw new IllegalArgumentException(DynamicText.ZeroBalanceError.getMessage());
     }
-    
   }
   
   @FXML
@@ -150,14 +122,14 @@ public class MoneyPageController {
       moneyErrorLabel.setText(e.getMessage());
       return;
     }
-    hotelAccess.addBalance(person, Double.parseDouble(moneyAmount));
+    notifyListeners(Message.AddBalance, (Double) Double.parseDouble(moneyAmount));
     
-    notifyListeners(Message.MainPage, person);
+    notifyListeners(Message.ShowMainPage, null);
   }
 
   @FXML
   private void moneyCancelButtonOnAction() {
-    notifyListeners(Message.MainPage, person);
+    notifyListeners(Message.ShowMainPage, null);
   }
 
   /**

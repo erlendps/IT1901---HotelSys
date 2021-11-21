@@ -11,8 +11,11 @@ import org.glassfish.jersey.server.ResourceConfig;
 /**
  * Configures the rest service,
  * e.g. JSON support with Jackson and
- * injectable Hotel and HotelPersistance
+ * injectable Hotel and HotelPersistance. This class is specifically used
+ * for the RESTservive test and integration tests.
  */
+// https://stackoverflow.com/questions/4023185/disable-a-particular-checkstyle-rule-for-a-particular-line-of-code
+// CHECKSTYLE IGNORE AbbreviationAsWordInName FOR NEXT 1 LINE
 public class HotelITConfig extends ResourceConfig {
   private Hotel hotel;
   private HotelPersistence hotelPersistence;

@@ -3,8 +3,8 @@ package gr2116.ui.main;
 import gr2116.core.HotelRoom;
 import gr2116.core.HotelRoomFilter;
 import gr2116.core.HotelRoomSorter;
-import gr2116.core.Person;
 import gr2116.core.HotelRoomSorter.SortProperty;
+import gr2116.core.Person;
 import gr2116.ui.DynamicText;
 import gr2116.ui.access.HotelAccess;
 import gr2116.ui.message.Message;
@@ -211,11 +211,10 @@ public class MainPageController implements MessageListener {
       buildRoomList();
     }
     if (message == Message.SignOut) {
-      notifyListeners(Message.SignOut, person);
+      notifyListeners(Message.SignOut, null);
     }
-
-    if (message == Message.MoneyPage) {
-      notifyListeners(Message.MoneyPage, person);
+    if (message == Message.ShowMoneyPage) {
+      notifyListeners(Message.ShowMoneyPage, null);
     }
   }
 

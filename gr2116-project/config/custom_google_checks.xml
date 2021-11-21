@@ -44,6 +44,12 @@
   </module>
 
   <module name="TreeWalker">
+    <!-- Ignores (\w+) check for the next (\d+) lines when writing the comment https://checkstyle.sourceforge.io/config.html -->
+    <module name="SuppressWithNearbyCommentFilter">
+      <property name="commentFormat" value="CHECKSTYLE IGNORE (\w+) FOR NEXT (\d+) LINES?"/>
+      <property name="checkFormat" value="$1"/>
+      <property name="influenceFormat" value="$2"/>
+    </module>
     <module name="OuterTypeFilename"/>
     <module name="IllegalTokenText">
       <property name="tokens" value="STRING_LITERAL, CHAR_LITERAL"/>
