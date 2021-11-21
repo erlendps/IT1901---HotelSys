@@ -77,6 +77,8 @@ class FilterPanelController {
 
     + FilterPanelController()
     - void initialize()
+    - void roomTypeChoiceBoxOnAction()
+    - void clearFilterButtonOnAction()
     + void addListener(MessageListener)
     + void removeListener(MessageListener)
     + void notifyListeners()
@@ -90,7 +92,10 @@ class AmenityCheckBox {
 }
 
 class HotelRoomListItem {
-    - HotelRoom room
+    - int roomNumber
+    - double price
+    - HotelRoomType roomType
+    - Collection<String> amenities
     - Label numberLabel
     - Label typeLabel
     - Label amenitiesLabel
@@ -159,7 +164,7 @@ enum DynamicText {
     InvalidPassword,
     UsernameTaken,
     UsernameHasNoMatches,
-    WrongPassword
+    WrongPassword;
 }
 
 interface MessageListener {

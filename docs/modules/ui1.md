@@ -9,9 +9,10 @@ class DirectHotelAccess {
     + Collection<Person> getPersons()
     + Collection<HotelRoom> getRoom  (HotelRoomFilter)
     + void loadHotel()
-    + void saveHotel()
+    - void saveHotel()
     + void makeReservation(Person, int, LocalDate, LocalDate)
     + void addBalance(Person, double)
+    + void setPrefix(String)
 }
 
 class RemoteHotelAccess {
@@ -34,11 +35,12 @@ class RemoteHotelAccess {
     - boolean putRoom(HotelRoom)
     + void makeReservation(Person, int, LocalDate, LocalDate)
     + void addBalance(Person, double) 
+    + void setPrefix(String)
 }
 
 class AppController {
-    - HotelPersistence hotelPersistence
     - HotelAccess hotelAccess
+    - Person currentPerson
     - String endpointUri
     - MainPageController mainPageViewControlle
     - SplitPane mainPageView
@@ -51,18 +53,14 @@ class AppController {
     - StackPane root
 
     - void initialize()
-    + void receiveMessage(Object, Message,Object)
+    + void receiveMessage(Object, Message, Object)
     + void setPrefix(String)
     + void moveToFrontPage()
-    + void moveToMainPage(Person)
-    + void moveToMoneyPage(Person)
+    + void moveToMainPage()
+    + void moveToMoneyPage()
     + void moveToRemoteErrorPage()
     + Collection<Person> getPersons()
-    + HotelAccess getHotelAccess()
-    + HotelPersistence getHotelPersistence()
     + void load()
-    + void save()
-    + void setHotelAccess(HotelAccess)
 }
 
 class MainPageController {
@@ -93,8 +91,6 @@ class MainPageController {
 
 class MoneyPageController {
     - Collection<MessageListener> listeners
-    - Person person
-    - HotelAccess hotelAccess
     - TextField cardTextField
     - TextField moneyAmountTextField
     - Button addFundsButton
@@ -102,13 +98,12 @@ class MoneyPageController {
     - Label moneyErrorLabel
 
     + MoneyPageController()
-    + void setPerson(Person)
-    + void setHotelAccess(HotelAccess)
     - void validateCardNumber(String)
     - boolean checkLuhnsAlgorithm(String)
     - void validateMoneyAmount(String)
-    - void initialize()
-    + final void addListener(MessageListener)
+    - void addFundsButtonOnAction()
+    - void moneyCancelButtonOnAction()
+    + void addListener(MessageListener)
     + void removeListener(MessageListener)
     + void notifyListeners(Message,Object)
 }
@@ -133,7 +128,7 @@ enum SortProperty {
     ByRoomNumber,
     ByRoomNumberDecreasing,
     ByAmenityCount,
-    ByAmenityCountDecreasing
+    ByAmenityCountDecreasing;
 }
 
 interface HotelAccess {
@@ -141,9 +136,9 @@ interface HotelAccess {
     + Collection<Person> getPersons()
     + Collection<HotelRoom> getRooms(HotelRoomFilter)
     + void loadHotel()
-    + void saveHotel()
     + void makeReservation(Person, int, LocalDate, LocalDate)
     + void addBalance(Person, double)
+    + void setPrefix(String)
 }
 
 interface MessageListener {
