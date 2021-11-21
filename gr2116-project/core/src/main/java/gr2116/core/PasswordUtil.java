@@ -17,6 +17,7 @@ public class PasswordUtil {
    * Hashes the given password string with PBKDF2WithHmacSHA1.
    *
    * @param password the password to hash
+   *
    * @return the hashed password
    */
   public static String hashPassword(String password) {

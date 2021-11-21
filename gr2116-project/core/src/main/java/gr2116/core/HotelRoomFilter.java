@@ -90,6 +90,8 @@ public class HotelRoomFilter implements Predicate<HotelRoom> {
   /**
    * Tests if a hotel room matches this filter.
    *
+   * @param room the room to be tested.
+   *
    * @return whether or not the hotel room matches the filter
    */
   @Override

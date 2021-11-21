@@ -37,7 +37,7 @@ public class Reservation implements Iterable<LocalDate> {
    *
    * @throws IllegalArgumentException if startDate or endDate is null
    * @throws IllegalArgumentException if startDate is after endDate
-   * @throws NullPointerExceptino if room is null
+   * @throws IllegalArgumentException if room is null
    */
   public Reservation(final HotelRoom room,
                       final LocalDate startDate,
@@ -125,6 +125,13 @@ public class Reservation implements Iterable<LocalDate> {
     return getId();
   }
 
+  /**
+   * Custom implementation of .equals method.
+   *
+   * @param o object to test against
+   *
+   * @return true if o and this are the same, false otherwise
+   */
   @Override
   public boolean equals(Object o) {
     if (o == this) {
@@ -137,6 +144,12 @@ public class Reservation implements Iterable<LocalDate> {
     return getId().equals(res.getId());
   }
 
+  /**
+   * Custom implementation of hashCode method. See
+   * https://www.technofundo.com/tech/java/equalhash.html on why we did this.
+   *
+   * @return the hashCode for this Reservation
+   */
   @Override
   public int hashCode() {
     int hash = 7;

@@ -63,7 +63,7 @@ public class HotelRoom {
   /**
    * Returns the room type.
    *
-   * @return room type
+   * @return the room type
    */
   public final HotelRoomType getRoomType() {
     return roomType;
@@ -72,7 +72,7 @@ public class HotelRoom {
   /**
    * Returns what floor the room is on.
    *
-   * @return floor
+   * @return floor number
    */
   public final int getFloor() {
     return Integer.parseInt(Integer.toString(number).substring(0, 1));
@@ -112,7 +112,7 @@ public class HotelRoom {
   }
 
   /**
-   * Returns the reservations.
+   * Returns an iterator with the reservations.
    *
    * @return Iterator with type Reservation
    */
@@ -124,6 +124,8 @@ public class HotelRoom {
    * Sets the daily price to the given price.
    *
    * @param price the given price.
+   *
+   * @throws IllegalArgumentException if price is negative
    */
   public final void setPrice(final double price) {
     if (price < 0) {
@@ -149,7 +151,7 @@ public class HotelRoom {
   /**
    * Returns a collection of the names of the room's amenities.
    *
-   * @return amenities
+   * @return Collection of the names of the rooms amenities
    */
   public final Collection<String> getAmenities() {
     List<String> amen = amenities.stream()
@@ -209,6 +211,8 @@ public class HotelRoom {
    * @param reservation the reservation to add
    * 
    * @throws IllegalArgumentException if reservation is null
+   * @throws IllegalArgumentException if the room number of the reservation is different from
+   *                                  this rooms number.
    */
   public final void addReservation(final Reservation reservation) {
     if (reservation == null) {
@@ -229,7 +233,7 @@ public class HotelRoom {
    * Returns a collection of the ids
    * of the reservations in the room's calendar.
    *
-   * @return reservation ids
+   * @return Collection of reservation ids
    */
   public final Collection<String> getReservationIds() {
     return calendar.getReservationIds();
@@ -242,6 +246,7 @@ public class HotelRoom {
    * @param startDate the start date of the interval
    * @param endDate the end date of the interval
    *
+   * @throws IllegalArgumentException if startDate or endDate is null.
    * @throws IllegalArgumentException if startDate is chronologically after endDate.
    */
   private void verifyChronology(final LocalDate startDate,
@@ -255,6 +260,13 @@ public class HotelRoom {
     }
   }
 
+  /**
+   * Custom implementation of .equals method.
+   *
+   * @param o object to test against
+   *
+   * @return true if o and this are the same, false otherwise
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -270,6 +282,12 @@ public class HotelRoom {
         && this.getAmenities().equals(room.getAmenities());
   }
 
+  /**
+   * Custom implementation of hashCode method. See
+   * https://www.technofundo.com/tech/java/equalhash.html on why we did this.
+   *
+   * @return the hashCode for this HotelRoom
+   */
   @Override
   public int hashCode() {
     int hash = 13;
