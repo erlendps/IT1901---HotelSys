@@ -39,7 +39,7 @@ public class PersonResource {
   }
 
   /**
-  * Initializes PersonResource. Each method wil check and use what is needed.
+  * Initializes PersonResource. Each method will check and use what is needed.
   *
   * @param username the name of the person, needed to add a new person
   * @param person the person, needed for most request

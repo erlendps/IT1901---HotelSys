@@ -29,6 +29,12 @@ public class SignUpPanelController {
   @FXML
   private Label errorLabel;
 
+  /**
+   * The action to perform on sign up button press.
+   * Validates the textfields, and sets error message accordingly.
+   * Notifies listeners if the fields are valid.
+   * Will result in a sign up and login if FrontPageController is listening.
+   */
   @FXML
   private void signUpButtonOnAction() {
     setErrorLabel("");

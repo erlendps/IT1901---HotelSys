@@ -12,6 +12,7 @@ import java.io.IOException;
 public class ReservationSerializer extends JsonSerializer<Reservation> {
 
   /*
+   * Serializer for Reservation object with the following
    * format: { "room": ... , "startDate": "...", "endDate": "...", "id": ... }
    */
   @Override

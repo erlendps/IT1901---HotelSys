@@ -9,7 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 
 /**
- * Login page class, which is what meets the user when the program starts.
+ * Front page controller, for the page the user meets when the program starts.
  */
 public class FrontPageController implements MessageListener {
   private Collection<MessageListener> listeners = new HashSet<>();
@@ -28,11 +28,8 @@ public class FrontPageController implements MessageListener {
   private SignUpPanelController signUpPanelViewController;
 
   /**
-   * Initialize FrontPage. Sets action for the login button.
-   * Set sign-in button to validate input.
-   * Add register field if necessary.
-   * If login is completed, redirect to
-   * main page.
+   * Initialize FrontPage.
+   * Shows the default panel (sign up and login buttons)
    */
   @FXML
   private void initialize() {
@@ -51,14 +48,18 @@ public class FrontPageController implements MessageListener {
     showPanel(signUpPanelView);
   }
 
+  /**
+   * Clears the panelContainer and shows a new panel.
+   *
+   * @param panel the panel to show
+   */
   private void showPanel(VBox panel) {
     panelContainer.getChildren().clear();
     panelContainer.getChildren().add(panel);
   }
 
   public void showDefaultPanel() {
-    panelContainer.getChildren().clear();
-    panelContainer.getChildren().add(defaultPanel);
+    showPanel(defaultPanel);
   }
 
   public void setLoginPanelViewErrorLabel(String text) {
@@ -104,6 +105,19 @@ public class FrontPageController implements MessageListener {
     }
   }
 
+  /**
+   * Receives messages from various parts of the program,
+   * and acts accordingly.
+   * Implemented messages are:
+   * - Message.SignUp, with Person as data
+   * - Message.Login, with Person as data
+   * - Message.Cancel
+
+   *  @param from the object the message is from
+   *  @param message the message to receive
+   *  @param data the data to go along with the message
+   * 
+   */
   @Override
   public void receiveMessage(Object from, Message message, Object data) {
     if (message == Message.Cancel) {

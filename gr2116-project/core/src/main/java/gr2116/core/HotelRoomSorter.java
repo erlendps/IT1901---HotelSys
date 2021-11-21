@@ -44,6 +44,13 @@ public class HotelRoomSorter {
     }
   }
 
+  /**
+   * Sorts hotelRooms on this sortProperty's comparator.
+   *
+   * @param hotelRooms the collection to sort
+   *
+   * @return the sorted collection
+   */
   public List<HotelRoom> sortRooms(Collection<HotelRoom> hotelRooms) {
     return hotelRooms.stream().sorted(sortProperty.getComparator()).toList();
   }
@@ -52,6 +59,7 @@ public class HotelRoomSorter {
    * Returns the current sort property.
    *
    * @param sortProperty the current sort property
+   *
    * @throws IllegalArgumentException if sortProperty is null
    */
   public void setSortProperty(SortProperty sortProperty) {
@@ -61,6 +69,10 @@ public class HotelRoomSorter {
     this.sortProperty = sortProperty;
   }
 
+  /**
+   * Returns the sort property
+   * @return this.sortProperty
+   */
   public SortProperty getSortProperty() {
     return sortProperty;
   }

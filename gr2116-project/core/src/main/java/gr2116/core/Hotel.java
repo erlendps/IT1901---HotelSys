@@ -53,7 +53,9 @@ public class Hotel implements Iterable<HotelRoom> {
    * Adds the given room to the hotel.
    *
    * @param room the HotelRoom to add
-   * 
+   *
+   * @return The room that was replaced or null if no such room already existed
+   *
    * @throws IllegalArgumentException if room is null
    */
   public final HotelRoom addRoom(final HotelRoom room) {
@@ -77,7 +79,7 @@ public class Hotel implements Iterable<HotelRoom> {
    *
    * @param person the Person to be added
    *
-   * @return true if person was added, false otherwise
+   * @return the Person that was replaced or null if no such Person existed
    *
    * @throws IllegalArgumentException if person is null
    */
@@ -103,13 +105,18 @@ public class Hotel implements Iterable<HotelRoom> {
    *
    * @param predicate the given predicate.
    *
-   * @return a collection of rooms.
+   * @return a collection of rooms that matches the predicate.
    */
   public final Collection<HotelRoom> getRooms(
       final Predicate<HotelRoom> predicate) {
     return getRooms().stream().filter(predicate).toList();
   }
 
+  /**
+   * Returns a collection of all the rooms in this Hotel.
+   *
+   * @return a collection of rooms.
+   */
   public final Collection<HotelRoom> getRooms() {
     return new ArrayList<>(rooms.values());
   }
@@ -148,10 +155,11 @@ public class Hotel implements Iterable<HotelRoom> {
    * @param startDate - {@code LocalDate} of when the reservation should start.
    * @param endDate - {@code LocalDate} of when the reservation should end.
    *
-   * @throws IllegalArgumentException if startDate or endDate is null.
+   * @throws IllegalArgumentException if person, startDate or endDate is null.
    * @throws IllegalStateException if the start date is before today.
    * @throws IllegalArgumentException if startDate is chronologically after endDate
    * @throws IllegalArgumentException if the hotel room number is not a room in the hotel.
+   * @throws IllegalArgumentException if the Person is not a user at the Hotel.
    * @throws IllegalStateException  if the {@code Person} does not have enough balance
    *                                to pay for the reservation.
    * @throws IllegalStateException  if hotelRoom is unavailable, e.g already booked, in

@@ -69,6 +69,7 @@ public class Person {
    * Sets the first name.
    *
    * @param firstName the string to be set as the first name
+   *
    * @throws IllegalArgumentException if the name is invalid
    */
   public void setFirstName(String firstName) {
@@ -91,6 +92,7 @@ public class Person {
    * Sets the last name.
    *
    * @param lastName the string to be set as the last name
+   *
    * @throws IllegalArgumentException if the name is invalid
    */
   public void setLastName(String lastName) {
@@ -162,6 +164,7 @@ public class Person {
    * Sets the persons password.
    *
    * @param password the password to set
+   *
    * @throws IllegalArgumentException if the password is invalid - see isValidPassword method.
    */
   public void setPassword(String password) {
@@ -176,6 +179,7 @@ public class Person {
    * Used when building persons from json.
    *
    * @param hashed the hashed password to be set
+   *
    * @throws IllegalStateExceptino if the password has already been set
    */
   public void setHashedPassword(String hashed) {
@@ -310,6 +314,13 @@ public class Person {
     }
   }
 
+  /**
+   * Custom implementation of .equals method.
+   *
+   * @param o object to test against
+   *
+   * @return true if o and this are the same, false otherwise
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -324,6 +335,12 @@ public class Person {
         && this.getReservations().equals(p.getReservations());
   }
 
+  /**
+   * Custom implementation of hashCode method. See
+   * https://www.technofundo.com/tech/java/equalhash.html on why we did this.
+   *
+   * @return the hashCode for this Person
+   */
   @Override
   public int hashCode() {
     int hash = 5;

@@ -14,6 +14,7 @@ import javafx.scene.layout.Region;
 
 /**
  * A gui element for displaying hotel rooms in a list.
+ * Has information about the room and button to make a reservation.
  */
 public class HotelRoomListItem extends HBox {
   private final int roomNumber;

@@ -105,7 +105,11 @@ public class MoneyPageController {
       throw new IllegalArgumentException(DynamicText.ZeroBalanceError.getMessage());
     }
   }
-  
+
+  /**
+   * Checks if valid cardnumber and valid money amount, catchest exception if not.
+   * Notify listner to add balance, if cardnumber and money are valid.
+   */
   @FXML
   private void addFundsButtonOnAction() {
     String cardNumber = cardTextField.getText();
@@ -127,6 +131,9 @@ public class MoneyPageController {
     notifyListeners(Message.ShowMainPage, null);
   }
 
+  /**
+   * Notify listner when cancel button is pressed (ShowMainPage).
+   */
   @FXML
   private void moneyCancelButtonOnAction() {
     notifyListeners(Message.ShowMainPage, null);

@@ -92,7 +92,8 @@ public class HotelPersistence {
   }
 
   /**
-   * Loads from file a Hotel object with the given prefix.
+   * Loads from file a Hotel object with the given prefix. If it does not find the file, i.e
+   * there is an IOException it returns a Hotel-object with x randomly generated rooms. 
    *
    * @return Hotel object
    *

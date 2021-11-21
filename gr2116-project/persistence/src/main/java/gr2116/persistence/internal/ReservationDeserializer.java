@@ -20,6 +20,7 @@ import java.time.LocalDate;
 public class ReservationDeserializer extends JsonDeserializer<Reservation> {
 
   /*
+   * Deserializes a Reservation object with the following
    * format: { "room": ... , "startDate": "...", "endDate": "...", "id": ... }
    */
 
