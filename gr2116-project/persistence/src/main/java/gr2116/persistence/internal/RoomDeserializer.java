@@ -24,10 +24,10 @@ public class RoomDeserializer extends JsonDeserializer<HotelRoom> {
   private final ReservationDeserializer reservationDeserializer = new ReservationDeserializer();
 
   /*
+   * Deserializes a HotelRoom object with the following
    * format: { "number": ... , "type": "...", "amenities": [ ... ], "price": ... ,
    * "reservations": [ ... ] }
    */
-
   @Override
   public HotelRoom deserialize(JsonParser p, DeserializationContext ctxt)
       throws IOException, JsonProcessingException {

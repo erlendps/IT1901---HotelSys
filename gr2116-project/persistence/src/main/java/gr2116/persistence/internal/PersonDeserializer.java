@@ -21,6 +21,11 @@ public class PersonDeserializer extends JsonDeserializer<Person> {
 
   private ReservationDeserializer reservationDeserializer = new ReservationDeserializer();
 
+  /*
+   * Deserializes a Person object with the following
+   * format: { "name": "...", "username": "...", "balance": ... , "reservations": [
+   * ... ] }
+   */
   @Override
   public Person deserialize(JsonParser p, DeserializationContext ctxt)
       throws IOException, JsonProcessingException {
