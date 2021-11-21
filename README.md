@@ -13,7 +13,7 @@ Vi utvikler [HotelSys](gr2116-project) - en applikasjon for å booke hotellrom.
 
 Kodingsprosjektet ligger i mappen [gr2116-project](gr2116-project). Her ligger de fire hovedmodulene som utgjør prosjektet. [`core`](gr2116-project/core) refererer til domenelogikk, [`persistence`](gr2116-project/persistence) refererer til fillagringssystemet og [`ui`](gr2116-project/ui) refererer til det grafiske brukergrensesnittet i applikasjonen. [`RESTservice`](gr2116-project/RESTservice) utgjøre REST API-et som håndterer HTTP-request sendt fra applikasjonen. Dokumentasjon for hver enkelt modul ligger i [modules](docs/modules) og under "rot-mappen" til hver modul.
 
-Diagrammer er skrevet i markdown og bruker PlantUML. Kildekoden for hvert diagram ligger i [diagrams](docs/diagrams).
+Diagrammer er skrevet i markdown og bruker PlantUML. Kildekoden for hvert diagram ligger i undermapper under [docs](docs).
 
 ## Bygging og kjøring av prosjektet
 
