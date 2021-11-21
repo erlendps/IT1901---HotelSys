@@ -128,7 +128,6 @@
               <name>HotelSys</name>
               <appVersion>1.0.0</appVersion>
               <vendor>gr2116</vendor>
-              <icon>../../docs/images/icon.png</icon>
               <destination>target/RemoteHotelSys</destination>
               <module>gr2116.ui/gr2116.ui.app.RemoteApp</module>
               <runtimeImage>target/remotehotelsysfx</runtimeImage>
@@ -214,7 +213,6 @@
           <name>HotelSysFX</name>
           <appVersion>1.0.0</appVersion>
           <vendor>gr2116</vendor>
-          <imageOptions>../../docs/images/icon.ico</imageOptions>
           <destination>target/HotelSys</destination>
           <module>gr2116.ui/gr2116.ui.app.App</module>
           <runtimeImage>target/hotelsysfx</runtimeImage>
