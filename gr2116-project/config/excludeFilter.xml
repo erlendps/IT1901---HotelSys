@@ -21,4 +21,9 @@
       <Bug pattern="EI_EXPOSE_REP2"/>
     </Or>
   </Match>
+
+  <Match>
+    <Package name="gr2116.ui.main"/>
+    <Bug pattern="EI_EXPOSE_REP2"/>
+  </Match>
   </FindBugsFilter>
