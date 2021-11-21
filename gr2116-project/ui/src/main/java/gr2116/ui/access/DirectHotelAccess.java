@@ -50,7 +50,7 @@ public class DirectHotelAccess implements HotelAccess {
   /**
    * Saves the hotel to file.
    */
-  public void saveHotel() {
+  private void saveHotel() {
     try {
       hotelPersistence.saveHotel(hotel);
     } catch (IOException e) {
