@@ -15,32 +15,58 @@ Diagrammer er skrevet i markdown og bruker PlantUML. Kildekoden for hvert diagra
 Selve prosjektet ligger under [**gr2116-project**](gr2116-project). Prosjektet kjøres og bygges av maven. Følgende kommandoer gjelder fra **gr2116-project**-mappa. Prosjektet må bygges før det kan kjøres eller testes.
 
 For å bygge:
-> mvn install
+
+```shell
+mvn install
+```
 
 Det finnes to versjoner av appen. Den tar ikke i bruk REST-APIet og lagrer lokalt. Den andre versjonen tar i bruk REST-APIet, som den gjør ved å sende HTTP-requests til endepunktet. Dette er forklart mer i egen README fil i [`RESTservice`](gr2116-project/RESTservice).
 For å kjøre den lokale versjonen av appen:
 
-> mvn -pl ui javafx:run
+```shell
+mvn -pl ui javafx:run
+```
 
 For å kjøre "remote"-versjonen av appen må man også starte en webserver som skal håndtere HTTP-requester. Dette gjøres ved å starte en jetty webapp.
 For å starte jetty:
 
-> mvn -pl webapp jetty:run
+```shell
+mvn -pl webapp jetty:run
+```
 
 Deretter kan man starte appen:
 
-> mvn -P remoteapp -pl ui javafx:run
+```shell
+mvn -P remoteapp -pl ui javafx:run
+```
 
 For å teste:
 
-> mvn test
+```shell
+mvn test
+```
 
 For å verifisere, samt å kjøre integrasjonstester:
 
-> mvn verify
+```shell
+mvn verify
+```
 
 Test coverage fra jacoco ligger i `module-name/target/site/index.html`. I GitPod kan denne vises ved hjelp av Live Server extension. Det samme kan man lokalt i VSCode med samme Live Server extension. Vi har hatt noen problemer med å kjøre UI tester (både ui-tester og integrasjonstester) i gitpod, men testene skal kjøre lokalt og dette er noe vi anbefaler.
 
+For å bygge applikasjonen til en `.exe`, `.dmg` eller `.deb` fil, bruker vi [jlink](https://docs.oracle.com/javase/9/tools/jlink.htm#JSWOR-GUID-CECAC52B-CFEE-46CB-8166-F17A8E9280E9) og [jpackage](https://docs.oracle.com/en/java/javase/14/docs/specs/man/jpackage.html). Man kan bygge både remote-versjonen og lokal-versjonen.
+
+For å bygge lokal-versjonen:
+
+```shell
+mvn -pl ui javafx:jlink jpackage:jpackage
+```
+
+For å bygge remote-versjonen:
+
+```shell
+mvn -P remoteapp -pl ui javafx:jlink jpackage:jpackage
+```
 
 ## Utgivelser
 
