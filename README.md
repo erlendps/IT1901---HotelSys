@@ -73,6 +73,8 @@ For å bygge remote-versjonen:
 mvn -P remoteapp -pl ui javafx:jlink jpackage:jpackage
 ```
 
+Merk at denne versjonen av appen også er avhengig av at det kjører en websever som serverer REST-APIet.
+
 ## Utgivelser
 
  - [Release 1](docs/release1)
