@@ -1,3 +1,4 @@
+```plantuml
 @startuml
 
     actor user
@@ -13,6 +14,7 @@
     RESTservice <-- persistence: saved
     HotelAccess <-- RESTservice: response
     ui <-- HotelAccess: added
-    user <-- ui: Room added
+    user <-- ui: Reservation added
 
 @enduml
+```
