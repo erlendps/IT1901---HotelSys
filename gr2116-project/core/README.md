@@ -30,3 +30,9 @@ Hotellrom finnes i følgende varianter:
 * Quad
 * Suite
 * Penthouse
+
+## Klassediagram
+
+Under følger klassediagrammet for `core`-modulen.
+
+![klassediagram core](../../docs/images/core.PNG "Klassediagram core")
