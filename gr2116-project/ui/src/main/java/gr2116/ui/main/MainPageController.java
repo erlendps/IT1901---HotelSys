@@ -19,6 +19,7 @@ import javafx.scene.layout.VBox;
 
 /**
  * Main page, which contains the main panel for booking hotel nights.
+ * Does also include the user panel and filter panel.
  */
 public class MainPageController implements MessageListener {
   private HotelAccess hotelAccess;

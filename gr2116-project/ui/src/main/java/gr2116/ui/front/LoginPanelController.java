@@ -25,6 +25,13 @@ public class LoginPanelController {
   @FXML
   private Label errorLabel;
 
+  /**
+   * The action to perform on login button press.
+   * Validates the textfields, and sets error message accordingly.
+   * Notifies listeners if the fields are valid.
+   * Will result in a login if FrontPageController is listening,
+   * and the username and password matches a person of the hotel.
+   */
   @FXML
   private void loginButtonOnAction() {
     setErrorLabel("");

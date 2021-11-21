@@ -60,7 +60,7 @@ public class FilterPanelController {
   public FilterPanelController() {}
 
   /**
-   * Initializes the component. Sets action for buttons and adds data for filtering.
+   * Initializes the component. Sets action for date pickers and adds data for filtering.
    */
   @FXML
   private void initialize() {
@@ -111,10 +111,14 @@ public class FilterPanelController {
     });
   }
 
+  /**
+   * OnAction for roomTypeChoiceBox.
+   * If there is not selected a roomType, give message "select a room type".
+   * Notifies listeners about the change.
+   */
   @FXML
   private void roomTypeChoiceBoxOnAction() {
-    // When user presses a roomtype box the site updates.
-    // If there is not selected a roomType, give message "select a room type".
+    
     HotelRoomType roomType = roomTypeChoiceBox.getValue();
     if (roomType == null) {
       roomTypeDescription.setText("Select a room type.");
@@ -124,9 +128,13 @@ public class FilterPanelController {
     notifyListeners();
   } 
 
+  /**
+   * OnAction for clearFilterButton.
+   * When user presses clear filter button, the filters clears.
+   * Notifies listeners about the change.
+   */
   @FXML
   private void clearFilterButtonOnAction() {
-    //When user presses clear filter button, the filters clears.
     startDatePicker.setValue(null);
     endDatePicker.setValue(null);
     roomTypeChoiceBox.setValue(null);
@@ -187,7 +195,7 @@ public class FilterPanelController {
   }
   
   /**
-   * Notify listenrs that the filter has been updated.
+   * Notifies listeners that the filter has been updated.
    * Includes dates, room type, floor and amenities.
    */
   public final void notifyListeners() {

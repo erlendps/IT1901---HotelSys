@@ -22,7 +22,7 @@ import javafx.scene.layout.StackPane;
 /**
  * The controller for the application.
  * The controller implements the MessageListener interface,
- * as it receives notifications from various parts of the program.
+ * as it receives messages from various parts of the program.
  */
 public class AppController implements MessageListener {
   private HotelAccess hotelAccess;
@@ -59,8 +59,10 @@ public class AppController implements MessageListener {
   private StackPane root;
 
   /**
-   * Initialize the program.
-   * Moves to Login page, which is the first window the user sees.
+   * Initializes the program.
+   * Moves to the front page, which is the first window the user sees.
+   * If a connection to the server cannot be made, the remote error page will be
+   * shown instead.
    */
   @FXML
   private void initialize() {
@@ -94,6 +96,25 @@ public class AppController implements MessageListener {
     mainPageViewController.setHotelAccess(hotelAccess);
   }
 
+  /**
+   * Receives messages from various parts of the program,
+   * and acts accordingly.
+   * Implemented messages are:
+   * - Message.SignUp, with Person as data
+   * - Message.Login, with Person as data
+   * - Message.SignOut
+   * - Message.ShowMoneyPage
+   * - Message.ShowMainPage
+   * - Message.Reconnect
+   * - Message.AddBalance, with Double as data
+   *
+   *  @param from the object the message is from
+   *  @param message the message to receive
+   *  @param data the data to go along with the message
+   * 
+   * @throws IllegalArgumentException if a person without a password tries to sign up
+   * @throws IllegalStateException if balance is added, but a current person has not been set
+   */
   @Override
   public final void receiveMessage(final Object from,
       final Message message, final Object data) {
@@ -160,11 +181,10 @@ public class AppController implements MessageListener {
   }
 
   /**
-   * Move to the login page.
-   * This involves clearing AppControllers children,
-   * creating a new FrontPage instance,
-   * adding AppController as a listener and setting the persons from own memory.
-   * AppController finally adds the login page as a child instance of itself.
+   * Move to the front page.
+   * This involves clearing children of root,
+   * adding the frontPageView as a child and
+   * making it show the default panel. 
    */
   public void moveToFrontPage() {
     root.getChildren().clear();
@@ -174,11 +194,9 @@ public class AppController implements MessageListener {
 
   /**
    * Moves to main page.
-   * This involves clearing AppControllers children,
-   * creating a new MainPage instance,
-   * adding AppController as a listener and setting the rooms from memory.
-   * The MainPage is created with the selected person (which is usually selected from FrontPage).
-   * Finally adds MainPage as a child of itself.
+   * This involves clearing children of root,
+   * adding the mainPageView as a child and
+   * updating the person of mainPageViewController.
    *
    * @throws IllegalStateException if currentPerson is null
    */
@@ -192,7 +210,9 @@ public class AppController implements MessageListener {
   }
 
   /**
-   * Moves to money page.
+   * Moves to main page.
+   * This involves clearing children of root,
+   * and adding the moneyPageView as a child.
    */
   public void moveToMoneyPage() {
     root.getChildren().clear();
@@ -224,4 +244,3 @@ public class AppController implements MessageListener {
     hotelAccess.loadHotel();
   }
 }
-

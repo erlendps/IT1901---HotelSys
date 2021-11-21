@@ -106,7 +106,7 @@ public class UserPanelController implements PersonListener {
   }
 
   /**
-   * Update the person panel with attributes that might have changed.
+   * Update the user panel with attributes that might have changed.
    * This includes name, email, balance and reservations.
    */
   private void updatePanel() {
