@@ -29,7 +29,7 @@ RESTservice består av to pakker (gr2116.RESTservice):
 * [`restapi`](src/main/java/gr2116/RESTservice/restapi)
 * [`restserver`](src/main/java/gr2116/RESTservice/restserver)
 
-Restserver inneholder konfigurasjon for hvordan json som blir sendt med HTTP-requester skal bli mappet til objekter, og inneholder Hotel-objektet. [`HotelConfig.java`](src/main/java/gr2116/RESTservice/restserver/HotelConfig.java) inneholder konfigurasjon av REST-apiet, blant annet hvor den skal hente data fra og hvordan json blir mappet fra og til objekter ved hjelp av serialiseringen og deserialiseringen definert i [`persistence`](../persistence)-modulen.
+Restserver inneholder konfigurasjon for hvordan json som blir sendt med HTTP-requester skal bli mappet til objekter, og inneholder Hotel-objektet. [`HotelConfig.java`](src/main/java/gr2116/RESTservice/restserver/HotelConfig.java) inneholder konfigurasjon av REST-APIet, blant annet hvor den skal hente data fra og hvordan json blir mappet fra og til objekter ved hjelp av serialiseringen og deserialiseringen definert i [`persistence`](../persistence)-modulen.
 
 Restapi får Hotel-objektet fra restserver gjennom Context-tag. [`HotelService.java`](src/main/java/gr2116/RESTservice/restapi/HotelService.java) tar imot forespørsler til baseURL/rest/hotel/*, og avhengig av hva resten av URL er, vil den delegere videre til enten [`RoomResource.java`](src/main/java/gr2116/RESTservice/restapi/RoomResource.java) eller [`PersonResource.java`](src/main/java/gr2116/RESTservice/restapi/PersonResource.java).
 
