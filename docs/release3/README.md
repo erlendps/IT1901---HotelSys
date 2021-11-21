@@ -4,7 +4,7 @@ Issues for innlevering 3 kan finnes under milestone [Release 3](https://gitlab.s
 
 ## Arkitektur 
 
-Klassediagram for alle modulene er generert med PlantUML, og kan ses i [modules](../modules/README.md). I tillegg ligger alle diagrammene i [images](../images).
+I prosjektet blir det brukt en flerlagsarkitektur. Det vil si at presentasjon, dataaksess, forretningslogikk og applikasjonslogikk ligger i separerte moduler. Vårt presentasjonslag er [`ui`](../../gr2116-project/ui), her ligger kode for det grafiske brukergrensesnittet i applikasjonen. Dataaksesslaget er [`persistence`](../../gr2116-project/persistence), her ligger kode for fil-lagring og lasting. Forretningslogikklaget er [`core`](../../gr2116-project/core), dette laget håndterer utvekslingen av data mellom presentasjonslaget og dataaksesslaget. Applikasjonslaget er [`RESTservice`](../../gr2116-project/RESTservice), dette laget bestemmer hvordan ulike forespørsler skal bli behandlet.  
 
 ## Arbeidsvaner
 
