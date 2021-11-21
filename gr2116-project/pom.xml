@@ -135,6 +135,7 @@
             <xmlOutput>false</xmlOutput>
             <htmlOutput>true</htmlOutput>
             <failOnError>false</failOnError>
+            <excludeFilterFile>config/excludeFilter.xml</excludeFilterFile>
           </configuration>
           <executions>
             <execution>
