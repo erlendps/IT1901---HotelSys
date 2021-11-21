@@ -1,3 +1,4 @@
+```plantuml
 @startuml
 
     actor user
@@ -12,6 +13,7 @@
     core <-- persistence: saved
     HotelAccess <-- core: response
     ui <-- HotelAccess: added
-    user <-- ui: Room added
+    user <-- ui: Reservation added
 
 @enduml
+```
