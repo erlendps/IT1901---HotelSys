@@ -9,5 +9,5 @@ UI-modulen mangler testdekning i jacoco for access-pakken, app-pakken og remotee
 ## klassediagram
 
 Klassediagram for UI-modul er delt i to, slik at det blir mer oversiktelig.
-![klassediagram RESTservice](../../docs/images/ui1.PNG "Klassediagram 1 for ui")
-![klassediagram RESTservice](../../docs/images/ui2.PNG "Klassediagram 2 for ui2")
+![klassediagram ui](../../docs/images/ui1.PNG "Klassediagram 1 for ui")
+![klassediagram ui](../../docs/images/ui2.PNG "Klassediagram 2 for ui2")
