@@ -1,4 +1,3 @@
-
 <div align="center">
     <img src="docs/images/header.png"
         width="400"
@@ -7,9 +6,9 @@
 
 [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](https://gitpod.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2116/gr2116/-/tree/main/)
 
-# IT1901 Group project - HotelSys
+# IT1901 Gruppeprosjekt - HotelSys
 
-Dette er et utviklingsprosjekt for gruppe 16 i faget IT1901.
+Dette er et utviklingsprosjekt for gruppe 16 i emnet IT1901.
 Vi utvikler [HotelSys](gr2116-project) - en applikasjon for å booke hotellrom.
 
 Kodingsprosjektet ligger i mappen [gr2116-project](gr2116-project). Her ligger de fire hovedmodulene som utgjør prosjektet. [`core`](gr2116-project/core) refererer til domenelogikk, [`persistence`](gr2116-project/persistence) refererer til fillagringssystemet og [_ui_](gr2116-project/ui/src/main/java/gr2116/ui) refererer til det grafiske brukergrensesnittet i applikasjonen. [`RESTservice`](gr2116-project/RESTservice) utgjøre REST API-et som håndterer HTTP-request sendt fra applikasjonen. Dokumentasjon for hver enkelt modul ligger i [modules](docs/modules) og under "rot-mappen" til hver modul.
@@ -88,9 +87,9 @@ Funksjonaliteten og brukergrensesnittet til applikasjonen er bygget utifra et se
 ## Kodeverktøy
 
 I prosjektet bruker vi noen kodeanalyseverktøy for å sikre at kodekvaliteten er god. For å sjekke output fra disse verktøyene kan man kjøre:
-
-> mvn verify
-
+```shell
+mvn verify
+```
 ### Spotbugs
 
 Et verktøy som analyserer koden og gir tilbakemelding på generell kodekvalitet. Den kan oppdage eventuelle bugs også. Vi har valgt å eksludere noen bugs. Begrunnelsen for det ligger i de modulene det er aktuelt for ([`ui`](gr2116-project/ui) og [`RESTservice`](gr2116-project/RESTservice)). Man kan se hva som blir eksludert i [`excludeFilter.xml`](gr2116-project/config/excludeFilter.xml)
